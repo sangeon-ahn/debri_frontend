@@ -1,19 +1,20 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import SearchLecture from '../SearchLecture/SearchLecture';
+import Header from "../Header/Header";
 
 export default function Home() {
     const userdata = JSON.parse(localStorage.getItem('userData'));
 
     return (
         <div>
+            <Header />
             <div>
                 <div>
-                    email: {userdata[0].email}<br />
-                    nickname:{userdata[0].nickname}
+                    <div>
+                        email: {userdata[0].email}<br />
+                        nickname:{userdata[0].nickname}
+                    </div>
                 </div>
             </div>
-            <SearchLecture />
         </div>
     );
 }
