@@ -82,7 +82,7 @@ export default function SearchLecture() {
                     검색
                     </button>
                 </form>
-                <div style={{display:"flex", width: "600px"}}>
+                <div className="lectures">
                     {
                     lectureData.map((lecture, i) => {
                         return (
