@@ -5,12 +5,12 @@ import "./SearchLecture.css";
 export default function Lecture(props) {
     const [isLectureClicked, setIsLectureClicked] = useState(false);
 
-    const lectureDetailStyle = {
-        display: "block",
-        border: "1px solid black",
-        marginTop: "30px",
-        fontSize: "50px"
-    };
+    // const lectureDetailStyle = {
+    //     display: "block",
+    //     border: "1px solid black",
+    //     marginTop: "30px",
+    //     fontSize: "50px"
+    // };
 
     function handleLectureClick() {
         setIsLectureClicked(state => {
