@@ -1,18 +1,18 @@
-<<<<<<< HEAD
-function App() {
-  return (
-    <div>하이</div>
-=======
-
-import './App.css';
 import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
+
+
+
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Login></Login>
-    </div>
->>>>>>> 7b034d00a8bb6a7d89bd000f3fc41905bfdbdeda
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
