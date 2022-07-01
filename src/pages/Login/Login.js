@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const users = [
   {
@@ -23,6 +24,8 @@ const Login = ()=>{
     const [password, setPassword] = useState('');
     const [id, setId] = useState('');
 
+    const navigate = useNavigate();
+
     const handlePasswordChange = (e) => {
       console.log('hi');
       setPassword(e.target.value);
@@ -39,9 +42,12 @@ const Login = ()=>{
         return;
       }
 
-      console.log(userData);
+      localStorage.setItem('userData',JSON.stringify(userData));
 
+      navigate('/home');
     };
+
+    
 
     return(
       <div>
