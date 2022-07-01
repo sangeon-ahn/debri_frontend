@@ -1,0 +1,24 @@
+.A13_block {
+  background-color: rgb(216, 216, 216);
+  color: white;
+  border-radius: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 80%;
+  padding: 1% 2%;
+}
+.A13_block2 {
+  background-color: #79a575;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 80%;
+  padding: 1% 2%;
+  font-size:40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+.aaa {
+  display: inline;
+}
