@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Debri</title>
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Debri</title>
 
-		<!-- css files -->
-		<link rel="stylesheet" href="css/login.css" />
-	</head>
-	<body>
+      <!-- css files -->
+      <link rel="stylesheet" href="css/login.css" />
+   </head>
+   <body>
     <div class="A13_block">
       <span>Debri</span>
       <form id="A13_form" class="hidden">
         <div>
           <div>
             ID
-            <input required maxlength="15" type="text" placeholder="email id"/>
+            <input type="text" placeholder="email id" id="input-id"/>
           </div>
           <div>
             PW
-            <input required maxlength="15" type="text" placeholder="pass word"/>
+            <input type="text" placeholder="pass word" id="input-password"/>
           </div>
-          <input type="submit" value="Log In" />
         </div>
+        <input type="submit" value="로그인" />
       </form>
+      <button><a href = 'account.html'>가입하기</a></button>
       <button id="A13_logout">Log out</button>
     </div>
     <div class="A13_block2">
@@ -39,5 +40,5 @@
 
 
     <script src="js/login.js"></script>
-	</body>
+   </body>
 </html>
