@@ -75,6 +75,7 @@ const Login = ()=>{
         >
           로그인
         </button>
+        <Link to='/timetable'>시간표</Link>
       </div>
     );
 }
