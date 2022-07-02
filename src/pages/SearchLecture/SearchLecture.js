@@ -7,6 +7,8 @@ export default function SearchLecture() {
     const [lectureInput, setlectureInput] = useState('');
     const [lectureData, setLectureData] = useState([]);
 
+
+    
     const FetchedLectureData = [
         {
             id:1,
@@ -86,7 +88,7 @@ export default function SearchLecture() {
                     {
                     lectureData.map((lecture, i) => {
                         return (
-                            <div class="lectureStyle" key={i}>
+                            <div className="lectureStyle" key={i}>
                                 <Lecture lecture={lecture} />
                             </div>
                         );
