@@ -28,7 +28,7 @@ const Account =()=>{
 
   async function postData(id,password,birthday, nickname) {
     try {
-      const response = await axios.post(`/user/create`,
+      const response = await axios.post(`/api/user/create`,
         JSON.stringify(
           {
             id : id, 

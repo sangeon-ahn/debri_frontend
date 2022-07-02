@@ -3,6 +3,7 @@ import Lecture from "./Lecture";
 import "./SearchLecture.css";
 import Header from "../Header/Header";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SearchLecture() {
     const [language, setLanguage] = useState('');
@@ -83,7 +84,7 @@ export default function SearchLecture() {
         const fetchLectures = async (object) => {
             try {
                 const response = await axios.post(
-                    '/lecture/search',
+                    '/api/lecture/search',
                     object
                 );
                 console.log(response.data.result);
@@ -111,8 +112,8 @@ export default function SearchLecture() {
         const addLecture = async (object) => {
             try {
                 const response = await axios.post(
-                    '/lecture/add',
-                    object
+                    '/api/lecture/add',
+                    JSON.stringify({object})
                 );
                 console.log(response.data);
                 // setLectureData(response.data.result);
@@ -215,7 +216,7 @@ export default function SearchLecture() {
                         type="text"
                         value={addLectureDescription}
                         onChange={handleAddLectureDescriptionInput}
-                        placeholder="강의 설멍"
+                        placeholder="강의 설명"
                     />
                     <button
                         onClick={handleAddLectureButton}
@@ -234,6 +235,7 @@ export default function SearchLecture() {
                     })}
                 </div>
             </div>
+            <button><Link to="/mycurri">내 커리큘럼 보러가기</Link></button>
         </div>
     );
 }
