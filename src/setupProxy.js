@@ -1,0 +1,15 @@
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  app.use(
+    '/user',
+    createProxyMiddleware({
+      target: 'http://54.180.180.217',
+      changeOrigin: true,
+    })
+  );
+};
+
+// const { createProxyMiddleware } = require('http-proxy-middleware');
+ 
+// const apiProxy = createProxyMiddleware('/', { target: 'http://54.180.180.217' });

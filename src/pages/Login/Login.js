@@ -1,50 +1,45 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-const users = [
-  {
-    email: "sangeon@gmail.com",
-    password: "1234",
-    nickname: "whale",
-    curriculum: {
-      subject: "front-end"
-    }
-  },
-  {
-    email: "tkddjs@gmail.com",
-    password: 1234,
-    nickname: "dolphin",
-    curriculum: {
-      subject: "back-end"
-    }
-  }
-];
+import axios from "axios";
 
 const Login = ()=>{
-    const [password, setPassword] = useState('');
-    const [id, setId] = useState('');
-
+    const [Password, setPassword] = useState('');
+    const [Id, setId] = useState('');
     const navigate = useNavigate();
 
-    const handlePasswordChange = (e) => {
-      console.log('hi');
-      setPassword(e.target.value);
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+  
+    async function postData(id,password) {
+      console.log(id, password)
+      try {
+        const response = await axios.post(`/user/login`,
+          JSON.stringify({id,password}),
+          { headers }
+        );
+        console.log('리턴', response);
+        alert('저장완료');
+  
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     const handleIdChange = (e) => {
       setId(e.target.value);
     }
 
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+    }
+
     const handleLoginButton = (e) => {
-      const userData = users.filter(user => String(user.email) === String(id));
-
-      if (userData[0].password !== password) {
-        return;
-      }
-
-      localStorage.setItem('userData',JSON.stringify(userData));
-
-      navigate('/home');
+      e.preventDefault() 
+      postData(Id,Password)
     };
 
     
@@ -75,7 +70,6 @@ const Login = ()=>{
         >
           로그인
         </button>
-        <Link to='/timetable'>시간표</Link>
       </div>
     );
 }
