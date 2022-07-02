@@ -2,67 +2,125 @@ import { useState } from "react";
 import Lecture from "./Lecture";
 import "./SearchLecture.css";
 import Header from "../Header/Header";
+import axios from "axios";
 
 export default function SearchLecture() {
-    const [lectureInput, setlectureInput] = useState('');
+    const [language, setLanguage] = useState('');
+    const [difficulty, setDifficulty] = useState(1);
+    const [lectureKind, setLectureKind] = useState('');
+    const [pricing, setPricing] = useState('');
+    const [lectureName, setLectureName] = useState('');
+
+    const [addLanguage, setAddLanguage] = useState('');
+    const [addDifficulty, setAddDifficulty] = useState(1);
+    const [addLectureKind, setAddLectureKind] = useState('');
+    const [addPricing, setAddPricing] = useState('');
+    const [addLectureName, setAddLectureName] = useState('');
+    const [addMaterialUrl, setAddMaterialUrl] = useState('');
+    const [addImgUrl, setAddImgUrl] = useState('');
+    const [addLectureDescription, setAddLectureDescription] = useState('');
+
     const [lectureData, setLectureData] = useState([]);
 
+    function handleLanguageInput(e) {
+        console.log(e);
+        setLanguage(e.target.value);
+    }
 
-    
-    const FetchedLectureData = [
-        {
-            id:1,
-            title: "렉처1",
-            url:"http://www.naver.com",
-            lectureDetail: {
-                title: "리그오브레전드 브론즈 찍기",
-                time: "월/금 01:00 ~ 02:00",
-                text: "SQL과 PYC 관련 수강생들의 강추",
-                url:"http://www.naver.com",
-            }
-        },
-        {
-            id:2,
-            title: "렉처2",
-            url: "http://www.google.com",
-            lectureDetail: {
-                title: "리그오브레전드 골드 찍기",
-                time: "월/금 01:00 ~ 02:00",
-                text: "SQL과 PYC 관련 수강생들의 강추",
-                url:"http://www.naver.com",
-            }
-        },
-        {
-            id:3,
-            title: "렉처3",
-            url: "http://www.gmail.com",
-            lectureDetail: {
-                title: "리그오브레전드 다이아 찍기",
-                time: "월/금 01:00 ~ 02:00",
-                text: "SQL과 PYC 관련 수강생들의 강추",
-                url:"http://www.naver.com",
-            }
-        },
-        {
-            id:4,
-            title: "렉처4",
-            url: "http://www.nate.com",
-            lectureDetail: {
-                title: "리그오브레전드 챌린저 찍기",
-                time: "월/금 01:00 ~ 02:00",
-                text: "SQL과 PYC 관련 수강생들의 강추",
-                url:"http://www.naver.com",
-            }
-        }
-    ];
+    function handleDifficultyInput(e) {
+        setDifficulty(e.target.value);
+    }
 
-    function handleLectureInput(e) {
-        setlectureInput(e.target.value);
+    function handleLectureKindInput(e) {
+        setLectureKind(e.target.value);
+    }
+
+    function handlePricingInput(e) {
+        setPricing(e.target.value);
+    }
+
+    function handleLectureNameInput(e) {
+        setLectureName(e.target.value);
+    }
+
+
+    function handleAddLanguageInput(e) {
+        console.log(e);
+        setAddLanguage(e.target.value);
+    }
+
+    function handleAddDifficultyInput(e) {
+        setAddDifficulty(e.target.value);
+    }
+
+    function handleAddLectureKindInput(e) {
+        setAddLectureKind(e.target.value);
+    }
+
+    function handleAddPricingInput(e) {
+        setAddPricing(e.target.value);
+    }
+
+    function handleAddLectureNameInput(e) {
+        setAddLectureName(e.target.value);
+    }
+
+    function handleAddMaterialUrlInput(e) {
+        setAddMaterialUrl(e.target.value);
+    }
+
+    function handleAddImgUrlInput(e) {
+        setAddImgUrl(e.target.value);
+    }
+
+    function handleAddLectureDescriptionInput(e) {
+        setAddLectureDescription(e.target.value);
     }
 
     function handleSearchButton(e) {
         e.preventDefault();
-        setLectureData(FetchedLectureData);
+        const lecturesObj = {language, difficulty, lectureKind, pricing, lectureName};
+        const fetchLectures = async (object) => {
+            try {
+                const response = await axios.post(
+                    'http://54.180.180.217/lecture/search',
+                    object
+                );
+                console.log(response.data.result);
+                setLectureData(response.data.result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchLectures(lecturesObj);
+    }
+
+    function handleAddLectureButton(e) {
+        e.preventDefault();
+        const lecturesObj = {
+            language: addLanguage,
+            difficulty: addDifficulty,
+            lectureKind: addLectureKind,
+            pricing: addPricing,
+            lectureName: addLectureName,
+            materialUrl: addMaterialUrl,
+            imgUrl: addImgUrl,
+            lectureDescription: addLectureDescription};
+
+        console.log(lecturesObj);
+        const addLecture = async (object) => {
+            try {
+                const response = await axios.post(
+                    'http://54.180.180.217/lecture/add',
+                    object
+                );
+                console.log(response.data);
+                // setLectureData(response.data.result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        addLecture(lecturesObj);
     }
 
     return (
@@ -74,14 +132,95 @@ export default function SearchLecture() {
                     <span>강의 검색</span>
                     <input
                         type="text"
-                        value={lectureInput}
-                        onChange={handleLectureInput}
-                        placeholder="강의를 검색하세요"
+                        value={language}
+                        onChange={handleLanguageInput}
+                        placeholder="언어(C, JAVA)"
+                    />
+                    <input
+                        type="text"
+                        value={difficulty}
+                        onChange={handleDifficultyInput}
+                        placeholder="난이도(1, 2)"
+                    />
+                    <input
+                        type="text"
+                        value={lectureKind}
+                        onChange={handleLectureKindInput}
+                        placeholder="강의 종류(강의영상, 책)"
+                    />
+                    <input
+                        type="text"
+                        value={pricing}
+                        onChange={handlePricingInput}
+                        placeholder="가격(FREE, Charged)"
+                    />
+                    <input
+                        type="text"
+                        value={lectureName}
+                        onChange={handleLectureNameInput}
+                        placeholder="강의명"
                     />
                     <button
                         onClick={handleSearchButton}
                     >
                     검색
+                    </button>
+                </form>
+                <br />
+                <form id="lecture-search-form">
+                    <span>강의 추가</span>
+                    <input
+                        type="text"
+                        value={addLanguage}
+                        onChange={handleAddLanguageInput}
+                        placeholder="언어(C, JAVA)"
+                    />
+                    <input
+                        type="text"
+                        value={addDifficulty}
+                        onChange={handleAddDifficultyInput}
+                        placeholder="난이도(1, 2)"
+                    />
+                    <input
+                        type="text"
+                        value={addLectureKind}
+                        onChange={handleAddLectureKindInput}
+                        placeholder="강의 종류(강의영상, 책)"
+                    />
+                    <input
+                        type="text"
+                        value={addPricing}
+                        onChange={handleAddPricingInput}
+                        placeholder="가격(FREE, Charged)"
+                    />
+                    <input
+                        type="text"
+                        value={addLectureName}
+                        onChange={handleAddLectureNameInput}
+                        placeholder="강의명"
+                    />
+                    <input
+                        type="text"
+                        value={addMaterialUrl}
+                        onChange={handleAddMaterialUrlInput}
+                        placeholder="강의 주소"
+                    />
+                    <input
+                        type="text"
+                        value={addImgUrl}
+                        onChange={handleAddImgUrlInput}
+                        placeholder="강의 이미지"
+                    />
+                    <input
+                        type="text"
+                        value={addLectureDescription}
+                        onChange={handleAddLectureDescriptionInput}
+                        placeholder="강의 설멍"
+                    />
+                    <button
+                        onClick={handleAddLectureButton}
+                    >
+                    추가
                     </button>
                 </form>
                 <div className="lectures">
