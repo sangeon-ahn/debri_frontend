@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const users = [
   {
@@ -23,7 +24,9 @@ const users = [
 const Login = ()=>{
     const [password, setPassword] = useState('');
     const [id, setId] = useState('');
-
+    const [user, setUser] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handlePasswordChange = (e) => {
@@ -36,18 +39,33 @@ const Login = ()=>{
     }
 
     const handleLoginButton = (e) => {
-      const userData = users.filter(user => String(user.email) === String(id));
-
-      if (userData[0].password !== password) {
-        return;
+      const fetchUser = async (email, pw) => {
+        try {
+          setError(null);
+          setUser(null);
+          setLoading(true);
+          const response = await axios.post(
+            'http://54.180.180.217/user/login',
+            {
+              id: email,
+              password:pw
+            }
+          );
+          setUser(response.data);
+          console.log(user.result.userIdx);
+          navigate('/home');
+        } catch (error) {
+          setError(error);
+        }
+        setLoading(false);
       }
+      fetchUser(id, password);
 
-      localStorage.setItem('userData',JSON.stringify(userData));
+      // localStorage.setItem('userIndex', user.result.userIdx);
 
-      navigate('/home');
     };
 
-    
+
 
     return(
       <div>
