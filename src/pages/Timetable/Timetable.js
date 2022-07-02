@@ -1,107 +1,15 @@
 import React, { useState } from "react";
 import Clock from 'react-live-clock';
-<<<<<<< HEAD
-import Header from "../Header/Header";
-
-const timetable = [
-  {
-    useid : 1,
-    lectureid: 1,
-    title: "SQL study",
-    date: [
-      {
-        day : "월",
-        starttime : "11:00",
-        endtime : "14:00"
-      },
-      {
-        day : "금",
-        starttime : "11:00",
-        endtime : "14:00"
-      }
-    ],
-    location : "랩실",
-    info : "서버 화이팅",
-    tags: [{
-      id : 1,
-      tagname : "sql"
-    }]
-  },
-  {
-    useid : 1,
-    lectureid: 2,
-    title: "Ruby on Rails 강의",
-    date: [
-      {
-        id:1,
-        day : "월",
-        starttime : "14:00",
-        endtime : "16:00"
-      },
-      {
-
-        id: 2,
-        day : "금",
-        starttime : "14:00",
-        endtime : "16:00"
-      }
-    ],
-    location : "대양홀",
-    info : "강의 지루해",
-    tags : [
-      {
-        id : 2,
-        tagname : "Ruby"
-      },
-      {
-        id : 3,
-        tagname : "JS"
-      },
-      {
-        id : 4,
-        tagname : "HTML"
-      }
-    ]
-  },
-];
-
-=======
 import {useRecoilState} from 'recoil';
 import {userId} from '../../Atom';
 import Header from "../Header/Header";
 
-
->>>>>>> 0cd77df2794b1302b379fc420de6a45e98b0ae7e
 function Timetable() {
   const [user, setUser] = useRecoilState(userId);
 
   return (
     <div>
       <Header />
-<<<<<<< HEAD
-      <div style={{float: "left"}}>
-        <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true}/>
-        {timetable.map((item, i) => (
-          <div key={item.id} style={{float: "left", margin: "20px"}} >
-            <h3>{item.title}</h3>
-            {item.date.map((todate) => (
-              <div key={todate.id}>
-                <div>{todate.day}</div>
-                <div>{todate.starttime}</div>
-                <div>{todate.endtime}</div>
-              </div>
-            ))}
-            <div>{item.location}</div>
-            <div>{item.info}</div>
-            {item.tags.map((tag) => (
-              <div key={tag.id}>
-                <div>{tag.name}</div>
-              </div>
-            ))}
-          </div>
-        ))}
-    </div>
-=======
       <h2>유저 아이디 {user}님 반갑습니다.</h2>
       <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true}/>
       {/* {timetable.map((item, i) => (
@@ -123,7 +31,6 @@ function Timetable() {
           ))}
         </div>
       ))} */}
->>>>>>> 0cd77df2794b1302b379fc420de6a45e98b0ae7e
     </div>
   );
 }
