@@ -23,11 +23,6 @@ export default function Header() {
                     <Link to="/menu" className='link'>메뉴</Link>
                 </div>
             </div>
-            {/* <div>
-                <br />
-                {userdata[0].email}<br />
-                {userdata[0].nickname}
-            </div> */}
         </div>
     );
 }

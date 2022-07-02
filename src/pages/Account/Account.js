@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Account =()=>{
@@ -16,28 +16,35 @@ const Account =()=>{
     if(Password !== PasswordCheck) {
       return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
     }
+    console.log(typeof(Birth))
     console.log(Id, Password, Birth, Nickname);
-    // postData(Id, Password, Birth, Nickname);
+    postData(Id, Password, Birth, Nickname);
   }     
 
-  // const headers = {
-  //   Accept: 'application/json',
-  //   'Content-Type': 'application/json',
-  // };
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
 
-  // async function postData(id,password,birth, nickname) {
-  //   try {
-  //     const response = await axios.post(`/api/review/add/${localStorage.getItem('userId')}/${params.farmId}`,
-  //       JSON.stringify({id,password,birth, nickname}),
-  //       { headers }
-  //     );
-  //     console.log('리턴', response);
-  //     alert('저장완료');
+  async function postData(id,password,birthday, nickname) {
+    try {
+      const response = await axios.post(`/user/create`,
+        JSON.stringify(
+          {
+            id : id, 
+            nickname : nickname,
+            birthday: birthday,
+            password : password
+          }),
+        { headers }
+      );
+      console.log('리턴', response);
+      alert('저장완료');
 
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const onChangeId = (e) => {
     setId(e.target.value)
@@ -68,7 +75,7 @@ const Account =()=>{
           비밀번호 확인 <input type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
         </div>
         <div>
-          생년월일 <input type="text" placeholder="생년월일8자리" onChange={onChangeBirth} value={Birth}/>
+          생년월일 <input type="date" onChange={onChangeBirth} value={Birth}/>
         </div>
         <div>
           닉네임 <input type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
@@ -76,6 +83,7 @@ const Account =()=>{
 
       </div>
       <button onClick={onClickSave}>가입하기</button>
+      <button><Link to="/">로그인</Link></button>
     </div>
 
   );

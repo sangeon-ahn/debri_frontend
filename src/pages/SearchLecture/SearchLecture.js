@@ -83,7 +83,7 @@ export default function SearchLecture() {
         const fetchLectures = async (object) => {
             try {
                 const response = await axios.post(
-                    'http://54.180.180.217/lecture/search',
+                    '/lecture/search',
                     object
                 );
                 console.log(response.data.result);
@@ -111,7 +111,7 @@ export default function SearchLecture() {
         const addLecture = async (object) => {
             try {
                 const response = await axios.post(
-                    'http://54.180.180.217/lecture/add',
+                    '/lecture/add',
                     object
                 );
                 console.log(response.data);

@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import {useRecoilState} from 'recoil';
+import {userId} from '../../Atom';
 
 const Login = () => {
     const [password, setPassword] = useState('');
     const [id, setId] = useState('');
-    const [user, setUser] = useState(false);
+    const [user, setUser] = useRecoilState(userId);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isSuccess, setIsSuccess] = useState(false);
 
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //   navigate('/home');
-    // }, [isSuccess]);
+    localStorage.clear()
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-    const handlePasswordChange = (e) => {
-      console.log('hi');
-      setPassword(e.target.value);
-    }
 
     const handleIdChange = (e) => {
       setId(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
     }
 
     const handleLoginButton = (e) => {
@@ -32,26 +36,23 @@ const Login = () => {
           setUser(null);
           setLoading(true);
           
-          const response = await axios.post(
-            'http://54.180.180.217/user/login',
-            {
-              id: email,
-              password:pw
-            }
+          const response = await axios.post(`/user/login`,
+            JSON.stringify(
+              {
+                id : email, 
+                password : pw
+              }),
+            { headers }
           );
-
-          setUser(response.data);
-          setIsSuccess(response.data.isSuccess);
+          setUser(response.data.result.userIdx);
           navigate('/home');
         } catch (error) {
           setError(error);
+          alert('회원가입을 해주세요')
         }
         setLoading(false);
       }
       fetchUser(id, password);
-
-      // localStorage.setItem('userIndex', user.result.userIdx);
-
     };
 
     return (
@@ -86,6 +87,13 @@ const Login = () => {
         <div className="toggle">
           
         </div>
+        <button
+          type="button"
+          onClick={handleLoginButton}
+        >
+          로그인
+        </button>
+        <button><Link to="/account">회원가입</Link></button>
       </div>
     );
 }
