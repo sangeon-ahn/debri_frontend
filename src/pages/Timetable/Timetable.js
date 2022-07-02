@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Clock from 'react-live-clock';
+import {useRecoilState} from 'recoil';
+import {userId} from '../../Atom';
 
 
 const timetable = [
@@ -65,9 +67,11 @@ const timetable = [
 ];
 
 function Timetable() {
+  const [user, setUser] = useRecoilState(userId);
 
   return (
     <div>
+      <h2>유저 아이디 {user}님 반갑습니다.</h2>
       <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true}/>
       {timetable.map((item, i) => (
         <div key={item.id} >            

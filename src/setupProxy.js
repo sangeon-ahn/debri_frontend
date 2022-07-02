@@ -9,7 +9,3 @@ module.exports = function(app) {
     })
   );
 };
-
-// const { createProxyMiddleware } = require('http-proxy-middleware');
- 
-// const apiProxy = createProxyMiddleware('/', { target: 'http://54.180.180.217' });

@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import {useRecoilState} from 'recoil';
+import {userId} from '../../Atom';
 
-const Login = ()=>{
-    const [Password, setPassword] = useState('');
-    const [Id, setId] = useState('');
+const Login = () => {
+    const [password, setPassword] = useState('');
+    const [id, setId] = useState('');
+    const [user, setUser] = useRecoilState(userId);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-
+    localStorage.clear()
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
 
-  
-    async function postData(id,password) {
-      console.log(id, password)
-      try {
-        const response = await axios.post(`/user/login`,
-          JSON.stringify({id,password}),
-          { headers }
-        );
-        console.log('리턴', response);
-        alert('저장완료');
-  
-      } catch (error) {
-        console.error(error);
-      }
-    }
 
     const handleIdChange = (e) => {
       setId(e.target.value);
@@ -38,13 +28,30 @@ const Login = ()=>{
     }
 
     const handleLoginButton = (e) => {
-      e.preventDefault() 
-      postData(Id,Password)
+      const fetchUser = async (email, pw) => {
+        try {
+          setError(null);
+          setUser(null);
+          setLoading(true);
+          
+          const response = await axios.post(`/user/login`,
+            JSON.stringify({id : email, password : pw}),
+            { headers }
+          );
+          setUser(response.data.result.userIdx);
+          navigate('/home');
+        } catch (error) {
+          setError(error);
+          alert('회원가입을 해주세요')
+        }
+        setLoading(false);
+      }
+      fetchUser(id, password);
     };
 
-    
 
-    return(
+
+    return (
       <div>
         <div>
           Id

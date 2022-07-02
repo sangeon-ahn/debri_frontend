@@ -27,10 +27,10 @@ const Account =()=>{
 
   // async function postData(id,password,birth, nickname) {
   //   try {
-  //     const response = await axios.post(`/api/review/add/${localStorage.getItem('userId')}/${params.farmId}`,
-  //       JSON.stringify({id,password,birth, nickname}),
-  //       { headers }
-  //     );
+      // const response = await axios.post(`/api/review/add/${localStorage.getItem('userId')}/${params.farmId}`,
+      //   JSON.stringify({id,password,birth, nickname}),
+      //   { headers }
+      // );
   //     console.log('리턴', response);
   //     alert('저장완료');
 

@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import "./Home.css";
 
 export default function Home() {
-    const userdata = JSON.parse(localStorage.getItem('userData'));
+    // const userdata = JSON.parse(localStorage.getItem('userIndex'));
 
     return (
         <div className="home">
