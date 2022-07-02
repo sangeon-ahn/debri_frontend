@@ -14,7 +14,6 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    localStorage.clear()
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -36,7 +35,7 @@ const Login = () => {
           setUser(null);
           setLoading(true);
           
-          const response = await axios.post(`/user/login`,
+          const response = await axios.post(`/api/user/login`,
             JSON.stringify(
               {
                 id : email, 
@@ -75,17 +74,7 @@ const Login = () => {
                 onChange={handlePasswordChange}
               />
             </form>
-          </div>
-          <button
-            type="button"
-            onClick={handleLoginButton}
-          >
-            로그인
-          </button>
-          <Link to='/timetable'>시간표</Link>
-        </div>
-        <div className="toggle">
-          
+          </div>          
         </div>
         <button
           type="button"

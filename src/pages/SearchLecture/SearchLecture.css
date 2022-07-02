@@ -1,8 +1,9 @@
 .lecture-search-bar {
-    position: absolute;
+    /* position: absolute; */
     top: 50px;
-    width: 100%;
+    width: 90%;
     z-index: -1;
+    float: right;
 }
 
 #lecture-search-form {
@@ -84,7 +85,7 @@
 .bottom-attach a {
     text-decoration: none;
     color: inherit;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     border-radius: 5px;
     padding: 2px;
