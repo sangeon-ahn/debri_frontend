@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,7 +8,13 @@ const Login = () => {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isSuccess, setIsSuccess] = useState(false);
+
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //   navigate('/home');
+    // }, [isSuccess]);
 
     const handlePasswordChange = (e) => {
       console.log('hi');
@@ -35,7 +41,7 @@ const Login = () => {
           );
 
           setUser(response.data);
-          console.log(user.result.userIdx);
+          setIsSuccess(response.data.isSuccess);
           navigate('/home');
         } catch (error) {
           setError(error);
@@ -48,36 +54,40 @@ const Login = () => {
 
     };
 
-
-
     return (
       <div>
         <div>
-          Id
-          <form>
-            <input
-              type="text"
-              onChange={handleIdChange}
-            />
-          </form>
+          <div>
+            Id
+            <form>
+              <input
+                type="text"
+                onChange={handleIdChange}
+              />
+            </form>
+          </div>
+          <div>
+            Password
+            <form>
+              <input
+                type="password"
+                onChange={handlePasswordChange}
+              />
+            </form>
+          </div>
+          <button
+            type="button"
+            onClick={handleLoginButton}
+          >
+            로그인
+          </button>
+          <Link to='/timetable'>시간표</Link>
         </div>
-        <div>
-          Password
-          <form>
-            <input
-              type="password"
-              onChange={handlePasswordChange}
-            />
-          </form>
+        <div className="toggle">
+          
         </div>
-        <button
-          type="button"
-          onClick={handleLoginButton}
-        >
-          로그인
-        </button>
-        <Link to='/timetable'>시간표</Link>
       </div>
     );
 }
+
 export default Login;

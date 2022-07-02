@@ -126,7 +126,7 @@ export default function SearchLecture() {
     return (
         <div>
             <Header />
-            <div>
+            <div className="lecture-search-bar">
                 <br />
                 <form id="lecture-search-form">
                     <span>강의 검색</span>
@@ -140,25 +140,25 @@ export default function SearchLecture() {
                         type="text"
                         value={difficulty}
                         onChange={handleDifficultyInput}
-                        placeholder="난이도(1, 2)"
+                        placeholder="난이도(1, 2, 3)"
                     />
                     <input
                         type="text"
                         value={lectureKind}
                         onChange={handleLectureKindInput}
-                        placeholder="강의 종류(강의영상, 책)"
+                        placeholder="강의 종류"
                     />
                     <input
                         type="text"
                         value={pricing}
                         onChange={handlePricingInput}
-                        placeholder="가격(FREE, Charged)"
+                        placeholder="가격"
                     />
                     <input
                         type="text"
                         value={lectureName}
                         onChange={handleLectureNameInput}
-                        placeholder="강의명"
+                        placeholder="강의 명"
                     />
                     <button
                         onClick={handleSearchButton}
@@ -179,25 +179,25 @@ export default function SearchLecture() {
                         type="text"
                         value={addDifficulty}
                         onChange={handleAddDifficultyInput}
-                        placeholder="난이도(1, 2)"
+                        placeholder="난이도(1, 2, 3)"
                     />
                     <input
                         type="text"
                         value={addLectureKind}
                         onChange={handleAddLectureKindInput}
-                        placeholder="강의 종류(강의영상, 책)"
+                        placeholder="강의 종류"
                     />
                     <input
                         type="text"
                         value={addPricing}
                         onChange={handleAddPricingInput}
-                        placeholder="가격(FREE, Charged)"
+                        placeholder="가격"
                     />
                     <input
                         type="text"
                         value={addLectureName}
                         onChange={handleAddLectureNameInput}
-                        placeholder="강의명"
+                        placeholder="강의 명"
                     />
                     <input
                         type="text"
