@@ -11,16 +11,16 @@ export default function Header() {
             </div>
             <div>
                 <div className='menuStyle'>
-                    <Link to="/home">홈</Link>
+                    <Link to="/home" className='link'>홈</Link>
                 </div>
                 <div className='menuStyle'>
-                    <Link to="/timetable">시간표</Link>
+                    <Link to="/timetable" className='link'>시간표</Link>
                 </div>
                 <div className='menuStyle'>
-                    <Link to="/search">{"강의검색&추가"}</Link>
+                    <Link to="/search" className='link'>{"강의검색&추가"}</Link>
                 </div>
                 <div className='menuStyle'>
-                    <Link to="/menu">메뉴</Link>
+                    <Link to="/menu" className='link'>메뉴</Link>
                 </div>
             </div>
         </div>

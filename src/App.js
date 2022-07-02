@@ -9,6 +9,18 @@ import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'reco
 
 function App() {
   return (
+<<<<<<< HEAD
+    <BrowserRouter>
+      <Routes>
+        <Route path="home" element={<Home />} />
+        <Route path="account" element={<Account />} />
+        <Route path="timetable" element={<Timetable />} />
+        <Route path="/" element={<Login />} />
+        <Route path="search" element={<SearchLecture />} />
+        <Route path="menu" element={<Menu />} />
+      </Routes>
+    </BrowserRouter>
+=======
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
@@ -21,6 +33,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
+>>>>>>> 0cd77df2794b1302b379fc420de6a45e98b0ae7e
   );
 }
 

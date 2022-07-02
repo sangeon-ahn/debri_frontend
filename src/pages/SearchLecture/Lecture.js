@@ -23,7 +23,10 @@ export default function Lecture(props) {
             <span>가격: {props.lecture.pricing}</span>
             <br />
             <br />
-            <a href={props.lecture.materialUrl}>바로가기</a>
+            <div className="bottom-attach">
+                <a href={props.lecture.materialUrl}>바로가기</a>
+                <button>커리큘럼에 추가</button>
+            </div>
             {/* <button onClick={handleLectureClick} style={{marginBottom: "30px"}}>
                 세부내용
             </button> */}

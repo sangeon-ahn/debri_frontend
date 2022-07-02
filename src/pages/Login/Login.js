@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {useRecoilState} from 'recoil';
@@ -10,6 +10,8 @@ const Login = () => {
     const [user, setUser] = useRecoilState(userId);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isSuccess, setIsSuccess] = useState(false);
+
     const navigate = useNavigate();
 
     localStorage.clear()
@@ -53,27 +55,37 @@ const Login = () => {
       fetchUser(id, password);
     };
 
-
-
     return (
       <div>
         <div>
-          Id
-          <form>
-            <input
-              type="text"
-              onChange={handleIdChange}
-            />
-          </form>
+          <div>
+            Id
+            <form>
+              <input
+                type="text"
+                onChange={handleIdChange}
+              />
+            </form>
+          </div>
+          <div>
+            Password
+            <form>
+              <input
+                type="password"
+                onChange={handlePasswordChange}
+              />
+            </form>
+          </div>
+          <button
+            type="button"
+            onClick={handleLoginButton}
+          >
+            로그인
+          </button>
+          <Link to='/timetable'>시간표</Link>
         </div>
-        <div>
-          Password
-          <form>
-            <input
-              type="password"
-              onChange={handlePasswordChange}
-            />
-          </form>
+        <div className="toggle">
+          
         </div>
         <button
           type="button"
@@ -85,4 +97,5 @@ const Login = () => {
       </div>
     );
 }
+
 export default Login;
