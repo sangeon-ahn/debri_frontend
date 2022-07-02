@@ -7,8 +7,7 @@
 
 .lectureStyle {
     display: block;
-    width: 100%;
-    height: 100px;
+    width: 200px;
     border: 1px solid black;
     padding: 10px;
     margin: 5px;
@@ -24,6 +23,6 @@
 .lectures {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin-right: 10px;
 }

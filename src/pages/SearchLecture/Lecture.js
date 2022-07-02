@@ -3,35 +3,33 @@ import LectureDetail from "./LectureDetail";
 import "./SearchLecture.css";
 
 export default function Lecture(props) {
-    const [isLectureClicked, setIsLectureClicked] = useState(false);
+    console.log(props);
+    // const [isLectureClicked, setIsLectureClicked] = useState(false);
 
-    // const lectureDetailStyle = {
-    //     display: "block",
-    //     border: "1px solid black",
-    //     marginTop: "30px",
-    //     fontSize: "50px"
-    // };
-
-    function handleLectureClick() {
-        setIsLectureClicked(state => {
-            return !state;
-        });
-    }
+    // function handleLectureClick() {
+    //     setIsLectureClicked(state => {
+    //         return !state;
+    //     });
+    // }
 
     return (
         <div>
-            <div
-                id="lecture">강의명:{props.lecture.title}
-                <br />
-            </div>
-            <a href={props.lecture.url}>링크</a>
-            {props.lecture.url}
-            <button onClick={handleLectureClick} style={{marginBottom: "30px"}}>
+            <span>강의명:{props.lecture.lectureName}</span>
+            <br />
+            <br />
+            <span>강의설명: {props.lecture.lectureDescription}</span>
+            <br />
+            <br />
+            <span>가격: {props.lecture.pricing}</span>
+            <br />
+            <br />
+            <a href={props.lecture.materialUrl}>바로가기</a>
+            {/* <button onClick={handleLectureClick} style={{marginBottom: "30px"}}>
                 세부내용
-            </button>
-            {isLectureClicked ?
-                <LectureDetail class="lectureDetail" id={props.lecture.title} detailData={props.lecture.lectureDetail}/> : <br />
-            }
+            </button> */}
+            {/* {isLectureClicked ?
+                <LectureDetail class="lectureDetail" id={props.lecture.lectureIdx} detailData={props.lecture.lectureDetail}/> : <br />
+            } */}
         </div>
     );
 }

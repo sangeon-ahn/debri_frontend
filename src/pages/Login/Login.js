@@ -2,26 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const users = [
-  {
-    email: "sangeon@gmail.com",
-    password: "1234",
-    nickname: "whale",
-    curriculum: {
-      subject: "front-end"
-    }
-  },
-  {
-    email: "tkddjs@gmail.com",
-    password: 1234,
-    nickname: "dolphin",
-    curriculum: {
-      subject: "back-end"
-    }
-  }
-];
-
-const Login = ()=>{
+const Login = () => {
     const [password, setPassword] = useState('');
     const [id, setId] = useState('');
     const [user, setUser] = useState(false);
@@ -44,6 +25,7 @@ const Login = ()=>{
           setError(null);
           setUser(null);
           setLoading(true);
+          
           const response = await axios.post(
             'http://54.180.180.217/user/login',
             {
@@ -51,6 +33,7 @@ const Login = ()=>{
               password:pw
             }
           );
+
           setUser(response.data);
           console.log(user.result.userIdx);
           navigate('/home');
@@ -67,7 +50,7 @@ const Login = ()=>{
 
 
 
-    return(
+    return (
       <div>
         <div>
           Id
