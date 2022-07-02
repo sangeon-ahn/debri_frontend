@@ -35,7 +35,11 @@ const Login = () => {
           setLoading(true);
           
           const response = await axios.post(`/user/login`,
-            JSON.stringify({id : email, password : pw}),
+            JSON.stringify(
+              {
+                id : email, 
+                password : pw
+              }),
             { headers }
           );
           setUser(response.data.result.userIdx);
@@ -77,6 +81,7 @@ const Login = () => {
         >
           로그인
         </button>
+        <button><Link to="/account">회원가입</Link></button>
       </div>
     );
 }

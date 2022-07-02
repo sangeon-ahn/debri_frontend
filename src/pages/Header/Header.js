@@ -14,7 +14,7 @@ export default function Header() {
                     <Link to="/home">홈</Link>
                 </div>
                 <div className='menuStyle'>
-                    <Link to="/timeline">시간표</Link>
+                    <Link to="/timetable">시간표</Link>
                 </div>
                 <div className='menuStyle'>
                     <Link to="/search">{"강의검색&추가"}</Link>
@@ -23,11 +23,6 @@ export default function Header() {
                     <Link to="/menu">메뉴</Link>
                 </div>
             </div>
-            {/* <div>
-                <br />
-                {userdata[0].email}<br />
-                {userdata[0].nickname}
-            </div> */}
         </div>
     );
 }
