@@ -13,7 +13,7 @@ function Timetable() {
       <Header />
       <h2>유저 아이디 {user}님 반갑습니다.</h2>
       <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true}/>
-      {timetable.map((item, i) => (
+      {/* {timetable.map((item, i) => (
         <div key={item.id} >            
           <h3>{item.title}</h3>
           {item.date.map((todate) => (
@@ -31,7 +31,7 @@ function Timetable() {
             </div>
           ))}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
