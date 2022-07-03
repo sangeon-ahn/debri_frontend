@@ -1,0 +1,93 @@
+.lecture-search-bar {
+    /* position: absolute; */
+    top: 50px;
+    width: 90%;
+    z-index: -1;
+    float: right;
+}
+
+#lecture-search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    width: 100%;
+    
+}
+
+.lectureStyle {
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 1px solid black;
+    padding: 20px;
+    margin: 5px;
+}
+
+.lectureStyle button {
+    margin-left: 10px;
+    background-color: white;
+    /* color: black; */
+    font-weight: bold;
+    padding: 2px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.lectureDetail {
+    display: block;
+    border: 1px solid black;
+    margin-top: 30px;
+    font-size: 50px;
+}
+
+.lectures {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin-right: 10px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+#lecture-search-form input {
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    width: 100px;
+}
+
+#lecture-search-form button {
+    padding: 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    border: 2px solid rgb(108, 202, 214);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#lecture-search-form span {
+    margin-right: 10px;
+    font-size: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.bottom-attach {
+    position: absolute;
+    bottom: 20px;
+}
+
+.bottom-attach a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px;
+    border: 2px solid black
+}
