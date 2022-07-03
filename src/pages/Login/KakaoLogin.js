@@ -16,6 +16,7 @@ const KakaoLogin = () => {
           src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
           width="222"
         />
+        <div>url에 토큰 정보 있음</div>
       </a>
     </div>
   );
