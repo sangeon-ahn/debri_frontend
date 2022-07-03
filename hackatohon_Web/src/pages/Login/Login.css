@@ -1,0 +1,11 @@
+home {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: hidden;
+}
+
+.loginFailMessage {
+
+}
