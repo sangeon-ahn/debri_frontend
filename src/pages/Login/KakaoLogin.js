@@ -8,7 +8,7 @@ const loginWithKakao = () =>{
   })
 }
 
-const KakaoLogin = () => {
+const KakaoLogin = () => { 
   return (
     <div>
       <a id="custom-login-btn" onClick={loginWithKakao}>
