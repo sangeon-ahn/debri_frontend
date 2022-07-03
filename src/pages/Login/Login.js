@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {useRecoilState} from 'recoil';
 import {userId} from '../../Atom';
+import "./Login.css";
 
 const Login = () => {
     const [password, setPassword] = useState('');
@@ -83,6 +84,7 @@ const Login = () => {
           로그인
         </button>
         <button><Link to="/account">회원가입</Link></button>
+        <button><Link to="/kakaologin">카카오 로그인</Link></button>
       </div>
     );
 }

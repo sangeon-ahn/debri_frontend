@@ -1,4 +1,5 @@
 import Login from "./pages/Login/Login";
+import KakaoLogin from "./pages/Login/KakaoLogin";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Account from "./pages/Account/Account";
@@ -17,6 +18,7 @@ function App() {
           <Route path="account" element={<Account />} />
           <Route path="timetable" element={<Timetable />} />
           <Route path="/" element={<Login />} />
+          <Route path="/kakaologin" element={<KakaoLogin />} />
           <Route path="search" element={<SearchLecture />} />
           <Route path="menu" element={<Menu />} />
           <Route path="mycurri" element={<MyCurri></MyCurri>}/>
