@@ -1,12 +1,24 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 const {Kakao} = window;
 
 const loginWithKakao = () =>{
+  const href = window.location.href;
+  let params = new URL(document.location).searchParams;
+  let code = params.get("code");
+
+  console.log(params);
+  console.log(code);
+   
+  // useEffect(() => {
+    
+  // })
   Kakao.Auth.authorize({
     redirectUri: 'http://localhost:3000/auth/kakao/callback'
   })
-}
+
+} 
 
 const KakaoLogin = () => { 
   return (
