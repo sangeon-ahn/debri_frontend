@@ -22,10 +22,11 @@
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0",
     "redux": "^4.2.0",
+    "redux-actions": "^2.6.5",
     "web-vitals": "^2.1.4"
   },
   "main": "src/main.js",
-  "homepage":"./",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
