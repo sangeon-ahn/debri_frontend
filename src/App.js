@@ -18,10 +18,11 @@ function App() {
           <Route path="account" element={<Account />} />
           <Route path="timetable" element={<Timetable />} />
           <Route path="/" element={<Login />} />
-          <Route path="/kakaologin" element={<KakaoLogin />} />
+          <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
           <Route path="search" element={<SearchLecture />} />
           <Route path="menu" element={<Menu />} />
           <Route path="mycurri" element={<MyCurri></MyCurri>}/>
+          
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
