@@ -7,7 +7,7 @@
 [우아한 형제들 - 우린 Git-flow를 사용하고 있어요](https://techblog.woowahan.com/2553/)
 
 **branch 종류**
-> * master - 항상 실행 가능한 상태 유지
+> * main - 항상 실행 가능한 상태 유지
 > * develop - 개발용
 > * feature - 기능 단위 개발용
 > * release - master로 옮기기전 검수용
