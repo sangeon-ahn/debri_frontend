@@ -6,13 +6,14 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 680,
+    width: 376,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
       devTools: isDev,
     },
+    autoHideMenuBar: true
   });
 
   mainWindow.loadURL(

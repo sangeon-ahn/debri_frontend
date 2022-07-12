@@ -1,0 +1,44 @@
+.account{
+    position: relative;
+    width: 360px;
+}
+
+/*로고*/
+.Logo_box {
+    position: absolute;
+    width: 223.81px;
+    height: 198px;
+    left: 68px;
+    top: 93px;
+}
+.onlylogo {
+    position: absolute;
+    width: 152px;
+    height: 106px;
+    left: 104px;
+    top: 93px;
+}
+.logotype {
+    position: absolute;
+    width: 223.81px;
+    height: 43.61px;
+    left: 68px;
+    top: 216.58px;
+}
+
+.account_warp {
+    position: absolute;
+    color: white;
+    box-sizing: border-box;
+    top: 340px;
+
+}
+
+.account_content {
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+}
