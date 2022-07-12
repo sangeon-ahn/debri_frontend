@@ -1,0 +1,22 @@
+.favorite-title {
+    display: flex;
+    margin-bottom: 22px;
+}
+
+.favorite-title p {
+    margin: 0px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    color: white;
+    margin-right: 22px;
+}
+
+.board-menu {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.favorite-boards {
+    margin-bottom: 24px;
+}

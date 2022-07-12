@@ -1,6 +1,8 @@
+import BoardsPage from "./pages/BoardsPage/BoardsPage";
+
 function App() {
   return (
-    <div>hi</div>
+    <BoardsPage />
   );
 }
 
