@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import './BoardsPage.css';
 import logo from '../../assets/LOGO.png';
 import profile from '../../assets/Profile.png';

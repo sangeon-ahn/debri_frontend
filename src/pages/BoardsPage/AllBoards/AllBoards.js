@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import './AllBoards.css';
 
 export default function AllBoards({ boards }) {

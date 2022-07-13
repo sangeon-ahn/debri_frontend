@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import './FavoriteBoards.css';
 
 export default function FavoriteBoards({ boards }) {
