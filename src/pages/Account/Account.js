@@ -12,16 +12,21 @@ const Account =()=>{
   const [PasswordCheck, setPasswordCheck] = useState('');
   const [Birth, setBirth] = useState('');
   const [Nickname, setNickname] = useState('');
-  const [isagree, setIsagree] = useState('false');
+  const [allCheck, setAllCheck] = useState(false);
+  const [useCheck, setUseCheck] = useState(false);
+  const [marketingCheck, setMarketingCheck] = useState(false);
 
   function onClickSave(event){
     event.preventDefault() 
     if(Password !== PasswordCheck) {
       return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
+    } else if (!Id || !Password || !Nickname|| !Birth || !useCheck){
+      alert("필수항목을 확인해주세요")
+    } else {
+      // postData(Id, Password, Birth, Nickname);
     }
     console.log(typeof(Birth))
     console.log(Id, Password, Birth, Nickname);
-    // postData(Id, Password, Birth, Nickname);
   }     
 
   const headers = {
@@ -65,13 +70,49 @@ const Account =()=>{
     setNickname(e.target.value)
   }
 
+  const allBtnEvent =()=>{
+    if(allCheck === false) {
+      setAllCheck(true);
+      setUseCheck(true);
+      setMarketingCheck(true);
+    }else {
+      setAllCheck(false);
+      setUseCheck(false);
+      setMarketingCheck(false);
+    } 
+  };
+  
+  const useBtnEvent =()=>{
+    if(useCheck === false) {
+      setUseCheck(true)
+    }else {
+      setUseCheck(false)
+    }
+  };
+  
+  const marketingBtnEvent =()=>{
+    if(marketingCheck === false) {
+      setMarketingCheck(true)
+    }else {
+      setMarketingCheck(false)
+    }
+  };
+
+  useEffect(()=>{
+    if(useCheck===true && marketingCheck===true){
+      setAllCheck(true)
+    } else {
+      setAllCheck(false)
+    }
+  }, [useCheck, marketingCheck])
+
   return (
     <div className='account'>
       <button><Link to="/">돌아가기</Link></button>
       <div className='Logo_box'>
         <img src={onlylogo} alt="데브리" className="onlylogo"></img>
         <img src={logoType} alt="데브리" className="logotype"></img>
-        <p>“개발과 관련된 모든 것들을 연결합니다.”</p>
+        <p className='logotext'>“개발과 관련된 모든 것들을 연결합니다.”</p>
       </div>
 
       <div className='account_warp'>
@@ -91,6 +132,25 @@ const Account =()=>{
           닉네임 <input type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
         </div>
         <button onClick={onClickSave}>시작하기</button>
+
+        <form method="post" action="">
+          <div>
+            <div>
+              <div>
+                <input type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent}/>
+                <label for="all-check">전체 약관에 동의합니다.</label>
+              </div>
+              <div>
+                <input type="checkbox" id="check2" checked={useCheck}  onChange={useBtnEvent}/>
+                <label for="check2">개인정보 약관에 동의합니다. (필수)</label>
+              </div>
+              <div>
+                <input type="checkbox" id="check3" checked={marketingCheck}  onChange={marketingBtnEvent}/>
+                <label for="check3">서비스 홍보 약관에 동의합니다. (선택)</label>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 

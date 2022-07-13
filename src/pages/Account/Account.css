@@ -10,22 +10,26 @@
     height: 198px;
     left: 68px;
     top: 93px;
+    text-align: center;
 }
 .onlylogo {
-    position: absolute;
     width: 152px;
     height: 106px;
-    left: 104px;
-    top: 93px;
 }
 .logotype {
-    position: absolute;
     width: 223.81px;
     height: 43.61px;
-    left: 68px;
-    top: 216.58px;
+    margin: 10px 0;
 }
-
+.logotext {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 17px;
+    margin:0;
+    color: #FFFFFF;
+    }
 .account_warp {
     position: absolute;
     color: white;
