@@ -1,11 +1,10 @@
 import './BoardsPage.css';
-import logo from '../../assets/LOGO.png';
-import profile from '../../assets/Profile.png';
-import vector from '../../assets/Vector.png';
-import searchIcon from '../../assets/searchIcon.png';
 import { useState } from 'react';
 import FavoriteBoards from './FavoriteBoards/FavoriteBoards';
 import AllBoards from './AllBoards/AllBoards';
+import Header from '../Header/Header';
+import Search from '../Search/Search';
+import LowBar from '../LowBar/LowBar';
 
 export default function BoardsPage() {
   const dummyData = [
@@ -58,23 +57,15 @@ export default function BoardsPage() {
   ]
   const [boards, setBoards] = useState(dummyData);
 
-
-
   return (
     <>
-      <div className="header">
-        <img src={logo} alt="액박" className="logo"></img>
-        <img src={profile} alt="액박" className='profile'></img>
-        <img src={vector} alt="액박" className='vector'></img>
-      </div>
-      <div className="search-bar">
-        <img src={searchIcon} alt="액박" className="search-icon"></img>
-        <input type="text" className="search" placeholder="검색어를 입력하세요" />
-      </div>
+      <Header />
+      <Search />
       <div className='board-list'>
-        <FavoriteBoards boards={boards} ></FavoriteBoards>
-        <AllBoards boards={boards}></AllBoards>
+        <FavoriteBoards boards={boards} />
+        <AllBoards boards={boards} />
       </div>
+      <LowBar />
     </>
   )
 }

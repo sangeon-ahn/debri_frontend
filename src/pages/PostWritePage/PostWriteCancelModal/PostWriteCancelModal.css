@@ -1,0 +1,65 @@
+.post-write-cancel-modal {
+  width: 316px;
+  height: 86px;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cancel-title {
+  display: flex;
+  width: 250px;
+  height: 22px;
+  position: relative;
+  top: 14px;
+  left: 20px;
+  align-items: center;
+  /* text-align: center; */
+}
+
+.cancel-title span {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.alert-icon-box {
+  width: 22px;
+  height: 22px;
+  margin-right: 11px;
+}
+
+.yesno-box {
+  position: absolute;
+  width: 141px;
+  height: 28px;
+  right: 17px;
+  bottom: 10px;
+}
+
+.cancel-yes-button {
+  width: 60px;
+  height: 28px;
+  background-color: #FF0000;
+  border-radius: 10px;
+  border: 1px solid #FF0000;
+  color: white;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 700;
+  margin-right: 7px;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+}
+
+.cancel-no-button {
+  width: 74px;
+  height: 28px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid white;
+  font-weight: 800;
+font-size: 10px;
+line-height: 14px;
+font-family: 'Noto Sans KR';
+font-style: normal;
+}

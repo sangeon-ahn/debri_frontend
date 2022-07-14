@@ -1,0 +1,130 @@
+.post-write-container {
+  position: relative;
+  padding: 0 22px;
+  width: 316px;
+}
+
+.go-past-button {
+  background-color: transparent;
+  border: none;
+}
+
+.title-input {
+  position: relative;
+  width: 282px;
+  margin: 14px 0 14px 26px;
+  background-color: transparent;
+  border: none;
+  caret-color: white;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.title-input::placeholder {
+  color: white;
+}
+
+.title-input:focus {
+  outline: none;
+}
+
+.title-input:focus::placeholder {
+  opacity: 0;
+}
+
+.select-board {
+  box-sizing: border-box;
+  width: 316px;
+  height: 37px;
+  left: 22px;
+  top: 174px;
+  align-items: center;
+  border-width: 1px 0px;
+  border-style: solid;
+  border-color: #2F343A;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.content-textarea {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  caret-color: white;
+  color: white;
+  text-align: start;
+  margin-top: 29px;
+  font-size: 12px;
+  resize: none;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.content-textarea::placeholder {
+  color: white;
+}
+
+.content-textarea:focus {
+  outline: none;
+}
+
+.content-textarea:focus::placeholder {
+  opacity: 0;
+}
+
+.limit-length {
+  text-align: center;
+  color: white;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  margin-bottom: 7px;
+  margin-top: 10px;
+}
+
+.write-post-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.write-post {
+  display: flex;
+  width: 120px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: #66CC66;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.pencil {
+  margin-left: 9px;
+  margin-right: 10px;
+}
+
+select {
+  background-color: transparent;
+  color: white;
+  border: none;
+  /* appearance: none; */
+  width: 130px;
+  height: inherit;
+  position: relative;
+  z-index: 1;
+  margin-left: 150px;
+}
+
+select:focus {
+  outline: none;
+}
+
+select option {
+  background-color: #0A1123;
+}
+
+
+
