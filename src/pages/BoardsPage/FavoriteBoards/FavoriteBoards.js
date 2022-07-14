@@ -5,13 +5,14 @@ import toggleUp from '../../../assets/toggleUp.png';
 import favoriteStar from '../../../assets/favoriteStar.png';
 import rightArrow from '../../../assets/rightArrow.png';
 
-export default function FavoriteBoards({ boards }) {
+export default function FavoriteBoards(props) {
+  const { boards } = props;
   const [isOpened, setIsOpened] = useState(true);
 
   function handleFavoriteBoardsToggle() {
     setIsOpened(state => !state);
   }
-
+  console.log(props);
   return (
     <div className="favorite-boards">
       <div className="favorite-title">

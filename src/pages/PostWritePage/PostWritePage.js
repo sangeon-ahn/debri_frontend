@@ -6,19 +6,22 @@ import writePost from '../../assets/writePost.png';
 import selectButton from '../../assets/selectButton.png';
 import leftArrow from '../../assets/leftArrow.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import PostWriteCancelModal from './PostWriteCancelModal/PostWriteCancelModal';
 
 export default function PostWritePage() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
-  let navigate = useNavigate();
-  let location = useLocation();
-  console.log(location);
   return (
     <>
+      <PostWriteCancelModal
+        isCancelModalOpen={isCancelModalOpen}
+        closeCancelModal={() => setIsCancelModalOpen(false)}
+      />
       <Header />
       <div className='post-write-container'>
-        <button className='go-past-button' onClick={() => navigate(-1)}>
+        <button className='go-past-button' onClick={() => setIsCancelModalOpen(true)}>
           <img src={leftArrow} alt=''/>
         </button>
         <div>

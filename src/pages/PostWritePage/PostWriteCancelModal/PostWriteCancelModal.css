@@ -1,9 +1,40 @@
-.post-write-cancel-modal {
+ /* .post-write-cancel-modal {
+  position: fixed;
   width: 316px;
+  opacity: 1;
   height: 86px;
   background-color: #D9D9D9;
   border-radius: 10px;
-  position: relative;
+  z-index: 99;
+  animation: modal-show 0.3s;
+  overflow: hidden;
+  top: 300px;
+  left: 22px;
+} */
+
+
+.post-write-cancel-modal .open-modal {
+  display: block;
+  animation: modal-bg-show 0.3s;
+}
+
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .cancel-title {
@@ -14,7 +45,6 @@
   top: 14px;
   left: 20px;
   align-items: center;
-  /* text-align: center; */
 }
 
 .cancel-title span {
@@ -62,4 +92,58 @@ font-size: 10px;
 line-height: 14px;
 font-family: 'Noto Sans KR';
 font-style: normal;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+}
+.post-write-cancel-modal {
+  width: 316px;
+  height: 86px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-show 0.3s;
+  /* overflow: hidden; */
+  position: relative;
+}
+
+.modal.openModal {
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-bg-show 0.3s;
+}
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
