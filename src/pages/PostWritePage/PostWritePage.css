@@ -7,6 +7,7 @@
 .go-past-button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .title-input {

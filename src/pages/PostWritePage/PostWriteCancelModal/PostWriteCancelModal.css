@@ -1,40 +1,27 @@
- /* .post-write-cancel-modal {
-  position: fixed;
-  width: 316px;
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
   opacity: 1;
-  height: 86px;
-  background-color: #D9D9D9;
-  border-radius: 10px;
-  z-index: 99;
-  animation: modal-show 0.3s;
-  overflow: hidden;
-  top: 300px;
-  left: 22px;
-} */
-
-
-.post-write-cancel-modal .open-modal {
-  display: block;
-  animation: modal-bg-show 0.3s;
 }
 
-@keyframes modal-show {
-  from {
-    opacity: 0;
-    margin-top: -50px;
-  }
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
+.ReactModal__Overlay--before-close{
+  opacity: 0;
 }
-@keyframes modal-bg-show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+
+.ReactModal__Content {
+  margin-top: 0px;
+  transition: margin-top 300ms ease-in-out;
+}
+
+.ReactModal__Content--after-open {
+  margin-top: 50px;
+}
+
+.ReactModal__Content--before-close {
+  margin-top: -50px;
 }
 
 .cancel-title {
@@ -78,7 +65,8 @@
   font-weight: 700;
   margin-right: 7px;
   font-family: 'Noto Sans KR';
-font-style: normal;
+  font-style: normal;
+  cursor: pointer;
 }
 
 .cancel-no-button {
@@ -88,93 +76,9 @@ font-style: normal;
   border-radius: 10px;
   border: 1px solid white;
   font-weight: 800;
-font-size: 10px;
-line-height: 14px;
-font-family: 'Noto Sans KR';
-font-style: normal;
-}
-
-.modal {
-  /* display: none; */
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.modal button {
-  outline: none;
+  font-size: 10px;
+  line-height: 14px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
   cursor: pointer;
-  border: 0;
-}
-.post-write-cancel-modal {
-  width: 316px;
-  height: 86px;
-  margin: 0 auto;
-  border-radius: 0.3rem;
-  background-color: #D9D9D9;
-  border-radius: 10px;
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
-  /* overflow: hidden; */
-  position: relative;
-}
-
-.modal-show {
-  animation: modal-show 0.3s;
-}
-
-.modal-close {
-  animation: modal-close 0.3s;
-}
-
-.modal.openModal {
-  display: flex;
-  align-items: center;
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
-  animation: modal-bg-show 0.3s;
-}
-
-.modal.closeModal {
-  display: flex;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  animation: modal-bg-close 0.3s;
-}
-
-
-@keyframes modal-bg-show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modal-close {
-  from {
-    opacity: 1;
-    margin-top: 0;
-  }
-  to {
-    opacity: 0;
-    margin-top: -50px;
-  }
-}
-
-@keyframes modal-bg-close {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-.display-none {
-  display: none;
 }
