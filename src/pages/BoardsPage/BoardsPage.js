@@ -7,6 +7,9 @@ import Search from '../Search/Search';
 import LowBar from '../LowBar/LowBar';
 
 export default function BoardsPage() {
+  // 여기 있는 더미데이터는 api로 안받아와도 될수도
+  // 그냥 링크 path로 게시판 id 파라미터 보내서 링크타고 들어가서 렌더링 하는 방식
+  // 근데 게시판 id를 알아야하니까 받아와야하긴 할듯
   const dummyData = [
     {
       id: 1,
@@ -65,7 +68,6 @@ export default function BoardsPage() {
         <FavoriteBoards boards={boards} />
         <AllBoards boards={boards} />
       </div>
-      <LowBar />
     </>
   )
 }

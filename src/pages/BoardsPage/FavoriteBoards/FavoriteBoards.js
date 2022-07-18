@@ -4,6 +4,7 @@ import toggleDown from '../../../assets/toggleDown.png';
 import toggleUp from '../../../assets/toggleUp.png';
 import favoriteStar from '../../../assets/favoriteStar.png';
 import rightArrow from '../../../assets/rightArrow.png';
+import { Link } from 'react-router-dom';
 
 export default function FavoriteBoards(props) {
   const { boards } = props;
@@ -12,7 +13,7 @@ export default function FavoriteBoards(props) {
   function handleFavoriteBoardsToggle() {
     setIsOpened(state => !state);
   }
-  console.log(props);
+
   return (
     <div className="favorite-boards">
       <div className="favorite-title">
@@ -30,13 +31,16 @@ export default function FavoriteBoards(props) {
             return (
               <div className='board-menu' key={board.id}>
                 <div>
-                <button>
-                  <img src={favoriteStar} alt="엑박"></img>
-                </button>
-
+                  <button>
+                    <img src={favoriteStar} alt="엑박"></img>
+                  </button>
                 </div>
-                <div>{board.text}</div>
-                <img src={rightArrow} alt="엑박" width="9.44px" height="16.19px" className='right-arrow'/>
+                <Link to={`/boards/${board.id}`} state={{board:board}} >
+                  <div style={{display:'flex', alignItems:'center'}}>
+                    <div>{board.text}</div>
+                    <img src={rightArrow} alt="엑박" width="9.44px" height="16.19px" className='right-arrow'/>
+                  </div>
+                </Link>
               </div>
             )
           })}

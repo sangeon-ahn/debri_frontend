@@ -16,13 +16,15 @@ export default function PostWritePage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
+  const location = useLocation();
+  console.log(location);
   const handleSelectOption = (e) => {
     setSelectedOption(e.target.value);
   };
   // 게시판에서 글쓰기 버튼 누를 때 writepage로 링크타고 이동할텐데 이때 현재 있는 게시판 데이터 파라미터를 넘겨준 다음 이 데이터를 writepage에서 useParams로 받아서 useEffet setSelectedOption를 호출해주면 된다.
-  console.log(selectedOption);
+ 
   return (
-    <>
+    <div>
       <PostWriteCancelModal
         isCancelModalOpen={isCancelModalOpen}
         closeCancelModal={() => setIsCancelModalOpen(false)}
@@ -80,6 +82,7 @@ export default function PostWritePage() {
           </button>
         </div>
       </div>
-    </>
+      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
+    </div>
   );
 }

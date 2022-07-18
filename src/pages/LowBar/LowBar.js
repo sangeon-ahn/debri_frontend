@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import homeButton from '../../assets/homeButton.png';
 import activeHomeButton from '../../assets/activeHomeButton.png';
@@ -34,8 +34,8 @@ export default function LowBar() {
 
   return (
     <div className="low-bar">
-      <div className="home-button" onClick={handleLowButtonClick} style={{zIndex: 10}}>
-        <NavLink to={'/home'}>
+      <div className="home-button" onClick={handleLowButtonClick} id="homeButton">
+        <NavLink to={'/'}>
           <div className='home-icon-box' id="homeButton"><img src={isButtonClicked.homeButton ? activeHomeButton : homeButton} alt='' id="homeButton"/></div>
           <div className={(isButtonClicked.homeButton ? ' active-home-text' : 'home-text')} id="homeButton">홈</div>
         </NavLink>
