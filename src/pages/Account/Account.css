@@ -68,8 +68,6 @@
     height: 40px;
     margin: 10px 20px;
     line-height: 40px;
-    font-size: 14px;
-    font-weight: 400;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
     color:#FFFFFF;
@@ -144,11 +142,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display:inline-block;
     position:absolute;
 }
-
+.account_text{
+    display:inline-block;
+    width : 40px;
+    line-height: 14px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    margin:7px 5px 0px 15px;
+    word-break:keep-all;
+}
 .textinput {
     border: none;
     outline: none;
     background: transparent;
-    border-left: 1px solid #ffffff;
     color:#FFFFFF;
+    font-size: 14px;
 }

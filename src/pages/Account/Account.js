@@ -116,19 +116,24 @@ const Account =()=>{
 
       <div className='account_warp'>
         <div className= {`account_content ${!login ? '' :( Id ? 'success' : 'fail')}`}>
-          ID <input className='textinput' type="email" placeholder="email 형식" onChange={onChangeId} value={Id}/>
+          <span className='account_text'>ID</span> 
+          |<input className='textinput' type="email" placeholder="email 형식" onChange={onChangeId} value={Id}/>
         </div>
         <div className= {`account_content ${!login ? '' :( Password ? 'success' : 'fail')}`}>
-          PW <input className='textinput' type="password" placeholder="비밀번호" onChange={onChangePassword} value={Password} />
+          <span className='account_text'>PW</span> 
+          |<input className='textinput' type="password" placeholder="비밀번호" onChange={onChangePassword} value={Password} />
         </div>
         <div className= {`account_content ${!login ? '' :( PasswordCheck ? 'success' : 'fail')}`}>
-          비밀번호 확인 <input className='textinput' type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
+          <span className='account_text' style={{fontSize:'9px'}}>비밀번호 확인</span> 
+          |<input className='textinput' type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
         </div>
         <div className= {`account_content ${!login ? '' :( Birth ? 'success' : 'fail')}`}>
-          생년월일<input className='textinput' type="date" onChange={onChangeBirth} value={Birth}/>
+          <span className='account_text' style={{fontSize:'10px'}}>생년 월일</span>
+          |<input className='textinput' type="date" onChange={onChangeBirth} value={Birth}/>
         </div>
         <div className= {`account_content ${!login ? '' :( Nickname ? 'success' : 'fail')}`}>
-          닉네임 <input className='textinput' type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
+          <span className='account_text' style={{fontSize:'10px'}}>닉네임</span> 
+          |<input className='textinput' type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
         </div>
         <button className={`start_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`} onClick={onClickSave}>시작하기</button>
 
