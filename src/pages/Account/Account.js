@@ -25,9 +25,9 @@ const Account =()=>{
     } else if (!Id || !Password || !Nickname|| !Birth || !useCheck){
       console.log('fail')
     } else {
-      postData(Id, Password, Birth, Nickname);
+      postData(Id, Password, PasswordCheck, Birth, Nickname);
     }
-    console.log(Id, Password, Birth, Nickname);
+    console.log(Id, Password, PasswordCheck, Birth, Nickname);
   }     
 
   const headers = {
@@ -35,20 +35,20 @@ const Account =()=>{
     'Content-Type': 'application/json',
   };
 
-  async function postData(id,password,birthday, nickname) {
+  async function postData(id,password, passwordCheck, birthday, nickname) {
     try {
-      const response = await axios.post(`/api/user/create`,
+      const response = await axios.post(`/api/user/signUp`,
         JSON.stringify(
           {
-            id : id, 
+            userId : id,
+            password : password,
+            password2 : passwordCheck,
             nickname : nickname,
-            birthday: birthday,
-            password : password
+            birthday: birthday
           }),
         { headers }
       );
       console.log('리턴', response);
-      alert('저장완료');
 
     } catch (error) {
       console.error(error);
