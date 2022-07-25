@@ -12,7 +12,7 @@
   width: 316px;
   height: auto;
   box-sizing: border-box;
-  padding: 10px 22px 6px 22px;
+  padding: 10px 12.23px 6px 23px;
   border-bottom: 1px solid #2F343A;;
   margin-top: 10px;
 }
@@ -25,10 +25,16 @@
   font-size: 14px;
   line-height: 20px;
   color: #FFFFFF;
+  width: 200px;
+}
+
+.post-title-container {
+  position: relative;
 }
 
 .post-title-wrapper {
   display: flex;
+  width: 316px;
 }
 
 .post-user-info {
@@ -65,7 +71,97 @@
 .report-icon-box {
   margin-right: 7.87px;
   /* height: 14px; */
+}
 
+.post-setting-container {
+  width: 316px;
+  height: 193px;
+  top: 90px;
+  background-color: #0A1123;
+  z-index: 10;
+}
+
+.post-setting-menu-container {
+  width: 316px;
+  height: 139px;
+  background: #8B95A1;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  border: 1px solid black;
+}
+
+.post-setting-cancel-container {
+  width: 316px;
+  height: 48px;
+  background: #212632;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+color: #FFFFFF;
+text-align: center;
+border: 1px solid black;
+}
+
+.post-setting-modal-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 43px;
+text-align: center;
+flex: 1;
+
+color: #0A1123;
+}
+.post-modify {
+  flex: 1;
+  box-sizing: border-box;
+  width: 300px;
+  height: 48px;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: #0A1123;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+  line-height: 42px;
+  height: 47px;
+  background-color: transparent;
+}
+
+.post-delete {
+  flex: 1;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 23px;
+text-align: center;
+height: 47px;
+color: #000000;
+background-color: transparent;
+border: none;
+}
+
+.post-menu-button {
+  height: 25px;
+  line-height: 0px;
+  position: absolute;
+  right: 0px;
+  background-color: transparent;
+  border: none;
+}
+
+.post-menu-icon {
+  /* vertical-align: middle; */
 }
 
 .post-report-text {
@@ -149,6 +245,7 @@ line-height: 14px;
 .comments-container {
   width: 100%;
   height: auto;
+  margin-bottom: 222px;
 }
 
 .comment-container {
@@ -266,6 +363,7 @@ margin-right: 9px;
   background: #202E51;
   border-top: 1px solid #2F343A;
   display: flex;
+  margin-bottom: 5px;
 }
 
 .recomment-arrow-box {

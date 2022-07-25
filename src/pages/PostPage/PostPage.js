@@ -3,41 +3,191 @@ import Header from "../Header/Header";
 import Search from "../Search/Search";
 import './PostPage.css';
 import leftArrow from '../../assets/leftArrow.png';
-import grayUpThumb from '../../assets/grayUpThumb.png';
 // import greenUpThumb from '../../assets/greenUpThumb.png';
-import reComment from '../../assets/reComment.png'
-import recommentArrow from '../../assets/recommentArrow.png';
 import postUserProfile from '../../assets/postUserProfile.png';
 import userReport from '../../assets/userReport.png';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Comments from "./Comments/Comments";
+import WriteComment from "./WriteComment/WriteComment";
+import postMenuIcon from "../../assets/postMenuIcon.png";
+import Modal from 'react-modal';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  // const { board,} = location.state;
+  // const {id} = location.state.post;
+  const location = useLocation();
   const params = useParams();
-  console.log(params)
+
+  const { boardId, postId } = params;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [comments, setComments] = useState(null);
+  const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
+  const [post, setPost] = useState(null);
+  const userIdx = localStorage.getItem("userIdx");
+
+  const fetchPost = async (postIdx) => {
+    try {
+      setError(null);
+      setComments(null);
+      setLoading(true);
+      const response = await axios.get(`/api/post/get/${postIdx}`);
+      setPost(response.data.result);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  const fetchComments = async (postIdx) => {
+    try {
+      setError(null);
+      setComments(null);
+      setLoading(true);
+      const response = await axios.get(`/api/comment/get/${postIdx}`);
+      if (response.data.isSuccess) {
+        setComments(response.data.result);
+      } else {
+        setComments([]);
+      }
+      console.log(response);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPost(postId);
+    fetchComments(postId);
+    // window.addEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleScroll = e => {
+    const { innerHeight } = window;
+    const { scrollHeight } = document.body;
+    const myScroll = e.srcElement.scrollingElement.scrollTop;
+    console.log('전체 body 의 높이 : ' + scrollHeight);
+    console.log('전체 스크롤바 높이 : ' + innerHeight);
+    console.log('현재 스크롤 위치 : ' + myScroll);
+  }
+
+  const handleEnterInput = (e, content, authorName) => {
+    const UploadComment = async (userIdx, postIdx, content, authorName) => {
+      try {
+        const response = await axios.post(`/api/comment/replyOnPost/create`,
+          JSON.stringify(
+            {
+              userIdx: userIdx,
+              postIdx: postIdx,
+              content: content,
+              authorName: authorName
+            }),
+            { headers }
+        );
+
+        console.log(response.data.result);
+        setComments(state => {
+          return [
+            ...state,
+            response.data.result
+          ];
+        });
+
+      } catch (e) {
+        console.log(e);
+        setError(e);
+      }
+    };
+
+    UploadComment(userIdx, postId, content, authorName);
+  };
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  const headers = {
+        'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      };
+
+  const handlePostDeleteClick = e => {
+    const deletePost = async (postIdx) => {
+      try {
+        const response = axios.patch(`/api/post/${postIdx}/status`,
+            { headers }
+        );
+        console.log(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    deletePost();
+  };
+
+  if (loading) return <div>로딩중!</div>
+  if (error) return <div>에러발생!</div>
+  if (!post) return <div>로딩중!</div>;
+  if (!comments) return <div>로딩중!</div>;
+
   return (
     <>
       <Header />
       <Search />
-      {/* <div className="post-container">
+      <div className="post-container">
         <div className='board-title-box'>
           <button className='back-button' onClick={() => navigate(-1)}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>{board.text}</div>
+          <div className='board-title'>게시판제목</div>
         </div>
+        <Modal
+          closeTimeoutMS={300}
+          isOpen={isPostSettingModalOn}
+          onRequestClose={() => setIsPostSettingModalOn(state => !state)}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+         <div className="post-setting-container">
+            <div className="post-setting-menu-container">
+              <div className="post-setting-modal-title">게시물 관리</div>
+              <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
+              <button className="post-delete" onClick={() => {
+                handlePostDeleteClick();
+                navigate(-1);
+              }}>삭제하기</button>
+            </div>
+            <button className="post-setting-cancel-container" onClick={() => setIsPostSettingModalOn(state => !state)}>닫기</button>
+          </div>
+        </Modal>
         <div className="post-subject">
           <div className="post-title-container">
             <div className="post-title-wrapper">
-              <span className="post-title-box">{post.title}</span>
-              <div className="post-comment-number">(2)</div>
+              <div className="post-title-box">{post.postName}</div>
+              <div className="post-comment-number">({post.commentNumber})</div>
+              <button className="post-menu-button" onClick={() => setIsPostSettingModalOn(state=>!state)}>
+                <img className="post-menu-icon" src={postMenuIcon} alt=""/>
+              </button>
             </div>
-            <div className="post-elapsed-time">5분 전</div>
+            <div className="post-elapsed-time">{post.timeAfterCreated}</div>
           </div>
           <div className="post-user-info">
             <div className="post-user-profile">
               <img src={postUserProfile} alt="엑박" />
             </div>
-            <div className="post-user-nickname">데브리짱짱걸 ></div>
+            <div className="post-user-nickname">{post.authorName} ></div>
           </div>
         </div>
         <div className="report-user-box">
@@ -46,40 +196,15 @@ export default function PostPage() {
           </div>
           <div className="post-report-text">신고하기</div>
         </div>
-        <div className="post-main-content">{post.content}</div>
+        <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
           <button className="up-vote-button">추천</button>
           <button className="scrap-button">스크랩</button>
         </div>
-        <div className="comments-container">
-          <div className="comment-container">
-            <div className="comment-content">
-              지금 장난하나 ㅡㅡ 아니 코딩이 장난이에요? 최소한 검색 정도는 할 줄 알아야지 얼탱이가 밤탱이네요 ㅡㅡ 님은 코딩하지마삼
-            </div>
-            <div className="comment-detail">
-              <div className="comment-user-name"><span>데브리짱짱보이 ></span></div>
-              <div className="comment-elapsed-time">5분 전</div>
-              <div className="comment-button-box">
-                  <img src={grayUpThumb} alt='' className="gray-upthumb-icon"/>
-                <div className="up-vote-number">0</div>
-                <div className="barrier-line"></div>
-                  <img src={reComment} alt='' className="recomment-icon"/>
-              </div>
-            </div>
-          </div>
-          <div className="recomment-container">
-            <div className="recomment-arrow-box">
-              <img src={recommentArrow} alt='' className="recomment-arrow" />
-            </div>
-            <div className="recomment-main">
-              <div className="recomment-content">지금 장난 둘^^</div>
-              <div className="recomment-user"></div>
-            </div>
-            <div className="recomment-button-box"></div>
-          </div>
-        </div>
+        {comments && <Comments comments={comments} />}
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div> */}
+        <WriteComment handleEnterInput={handleEnterInput} />
+       <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
     </>
   );
 }
