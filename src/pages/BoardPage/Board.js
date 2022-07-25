@@ -8,52 +8,43 @@ import favoriteStar from '../../assets/favoriteStar.png';
 import LowBar from '../LowBar/LowBar';
 import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/글쓰기.png';
+import React ,{useState,useEffect}from 'react';
+import axios from 'axios';
 
 export default function Board() {
   const navigate = useNavigate();
   const params = useParams();
-  const boardId = params.boardId;
+  const [posts,setPosts] = useState(null);   //결과값
+  const [loading,setLoading] = useState(false); // 로딩되는지 여부
+  const [error,setError] = useState(null); //에러   
+  
+  const fetchPosts = async (boardIdx) => { 
+      try {
+          setPosts(null);
+          setError(null);
+          setLoading(true); //로딩이 시작됨
+          const response = await axios.get(`api/post/getList/${boardIdx}`);
+          setPosts(response.data);
+      } catch (e) {
+          setError(e);
+      }
+      setLoading(false);
+  };
+
+  useEffect( () =>{
+      fetchPosts(1);
+      // fetchPosts(params.boardId);
+  },[] )
+
+  if (loading) return <div>로딩중..</div>
+  if (error) return <div>에러 발생!!</div>
+  if (!posts) return null;
   
   const boardTitle = {
     1: '파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!'
   };
 
-  // boardId로 api요청해서 게시판 데이터 받은 데이터(지금은 더미 데이터)
-  const dummyData = [
-    {
-      id: 1,
-      title: '공백포함(21자35바이트)이상뒤에는 점을 붙인다',
-      content: '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용'
-    },
-    {
-      id: 2,
-      title: '이거 오류 고치는 법'
-    },
-    {
-      id: 3,
-      title: '아이고 맙소사 이게 어떻게 된 일인지 도대체 모르겠네'
-    },
-    {
-      id: 4,
-      title: 'Issue occured: error_why...? help me please'
-    },
-    {
-      id: 5,
-      title: '바이트 문제가 아니라 그냥 위치로 자를 수 있어요'
-    },
-    {
-      id: 6,
-      title: '공백포함(21자35바이트)이상뒤에는 점을 붙인다'
-    },
-    {
-      id: 7,
-      title: '공백포함(21자35바이트)이상뒤에는 점을 붙인다'
-    },
-    {
-      id: 8,
-      title: '공백포함(21자35바이트)이상뒤에는 점을 붙인다'
-    }
-  ];
+  console.log(posts.result);
 
   return (
     <>
@@ -69,19 +60,18 @@ export default function Board() {
             <img src={favoriteStar} alt=''/>
           </div>
         </div>
-        <div className='board-detail'>{boardTitle[boardId]}</div>
+        <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
+        {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
       <div className='post-list'>
-        {dummyData.map(post => {
-          return (
-            <PostSummary post={post} key={post.id} boardId={boardId} />
-          )
-        })}
+        {posts.result.map(post => (
+            <PostSummary post={post} key={post.postIdx} boardId={post.boardIdx} />
+        ))}
       </div>
       <div className='write-post-container2'>
           <button
             className='write-post'
-            onClick={() => navigate('/postwrite', {state: {boardId}})}>
+            onClick={() => navigate('/postwrite')}>
               <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
                 <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
               </div>

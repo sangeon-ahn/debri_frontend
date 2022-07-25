@@ -65,8 +65,8 @@ export default function BoardsPage() {
       <Header />
       <Search />
       <div className='board-list'>
-        <FavoriteBoards boards={boards} />
-        <AllBoards boards={boards} />
+        {/* <FavoriteBoards/> */}
+        <AllBoards/>
       </div>
     </>
   )
