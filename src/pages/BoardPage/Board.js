@@ -65,7 +65,7 @@ export default function Board() {
       </div>
       <div className='post-list'>
         {posts.result.map(post => (
-            <PostSummary post={post} key={post.postIdx} boardId={post.boardIdx} />
+            <PostSummary post={post} key={post.postIdx} />
         ))}
       </div>
       <div className='write-post-container2'>

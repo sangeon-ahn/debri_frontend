@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
 import './PostPage.css';
@@ -11,15 +11,14 @@ import postUserProfile from '../../assets/postUserProfile.png';
 import userReport from '../../assets/userReport.png';
 
 export default function PostPage() {
-  const location = useLocation();
-  console.log(location.state);
   const navigate = useNavigate();
-  const { board, post } = location.state;
+  const params = useParams();
+  console.log(params)
   return (
     <>
       <Header />
       <Search />
-      <div className="post-container">
+      {/* <div className="post-container">
         <div className='board-title-box'>
           <button className='back-button' onClick={() => navigate(-1)}>
             <img src={leftArrow} alt=''/>
@@ -80,7 +79,7 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
+      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div> */}
     </>
   );
 }
