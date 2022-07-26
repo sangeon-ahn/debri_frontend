@@ -43,7 +43,7 @@ Modal.defaultStyles.content = {
 export default function PostWriteConfirmModal(props) {
   const { isConfirmModalOpen, closeConfirmModal } = props;
   const navigate = useNavigate();
-  
+
   return (
     <div>
       <Modal

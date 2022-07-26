@@ -8,8 +8,8 @@ import leftArrow from '../../assets/leftArrow.png';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import PostWriteCancelModal from './PostWriteCancelModal/PostWriteCancelModal';
 import PostWriteConfirmModal from './PostWriteConfirmModal/PostWriteConfirmModal';
-import {useRecoilState} from 'recoil';
-import {userId} from '../../Atom';
+// import {useRecoilState} from 'recoil';
+// import {userId} from '../../Atom';
 import axios from 'axios';
 
 export default function PostWritePage() {
@@ -21,10 +21,11 @@ export default function PostWritePage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const location = useLocation();
-  console.log(location);
 
-  function onClickSave(){
-    // postData(selectedOption, userId, title, content);
+  const userId = localStorage.getItem("userId");
+
+  function onClickSave() {
+  // postData(selectedOption, userId, title, content);
     setIsConfirmModalOpen(true);
   } 
 

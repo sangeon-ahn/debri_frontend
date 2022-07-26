@@ -75,7 +75,6 @@
 
 .post-setting-container {
   width: 316px;
-  height: 193px;
   top: 90px;
   background-color: #0A1123;
   z-index: 10;
@@ -389,3 +388,30 @@ color: #FFFFFF;
 margin-top: 10px;
 max-width: 200px;
 }
+
+
+
+/* 포스트 신고 모달창 */
+.post-report-button {
+  width: 316px;
+  height: 48px;
+  background: #8B95A1;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+
+  color: #000000;
+}
+
+/* 포스트 신고 버튼 누른 후 모달창 */
+.post-report-detail {
+  width: 316px;
+  height: 282px;
+  background: #8B95A1;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  }

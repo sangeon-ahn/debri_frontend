@@ -37,9 +37,9 @@
   border: none;
   color: white;
 }
-.write-comment-input:focus::placeholder {
+/* .write-comment-input:focus::placeholder {
   opacity: 0;
-}
+} */
 .write-comment-box span {
   font-family: 'Noto Sans KR';
   font-style: normal;

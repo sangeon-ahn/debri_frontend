@@ -5,12 +5,26 @@ import axios from "axios";
 
 export default function WriteComment(props) {
   const [commentContent, setCommentContent] = useState('');
-  const { handleEnterInput } = props;
-
+  const { handleEnterInput, authorName, placeHolder, setInputRef, setPlaceHolder, setRootCommentIdx } = props;
+  console.log(placeHolder);
   const handleCommentInput = (e) => {
     setCommentContent(e.target.value);
   };
+  const inputRef = useRef();
 
+  setInputRef(inputRef);
+
+  useEffect(() => {
+    inputRef.current.addEventListener('focusout', () => {
+      setPlaceHolder('댓글 쓰기');
+      setRootCommentIdx(null);
+    });
+    return inputRef.current.removeEventListener('focusout', () => {
+      setPlaceHolder('댓글 쓰기');
+      setRootCommentIdx(null);
+    });
+  }, [setPlaceHolder, setRootCommentIdx]);
+  
   // const deleteComment = async (commentId) => {
   //   try {
   //     const patching = axios.patch(`/api/comment/delete/${commentId}`);
@@ -26,9 +40,10 @@ export default function WriteComment(props) {
         <img src={writeCommentIcon} alt="" />
       </div>
       <input
+        ref={inputRef}
         type="text"
         className="write-comment-input"
-        placeholder="댓글쓰기"
+        placeholder={placeHolder ? placeHolder : "댓글쓰기"}
         value={commentContent}
         onChange={handleCommentInput}
         onKeyDown={(e) => {
@@ -36,7 +51,7 @@ export default function WriteComment(props) {
             return;
           }
 
-          handleEnterInput(e, commentContent, 'asd');
+          handleEnterInput(e, commentContent, authorName);
           setCommentContent('');
         }}
       />

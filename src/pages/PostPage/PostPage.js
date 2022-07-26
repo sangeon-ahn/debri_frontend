@@ -6,7 +6,7 @@ import leftArrow from '../../assets/leftArrow.png';
 // import greenUpThumb from '../../assets/greenUpThumb.png';
 import postUserProfile from '../../assets/postUserProfile.png';
 import userReport from '../../assets/userReport.png';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Comments from "./Comments/Comments";
 import WriteComment from "./WriteComment/WriteComment";
@@ -27,6 +27,7 @@ export default function PostPage() {
   const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
   const [post, setPost] = useState(null);
   const userIdx = localStorage.getItem("userIdx");
+  const userNickname = localStorage.getItem("nickname");
 
   const fetchPost = async (postIdx) => {
     try {
@@ -53,7 +54,7 @@ export default function PostPage() {
       } else {
         setComments([]);
       }
-      console.log(response);
+      // console.log(response);
     } catch (e) {
       setError(e);
       console.log(e);
@@ -65,19 +66,30 @@ export default function PostPage() {
     fetchPost(postId);
     fetchComments(postId);
     // window.addEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('mousedown', clickModalOutside);
 
-  const handleScroll = e => {
-    const { innerHeight } = window;
-    const { scrollHeight } = document.body;
-    const myScroll = e.srcElement.scrollingElement.scrollTop;
-    console.log('전체 body 의 높이 : ' + scrollHeight);
-    console.log('전체 스크롤바 높이 : ' + innerHeight);
-    console.log('현재 스크롤 위치 : ' + myScroll);
-  }
+    return () => {
+      document.addEventListener('mousedown', clickModalOutside);
+    }
+  }, [postId]);
+
+  const clickModalOutside = e => {
+    if (e.target.className === "ReactModal__Overlay ReactModal__Overlay--after-open") {
+      setPostReportDetailOn(false);
+    }
+  };
+
+  // const handleScroll = e => {
+  //   const { innerHeight } = window;
+  //   const { scrollHeight } = document.body;
+  //   const myScroll = e.srcElement.scrollingElement.scrollTop;
+  //   console.log('전체 body 의 높이 : ' + scrollHeight);
+  //   console.log('전체 스크롤바 높이 : ' + innerHeight);
+  //   console.log('현재 스크롤 위치 : ' + myScroll);
+  // }
 
   const handleEnterInput = (e, content, authorName) => {
-    const UploadComment = async (userIdx, postIdx, content, authorName) => {
+    const uploadComment = async (userIdx, postIdx, content, authorName) => {
       try {
         const response = await axios.post(`/api/comment/replyOnPost/create`,
           JSON.stringify(
@@ -104,7 +116,38 @@ export default function PostPage() {
       }
     };
 
-    UploadComment(userIdx, postId, content, authorName);
+    const uploadReComment = async (userIdx, postIdx, rootCommentIdx, content, authorName) => {
+      try {
+        const response = await axios.post(`/api/comment/replyOnReply/create`,
+          JSON.stringify(
+            {
+              userIdx,
+              postIdx,
+              rootCommentIdx,
+              content,
+              authorName
+            }),
+            { headers }
+        );
+
+        console.log(response.data.result);
+        setComments(state => {
+          return [
+            ...state,
+            response.data.result
+          ];
+        });
+      } catch (e) {
+        console.log(e);
+        setError(e);
+      }
+    };
+
+    if (rootCommentIdx === null) {
+      uploadComment(userIdx, postId, content, authorName);
+    } else {
+      uploadReComment(userIdx, postId, rootCommentIdx, content, authorName);
+    }
   };
 
   const customStyles = {
@@ -117,6 +160,30 @@ export default function PostPage() {
       transform: 'translate(-50%, -50%)',
     },
   };
+
+  Modal.setAppElement('#root');
+  Modal.defaultStyles.overlay = {
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    bottom: 0,
+    left: 0,
+    position: "fixed",
+    right: 0,
+    top: 0,
+    zIndex: 99
+  }
+  Modal.defaultStyles.content = {
+    position: 'absolute',
+    top: '40px',
+    left: '40px',
+    right: '40px',
+    bottom: '40px',
+    WebkitOverflowScrolling: 'touch',
+    outline: 'none',
+    width: '316px',
+    backgroundColor: '#D9D9D9',
+    borderRadius: '10px',
+  }
+
   const headers = {
         'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
         Accept: 'application/json',
@@ -136,6 +203,23 @@ export default function PostPage() {
     };
     deletePost();
   };
+
+  const [postReportDetailOn, setPostReportDetailOn] = useState(false);
+
+  const handleReportClick = () => {
+    setPostReportDetailOn(true);
+  };
+
+  const handleModalCloseClick = () => {
+    setIsPostSettingModalOn(false);
+    setPostReportDetailOn(false);
+  };
+
+  const reportSettingModal = useRef();
+
+  const [rootCommentIdx, setRootCommentIdx] = useState(null);
+  const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
+  const [inputRef, setInputRef] = useState(null);
 
   if (loading) return <div>로딩중!</div>
   if (error) return <div>에러발생!</div>
@@ -161,15 +245,26 @@ export default function PostPage() {
           contentLabel="Example Modal"
         >
          <div className="post-setting-container">
-            <div className="post-setting-menu-container">
-              <div className="post-setting-modal-title">게시물 관리</div>
-              <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
-              <button className="post-delete" onClick={() => {
-                handlePostDeleteClick();
-                navigate(-1);
-              }}>삭제하기</button>
-            </div>
-            <button className="post-setting-cancel-container" onClick={() => setIsPostSettingModalOn(state => !state)}>닫기</button>
+            {userIdx === post.authorIdx ?
+              <div className="post-setting-menu-container">
+                <div className="post-setting-modal-title">게시물 관리</div>
+                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
+                <button className="post-delete" onClick={() => {
+                  handlePostDeleteClick();
+                  navigate(-1);
+                }}>삭제하기</button>
+              </div> :
+              <div>
+                {postReportDetailOn ?
+                <div className="post-report-detail" ref={reportSettingModal}>
+
+                </div> :
+                <button className="post-report-button" onClick={handleReportClick}>
+                  신고하기
+                </button>}
+              </div>
+            }
+            <button className="post-setting-cancel-container" onClick={handleModalCloseClick}>닫기</button>
           </div>
         </Modal>
         <div className="post-subject">
@@ -201,9 +296,17 @@ export default function PostPage() {
           <button className="up-vote-button">추천</button>
           <button className="scrap-button">스크랩</button>
         </div>
-        {comments && <Comments comments={comments} />}
+        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} />}
       </div>
-        <WriteComment handleEnterInput={handleEnterInput} />
+        <WriteComment
+          handleEnterInput={handleEnterInput}
+          authorName={userNickname}
+          rootCommentIdx={rootCommentIdx}
+          placeHolder={placeHolder}
+          setInputRef={setInputRef}
+          setPlaceHolder={setPlaceHolder}
+          setRootCommentIdx={setRootCommentIdx}
+        />
        <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
     </>
   );

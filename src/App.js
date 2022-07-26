@@ -12,6 +12,8 @@ function App() {
   localStorage.setItem("userIdx", 2);
   localStorage.setItem("jwt", "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY");
   localStorage.setItem("refreshToken", "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgxMDU0NTQsImV4cCI6LTQzMTM2NDEzNTExMTY0MTJ9.N2YGiJm8YOP1QRCNIcD-lS-QW23di5Yp3CJgg5w7Gpo");
+  localStorage.setItem("nickname", "nickname1");
+  
   return (
     <BrowserRouter>
     {/* {logined && <Header />} */}
