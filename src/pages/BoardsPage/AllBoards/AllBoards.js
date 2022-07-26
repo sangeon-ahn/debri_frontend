@@ -59,6 +59,7 @@ export default function AllBoards() {
   
   function onScrap(e){
     postData(e);
+    fetchBoardList();
   } 
 
 

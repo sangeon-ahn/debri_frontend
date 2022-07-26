@@ -64,7 +64,8 @@ export default function FavoriteBoards() {
   }
 
   function onCancelscrap(e){
-    // postData(e);
+    postData(e);
+    fetchScrapBoardList();
   } 
 
   function handleFavoriteBoardsToggle() {
