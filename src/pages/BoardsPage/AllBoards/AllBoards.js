@@ -1,43 +1,37 @@
 import './AllBoards.css';
 import emptyStar from '../../../assets/emptyStar.png';
 import rightArrow from '../../../assets/rightArrow.png';
-import React ,{useState,useEffect}from 'react';
+import React ,{useState,useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function AllBoards() {
   const navigate = useNavigate();
   const [boardList,setBoardList] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러  
-  
+  const location = useLocation();
   const headers = {
-    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
+    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
-  // const headers = {
-  //   Accept: 'application/json',
-  //   'Content-Type': 'application/json',
-  //   Authorization : `Bearer ${localStorage.getItem("access_token")}`
-  // };
-
-  const fetchBoardList = async () => { 
+  const fetchBoardList = async () => {
     try {
         setBoardList(null);
         setError(null);
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`api/board/unscrap/getList`, { headers });
         setBoardList(response.data);
-    } catch (e) {
+      } catch (e) {
         setError(e);
-    }
-    setLoading(false);
-  };
-  
-  useEffect( () =>{
-    fetchBoardList();
+      }
+      setLoading(false);
+    };
+    
+    useEffect( () =>{
+      fetchBoardList();
   },[] )
   
   if (loading) return <div>로딩중..</div>
@@ -71,7 +65,7 @@ export default function AllBoards() {
       <div>
         {boardList.result.map((board) => (
           <div className='board-menu' key={board.boardIdx}>
-            <button onClick={onScrap(board.boardIdx)}>
+            <button onClick={() => onScrap(board.boardIdx)}>
               <img src={emptyStar} alt="엑박"></img>
             </button>
             <div onClick={() => navigate(`/boards/${board.boardIdx}`)}>

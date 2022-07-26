@@ -1,4 +1,5 @@
 import recommentArrow from '../../../assets/recommentArrow.png';
+import reCommentMenuIcon from "../../../assets/commentMenuIcon.png";
 
 export default function ReComment(props) {
   console.log('hi');
@@ -13,7 +14,9 @@ export default function ReComment(props) {
         <div className="recomment-content">{reComment.commentContent}</div>
         <div className="recomment-user">{reComment.authorName} ></div>
       </div>
-      <div className="recomment-button-box"></div>
+      <div className="recomment-button-box">
+        <img src={reCommentMenuIcon} alt="" className="reComment-menu-icon" />
+      </div>
     </div>
   );
 }

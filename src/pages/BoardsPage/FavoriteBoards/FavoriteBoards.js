@@ -16,27 +16,21 @@ export default function FavoriteBoards() {
   const [error,setError] = useState(null); //에러   
   
   const headers = {
-    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
+    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-
-  // const headers = {
-  //   Accept: 'application/json',
-  //   'Content-Type': 'application/json',
-  //   'Authorization' : `Bearer ${localStorage.getItem("jwt")}`
-  // };
-  console.log(headers)
-
-  const fetchScrapBoardList = async () => { 
+  const fetchScrapBoardList = async () => {
     try {
-        setScrapBoardList(null);
-        setError(null);
-        setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`/api/board/scrap/getList`, { headers });
-        setScrapBoardList(response.data);
+      setScrapBoardList(null);
+      setError(null);
+      setLoading(true); //로딩이 시작됨
+      const response = await axios.get(`/api/board/scrap/getList`, { headers });
+      console.log(response);
+      setScrapBoardList(response.data.result);
+      navigate('/boards');
     } catch (e) {
-        setError(e);
+      setError(e);
     }
     setLoading(false);
   };
@@ -45,10 +39,9 @@ export default function FavoriteBoards() {
     fetchScrapBoardList();
   },[] )
   
+  console.log(scrapBoardList, 'hi')
   if (loading) return <div>로딩중..</div>
   if (error) return <div>에러 발생!!</div>
-  if (!scrapBoardList) return null; 
-  
 
   async function postData(boardIdx) {
     try {
@@ -82,12 +75,12 @@ export default function FavoriteBoards() {
           {isOpened ? <img src={toggleDown} alt="엑박"></img> : <img src={toggleUp} alt="엑박"></img>}
         </button>
       </div>
-      {isOpened && !scrapBoardList &&
+      {isOpened && scrapBoardList &&
         <div>
-          {scrapBoardList.result.map((board) => (
+          {scrapBoardList.map((board) => (
             <div className='board-menu' key={board.boardIdx}>
               <div>
-                <button onClick={onCancelscrap(board.boardIdx)}>
+                <button onClick={() => onCancelscrap(board.boardIdx)}>
                   <img src={favoriteStar} alt="엑박"></img>
                 </button>
               </div>

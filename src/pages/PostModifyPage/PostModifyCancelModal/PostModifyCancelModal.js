@@ -12,34 +12,12 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    height: '86px'
   },
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root');
-console.log(Modal.defaultStyles.overlay);
-Modal.defaultStyles.overlay = {
-  backgroundColor: "rgba(0, 0, 0, 0.6)",
-  bottom: 0,
-  left: 0,
-  position: "fixed",
-  right: 0,
-  top: 0,
-  zIndex: 99
-}
-Modal.defaultStyles.content = {
-  position: 'absolute',
-  top: '40px',
-  left: '40px',
-  right: '40px',
-  bottom: '40px',
-  WebkitOverflowScrolling: 'touch',
-  outline: 'none',
-  width: '316px',
-  height: '86px',
-  backgroundColor: '#D9D9D9',
-  borderRadius: '10px',
-}
+
 
 console.log(Modal.defaultStyles.overlay);
 export default function PostWriteCancelModal(props) {

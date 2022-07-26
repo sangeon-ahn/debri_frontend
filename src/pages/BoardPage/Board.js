@@ -16,11 +16,11 @@ export default function Board() {
   const params = useParams();
   const [posts,setPosts] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
-  const [error,setError] = useState(null); //에러   
+  const [error,setError] = useState(null); //에러
 
   console.log(params)
-  
-  const fetchPosts = async (boardIdx) => { 
+
+  const fetchPosts = async (boardIdx) => {
       try {
           setPosts(null);
           setError(null);
@@ -75,7 +75,7 @@ export default function Board() {
       <div className='write-post-container2'>
           <button
             className='write-post'
-            onClick={() => navigate('/postwrite')}>
+            onClick={() => navigate(`/boards/${params.boardId}/postwrite`)}>
               <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
                 <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
               </div>

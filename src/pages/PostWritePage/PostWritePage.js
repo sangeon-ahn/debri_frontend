@@ -13,9 +13,9 @@ import PostWriteConfirmModal from './PostWriteConfirmModal/PostWriteConfirmModal
 import axios from 'axios';
 
 export default function PostWritePage() {
-  const [title, setTitle] = useState('');
+  const [postTitle, setPostTitle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
-  const [content, setContent] = useState('');
+  const [postContent, setPostContent] = useState('');
   // const [user, setUser] = useRecoilState(userId);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -25,27 +25,28 @@ export default function PostWritePage() {
   const userId = localStorage.getItem("userId");
 
   function onClickSave() {
-  // postData(selectedOption, userId, title, content);
     setIsConfirmModalOpen(true);
   } 
 
+  const params = useParams();
+  console.log(params);
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-  async function postData(boardIdx,userIdx,postContent, postName) {
-    try {
-      const response = await axios.post(`/api/post/create`,
-        JSON.stringify({boardIdx,userIdx,postContent, postName}),
-        { headers }
-      );
-      console.log('리턴', response);
-      alert('저장완료');
+  // async function postData(boardIdx,userIdx,postContent, postName) {
+  //   try {
+  //     const response = await axios.post(`/api/post/create`,
+  //       JSON.stringify({boardIdx,userIdx,postContent, postName}),
+  //       { headers }
+  //     );
+  //     console.log('리턴', response);
+  //     alert('저장완료');
 
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   const handleSelectOption = (e) => {
     setSelectedOption(e.target.value);
@@ -61,6 +62,8 @@ export default function PostWritePage() {
       <PostWriteConfirmModal
         isConfirmModalOpen={isConfirmModalOpen}
         closeConfirmModal={() => setIsConfirmModalOpen(false)}
+        postTitle={postTitle}
+        postContent={postContent}
       />
       <Header />
       <div className='post-write-container'>
@@ -71,9 +74,9 @@ export default function PostWritePage() {
           <input
             type='text'
             className='title-input'
-            value={title}
+            value={postTitle}
             placeholder='제목'
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setPostTitle(e.target.value)}
             spellCheck="false"
            />
         </div>
@@ -91,16 +94,16 @@ export default function PostWritePage() {
           <textarea
             className='content-textarea'
             type='text'
-            value={content}
+            value={postContent}
             placeholder="내용 입력"
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => setPostContent(e.target.value)}
             maxLength="5000"
             spellCheck="false"
             >
           </textarea>
         </div>
         <div className='limit-length'>
-          {content.length}/5000
+          {postContent.length}/5000
         </div>
         <div className='write-post-container'>
           <button

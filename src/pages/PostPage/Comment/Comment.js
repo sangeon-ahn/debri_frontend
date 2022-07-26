@@ -2,6 +2,7 @@ import grayUpThumb from '../../../assets/grayUpThumb.png';
 import reCommentIcon from '../../../assets/reComment.png'
 import ReComment from '../ReComment/ReComment';
 import "./Comment.css";
+import commentMenuIcon from "../../../assets/commentMenuIcon.png";
 
 export default function Comment(props) {
   const { comment, reComments, setRootCommentIdx, setPlaceHolder, inputRef } = props;
@@ -22,9 +23,10 @@ export default function Comment(props) {
           <div className="comment-elapsed-time">5분 전</div>
           <div className="comment-button-box">
               <img src={grayUpThumb} alt='' className="gray-upthumb-icon" />
-            <div className="up-vote-number">0</div>
-            <div className="barrier-line"></div>
+              <div className="up-vote-number">0</div>
+              <div className="barrier-line"></div>
               <img src={reCommentIcon} alt='' className="recomment-icon" onClick={handleRecommentButton}/>
+              <img src={commentMenuIcon} alt="" className="comment-menu-icon" />
           </div>
         </div>
       </div>

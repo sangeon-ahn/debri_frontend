@@ -299,10 +299,10 @@ color: #FFFFFF;
 .comment-button-box {
   position: absolute;
   display: flex;
-  width: 64px;
+  /* width: 64px; */
   height: 16px;
   /* border: 1px solid white; */
-  right: 41px;
+  right: 33px;
   align-items: center;
 }
 
@@ -354,6 +354,12 @@ margin-right: 9px;
 .recomment-icon {
   /* vertical-align: auto; */
   /* object-fit: fill; */
+  margin-right: 19px;
+  cursor: pointer;
+}
+
+.comment-menu-icon {
+  cursor: pointer;
 }
 
 .recomment-container {
@@ -388,8 +394,6 @@ color: #FFFFFF;
 margin-top: 10px;
 max-width: 200px;
 }
-
-
 
 /* 포스트 신고 모달창 */
 .post-report-button {
