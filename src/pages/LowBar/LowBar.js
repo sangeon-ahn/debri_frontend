@@ -36,13 +36,13 @@ export default function LowBar() {
     <div className="low-bar">
       <div className="home-button" onClick={handleLowButtonClick} id="homeButton">
         <NavLink to={'/'}>
-          <div className='home-icon-box' id="homeButton"><img src={isButtonClicked.homeButton ? activeHomeButton : homeButton} alt='' id="homeButton"/></div>
+          <div className='home-icon-box' id="homeButton"><img id="homeButton" src={isButtonClicked.homeButton ? activeHomeButton : homeButton} alt=''/></div>
           <div className={(isButtonClicked.homeButton ? ' active-home-text' : 'home-text')} id="homeButton">홈</div>
         </NavLink>
       </div>
       <div className="lecture-button" onClick={handleLowButtonClick} id="lectureButton">
         <NavLink to={'/lectures'}>
-          <div className='lecture-icon-box' id="lectureButton"><img src={isButtonClicked.lectureButton ? lectureButton : lectureButton} alt='' id='lectureButton'/></div>
+          <div className='lecture-icon-box' id="lectureButton"><img id="lectureButton" src={isButtonClicked.lectureButton ? lectureButton : lectureButton} alt=''/></div>
           <div className={(isButtonClicked.lectureButton ? ' active-home-text' : 'home-text')} id='lectureButton'>강의</div>
         </NavLink>
       </div>

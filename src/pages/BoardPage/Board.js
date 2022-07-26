@@ -17,13 +17,15 @@ export default function Board() {
   const [posts,setPosts] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러   
+
+  console.log(params)
   
   const fetchPosts = async (boardIdx) => { 
       try {
           setPosts(null);
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`api/post/getList/${boardIdx}`);
+          const response = await axios.get(`/api/post/getList/${boardIdx}`);
           setPosts(response.data);
       } catch (e) {
           setError(e);
@@ -32,9 +34,11 @@ export default function Board() {
   };
 
   useEffect( () =>{
-      fetchPosts(1);
-      // fetchPosts(params.boardId);
+      // fetchPosts(1);
+      fetchPosts(params.boardId);
   },[] )
+
+  console.log(posts)
 
   if (loading) return <div>로딩중..</div>
   if (error) return <div>에러 발생!!</div>
