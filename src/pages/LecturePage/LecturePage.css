@@ -1,0 +1,63 @@
+.lecture-page-container {
+  box-sizing: border-box;
+  padding: 0 22px;
+}
+
+.lecture-list-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.lecture-list-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+
+  color: #FFFFFF;
+}
+
+.filter-icon-box {
+  height: 20px;
+  /* line-height: 20px; */
+}
+
+
+.keywords-container {
+  display: flex;
+  margin-top: 20px;
+  width: 316px;
+  flex-wrap: wrap;
+}
+
+.keywords-subject-container {
+  margin-right: 6px;
+}
+.keyword {
+  display: flex;
+  box-sizing: border-box;
+  width: 100px;
+  height: 34px;
+  border: 1px solid #FFFFFF;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 31px;
+  color: #FFFFFF;
+  padding-left: 17px;
+  margin-bottom: 6px;
+  align-items: center;
+  position: relative;
+}
+
+.keyword:nth-child(3n) {
+  margin-right: 0px;
+}
+
+.keyword-plus-icon {
+  position: absolute;
+  right: 9px;
+}

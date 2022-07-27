@@ -1,0 +1,102 @@
+.low-bar {
+  position: fixed;
+  display: flex;
+  width: 316px;
+  height: 61px;
+  bottom: 38px;
+  left: 22px;
+  justify-content: space-between;
+}
+
+.home-button {
+  height: 100%;
+  width: 60px;
+  text-align: center;
+  position: relative;
+}
+
+.home-icon-box {
+  padding-top: 20px;
+}
+
+.home-text {
+  color: white;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.active-home-text {
+  color:#66CC66;
+  font-size: 10px;
+}
+
+.lecture-button {
+  height: 100%;
+  width: 60px;
+  text-align: center;
+}
+
+.board-button {
+  height: 100%;
+  width: 60px;
+  text-align: center;
+}
+
+.curriculum-button {
+  height: 100%;
+  width: 60px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+a:active {
+  color: transparent;
+}
+
+
+.lecture-icon-box {
+  padding-top: 19px;
+}
+
+.board-icon-box {
+  padding-top: 19px;
+}
+
+.curriculum-icon-box {
+  padding-top: 21px;
+}
+
+.curriculum-icons-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.curriculum-icon1 {
+  margin-right: -3px;
+}
+
+.active-lecture-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 27px;
+}
+
+.active-lecture-icon-box {
+  position: absolute;
+  /* width: 20px; */
+  /* height: 12px; */
+  line-height: 11px;
+}
+
+.active-lecture-icon-box:nth-child(2) {
+  top: 24px;
+}
+
+.active-lecture-icon-box:nth-child(3) {
+  top: 29px;
+} 

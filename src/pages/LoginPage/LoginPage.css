@@ -173,13 +173,13 @@ color: #283659;
 .copyright {
     position: fixed;
     font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 14px;
-text-align: center;
-
-color: #FFFFFF;
-bottom: 66px;
-left: 78px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    bottom: 66px;
+    left: 78px;
+    z-index: 2;
 }

@@ -1,0 +1,31 @@
+.start-curriculum {
+  width: 320px;
+  height: 320px;
+  border-radius: 160px;
+  border: 8px solid #66CC66;
+  margin: 0 auto;
+  margin-top: 142px;
+  text-align: center;
+  /* line-height: 336px; */
+  color: white;
+}
+
+.start-curriculum-plus-icon {
+  margin: 123px 0 28px 0;
+}
+
+.start-curriculum-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 7px;
+}
+
+.start-curriculum-detail-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 12px;
+}

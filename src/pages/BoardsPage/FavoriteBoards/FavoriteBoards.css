@@ -1,6 +1,7 @@
 .favorite-title {
     display: flex;
-    margin-bottom: 22px;
+    margin-bottom: 15px;
+    align-items: center;
 }
 
 .favorite-title p {
@@ -12,11 +13,42 @@
     margin-right: 22px;
 }
 
+.favorite-title button {
+    background-color: transparent;
+    border: none;
+}
+
 .board-menu {
+    height: 40px;
+    /* padding: 5px 0; */
+    width: 100%;
     display: flex;
-    margin-bottom: 20px;
+    align-items: center;
+    position: relative;
+    vertical-align:middle;
+}
+
+.board-menu button {
+    background-color: transparent;
+    border: none;
+    margin-right: 17px;
+    margin-top: 4px;
+}
+
+.right-arrow {
+    position: absolute;
+    right: 14px;
 }
 
 .favorite-boards {
-    margin-bottom: 24px;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.closed {
+    display: none;
+}
+
+.board-menu div {
+    color: white;
 }

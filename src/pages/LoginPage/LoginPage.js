@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import onlylogo from '../../assets/ONLY_LOGO.png';
 import logoType from '../../assets/LOGO_TYPE.png';
-import './Login.css';
+import './LoginPage.css';
 import capsLockIcon from '../../assets/capsLockIcon.png';
 
-// 초기값 공백 지정 useState
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -32,8 +31,10 @@ export default function Login() {
         { headers });
       console.log('리턴', response);
       if (response.data.isSuccess) {
-        setLocalstorage(response.data.result);
-        navigate('/board');
+        setLocalstorage()
+        localStorage.setItem("userData", JSON.stringify(response.data.result));
+        localStorage.setItem("idPassword", JSON.stringify({id: email, pwd: pwd}));
+        navigate('/home');
       } else {
         alert(" 아이디 혹은 비밀번호를 확인해 주세요.");
       }
@@ -50,6 +51,22 @@ export default function Login() {
        postData(email, password);
     }
 
+    const detectEnterInput = e => {
+      if (e.key === 'Enter') {
+        goToMain();
+      }
+    };
+
+    
+    useEffect(() => {
+      if (localStorage.getItem("idPassword")) {
+        console.log('hi');
+        const { id, pwd } =  JSON.parse(localStorage.getItem('idPassword'));
+        console.log(id, pwd);
+        setEmail(id);
+        setPassword(pwd);
+      }
+    }, [])
 
     return (
       <div className='login'>
@@ -62,12 +79,12 @@ export default function Login() {
           <div className='login_content'>
             <div className='input_keyword'>ID</div>
             <div className='vertical_line'></div>
-            <input className='id_input' type="email" placeholder="email 형식" onChange={e => {setEmail(e.target.value);}} />
+            <input className='id_input' placeholder="email 형식" value={email} onChange={e => {setEmail(e.target.value)}} />
           </div>
           <div className='login_content'>
             <div className='input_keyword'>PW</div>
             <div className='vertical_line'></div>
-            <input className='pw_input' type="password" placeholder="비밀번호" onChange={e => {setPassword(e.target.value)}} />
+            <input className='pw_input' placeholder="비밀번호" value={password} onChange={e => {setPassword(e.target.value)}} onKeyDown={detectEnterInput} />
             <img  className='capslock_icon' src={capsLockIcon} alt="" />
           </div>
           <div className="buttons_container">
@@ -76,6 +93,7 @@ export default function Login() {
           </div>
         </div>
         <div className='copyright'>Copyright © 2022, Debri. All rights reserved.</div>
+        <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
       </div>
     );
 }
