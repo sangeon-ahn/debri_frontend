@@ -62,18 +62,62 @@
     background: #0A1123;
 }
 
+.id_input {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    left: 56px;
+}
 
-
+.pw_input {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    left: 56px;
+}
 
 /*login_content --> account 값 불러옴, 수정 필요*/
 .login_content {
+    position: relative;
+    display: flex;
     width: 300px;
     height: 40px;
-    margin: 10px 20px;
+    margin-left: 30px;
     line-height: 40px;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
     color:#FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    align-items: center;
+    padding-left: 13px;
+}
+
+.input_keyword {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    color: #FFFFFF;
+}
+.vertical_line {
+    position: absolute;
+    width: 23.16px;
+    height: 0px;
+    border-bottom: 1px solid #FFFFFF;
+    transform: rotate(90deg);
+    background-color: transparent;
+    left: 35px;
+}
+
+.capslock_icon {
+    position: absolute;
+    right: 10px
 }
 .account_content.success {
     color : #66CC66;
@@ -90,18 +134,52 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* 로그인 버튼 활성/비활성화 버튼 색상 변경 --> 데브리 맞게 색상 조정 필요 */
-.loginButton {
-    margin-top: 10px;
-    padding: 0;
-    width: 250px;
-    height: 30px;
-    border: none;
-    background-color: #0095f6;
-    color: white;
-    font-size: 17px;
-    border-radius: 5px;
-
-    &:disabled {
-      background-color: rgba(0, 149, 246, 0.3);
-    }
+.buttons_container {
+    margin-top: 40px;
+    text-align: center;
   }
+
+.signup_button {
+width: 142px;
+height: 60px;
+background: #FFFFFF;
+border-radius: 6px;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 29px;
+/* identical to box height */
+margin-right: 16px;
+
+color: #283659;
+
+}
+
+.login_button {
+    width: 142px;
+    height: 60px;
+    background: #66CC66;
+    border-radius: 6px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 29px;
+    
+    color: #0A1123;
+}
+
+.copyright {
+    position: fixed;
+    font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 14px;
+text-align: center;
+
+color: #FFFFFF;
+bottom: 66px;
+left: 78px;
+}

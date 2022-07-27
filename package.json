@@ -54,5 +54,6 @@
     "productName": "Debri",
     "asar": true,
     "appId": "com.project"
-  }
+  },
+  "proxy": "https://www.debri.shop/"
 }
