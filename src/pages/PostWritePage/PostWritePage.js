@@ -5,48 +5,19 @@ import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/writePost.png';
 import selectButton from '../../assets/selectButton.png';
 import leftArrow from '../../assets/leftArrow.png';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import PostWriteCancelModal from './PostWriteCancelModal/PostWriteCancelModal';
 import PostWriteConfirmModal from './PostWriteConfirmModal/PostWriteConfirmModal';
-// import {useRecoilState} from 'recoil';
-// import {userId} from '../../Atom';
-import axios from 'axios';
 
 export default function PostWritePage() {
   const [postTitle, setPostTitle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [postContent, setPostContent] = useState('');
-  // const [user, setUser] = useRecoilState(userId);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-
-  const location = useLocation();
-
-  const userId = localStorage.getItem("userId");
 
   function onClickSave() {
     setIsConfirmModalOpen(true);
   } 
-
-  const params = useParams();
-  console.log(params);
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  };
-  // async function postData(boardIdx,userIdx,postContent, postName) {
-  //   try {
-  //     const response = await axios.post(`/api/post/create`,
-  //       JSON.stringify({boardIdx,userIdx,postContent, postName}),
-  //       { headers }
-  //     );
-  //     console.log('리턴', response);
-  //     alert('저장완료');
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   const handleSelectOption = (e) => {
     setSelectedOption(e.target.value);

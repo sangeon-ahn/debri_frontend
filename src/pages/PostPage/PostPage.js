@@ -15,8 +15,6 @@ import Modal from 'react-modal';
 
 export default function PostPage() {
   const navigate = useNavigate();
-  // const { board,} = location.state;
-  // const {id} = location.state.post;
   const location = useLocation();
   const params = useParams();
 
@@ -26,8 +24,7 @@ export default function PostPage() {
   const [comments, setComments] = useState(null);
   const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
   const [post, setPost] = useState(null);
-  const userIdx = localStorage.getItem("userIdx");
-  const userNickname = localStorage.getItem("nickname");
+  const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
 
   const fetchPost = async (postIdx) => {
     try {
@@ -204,6 +201,39 @@ export default function PostPage() {
     deletePost(postId);
   };
 
+  const postLike = async (userIdx, postIdx, likeStatus) => {
+    try {
+      const response = axios.post(`/api/post/like`,
+        {
+          postIdx: postIdx,
+          userIdx: userIdx,
+          likeStatus: likeStatus
+        },
+        { headers }
+        );
+      // console.log(response.data.result);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
+  const postLikeCancel = async (userIdx, postIdx) => {
+    try {
+      const response = axios.patch('/api/post/like/cancel',
+        {
+          postIdx: postIdx,
+          userIdx: userIdx
+        },
+        { headers }
+        );
+        console.log(response);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
 
   const handleReportClick = () => {
@@ -213,6 +243,20 @@ export default function PostPage() {
   const handleModalCloseClick = () => {
     setIsPostSettingModalOn(false);
     setPostReportDetailOn(false);
+  };
+
+  const handleLikeButtonClick = () => {
+    // if (!isLikeButtonClicked) {
+    //   postLike(userIdx, postId, "LIKE");
+    //   return;
+    // }
+    
+    // postLikeCancel(userIdx, postId);
+    console.log('clickLikeButton');
+  };
+
+  const handleScrapButtonClick = () => {
+    console.log('clickScrapButton');
   };
 
   const reportSettingModal = useRef();
@@ -293,14 +337,14 @@ export default function PostPage() {
         </div>
         <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
-          <button className="up-vote-button">추천</button>
-          <button className="scrap-button">스크랩</button>
+          <button className="up-vote-button" onClick={handleLikeButtonClick}>추천</button>
+          <button className="scrap-button" onClick={handleScrapButtonClick}>스크랩</button>
         </div>
         {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} />}
       </div>
         <WriteComment
           handleEnterInput={handleEnterInput}
-          authorName={userNickname}
+          authorName={userName}
           rootCommentIdx={rootCommentIdx}
           placeHolder={placeHolder}
           setInputRef={setInputRef}

@@ -25,8 +25,16 @@ export default function Comments(props) {
 
   return (
     <div className="comments-container">
-      {comments.filter(comment => comment.commentLevel === 0).map(rootComment => {
-        return <Comment key={rootComment.commentIdx} comment={rootComment} reComments={comments.filter(comment => comment.commentLevel === 1 && comment.commentGroup === rootComment.commentIdx)} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef}  />
+      {comments.filter(comment => comment.commentLevel === 0)
+      .map(rootComment => {
+        return <Comment
+          key={rootComment.commentIdx}
+          comment={rootComment}
+          reComments={comments.filter(
+            comment => comment.commentLevel === 1 && comment.commentGroup === rootComment.commentIdx)}
+          setRootCommentIdx={setRootCommentIdx}
+          setPlaceHolder={setPlaceHolder}
+          inputRef={inputRef} />
       })}
     </div>
   );

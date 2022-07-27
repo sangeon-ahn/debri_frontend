@@ -13,13 +13,14 @@ export default function FavoriteBoards() {
   const [isOpened, setIsOpened] = useState(true);
   const [scrapBoardList,setScrapBoardList] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
-  const [error,setError] = useState(null); //에러   
+  const [error,setError] = useState(null); //에러
   
   const headers = {
-    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+
   const fetchScrapBoardList = async () => {
     try {
       setScrapBoardList(null);
@@ -34,17 +35,16 @@ export default function FavoriteBoards() {
     }
     setLoading(false);
   };
-  
-  useEffect( () =>{
-    fetchScrapBoardList();
-  },[] )
-  
-  console.log(scrapBoardList, 'hi')
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러 발생!!</div>
 
+  useEffect(() => {
+    fetchScrapBoardList();
+  },[])
+  
   async function postData(boardIdx) {
     try {
+      setScrapBoardList(null);
+      setError(null);
+      setLoading(true); //로딩이 시작됨
       const response = await axios.patch(`/api/board/scrap/cancel/${boardIdx}`,
         JSON.stringify({}),
         { headers }
@@ -53,7 +53,9 @@ export default function FavoriteBoards() {
   
     } catch (error) {
       console.error(error);
+      setError(error);
     }
+    setLoading(false);
   }
 
   function onCancelscrap(e){
@@ -64,6 +66,9 @@ export default function FavoriteBoards() {
   function handleFavoriteBoardsToggle() {
     setIsOpened(state => !state);
   }
+
+  if (loading) return <div>로딩중..</div>
+  if (error) return <div>에러 발생!!</div>
 
   return (
     <div className="favorite-boards">
