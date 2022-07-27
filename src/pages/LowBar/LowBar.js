@@ -42,7 +42,9 @@ export default function LowBar() {
       </div>
       <div className="lecture-button" onClick={handleLowButtonClick} id="lectureButton">
         <NavLink to={'/lectures'}>
-          <div className='lecture-icon-box' id="lectureButton"><img id="lectureButton" src={isButtonClicked.lectureButton ? lectureButton : lectureButton} alt=''/></div>
+          <div className='lecture-icon-box' id="lectureButton">
+            <img id="lectureButton" src={isButtonClicked.lectureButton ? lectureButton : lectureButton} alt=''/>
+          </div>
           <div className={(isButtonClicked.lectureButton ? ' active-home-text' : 'home-text')} id='lectureButton'>강의</div>
         </NavLink>
       </div>
