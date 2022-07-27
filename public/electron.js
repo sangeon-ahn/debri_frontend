@@ -13,6 +13,7 @@ function createWindow() {
       enableRemoteModule: true,
       devTools: isDev,
     },
+    autoHideMenuBar: true
   });
 
   mainWindow.loadURL(
