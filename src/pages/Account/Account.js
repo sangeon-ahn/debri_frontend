@@ -141,15 +141,15 @@ const Account =()=>{
             <div>
               <div>
                 <input type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent}/>
-                <label for="all-check">전체 약관에 동의합니다.</label>
+                <label htmlFor="all-check">전체 약관에 동의합니다.</label>
               </div>
               <div>
                 <input type="checkbox" id="check2" checked={useCheck}  onChange={useBtnEvent}/>
-                <label for="check2">개인정보 약관에 동의합니다. (필수)</label>
+                <label htmlFor="check2">개인정보 약관에 동의합니다. (필수)</label>
               </div>
               <div>
                 <input type="checkbox" id="check3" checked={marketingCheck}  onChange={marketingBtnEvent}/>
-                <label for="check3">서비스 홍보 약관에 동의합니다. (선택)</label>
+                <label htmlFor="check3">서비스 홍보 약관에 동의합니다. (선택)</label>
               </div>
             </div>
           </div>
