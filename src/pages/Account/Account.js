@@ -16,39 +16,42 @@ const Account =()=>{
   const [useCheck, setUseCheck] = useState(false);
   const [marketingCheck, setMarketingCheck] = useState(false);
 
-  function onClickSave(event){
-    event.preventDefault() 
+  const navigate = useNavigate();
+
+  function onClickSave(event) {
+    event.preventDefault()
     if(Password !== PasswordCheck) {
       return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
     } else if (!Id || !Password || !Nickname|| !Birth || !useCheck){
       alert("필수항목을 확인해주세요")
     } else {
-      // postData(Id, Password, Birth, Nickname);
+      postData(Id, Password, PasswordCheck, Nickname, Birth);
     }
     console.log(typeof(Birth))
     console.log(Id, Password, Birth, Nickname);
   }     
-
+  console.log(Id, Password, Birth, Nickname);
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
-  async function postData(id,password,birthday, nickname) {
+  async function postData(id, password, password2, nickname, birthday) {
     try {
-      const response = await axios.post(`/api/user/create`,
+      const response = await axios.post(`/api/user/signUp`,
         JSON.stringify(
           {
-            id : id, 
+            userId : id,
+            password : password,
+            password2 : password2,
             nickname : nickname,
             birthday: birthday,
-            password : password
           }),
         { headers }
       );
       console.log('리턴', response);
-      alert('저장완료');
-
+      alert('회원가입 성공! 다시 로그인 해 주세요!');
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +73,7 @@ const Account =()=>{
     setNickname(e.target.value)
   }
 
-  const allBtnEvent =()=>{
+  const allBtnEvent = () => {
     if(allCheck === false) {
       setAllCheck(true);
       setUseCheck(true);
@@ -82,7 +85,7 @@ const Account =()=>{
     } 
   };
   
-  const useBtnEvent =()=>{
+  const useBtnEvent = () => {
     if(useCheck === false) {
       setUseCheck(true)
     }else {
@@ -90,7 +93,7 @@ const Account =()=>{
     }
   };
   
-  const marketingBtnEvent =()=>{
+  const marketingBtnEvent = () => {
     if(marketingCheck === false) {
       setMarketingCheck(true)
     }else {
@@ -98,8 +101,8 @@ const Account =()=>{
     }
   };
 
-  useEffect(()=>{
-    if(useCheck===true && marketingCheck===true){
+  useEffect(() => {
+    if(useCheck === true && marketingCheck === true){
       setAllCheck(true)
     } else {
       setAllCheck(false)
