@@ -15,17 +15,12 @@ export default function FavoriteBoards() {
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러   
   
+
   const headers = {
-    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    'ACCESS-TOKEN' : `${localStorage.getItem("jwt")}`
   };
-
-  // const headers = {
-  //   Accept: 'application/json',
-  //   'Content-Type': 'application/json',
-  //   'Authorization' : `Bearer ${localStorage.getItem("jwt")}`
-  // };
   console.log(headers)
 
   const fetchScrapBoardList = async () => { 
