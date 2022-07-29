@@ -48,7 +48,7 @@ export default function Board() {
     1: '파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!'
   };
 
-  console.log(posts.result);
+  console.log(posts);
 
   return (
     <>
@@ -68,7 +68,7 @@ export default function Board() {
         {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
       <div className='post-list'>
-        {posts.result.map(post => (
+        {posts && posts.result.map(post => (
             <PostSummary post={post} key={post.postIdx} state={state} />
         ))}
       </div>

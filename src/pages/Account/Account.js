@@ -15,43 +15,41 @@ const Account =()=>{
   const [allCheck, setAllCheck] = useState(false);
   const [useCheck, setUseCheck] = useState(false);
   const [marketingCheck, setMarketingCheck] = useState(false);
+  const [login, setLogin] = useState(false);
 
-  const navigate = useNavigate();
-
-  function onClickSave(event) {
-    event.preventDefault()
+  function onClickSave(event){
+    event.preventDefault() 
+    setLogin(true)
     if(Password !== PasswordCheck) {
       return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
     } else if (!Id || !Password || !Nickname|| !Birth || !useCheck){
-      alert("필수항목을 확인해주세요")
+      console.log('fail')
     } else {
-      postData(Id, Password, PasswordCheck, Nickname, Birth);
+      postData(Id, Password, PasswordCheck, Birth, Nickname);
     }
-    console.log(typeof(Birth))
-    console.log(Id, Password, Birth, Nickname);
+    console.log(Id, Password, PasswordCheck, Birth, Nickname);
   }     
-  console.log(Id, Password, Birth, Nickname);
+
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
-  async function postData(id, password, password2, nickname, birthday) {
+  async function postData(id,password, passwordCheck, birthday, nickname) {
     try {
       const response = await axios.post(`/api/user/signUp`,
         JSON.stringify(
           {
             userId : id,
             password : password,
-            password2 : password2,
+            password2 : passwordCheck,
             nickname : nickname,
-            birthday: birthday,
+            birthday: birthday
           }),
         { headers }
       );
       console.log('리턴', response);
-      alert('회원가입 성공! 다시 로그인 해 주세요!');
-      navigate('/');
+
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +71,7 @@ const Account =()=>{
     setNickname(e.target.value)
   }
 
-  const allBtnEvent = () => {
+  const allBtnEvent =()=>{
     if(allCheck === false) {
       setAllCheck(true);
       setUseCheck(true);
@@ -83,17 +81,15 @@ const Account =()=>{
       setUseCheck(false);
       setMarketingCheck(false);
     } 
-  };
-  
-  const useBtnEvent = () => {
+  };  
+  const useBtnEvent =()=>{
     if(useCheck === false) {
       setUseCheck(true)
     }else {
       setUseCheck(false)
     }
-  };
-  
-  const marketingBtnEvent = () => {
+  };  
+  const marketingBtnEvent =()=>{
     if(marketingCheck === false) {
       setMarketingCheck(true)
     }else {
@@ -101,8 +97,8 @@ const Account =()=>{
     }
   };
 
-  useEffect(() => {
-    if(useCheck === true && marketingCheck === true){
+  useEffect(()=>{
+    if(useCheck===true && marketingCheck===true){
       setAllCheck(true)
     } else {
       setAllCheck(false)
@@ -112,50 +108,55 @@ const Account =()=>{
   return (
     <div className='account'>
       <button><Link to="/">돌아가기</Link></button>
-      <div className='Logo_box'>
+      <div className= 'Logo_box'>
         <img src={onlylogo} alt="데브리" className="onlylogo"></img>
         <img src={logoType} alt="데브리" className="logotype"></img>
         <p className='logotext'>“개발과 관련된 모든 것들을 연결합니다.”</p>
       </div>
 
       <div className='account_warp'>
-        <div className='account_content'>
-          ID <input type="email" placeholder="email 형식" onChange={onChangeId} value={Id}/>
+        <div className= {`account_content ${!login ? '' :( Id ? 'success' : 'fail')}`}>
+          <span className='account_text'>ID</span> 
+          |<input className='textinput' type="email" placeholder="email 형식" onChange={onChangeId} value={Id}/>
         </div>
-        <div className='account_content'>
-          PW <input type="password" placeholder="비밀번호" onChange={onChangePassword} value={Password} />
+        <div className= {`account_content ${!login ? '' :( Password ? 'success' : 'fail')}`}>
+          <span className='account_text'>PW</span> 
+          |<input className='textinput' type="password" placeholder="비밀번호" onChange={onChangePassword} value={Password} />
         </div>
-        <div className='account_content'>
-          비밀번호<br></br>확인 <input type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
+        <div className= {`account_content ${!login ? '' :( PasswordCheck ? 'success' : 'fail')}`}>
+          <span className='account_text' style={{fontSize:'9px'}}>비밀번호 확인</span> 
+          |<input className='textinput' type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
         </div>
-        <div className='account_content'>
-          생년<br></br>월일 <input type="date" onChange={onChangeBirth} value={Birth}/>
+        <div className= {`account_content ${!login ? '' :( Birth ? 'success' : 'fail')}`}>
+          <span className='account_text' style={{fontSize:'10px'}}>생년 월일</span>
+          |<input className='textinput' type="date" onChange={onChangeBirth} value={Birth}/>
         </div>
-        <div className='account_content'>
-          닉네임 <input type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
+        <div className= {`account_content ${!login ? '' :( Nickname ? 'success' : 'fail')}`}>
+          <span className='account_text' style={{fontSize:'10px'}}>닉네임</span> 
+          |<input className='textinput' type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
         </div>
-        <button onClick={onClickSave}>시작하기</button>
+        <button className={`start_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`} onClick={onClickSave}>시작하기</button>
 
         <form method="post" action="">
           <div>
             <div>
-              <div>
-                <input type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent}/>
-                <label htmlFor="all-check">전체 약관에 동의합니다.</label>
+              <div className={`agree_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`}>
+                <input className='textinput' type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent}/>
+                <label for="all-check"><div className='agree_text'>전체 약관에 동의합니다.</div></label>
               </div>
-              <div>
-                <input type="checkbox" id="check2" checked={useCheck}  onChange={useBtnEvent}/>
-                <label htmlFor="check2">개인정보 약관에 동의합니다. (필수)</label>
+              <div className={`agree_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`}>
+                <input className='textinput' type="checkbox" id="check2" checked={useCheck}  onChange={useBtnEvent}/>
+                <label for="check2"><div className='agree_text'>개인정보 약관에 동의합니다. (필수)</div></label>
               </div>
-              <div>
-                <input type="checkbox" id="check3" checked={marketingCheck}  onChange={marketingBtnEvent}/>
-                <label htmlFor="check3">서비스 홍보 약관에 동의합니다. (선택)</label>
+              <div className='agree_btn'>
+                <input className='textinput' type="checkbox" id="check3" checked={marketingCheck}  onChange={marketingBtnEvent}/>
+                <label for="check3"><div className='agree_text'>서비스 홍보 약관에 동의합니다. (선택)</div></label>
               </div>
             </div>
           </div>
         </form>
+        
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
     </div>
 
   );
