@@ -9,9 +9,8 @@ export default function AllBoards() {
   const navigate = useNavigate();
   const [boardList,setBoardList] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
-  const [error,setError] = useState(null); //에러  
-  const location = useLocation();
-  
+  const [error,setError] = useState(null); //에러 
+
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     Accept: 'application/json',
@@ -36,8 +35,8 @@ export default function AllBoards() {
       fetchBoardList();
   },[] )
   
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러 발생!!</div>
+  if (loading) return null;
+  if (error) return null;
   if (!boardList) return null; 
 
   async function postData(boardIdx) {
