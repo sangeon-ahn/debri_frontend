@@ -38,7 +38,7 @@ export default function FavoriteBoards() {
 
   useEffect(() => {
     fetchScrapBoardList();
-  },[])
+  },[]);
   
   async function postData(boardIdx) {
     try {
@@ -67,8 +67,8 @@ export default function FavoriteBoards() {
     setIsOpened(state => !state);
   }
 
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러 발생!!</div>
+  if (loading) return null;
+  if (error) return null;
 
   return (
     <div className="favorite-boards">

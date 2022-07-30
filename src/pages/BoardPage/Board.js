@@ -20,12 +20,18 @@ export default function Board() {
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
 
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+
   const fetchPosts = async (boardIdx) => {
       try {
           setPosts(null);
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`/api/post/getList/${boardIdx}`);
+          const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
           setPosts(response.data);
       } catch (e) {
           setError(e);
@@ -34,21 +40,12 @@ export default function Board() {
   };
 
   useEffect( () =>{
-      // fetchPosts(1);
       fetchPosts(params.boardId);
-  },[] )
+  },[]);
 
-  console.log(posts)
-
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러 발생!!</div>
+  if (loading) return null;
+  if (error) return null;
   if (!posts) return null;
-  
-  const boardTitle = {
-    1: '파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!'
-  };
-
-  console.log(posts);
 
   return (
     <>
