@@ -20,12 +20,18 @@ export default function Board() {
 
   console.log(params)
   
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'ACCESS-TOKEN' : localStorage.getItem("jwt")
+  };
+
   const fetchPosts = async (boardIdx) => { 
       try {
           setPosts(null);
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`/api/post/getList/${boardIdx}`);
+          const response = await axios.get(`/api/post/getList/1`, { headers });
           setPosts(response.data);
       } catch (e) {
           setError(e);

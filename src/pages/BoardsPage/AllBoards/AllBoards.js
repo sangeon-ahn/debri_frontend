@@ -12,14 +12,15 @@ export default function AllBoards() {
   const [error,setError] = useState(null); //에러  
   
 
-
   const headers = {
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
     'ACCESS-TOKEN' : localStorage.getItem("jwt")
   };
 
   const fetchBoardList = async () => { 
+
+    // 5001
     try {
         setBoardList(null);
         setError(null);
@@ -31,7 +32,7 @@ export default function AllBoards() {
     }
     setLoading(false);
   };
-  console.log(boardList)
+
   
   useEffect( () =>{
     fetchBoardList();

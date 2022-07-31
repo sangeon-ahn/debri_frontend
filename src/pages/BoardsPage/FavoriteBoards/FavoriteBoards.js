@@ -17,11 +17,10 @@ export default function FavoriteBoards() {
   
 
   const headers = {
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
     'ACCESS-TOKEN' : `${localStorage.getItem("jwt")}`
   };
-  console.log(headers)
 
   const fetchScrapBoardList = async () => { 
     try {
@@ -30,15 +29,18 @@ export default function FavoriteBoards() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`/api/board/scrap/getList`, { headers });
         setScrapBoardList(response.data);
+        console.log(response)
     } catch (e) {
         setError(e);
     }
     setLoading(false);
   };
+
   
   useEffect( () =>{
     fetchScrapBoardList();
   },[] )
+
   
   if (loading) return <div>로딩중..</div>
   if (error) return <div>에러 발생!!</div>
