@@ -185,15 +185,15 @@ export default function PostPage() {
   }
 
   const headers = {
-        'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTgxMDU0NTQsImV4cCI6NTk2OTE3OTYzNDY4ODAwMH0.TIGybn0SXq51j0pLOxRFraDgxbN2HtcFxQAQ93mKBlY',
+        'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
         Accept: 'application/json',
         'Content-Type': 'application/json',
       };
 
-  const handlePostDeleteClick = e => {
-    const deletePost = async (postIdx) => {
+  const handlePostDeleteClick = (postId) => {
+    const deletePost = async (postId) => {
       try {
-        const response = axios.patch(`/api/post/${postIdx}/status`,
+        const response = axios.patch(`/api/post/${postId}/status`,
             { headers }
         );
         console.log(response.data);
@@ -201,7 +201,7 @@ export default function PostPage() {
         console.log(e);
       }
     };
-    deletePost();
+    deletePost(postId);
   };
 
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
@@ -232,7 +232,7 @@ export default function PostPage() {
       <Search />
       <div className="post-container">
         <div className='board-title-box'>
-          <button className='back-button' onClick={() => navigate(-1)}>
+          <button className='back-button' onClick={() => navigate(`/boards/${boardId}`)}>
             <img src={leftArrow} alt=''/>
           </button>
           <div className='board-title'>게시판제목</div>
@@ -245,12 +245,12 @@ export default function PostPage() {
           contentLabel="Example Modal"
         >
          <div className="post-setting-container">
-            {userIdx === post.authorIdx ?
+            {Number(userIdx) === post.authorIdx ?
               <div className="post-setting-menu-container">
                 <div className="post-setting-modal-title">게시물 관리</div>
                 <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
                 <button className="post-delete" onClick={() => {
-                  handlePostDeleteClick();
+                  handlePostDeleteClick(postId);
                   navigate(-1);
                 }}>삭제하기</button>
               </div> :

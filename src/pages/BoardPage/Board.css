@@ -56,7 +56,24 @@
 .post-list {
   width: 316px;
   padding: 0 22px;
+  height: 400px;
+  overflow-x: hidden;
 }
+
+.post-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.post-list::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.post-list::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 
 .pencil2 {
   object-fit: fill;

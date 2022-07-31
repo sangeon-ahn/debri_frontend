@@ -31,7 +31,7 @@ export default function FavoriteBoards() {
         setScrapBoardList(response.data);
         console.log(response)
     } catch (e) {
-        setError(e);
+      setError(e);
     }
     setLoading(false);
   };
@@ -42,10 +42,9 @@ export default function FavoriteBoards() {
   },[] )
 
   
+  console.log(scrapBoardList, 'hi')
   if (loading) return <div>로딩중..</div>
   if (error) return <div>에러 발생!!</div>
-  if (!scrapBoardList) return null; 
-  
 
   async function postData(boardIdx) {
     try {
@@ -79,12 +78,12 @@ export default function FavoriteBoards() {
           {isOpened ? <img src={toggleDown} alt="엑박"></img> : <img src={toggleUp} alt="엑박"></img>}
         </button>
       </div>
-      {isOpened && !scrapBoardList &&
+      {isOpened && scrapBoardList &&
         <div>
-          {scrapBoardList.result.map((board) => (
+          {scrapBoardList.map((board) => (
             <div className='board-menu' key={board.boardIdx}>
               <div>
-                <button onClick={onCancelscrap(board.boardIdx)}>
+                <button onClick={() => onCancelscrap(board.boardIdx)}>
                   <img src={favoriteStar} alt="엑박"></img>
                 </button>
               </div>

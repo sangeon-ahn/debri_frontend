@@ -1,9 +1,9 @@
 import './AllBoards.css';
 import emptyStar from '../../../assets/emptyStar.png';
 import rightArrow from '../../../assets/rightArrow.png';
-import React ,{useState,useEffect}from 'react';
+import React ,{useState,useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function AllBoards() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function AllBoards() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`api/board/unscrap/getList`, { headers });
         setBoardList(response.data);
-    } catch (e) {
+      } catch (e) {
         setError(e);
     }
     setLoading(false);
@@ -69,7 +69,7 @@ export default function AllBoards() {
       <div>
         {boardList.result.map((board) => (
           <div className='board-menu' key={board.boardIdx}>
-            <button onClick={onScrap(board.boardIdx)}>
+            <button onClick={() => onScrap(board.boardIdx)}>
               <img src={emptyStar} alt="엑박"></img>
             </button>
             <div onClick={() => navigate(`/boards/${board.boardIdx}`)}>
