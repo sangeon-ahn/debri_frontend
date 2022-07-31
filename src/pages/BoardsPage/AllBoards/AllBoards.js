@@ -1,7 +1,7 @@
 import './AllBoards.css';
 import emptyStar from '../../../assets/emptyStar.png';
 import rightArrow from '../../../assets/rightArrow.png';
-import React ,{useState,useEffect, useLayoutEffect}from 'react';
+import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -9,13 +9,12 @@ export default function AllBoards() {
   const navigate = useNavigate();
   const [boardList,setBoardList] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
-  const [error,setError] = useState(null); //에러  
-  
+  const [error,setError] = useState(null); //에러 
 
   const headers = {
-    'Accept': 'application/json',
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    Accept: 'application/json',
     'Content-Type': 'application/json',
-    'ACCESS-TOKEN' : localStorage.getItem("jwt")
   };
 
   const fetchBoardList = async () => { 
@@ -27,6 +26,7 @@ export default function AllBoards() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`api/board/unscrap/getList`, { headers });
         setBoardList(response.data);
+        console.log(response);
       } catch (e) {
         setError(e);
     }
@@ -38,8 +38,8 @@ export default function AllBoards() {
     fetchBoardList();
   },[] )
   
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러 발생!!</div>
+  if (loading) return null;
+  if (error) return null;
   if (!boardList) return null; 
 
   async function postData(boardIdx) {

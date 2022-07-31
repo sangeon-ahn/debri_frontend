@@ -17,43 +17,44 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement('#root');
-// Modal.defaultStyles.overlay = {
-//   backgroundColor: "rgba(0, 0, 0, 0.6)",
-//   bottom: 0,
-//   left: 0,
-//   position: "fixed",
-//   right: 0,
-//   top: 0,
-//   zIndex: 99
-// }
-// Modal.defaultStyles.content = {
-//   position: 'absolute',
-//   top: '40px',
-//   left: '40px',
-//   right: '40px',
-//   bottom: '40px',
-//   WebkitOverflowScrolling: 'touch',
-//   outline: 'none',
-//   width: '316px',
-//   height: '86px',
-//   backgroundColor: '#D9D9D9',
-//   borderRadius: '10px',
-// }
+Modal.setAppElement('#root');
+Modal.defaultStyles.overlay = {
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
+  bottom: 0,
+  left: 0,
+  position: "fixed",
+  right: 0,
+  top: 0,
+  zIndex: 99
+}
+Modal.defaultStyles.content = {
+  position: 'absolute',
+  top: '40px',
+  left: '40px',
+  right: '40px',
+  bottom: '40px',
+  WebkitOverflowScrolling: 'touch',
+  outline: 'none',
+  width: '316px',
+  height: '86px',
+  backgroundColor: '#D9D9D9',
+  borderRadius: '10px',
+}
 
 
 export default function PostWriteConfirmModal(props) {
   const { isConfirmModalOpen, closeConfirmModal, postContent, postTitle } = props;
   const navigate = useNavigate();
   const params = useParams();
+  const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
+
   const headers = {
-    'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
+    'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-  const userIdx = localStorage.getItem('userIdx');
-  const [postIdx, setPostIdx] = useState(1);
-  const postIdxRef = useRef(55);
+  
+  const postIdxRef = useRef(0);
 
   async function postData(boardIdx,userIdx,postContent, postName) {
     try {

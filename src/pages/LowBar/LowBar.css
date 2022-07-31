@@ -42,10 +42,13 @@
   text-align: center;
 }
 
-.menu-button {
+.curriculum-button {
   height: 100%;
   width: 60px;
   text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 a:active {
@@ -61,6 +64,39 @@ a:active {
   padding-top: 19px;
 }
 
-.menu-icon-box {
+.curriculum-icon-box {
   padding-top: 21px;
 }
+
+.curriculum-icons-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.curriculum-icon1 {
+  margin-right: -3px;
+}
+
+.active-lecture-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 27px;
+}
+
+.active-lecture-icon-box {
+  position: absolute;
+  /* width: 20px; */
+  /* height: 12px; */
+  line-height: 11px;
+}
+
+.active-lecture-icon-box:nth-child(2) {
+  top: 24px;
+}
+
+.active-lecture-icon-box:nth-child(3) {
+  top: 29px;
+} 

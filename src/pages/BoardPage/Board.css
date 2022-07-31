@@ -34,8 +34,10 @@
 }
 
 .favorite-button-box {
+  position: absolute;
   height: 26px;
   line-height: 20px;
+  right: 30.25px;
 }
 
 .favorite-button-box img {

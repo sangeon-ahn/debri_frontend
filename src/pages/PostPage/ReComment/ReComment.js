@@ -2,9 +2,7 @@ import recommentArrow from '../../../assets/recommentArrow.png';
 import reCommentMenuIcon from "../../../assets/commentMenuIcon.png";
 
 export default function ReComment(props) {
-  console.log('hi');
   const { reComment } = props;
-  console.log(props);
   return (
     <div className="recomment-container">
       <div className="recomment-arrow-box">

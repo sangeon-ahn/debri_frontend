@@ -44,7 +44,7 @@ const customStyles = {
 
 console.log(Modal.defaultStyles.overlay);
 export default function PostWriteCancelModal(props) {
-  const { isCancelModalOpen, closeCancelModal } = props;
+  const { isCancelModalOpen, closeCancelModal, state } = props;
   const navigate = useNavigate();
   const params = useParams();
   
