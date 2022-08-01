@@ -14,11 +14,12 @@ export default function FavoriteBoards() {
   const [scrapBoardList,setScrapBoardList] = useState(null);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
+  const [isSuccess, setIsSuccess] = useState(false);
   
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
 
@@ -29,7 +30,8 @@ export default function FavoriteBoards() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`/api/board/scrap/getList`, { headers });
         setScrapBoardList(response.data);
-        console.log(response)
+        setIsSuccess(response.data.isSuccess);
+        console.log('게시판 데이터',isSuccess)
     } catch (e) {
       setError(e);
     }
@@ -80,9 +82,9 @@ export default function FavoriteBoards() {
           {isOpened ? <img src={toggleDown} alt="엑박"></img> : <img src={toggleUp} alt="엑박"></img>}
         </button>
       </div>
-      {isOpened && scrapBoardList &&
+      {isOpened && isSuccess  &&
         <div>
-          {scrapBoardList.map((board) => (
+          {scrapBoardList.result.map((board) => (
             <div className='board-menu' key={board.boardIdx}>
               <div>
                 <button onClick={() => onCancelscrap(board.boardIdx)}>

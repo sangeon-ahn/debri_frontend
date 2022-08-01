@@ -13,7 +13,7 @@ export default function AllBoards() {
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
 
@@ -26,7 +26,7 @@ export default function AllBoards() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`api/board/unscrap/getList`, { headers });
         setBoardList(response.data);
-        console.log(response);
+        console.log(response)
       } catch (e) {
         setError(e);
     }

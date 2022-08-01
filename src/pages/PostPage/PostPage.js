@@ -26,6 +26,12 @@ export default function PostPage() {
   const [post, setPost] = useState(null);
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
 
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
+
   const fetchPost = async (postIdx) => {
     try {
       setError(null);
@@ -181,11 +187,6 @@ export default function PostPage() {
     borderRadius: '10px',
   }
 
-  const headers = {
-        'ACCESS-TOKEN': 'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoyLCJpYXQiOjE2NTg4MzMxMTcsImV4cCI6NTk3MTc5OTIyNDA2OTIwMH0.9x_GVpPVxJhBl3pdNB93uEaJEMUDbH2_rV_Rsz5fLRw',
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      };
 
   const handlePostDeleteClick = (postId) => {
     const deletePost = async (postId) => {
