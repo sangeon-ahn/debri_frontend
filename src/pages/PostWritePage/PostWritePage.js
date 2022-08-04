@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React ,{useState, useEffect, useLayoutEffect}from 'react';
+import axios from 'axios';
 import Header from '../Header/Header';
 import './PostWritePage.css';
 import pencil from '../../assets/pencil.png';
@@ -15,7 +16,36 @@ export default function PostWritePage() {
   const [postContent, setPostContent] = useState('');
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [boardList,setBoardList] = useState([]);
   const state = useLocation();
+
+  useEffect( () => {
+      getData();
+  }, [])
+
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
+
+  async function getData() {
+    await axios.get(`/api/board/allList`, { headers }).then( 
+      (res) => {
+        res.data.result.forEach((e) =>{
+          setBoardList((prev)=>[...prev,{
+            boardIdx: e.boardIdx,
+            boardName: e.boardName,
+            boardAdmin: e.boardAdmin,
+          }]);
+        });
+      }
+    )
+    .catch((err)=>{
+      console.log(err);
+    })
+    console.log(boardList)
+  } ;
 
   function onClickSave() {
     setIsConfirmModalOpen(true);
@@ -57,10 +87,9 @@ export default function PostWritePage() {
         <div className='select-board'>
           <div className='select-box'>
             <select name="option" onChange={handleSelectOption} value={selectedOption}>
-              <option value="C">"C언어" 게시판</option>
-              <option value="JAVA">"JAVA" 게시판</option>
-              <option value="Python">"PYTHION" 게시판</option>
-              <option value="free">"자유게시판"</option>
+              {boardList.map((board) => (
+                <option value={board.boardIdx} key={board.boardIdx}>{board.boardName}</option>
+              ))}
             </select>
           </div>
         </div>
