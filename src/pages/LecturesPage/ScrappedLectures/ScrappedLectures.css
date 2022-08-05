@@ -1,0 +1,17 @@
+.scrapped-lectures-container {
+  margin-top: 34px;
+}
+
+.scrapped-lectures-container-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+}
+
+.scrapped-lectures {
+  margin-top: 14px;
+  width: 316px;
+}
