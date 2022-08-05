@@ -51,6 +51,9 @@
   margin-bottom: 6px;
   align-items: center;
   position: relative;
+  background-color: transparent;
+  font-family: 'Noto Sans KR';
+font-style: normal;
 }
 
 .keyword:nth-child(3n) {
@@ -62,6 +65,46 @@
   right: 9px;
 }
 
+.keyword-minus-icon {
+  position: absolute;
+  right: 9px;
+}
+
 .lecture-list {
   margin-top: 14px;
+}
+
+.red {
+  background-color: #CB3953;
+  border: none;
+}
+
+.green {
+  background-color: #53CB39;
+  border: none;
+  color: #0A1123;
+}
+
+.blue {
+  background-color: #4B8BBE;
+  border: none;
+  color: #0A1123;
+}
+
+.gray {
+  background-color: #7F8B99;
+  border: none;
+  color: #0A1123;
+}
+
+.white {
+  background-color: #FFFFFF;
+  color: #0A1123;
+  border: none;
+}
+
+.darkgray {
+  background-color: #8B95A1;
+  color: #0A1123;
+  border: none;
 }
