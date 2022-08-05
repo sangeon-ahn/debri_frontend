@@ -16,6 +16,7 @@ export default function LecturesPage() {
   const [subject, setSubject] = useState(null);
   const [material, setMaterial] = useState(null);
   const [pricing, setPricing] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
 
   const headers = {
     Accept: 'application/json',
@@ -27,6 +28,20 @@ export default function LecturesPage() {
       isLoading(true);
       setError(false);
       const response = await axios.get('/api/lecture/getLectureList', { headers });
+      setLectures(response.data.result);
+      console.log(lectures);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+    isLoading(false);
+  };
+
+  const fetchLecturesWithFilter = async (lang, type, price, key) => {
+    try {
+      isLoading(true);
+      setError(false);
+      const response = await axios.get(`/api/lecture/search?lang=${lang}&type=${type}&price=${price}&key=${key}`, { headers });
       setLectures(response.data.result);
       console.log(lectures);
     } catch (e) {
@@ -111,6 +126,7 @@ export default function LecturesPage() {
   useEffect(() => {
     fetchLectures();
   }, []);
+
 
   if (loading) return;
   if (!lectures) return;
