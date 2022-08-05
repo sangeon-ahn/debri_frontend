@@ -19,14 +19,16 @@ export default function Board() {
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
+  const [board, setBoard] = useState(null);
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+  console.log(board);
 
-  const fetchPosts = async (boardIdx) => { 
+  const fetchPosts = async (boardIdx) => {
       try {
           setPosts(null);
           setError(null);
@@ -39,13 +41,31 @@ export default function Board() {
       setLoading(false);
   };
 
+  const fetchBoard = async () => {
+    try {
+      setBoard(null);
+      setError(null);
+      setLoading(true);
+      const response = await axios.get('/api/board/allList', {headers});
+      setBoard(filterBoardData(response.data.result));
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  const filterBoardData = (boards) => {
+    return boards.filter(board => board.boardIdx === Number(params.boardId));
+  };
+
   useEffect( () =>{
       fetchPosts(params.boardId);
+      fetchBoard(params.bordId);
   },[]);
 
   if (loading) return null;
   if (error) return null;
   if (!posts) return null;
+  if (!board) return null;
 
   return (
     <>
@@ -53,10 +73,10 @@ export default function Board() {
       <Search />
       <div className='board-title-container'>
         <div className='board-title-box'>
-          <button className='back-button' onClick={() => navigate(-1)}>
+          <button className='back-button' onClick={() => navigate('/boards')}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>"파이썬 게시판"</div>
+          <div className='board-title'>{board[0].boardName}</div>
           <div className='favorite-button-box'>
             <img src={favoriteStar} alt=''/>
           </div>

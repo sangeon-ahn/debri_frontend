@@ -8,43 +8,46 @@ import writePost from '../../assets/writePost.png';
 import leftArrow from '../../assets/leftArrow.png';
 import PostWriteCancelModal from './PostWriteCancelModal/PostWriteCancelModal';
 import PostWriteConfirmModal from './PostWriteConfirmModal/PostWriteConfirmModal';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 export default function PostWritePage() {
   const [postTitle, setPostTitle] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
   const [postContent, setPostContent] = useState('');
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [boardList,setBoardList] = useState([]);
-  const state = useLocation();
+  const { state } = useLocation();
+  const params = useParams();
+  const [selectedOption, setSelectedOption] = useState(params.boardId);
+  const [boardName, setBoardName] = useState('');
+  const [count, setCount] = useState(0);
 
-  useEffect( () => {
-      getData();
-  }, [])
+  console.log(params);
 
-  const headers = {
-    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  };
+  useEffect(() => {
+    getData();
+    }, []);
+    
+  useEffect(() => {
+      console.log('hh');
+      handleBoardName(selectedOption);
+  }, [selectedOption, boardList]);
 
-  async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then( 
-      (res) => {
-        res.data.result.forEach((e) =>{
-          setBoardList((prev)=>[...prev,{
-            boardIdx: e.boardIdx,
-            boardName: e.boardName,
-            boardAdmin: e.boardAdmin,
-          }]);
+    const headers = {
+      'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+    
+    async function getData() {
+      await axios.get(`/api/board/allList`, { headers }).then(
+        (res) => {
+          setBoardList(res.data.result);
+        }
+        )
+        .catch((err)=>{
+          console.log(err);
         });
-      }
-    )
-    .catch((err)=>{
-      console.log(err);
-    })
-    console.log(boardList)
   } ;
 
   function onClickSave() {
@@ -54,8 +57,19 @@ export default function PostWritePage() {
   const handleSelectOption = (e) => {
     setSelectedOption(e.target.value);
   };
-  // 게시판에서 글쓰기 버튼 누를 때 writepage로 링크타고 이동할텐데 이때 현재 있는 게시판 데이터 파라미터를 넘겨준 다음 이 데이터를 writepage에서 useParams로 받아서 useEffet setSelectedOption를 호출해주면 된다.
   
+  const handleBoardName = (boardId) => {
+    if (boardList.length === 0) return;
+
+    const board = boardList.find(board => {
+      return board.boardIdx === Number(boardId);
+    });
+
+    setBoardName(board.boardName);
+  };
+
+  if (!boardName) return;
+
   return (
     <div>
       <PostWriteCancelModal
@@ -68,6 +82,8 @@ export default function PostWritePage() {
         closeConfirmModal={() => setIsConfirmModalOpen(false)}
         postTitle={postTitle}
         postContent={postContent}
+        boardId={selectedOption}
+        boardName={boardName}
       />
       <Header />
       <div className='post-write-container'>

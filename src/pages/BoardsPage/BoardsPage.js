@@ -13,15 +13,17 @@ import favoriteStar from '../../assets/favoriteStar.png';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
-  const [boardList,setBoardList] = useState([]);   //결과값
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
-  const [error,setError] = useState(null); //에러 
+  const [error,setError] = useState(null); //에러
   const [isOpened, setIsOpened] = useState(true);
   const [isGetData, setIsGetData] = useState(0);
+  const [scrappedBoards, setScrappedBoards] = useState(null);
+  const [unScrappedBoards, setUnScrappedBoards] = useState(null);
 
   //boardList 가져오기
   useEffect( () => {
-      getData();
+      fetchScrappedBoards();
+      fetchUnScrappedBoards();
   }, [isGetData])
 
   const headers = {
@@ -30,28 +32,55 @@ export default function BoardsPage() {
     'Content-Type': 'application/json',
   };
 
-  async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then( 
-      (res) => {
-        res.data.result.forEach((e) =>{
-          setBoardList((prev)=>[...prev,{
-            boardIdx: e.boardIdx,
-            boardName: e.boardName,
-            boardAdmin: e.boardAdmin,
-            status: e.status
-          }]);
-        });
+  const fetchScrappedBoards = async () => {
+    try {
+      setScrappedBoards(null);
+      setError(null);
+      setLoading(true); //로딩이 시작됨
+      const response = await axios.get(`/api/board/scrap/getList`, { headers });
+      console.log(response);
+      setScrappedBoards(response.data.result);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  const fetchUnScrappedBoards = async () => {
+    try {
+        setUnScrappedBoards(null);
+        setError(null);
+        setLoading(true); //로딩이 시작됨
+        const response = await axios.get(`api/board/unscrap/getList`, { headers });
+        console.log(response.data);
+        setUnScrappedBoards(response.data.result);
+      } catch (e) {
+        setError(e);
       }
-    )
-    .catch((err)=>{
-      console.log(err);
-    })
-  } ;
+      setLoading(false);
+    };
+
+  //스크랩 생성
+  async function scrapBoard(boardIdx) {
+      setError(null);
+      setLoading(true); //로딩이 시작됨
+    try {
+      const response = await axios.post(`/api/board/scrap/${boardIdx}`,
+        JSON.stringify({}),
+        { headers }
+      );
+      console.log('리턴', response);
+
+    } catch (error) {
+      console.error(error);
+    }
+    setIsGetData(isGetData + 1);
+    setLoading(false);
+  }
 
   //스크랩취소
-  async function postUncrapData(boardIdx) {
+  async function unScrapBoard(boardIdx) {
     try {
-      setBoardList(null);
       setError(null);
       setLoading(true); //로딩이 시작됨
       const response = await axios.patch(`/api/board/scrap/cancel/${boardIdx}`,
@@ -59,47 +88,31 @@ export default function BoardsPage() {
         { headers }
       );
       console.log('리턴', response);
-  
+
     } catch (error) {
       console.error(error);
       setError(error);
     }
+    setIsGetData(isGetData + 1);
     setLoading(false);
   }
 
-  function onCancelscrap(e){
-    postUncrapData(e);
-    setIsGetData(isGetData + 1)
-  } 
-
-  //스크랩 생성
-  async function postScrapData(boardIdx) {
-    try {
-      const response = await axios.post(`/api/board/scrap/${boardIdx}`,
-        JSON.stringify({}),
-        { headers }
-      );
-      console.log('리턴', response);
-  
-    } catch (error) {
-      console.error(error);
+  function onScrap(e) {
+      scrapBoard(e);
     }
-  }
-  
-  function onScrap(e){
-    postScrapData(e);
-    setIsGetData(isGetData + 1)
-  } 
 
-  function handleFavoriteBoardsToggle() {
+  function onCancelScrap(e) {
+    unScrapBoard(e);
+  }
+
+  function handleScrappedBoardsToggle() {
     setIsOpened(state => !state);
   }
 
   if (loading) return null;
   if (error) return null;
-  if (!boardList) return null; 
-
-
+  if (!scrappedBoards || !unScrappedBoards) return null;
+  
   return (
     <div>
       <Header />
@@ -109,20 +122,19 @@ export default function BoardsPage() {
             <div className="favorite-title">
               <p>즐겨찾기된 게시판</p>
               <button onClick={
-                handleFavoriteBoardsToggle
+                handleScrappedBoardsToggle
               }>
                 {isOpened ? <img src={toggleDown} alt="엑박"></img> : <img src={toggleUp} alt="엑박"></img>}
               </button>
             </div>
-            {isOpened && 
+            {isOpened &&
               <div>
-                {boardList.map((board) => (
-                  <div>
-                    {board.status === 'ACTIVE' ?
-                      <div className='board-menu' key={board.boardIdx}>
+                {scrappedBoards && scrappedBoards.map((board) => (
+                  <div key={board.boardIdx}>
+                      <div className='board-menu'>
                         <div>
-                          <button onClick={() => onCancelscrap(board.boardIdx)}>
-                            <img src={favoriteStar} alt="엑박"></img>
+                          <button onClick={() => onCancelScrap(board.boardIdx)}>
+                            <img src={favoriteStar} alt="엑박" />
                           </button>
                         </div>
                         <div onClick={() => navigate(`/boards/${board.boardIdx}`)}>
@@ -132,24 +144,20 @@ export default function BoardsPage() {
                           </div>
                         </div>
                       </div>
-                      :
-                      <div></div>
-                    }
                   </div>
                 ))}
               </div>
             }
         </div>
-        
+
         <div className='all-boards'>
           <div className='all-boards-title'>
             <p>전체 게시판</p>
           </div>
           <div>
-            {boardList.map((board) => (
-              <div>
-                {board.status === 'INACTIVE' ?
-                  <div className='board-menu' key={board.boardIdx}>
+            {unScrappedBoards && unScrappedBoards.map((board) => (
+              <div key={board.boardIdx}>
+                  <div className='board-menu'>
                     <div>
                       <button onClick={() => onScrap(board.boardIdx)}>
                         <img src={emptyStar} alt="엑박"></img>
@@ -162,9 +170,6 @@ export default function BoardsPage() {
                       </div>
                     </div>
                   </div>
-                  :
-                  <div></div>
-                }         
               </div>
               ))}
           </div>
