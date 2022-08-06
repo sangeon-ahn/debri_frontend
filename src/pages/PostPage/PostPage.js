@@ -14,6 +14,9 @@ import postMenuIcon from "../../assets/postMenuIcon.png";
 import Modal from 'react-modal';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
+import scrapped from '../../assets/scrapped.png';
+import unScrapped from '../../assets/unScrapped.png';
+import { getTimeAfterCreated } from "../../utils/getTimeAfterCreated";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -23,12 +26,12 @@ export default function PostPage() {
   const { boardId, postId } = params;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
   const [post, setPost] = useState(null);
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
-
   const [postLikeStatus, setPostLikeStatus] = useState(null);
+  const [commentReported, setCommentReported] = useState(0);
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -39,7 +42,6 @@ export default function PostPage() {
   const fetchPost = async (postIdx) => {
     try {
       setError(null);
-      setComments(null);
       setLoading(true);
       const response = await axios.get(`/api/post/get/${postIdx}`, { headers });
       setPost(response.data.result);
@@ -54,15 +56,15 @@ export default function PostPage() {
   const fetchComments = async (postIdx) => {
     try {
       setError(null);
-      setComments(null);
       setLoading(true);
-      const response = await axios.get(`/api/comment/get/${postIdx}`, { headers });
+      const response = await axios.get(`/api/comment/get/${postIdx}`,
+        JSON.stringify({}),
+        { headers });
       if (response.data.isSuccess) {
+        console.log(1, response.data.result);
         setComments(response.data.result);
-      } else {
-        setComments([]);
       }
-      // console.log(response);
+      console.log(response);
     } catch (e) {
       setError(e);
       console.log(e);
@@ -85,19 +87,26 @@ export default function PostPage() {
   }, []);
 
   useEffect(() => {
-    console.log('1', post);
-    if (post) {
-      if (post.userLike) {
-        console.log('2', post.likeNumber);
-        setPostLikes(post.likeNumber);
-        setPostLikeStatus(true);
-      }
-     else {
+    if (!post) {
+      return;
+    }
+    console.log(post);
+    if (post.userLike) {
+      console.log('2', post.likeNumber);
+      setPostLikes(post.likeNumber);
+      setPostLikeStatus(true);
+    } else if (!post.userLike) {
       console.log(3);
       setPostLikeStatus(false);
     }
-  }
-    console.log(postLikeStatus);
+
+    if (post.userScrap) {
+      console.log(4);
+      setPostScrapStatus(true);
+    } else if (!post.userScrap) {
+      console.log(5);
+      setPostScrapStatus(false);
+    }
   }, [post]);
 
   useEffect(() => {
@@ -110,6 +119,10 @@ export default function PostPage() {
     }
   }, [postLikeStatus]);
 
+  useEffect(() => {
+    if (commentReported === 0) return;
+    fetchComments(postId);
+  }, [commentReported]);
 
   const clickModalOutside = e => {
     if (e.target.className === "ReactModal__Overlay ReactModal__Overlay--after-open") {
@@ -121,7 +134,8 @@ export default function PostPage() {
     const deletePost = async (commentIdx) => {
       try {
         const response = await axios.patch(`/api/comment/delete/${commentIdx}`,
-            { headers }
+          JSON.stringify({}),
+          { headers }
         );
         console.log(response.data);
         if (response.data.isSuccess) {
@@ -133,6 +147,28 @@ export default function PostPage() {
     };
     deletePost(commentIdx);
   };
+
+  const handleReportComment = (e, commentIdx) => {
+    const reportComment = async (commentIdx, reason) => {
+      try {
+        const response = await axios.post(`/api/report/commentReport`,
+          JSON.stringify({
+            commentIdx: parseInt(commentIdx),
+            reason: reason
+          }),
+          { headers });
+          console.log(response);
+          if (response.data.isSuccess) {
+            setComments(state => state.filter(comment => comment.commentIdx !== commentIdx));
+          }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log(parseInt(commentIdx), e.target.innerText);
+    reportComment(parseInt(commentIdx), e.target.innerText);
+  };
+
 
   const handleEnterInput = (e, content, authorName) => {
     const uploadComment = async (userIdx, postIdx, content, authorName) => {
@@ -147,7 +183,7 @@ export default function PostPage() {
             }),
             { headers }
         );
-  
+
         console.log(response.data.result);
         setComments(state => {
           return [
@@ -155,13 +191,13 @@ export default function PostPage() {
             response.data.result
           ];
         });
-  
+
       } catch (e) {
         console.log(e);
         setError(e);
       }
     };
-    
+
     const uploadReComment = async (userIdx, postIdx, rootCommentIdx, content, authorName) => {
       try {
         const response = await axios.post(`/api/comment/replyOnReply/create`,
@@ -234,7 +270,8 @@ export default function PostPage() {
     const deletePost = async (postId) => {
       try {
         const response = await axios.patch(`/api/post/${postId}/status`,
-            { headers }
+          JSON.stringify({}),
+          { headers }
         );
         console.log(response.data);
       } catch (e) {
@@ -279,7 +316,36 @@ export default function PostPage() {
       console.log(e);
       setError(e);
     }
-  }, []);
+  }, [headers]);
+
+  const postCancelScrap = async (postIdx) => {
+    try {
+      const response = await axios.post(`/api/post/unscrap/${postIdx}`,
+        JSON.stringify({}),
+        { headers }
+        );
+        console.log(response);
+        setPostScrapStatus(false);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
+  const postScrap = async (postIdx) => {
+    console.log(postIdx);
+    try {
+      const response = await axios.post(`/api/post/scrap/${postIdx}`,
+        JSON.stringify({}),
+        { headers }
+        );
+        console.log(response);
+        setPostScrapStatus(true);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
 
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
 
@@ -290,10 +356,6 @@ export default function PostPage() {
   const handleModalCloseClick = () => {
     setIsPostSettingModalOn(false);
     setPostReportDetailOn(false);
-  };
-
-  const handleScrapButtonClick = () => {
-    console.log('clickScrapButton');
   };
 
   const reportSettingModal = useRef();
@@ -319,12 +381,10 @@ export default function PostPage() {
     // console.log(parseInt(postId), e.target.innerText);
     reportPost(parseInt(postId), e.target.innerText);
     handleModalCloseClick();
+    navigate(`/boards/${boardId}`);
   };
 
-  if (loading) return null;
-  if (error) return null;
-  if (!post) return null;
-  if (!comments) return null;
+  const [postScrapStatus, setPostScrapStatus] = useState(null);
 
   return (
     <>
@@ -337,7 +397,7 @@ export default function PostPage() {
           </button>
           <div className='board-title'>게시판제목</div>
         </div>
-        <Modal
+        {(!loading && !error && post) && <><Modal
           closeTimeoutMS={300}
           isOpen={isPostSettingModalOn}
           onRequestClose={() => setIsPostSettingModalOn(state => !state)}
@@ -381,7 +441,7 @@ export default function PostPage() {
                 <img className="post-menu-icon" src={postMenuIcon} alt=""/>
               </button>
             </div>
-            <div className="post-elapsed-time">{post.timeAfterCreated}</div>
+            <div className="post-elapsed-time">{getTimeAfterCreated(post.timeAfterCreated)}</div>
           </div>
           <div className="post-user-info">
             <div className="post-user-profile">
@@ -414,9 +474,23 @@ export default function PostPage() {
             </button>
           </>
           }
-          <button className="scrap-button" onClick={handleScrapButtonClick}>스크랩</button>
+          {postScrapStatus ?
+          <>
+            <button className='scrap-status-button' onClick={() => {setPostScrapStatus(false); postCancelScrap(postId)}}>
+              <img src={scrapped} alt=""/>
+              <div>스크랩</div>
+            </button>
+          </> :
+          <>
+            <button className='default-status-scrap-button' onClick={() => {setPostScrapStatus(true); postScrap(postId)}}>
+              <img src={unScrapped} alt="" />
+              <div>스크랩</div>
+            </button>
+          </>
+          }
         </div>
-        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} handleCommentDelete={handleCommentDelete} />}
+        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} handleCommentDelete={handleCommentDelete} setCommentReported={setCommentReported} handleReportComment={handleReportComment} />}</>}
+        
       </div>
         <WriteComment
           handleEnterInput={handleEnterInput}

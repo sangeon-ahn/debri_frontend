@@ -57,7 +57,6 @@ export default function PostModifyPage() {
         isConfirmModalOpen={isConfirmModalOpen}
         closeConfirmModal={() => setIsConfirmModalOpen(false)}
         postContent={content}
-        postIdx={location.state.post.postIdx}
       />
       <Header />
       <div className='post-write-container'>

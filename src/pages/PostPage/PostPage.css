@@ -481,3 +481,66 @@ color: #000000;
 cursor: pointer;
 }
 
+.default-status-scrap-button {
+  box-sizing: border-box;
+width: 74px;
+height: 28px;
+border: 1px solid #FFFFFF;
+border-radius: 10px;
+background-color: transparent;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+
+color: #FFFFFF;
+align-items: center;
+position: relative;
+display: flex;
+cursor: pointer;
+}
+
+.default-status-scrap-button img {
+  line-height: 10px;
+  position: absolute;
+  left: 11px;
+  top: 7px;
+  margin-right: 9px;
+}
+
+.default-status-scrap-button div {
+  position: absolute;
+  left: 30px;
+}
+
+.scrap-status-button {
+  box-sizing: border-box;
+width: 74px;
+height: 28px;
+border: 1px solid #66CC66;
+border-radius: 10px;
+background-color: #66CC66;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 800;
+font-size: 10px;
+
+color: #0A1123;
+align-items: center;
+position: relative;
+display: flex;
+cursor: pointer;
+}
+
+.scrap-status-button img {
+  line-height: 10px;
+  position: absolute;
+  left: 11px;
+  top: 7px;
+  margin-right: 9px;
+}
+
+.scrap-status-button div {
+  position: absolute;
+  left: 30px;
+}

@@ -9,7 +9,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 
 export default function Comment(props) {
-  const { comment, reComments, setRootCommentIdx, setPlaceHolder, inputRef, handleCommentDelete } = props;
+  const { comment, reComments, setRootCommentIdx, setPlaceHolder, inputRef, handleCommentDelete, setCommentReported, handleReportComment } = props;
   const [isCommentSettingModalOn, setIsCommentSettingModalOn] = useState(false);
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
   const headers = {
@@ -17,6 +17,7 @@ export default function Comment(props) {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
+  const [reportedComment, setReportedComment] = useState(comment);
 
   const handleRecommentButton = e => {
     setRootCommentIdx(comment.commentIdx);
@@ -70,25 +71,6 @@ export default function Comment(props) {
     setCommentReportDetailOn(false);
   };
 
-  const handleReportComment = (e) => {
-    const reportComment = async (commentIdx, reason) => {
-      try {
-        const response = await axios.post(`/api/report/commentReport`,
-          JSON.stringify({
-            postIdx: commentIdx,
-            reason: reason
-          }),
-          { headers });
-          console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    console.log(parseInt(comment.commentIdx), e.target.innerText);
-    reportComment(parseInt(comment.commentIdx), e.target.innerText);
-    handleModalCloseClick();
-  };
-
   return (
     <div>
       <Modal
@@ -99,13 +81,13 @@ export default function Comment(props) {
           contentLabel="Example Modal"
         >
          <div className="post-setting-container">
-            {Number(userIdx) === comment.authorIdx ?
+            {Number(userIdx) === reportedComment.authorIdx ?
               <div className="post-setting-menu-container">
                 <div className="post-setting-modal-title">댓글 관리</div>
                 <button className="post-modify">수정하기</button>
                 <button className="post-delete" onClick={(e) => {
-                  console.log(comment.commentIdx);
-                  handleCommentDelete(e, comment.commentIdx);
+                  console.log(reportedComment.commentIdx);
+                  handleCommentDelete(e, reportedComment.commentIdx);
                   handleModalCloseClick();
                 }}>삭제하기</button>
               </div> :
@@ -113,11 +95,26 @@ export default function Comment(props) {
                 {commentReportDetailOn ?
                 <div className="post-report-detail">
                   <div className="post-setting-modal-title">게시물 관리</div>
-                  <div className="ad-spam-report" onClick={handleReportComment}>상업적 광고 / 스팸 게시물</div>
-                  <div className="fish" onClick={handleReportComment}>낚시 / 도배 게시물</div>
-                  <div className="irrelevant" onClick={handleReportComment}>개발과 무관한 게시물</div>
-                  <div className="hate" onClick={handleReportComment}>욕설 / 비하를 포함한 게시물</div>
-                  <div className="other" onClick={handleReportComment}>기타 사유</div>
+                  <div className="ad-spam-report" onClick={(e) => {
+                    handleModalCloseClick();
+                    handleReportComment(e, reportedComment.commentIdx);
+                  }}>상업적 광고 / 스팸 게시물</div>
+                  <div className="fish" onClick={(e) => {
+                    handleModalCloseClick();
+                    handleReportComment(e, reportedComment.commentIdx);
+                  }}>낚시 / 도배 게시물</div>
+                  <div className="irrelevant" onClick={(e) => {
+                    handleModalCloseClick();
+                    handleReportComment(e, reportedComment.commentIdx);
+                  }}>개발과 무관한 게시물</div>
+                  <div className="hate" onClick={(e) => {
+                    handleModalCloseClick();
+                    handleReportComment(e, reportedComment.commentIdx);
+                  }}>욕설 / 비하를 포함한 게시물</div>
+                  <div className="other" onClick={(e) => {
+                    handleModalCloseClick();
+                    handleReportComment(e, reportedComment.commentIdx);
+                  }}>기타 사유</div>
                 </div> :
                 <button className="post-report-button" onClick={handleReportClick}>
                   신고하기
@@ -147,7 +144,7 @@ export default function Comment(props) {
       {reComments.length > 0 &&
         <div className='reComments-container'>
           {reComments.map(reComment =>
-            <ReComment key={reComment.commentIdx} reComment={reComment} />
+            <ReComment key={reComment.commentIdx} reComment={reComment} setIsCommentSettingModalOn={setIsCommentSettingModalOn} setReportedComment={setReportedComment} />
           )}
         </div>}
     </div>

@@ -30,7 +30,6 @@ export default function Board() {
 
   const fetchPosts = async (boardIdx) => {
       try {
-          setPosts(null);
           setError(null);
           setLoading(true); //로딩이 시작됨
           const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
@@ -47,14 +46,14 @@ export default function Board() {
 
   const fetchBoard = async () => {
     try {
-      setBoard(null);
       setError(null);
       setLoading(true);
       const response = await axios.get('/api/board/allList', {headers});
-      setBoard(filterBoardData(response.data.result));
+      setBoard(...filterBoardData(response.data.result));
     } catch (e) {
       setError(e);
     }
+    setLoading(false);
   };
 
   const filterBoardData = (boards) => {
@@ -66,33 +65,35 @@ export default function Board() {
       fetchBoard(params.bordId);
   },[]);
 
-  if (loading) return null;
   if (error) return null;
-  if (!posts) return null;
-  if (!board) return null;
 
   return (
     <>
       <Header />
       <Search />
       <div className='board-title-container'>
-        <div className='board-title-box'>
+        {board && <>
+          <div className='board-title-box'>
           <button className='back-button' onClick={() => navigate('/boards')}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>{board[0].boardName}</div>
+          <div className='board-title'>{board.boardName}</div>
           <div className='favorite-button-box'>
             <img src={favoriteStar} alt=''/>
           </div>
         </div>
         <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
+        </>}
+        
         {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
-      <div className='post-list'>
+      
+      {posts && <div className='post-list'>
         {posts && posts.map(post => (
             <PostSummary post={post} key={post.postIdx} state={state} />
         ))}
-      </div>
+      </div>}
+      
       <div className='write-post-container2'>
           <button
             className='write-post'

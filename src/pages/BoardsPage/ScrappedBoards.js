@@ -7,7 +7,7 @@ export default function ScrappedBoards(props) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <>
       {scrappedBoards && scrappedBoards.map((board) => (
         <div key={board.boardIdx}>
           <div className='board-menu'>
@@ -25,6 +25,6 @@ export default function ScrappedBoards(props) {
           </div>
         </div>
       ))}
-    </div>
+    </>
   )
 }

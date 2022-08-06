@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import './PostModifyConfirmModal.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import confirmIcon from '../../../assets/confirmIcon.png';
 import axios from 'axios';
 
@@ -23,10 +23,12 @@ const customStyles = {
 
 
 export default function PostWriteConfirmModal(props) {
-  const { isConfirmModalOpen, closeConfirmModal, postContent, postIdx } = props;
+  const { isConfirmModalOpen, closeConfirmModal, postContent } = props;
   const navigate = useNavigate();
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
-
+  const params = useParams();
+  console.log(params);
+  
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
@@ -49,7 +51,6 @@ export default function PostWriteConfirmModal(props) {
     }
   };
 
-  
   return (
     <div>
       <Modal
@@ -67,8 +68,8 @@ export default function PostWriteConfirmModal(props) {
         </div>
         <div className='yesno-box'>
           <button className='confirm-yes-button' onClick={() => {
-            modifyPost(userIdx, postContent, postIdx);
-            navigate(-1);
+            modifyPost(userIdx, postContent, params.postId);
+            navigate(`/boards/${params.boardId}/${params.postId}`);
           }}>네</button>
           <button className='confirm-no-button' onClick={() => closeConfirmModal()}>아니오</button>
         </div>

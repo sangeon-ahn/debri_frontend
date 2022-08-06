@@ -38,12 +38,13 @@ export default function BoardsPage() {
 
   const fetchScrappedBoards = async () => {
     try {
-      setScrappedBoards(null);
       setError(null);
       setLoading(true); //로딩이 시작됨
       const response = await axios.get(`/api/board/scrap/getList`, { headers });
       console.log(response);
-      setScrappedBoards(response.data.result);
+      if (response.data.isSuccess) {
+        setScrappedBoards(response.data.result);
+      }
     } catch (e) {
       setError(e);
     }
@@ -52,12 +53,13 @@ export default function BoardsPage() {
 
   const fetchUnScrappedBoards = async () => {
     try {
-        setUnScrappedBoards(null);
         setError(null);
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`api/board/unscrap/getList`, { headers });
         console.log(response.data);
-        setUnScrappedBoards(response.data.result);
+        if (response.data.isSuccess) {
+          setUnScrappedBoards(response.data.result);
+        }
       } catch (e) {
         setError(e);
       }
@@ -73,8 +75,9 @@ export default function BoardsPage() {
       );
       console.log('리턴', response);
       if (response.data.isSuccess) {
+        setScrappedBoards(state =>
+          [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === boardIdx)]);
         setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== boardIdx));
-        setScrappedBoards(state => [...state, unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === boardIdx)[0]]);
       }
 
     } catch (error) {
@@ -91,7 +94,8 @@ export default function BoardsPage() {
       );
       console.log('리턴', response);
       if (response.data.isSuccess) {
-        setUnScrappedBoards(state => [...state, scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === boardIdx)[0]]);
+        setUnScrappedBoards(state => 
+          [...state, ...scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === boardIdx)]);
         setScrappedBoards(scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx !== boardIdx));
       }
     } catch (error) {
@@ -112,9 +116,6 @@ export default function BoardsPage() {
     setIsOpened(state => !state);
   }
 
-  if (loading) return null;
-  if (error) return null;
-
   return (
     <div>
       <Header />
@@ -129,7 +130,7 @@ export default function BoardsPage() {
                   <img src={toggleUp} alt="엑박" />}
               </button>
             </div>
-            {isOpened &&
+            {isOpened && !loading && scrappedBoards &&
               <ScrappedBoards scrappedBoards={scrappedBoards} onCancelScrap={onCancelScrap}/>
             }
         </div>
@@ -138,7 +139,7 @@ export default function BoardsPage() {
           <div className='all-boards-title'>
             <p>전체 게시판</p>
           </div>
-          <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />
+          {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
         </div>
       </div>
     </div>

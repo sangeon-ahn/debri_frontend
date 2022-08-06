@@ -2,7 +2,7 @@ import Comment from "../Comment/Comment";
 import ReComment from "../ReComment/ReComment";
 
 export default function Comments(props) {
-  const { comments, setRootCommentIdx, setPlaceHolder, inputRef, handleCommentDelete } = props;
+  const { comments, setRootCommentIdx, setPlaceHolder, inputRef, handleCommentDelete, setCommentReported, handleReportComment } = props;
   // 일단은 댓글과 대댓글의 순서로 정렬한 다음,
   // 이 정렬된 객체를 넘겨서 map으로 출력
   // filter를 사용해서 루트댓글인 경우와 대댓글인 경우를 나눠서 컴포넌트에 프로퍼티로 넘기고
@@ -36,7 +36,9 @@ export default function Comments(props) {
           setRootCommentIdx={setRootCommentIdx}
           setPlaceHolder={setPlaceHolder}
           inputRef={inputRef}
-          handleCommentDelete={handleCommentDelete} />
+          handleCommentDelete={handleCommentDelete}
+          setCommentReported={setCommentReported}
+          handleReportComment={handleReportComment} />
       })}
     </div>
   );
