@@ -5,9 +5,32 @@ import greenHeart from '../../../assets/greenHeart.png';
 
 export default function PostSummary(props) {
   const { post } = props;
-  const slicedTitle = (post.postName !==null && post.postName.length >= 20) ? post.postName.slice(0, 20) + '...' : post.postName
   const navigate = useNavigate();
-  
+
+  const getTimeAfterCreated = (minute) => {
+    if (minute === 0) {
+      return '방금';
+    }
+
+    if (minute < 60) {
+      return String(minute) + '분 전';
+    }
+
+    if (minute < 60 * 24) {
+      return parseInt(minute / 60) + '시간 전';
+    }
+
+    if (minute < 60 * 24 * 30) {
+      return parseInt(minute / (60 * 24)) + '일 전';
+    }
+
+    if (minute < 60 * 24 * 30 * 12) {
+      return parseInt(minute / (60 * 24 * 30)) + '개월 전';
+    }
+    
+    return parseInt(minute / (60 * 24 * 30 * 12)) + '년 전';
+  };
+
   return (
     <div className="post-summary-container">
       <div className='post-likes'>
@@ -24,10 +47,10 @@ export default function PostSummary(props) {
       </div>
       <div className='post-summary-wrapper' onClick={() => navigate(`/boards/${post.boardIdx}/${post.postIdx}`, { state: {post} })} >
         <div className='post-summary'>
-          <div className='post-title'>{slicedTitle}</div>
+          <div className='post-title'>{post.postName}</div>
           <div className='comment-number'>({post.commentNumber})</div>
         </div>
-        <div className='elapsed-time'>방금</div>
+        <div className='elapsed-time'>{getTimeAfterCreated(post.timeAfterCreated)}</div>
       </div>
     </div>
   )

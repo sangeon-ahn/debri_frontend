@@ -58,12 +58,14 @@
 }
 
 .post-title {
-  /* max-width: 232px; */
+  width: 232px;
   overflow: hidden;
   margin-right: 10px;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .comment-number {
