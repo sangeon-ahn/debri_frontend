@@ -203,6 +203,8 @@ border: none;
 }
 
 .post-button-container {
+  display: flex;
+  align-items: center;
   margin-top: 36px;
   width: 186px;
   height: 40px;
@@ -211,20 +213,90 @@ border: none;
   margin-bottom: 37px;
 }
 
-.up-vote-button {
+.like-status-button {
+  box-sizing: border-box;
+  align-items: center;
+  width: 90px;
+  height: 40px;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  padding: 10.22px 17px 9.14px 10.23px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  background-color: transparent;
+  margin-right: 22px;
+  padding: 10.22px 17px 9.14px 10.23px;
+  line-height: 17px;
+  position: relative;
+  color: white;
+}
+
+.liked-inpost-like-number {
+  position: absolute;
+  z-index: 4;
+  top:55%;
+  left: 24%;
+  margin-top: -7px;
+  margin-left: -2.9px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+  color: white;
+}
+
+.like-status-button img {
+  margin-right: 10.23px;
+}
+
+.default-inpost-like-number {
+  position: absolute;
+  z-index: 4;
+  top:55%;
+  left: 24%;
+  margin-top: -7px;
+  margin-left: -2.9px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+
+  color: #0A1123;
+}
+.post-like-gray-icon {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-top: -9.5px;
+  margin-left: -11px;
+}
+
+.default-status-button {
+  box-sizing: border-box;
+  display: flex;
   border: 2px solid #FFFFFF;
   background-color: transparent;
   color: white;
-  border-radius: 10px;
   width: 90px;
   height: 40px;
+  border-radius: 10px;
   margin-right: 22px;
-
+padding: 10.22px 17px 9.14px 10.23px;
   font-family: 'Noto Sans KR';
 font-style: normal;
 font-weight: 700;
 font-size: 14px;
-line-height: 20px;
+line-height: 17px;
+position: relative;
+}
+
+.default-status-button img {
+  margin-right: 10.23px;
 }
 
 .scrap-button {

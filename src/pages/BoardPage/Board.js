@@ -35,6 +35,7 @@ export default function Board() {
           setLoading(true); //로딩이 시작됨
           const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
           setPosts(response.data);
+          console.log(response);
       } catch (e) {
           setError(e);
       }

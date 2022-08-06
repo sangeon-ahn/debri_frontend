@@ -12,12 +12,14 @@ import Comments from "./Comments/Comments";
 import WriteComment from "./WriteComment/WriteComment";
 import postMenuIcon from "../../assets/postMenuIcon.png";
 import Modal from 'react-modal';
+import greenHeart from '../../assets/greenHeart.png';
+import whiteHeart from '../../assets/whiteHeart.png';
 
 export default function PostPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { state } = location;
   const params = useParams();
-
   const { boardId, postId } = params;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -25,6 +27,7 @@ export default function PostPage() {
   const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
   const [post, setPost] = useState(null);
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
+  const [postLikeStatus, setPostLikeStatus] = useState('UNLIKE');
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -37,8 +40,9 @@ export default function PostPage() {
       setError(null);
       setComments(null);
       setLoading(true);
-      const response = await axios.get(`/api/post/get/${postIdx}`);
+      const response = await axios.get(`/api/post/get/${postIdx}`, { headers });
       setPost(response.data.result);
+      console.log(response);
     } catch (e) {
       setError(e);
       console.log(e);
@@ -51,7 +55,7 @@ export default function PostPage() {
       setError(null);
       setComments(null);
       setLoading(true);
-      const response = await axios.get(`/api/comment/get/${postIdx}`);
+      const response = await axios.get(`/api/comment/get/${postIdx}`, { headers });
       if (response.data.isSuccess) {
         setComments(response.data.result);
       } else {
@@ -74,7 +78,8 @@ export default function PostPage() {
     return () => {
       document.addEventListener('mousedown', clickModalOutside);
     }
-  }, [postId]);
+  }, []);
+
 
   const clickModalOutside = e => {
     if (e.target.className === "ReactModal__Overlay ReactModal__Overlay--after-open") {
@@ -187,11 +192,10 @@ export default function PostPage() {
     borderRadius: '10px',
   }
 
-
-  const handlePostDeleteClick = (postId) => {
+  const handlePostDeleteClick = async (postId) => {
     const deletePost = async (postId) => {
       try {
-        const response = axios.patch(`/api/post/${postId}/status`,
+        const response = await axios.patch(`/api/post/${postId}/status`,
             { headers }
         );
         console.log(response.data);
@@ -204,7 +208,7 @@ export default function PostPage() {
 
   const postLike = async (userIdx, postIdx, likeStatus) => {
     try {
-      const response = axios.post(`/api/post/like`,
+      const response = await axios.post(`/api/post/like`,
         {
           postIdx: postIdx,
           userIdx: userIdx,
@@ -212,16 +216,18 @@ export default function PostPage() {
         },
         { headers }
         );
-      // console.log(response.data.result);
+      console.log(response);
+      setPostLikeStatus("LIKE");
+      
     } catch (e) {
       console.log(e);
       setError(e);
     }
   };
 
-  const postLikeCancel = async (userIdx, postIdx) => {
+  const postCancelLike = async (userIdx, postIdx) => {
     try {
-      const response = axios.patch('/api/post/like/cancel',
+      const response = await axios.patch('/api/post/like/cancel',
         {
           postIdx: postIdx,
           userIdx: userIdx
@@ -229,6 +235,7 @@ export default function PostPage() {
         { headers }
         );
         console.log(response);
+        setPostLikeStatus("UNLIKE");
     } catch (e) {
       console.log(e);
       setError(e);
@@ -244,16 +251,6 @@ export default function PostPage() {
   const handleModalCloseClick = () => {
     setIsPostSettingModalOn(false);
     setPostReportDetailOn(false);
-  };
-
-  const handleLikeButtonClick = () => {
-    // if (!isLikeButtonClicked) {
-    //   postLike(userIdx, postId, "LIKE");
-    //   return;
-    // }
-    
-    // postLikeCancel(userIdx, postId);
-    console.log('clickLikeButton');
   };
 
   const handleScrapButtonClick = () => {
@@ -338,7 +335,22 @@ export default function PostPage() {
         </div>
         <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
-          <button className="up-vote-button" onClick={handleLikeButtonClick}>추천</button>
+          {postLikeStatus === 'LIKE' ?
+          <>
+            <button className='like-status-button' onClick={() => postCancelLike(userIdx, postId, postLikeStatus)}>
+              <div className="liked-inpost-like-number">{post.likeNumber}</div>
+              <img src={greenHeart} alt=""/>
+              추천
+            </button>
+          </>:
+          <>
+            <button className='default-status-button' onClick={() => postLike(userIdx, postId, postLikeStatus)}>
+              <div className="default-inpost-like-number">{post.likeNumber}</div>
+              <img src={whiteHeart} alt="" />
+              <div>추천</div>
+            </button>
+          </>
+          }
           <button className="scrap-button" onClick={handleScrapButtonClick}>스크랩</button>
         </div>
         {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} />}
