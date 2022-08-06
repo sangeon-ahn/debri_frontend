@@ -29,15 +29,13 @@ border-radius: 10px;
 .lecture-subject {
   width: 40px;
   height: 16px;
-  background: #CB3953;
   border-radius: 10px;
   font-family: 'Noto Sans KR';
   font-style: normal;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 14px;
+  font-weight: 700;
+  font-size: 9px;
+  line-height: 16px;
   text-align: center;
-  color: #FFFFFF;
   margin-bottom: 2px;
 }
 
@@ -48,13 +46,12 @@ border-radius: 10px;
 
 .lecture-name {
   font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 23px;
-
-color: #FFFFFF;
-margin-right: 6px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+  color: #FFFFFF;
+  margin-right: 6px;
 }
 
 .lecture-chapters {

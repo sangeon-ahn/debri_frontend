@@ -1,44 +1,45 @@
 import Header from "../Header/Header";
 import './LecturesPage.css';
-import Search from "../Search/Search";
 import filterIcon from "../../assets/filterIcon.png";
-import keywordPlusIcon from '../../assets/keywordPlusIcon.png';
-import LowBar from "../LowBar/LowBar";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Lecture from "./Lecture/Lecture";
+import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import Lectures from "./Lectures";
+import LectureSearch from "./LectureSearch/LectureSearch";
+import LecturesFilter from "./LecturesFilter";
+import ScrappedLectures from "./ScrappedLectures/ScrappedLectures";
 
-export default function LecturesPage() {
-  const [lectures, setLectures] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, isLoading] = useState(false);
+export default React.memo(function LecturesPage() {
 
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  };
-
-  const fetchLectures = async () => {
-    try {
-      isLoading(true);
-      setError(false);
-      const response = await axios.get('/api/lecture/getLectureList', { headers });
-      setLectures(response.data.result);
-      console.log(lectures);
-    } catch (e) {
-      setError(e);
-      console.log(e);
+  const [subject, setSubject] = useState(null);
+  const [material, setMaterial] = useState(null);
+  const [pricing, setPricing] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
+  console.log(subject, material, pricing, searchInput);
+  const handleSubjectClick = (lang) => {
+    if (subject === null) {
+      setSubject(lang);
+      return;
     }
-    isLoading(false);
-  };
-  
-  useEffect(() => {
-    fetchLectures();
-  }, []);
 
-  if (loading) return;
-  if (!lectures) return;
-  if (error) return;
+    setSubject(null);
+  }
+
+  const handleTypeClick = (type) => {
+    if (material === null) {
+      setMaterial(type);
+      return;
+    }
+
+    setMaterial(null);
+  }
+
+  const handlePriceClick = (price) => {
+    if (pricing === null) {
+      setPricing(price);
+      return;
+    }
+
+    setPricing(null);
+  }
 
   return (
     <>
@@ -50,53 +51,23 @@ export default function LecturesPage() {
             <img src={filterIcon} alt="" />
           </div>
         </div>
-        <Search />
-        <div className="keywords-container">
-          <div className="keywords-subject-container">
-            <div className="keyword">
-              <div>Front</div>
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-            <div className="keyword">
-              <div>Front</div>
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-            <div className="keyword">
-              <div>Front</div>
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-            <div className="keyword">
-              <div>Front</div>
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-          </div>
-          <div className="keywords-subject-container">
-            <div className="keyword">
-              Front
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-            <div className="keyword">
-              Front
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-          </div>
-          <div>
-            <div className="keyword">
-              Front
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-            <div className="keyword">
-              Front
-              <img className="keyword-plus-icon" src={keywordPlusIcon} alt="" />
-            </div>
-          </div>
-        </div>
-        <div className="lecture-list">
-          {lectures.map(lecture => {
-            return <Lecture lecture={lecture} key={lecture.lectureIdx}/>
-          })}
-        </div>
+        <LectureSearch setSearchInput={setSearchInput}/>
+        <LecturesFilter
+          subject={subject}
+          material={material}
+          pricing={pricing}
+          handleSubjectClick={handleSubjectClick}
+          handleTypeClick={handleTypeClick}
+          handlePriceClick={handlePriceClick}
+        />
+        {(!subject && !material && !pricing && !searchInput) && <ScrappedLectures />}
+        {(subject || material || pricing || searchInput) && <Lectures
+          lang={subject}
+          type={material}
+          price={pricing}
+          searchInput={searchInput}
+        />}
       </div>
     </>
   )
-}
+});
