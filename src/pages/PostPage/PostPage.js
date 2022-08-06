@@ -6,7 +6,7 @@ import leftArrow from '../../assets/leftArrow.png';
 // import greenUpThumb from '../../assets/greenUpThumb.png';
 import postUserProfile from '../../assets/postUserProfile.png';
 import userReport from '../../assets/userReport.png';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
 import Comments from "./Comments/Comments";
 import WriteComment from "./WriteComment/WriteComment";
@@ -27,7 +27,8 @@ export default function PostPage() {
   const [isPostSettingModalOn, setIsPostSettingModalOn] = useState(false);
   const [post, setPost] = useState(null);
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
-  const [postLikeStatus, setPostLikeStatus] = useState('UNLIKE');
+
+  const [postLikeStatus, setPostLikeStatus] = useState(null);
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -69,6 +70,9 @@ export default function PostPage() {
     setLoading(false);
   };
 
+  const [postLikes, setPostLikes] = useState(0);
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     fetchPost(postId);
     fetchComments(postId);
@@ -79,6 +83,32 @@ export default function PostPage() {
       document.addEventListener('mousedown', clickModalOutside);
     }
   }, []);
+
+  useEffect(() => {
+    console.log('1', post);
+    if (post) {
+      if (post.userLike) {
+        console.log('2', post.likeNumber);
+        setPostLikes(post.likeNumber);
+        setPostLikeStatus(true);
+      }
+     else {
+      console.log(3);
+      setPostLikeStatus(false);
+    }
+  }
+    console.log(postLikeStatus);
+  }, [post]);
+
+  useEffect(() => {
+    if (postLikeStatus !== null && count !== 0) {
+      if (postLikeStatus) {
+        setPostLikes(state => state + 1);
+      } else {
+        setPostLikes(state => state - 1);
+    }
+    }
+  }, [postLikeStatus]);
 
 
   const clickModalOutside = e => {
@@ -217,15 +247,15 @@ export default function PostPage() {
         { headers }
         );
       console.log(response);
-      setPostLikeStatus("LIKE");
-      
+      setCount(state => state + 1);
+      setPostLikeStatus(true);
     } catch (e) {
       console.log(e);
       setError(e);
     }
   };
 
-  const postCancelLike = async (userIdx, postIdx) => {
+  const postCancelLike = useCallback(async (userIdx, postIdx) => {
     try {
       const response = await axios.patch('/api/post/like/cancel',
         {
@@ -235,12 +265,13 @@ export default function PostPage() {
         { headers }
         );
         console.log(response);
-        setPostLikeStatus("UNLIKE");
+        setPostLikeStatus(false);
+        setCount(state => state + 1);
     } catch (e) {
       console.log(e);
       setError(e);
     }
-  };
+  }, []);
 
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
 
@@ -335,17 +366,17 @@ export default function PostPage() {
         </div>
         <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
-          {postLikeStatus === 'LIKE' ?
+          {postLikeStatus ?
           <>
-            <button className='like-status-button' onClick={() => postCancelLike(userIdx, postId, postLikeStatus)}>
-              <div className="liked-inpost-like-number">{post.likeNumber}</div>
+            <button className='like-status-button' onClick={() => postCancelLike(userIdx, postId)}>
+              <div className="liked-inpost-like-number">{postLikes}</div>
               <img src={greenHeart} alt=""/>
               추천
             </button>
-          </>:
+          </> :
           <>
-            <button className='default-status-button' onClick={() => postLike(userIdx, postId, postLikeStatus)}>
-              <div className="default-inpost-like-number">{post.likeNumber}</div>
+            <button className='default-status-button' onClick={() => postLike(userIdx, postId, "LIKE")}>
+              <div className="default-inpost-like-number">{postLikes}</div>
               <img src={whiteHeart} alt="" />
               <div>추천</div>
             </button>

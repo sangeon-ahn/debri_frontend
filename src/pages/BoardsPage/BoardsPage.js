@@ -111,7 +111,6 @@ export default function BoardsPage() {
 
   if (loading) return null;
   if (error) return null;
-  if (!scrappedBoards || !unScrappedBoards) return null;
   
   return (
     <div>
