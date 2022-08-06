@@ -79,3 +79,19 @@
     display: flex;
     margin-bottom: 20px;
 }
+
+.scrap-star {
+    cursor: pointer;
+}
+
+.unscrap-star {
+    cursor: pointer;
+}
+
+.board-name {
+    cursor: pointer;
+}
+
+.boards-toggle-button {
+    cursor: pointer;
+}

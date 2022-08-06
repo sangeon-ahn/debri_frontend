@@ -34,7 +34,10 @@ export default function Board() {
           setError(null);
           setLoading(true); //로딩이 시작됨
           const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
-          setPosts(response.data);
+          if (response.data.isSuccess) {
+            const sortedPosts = response.data.result.sort((a, b) => b.postIdx - a.postIdx);
+            setPosts(sortedPosts);
+          }
           console.log(response);
       } catch (e) {
           setError(e);
@@ -86,7 +89,7 @@ export default function Board() {
         {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
       <div className='post-list'>
-        {posts && posts.result.map(post => (
+        {posts && posts.map(post => (
             <PostSummary post={post} key={post.postIdx} state={state} />
         ))}
       </div>
