@@ -324,7 +324,7 @@ export default function PostPage() {
                 <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
                 <button className="post-delete" onClick={() => {
                   handlePostDeleteClick(postId);
-                  navigate(-1);
+                  navigate(`/boards/${boardId}`);
                 }}>삭제하기</button>
               </div> :
               <div>

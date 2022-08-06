@@ -105,6 +105,7 @@ font-size: 16px;
 color: #FFFFFF;
 text-align: center;
 border: 1px solid black;
+cursor: pointer;
 }
 
 .post-setting-modal-title {
@@ -134,6 +135,7 @@ font-size: 16px;
   line-height: 42px;
   height: 47px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .post-delete {
@@ -148,6 +150,7 @@ height: 47px;
 color: #000000;
 background-color: transparent;
 border: none;
+cursor: pointer;
 }
 
 .post-menu-button {
@@ -157,6 +160,7 @@ border: none;
   right: 0px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .post-menu-icon {

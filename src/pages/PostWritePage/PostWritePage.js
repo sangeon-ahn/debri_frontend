@@ -20,7 +20,6 @@ export default function PostWritePage() {
   const params = useParams();
   const [selectedOption, setSelectedOption] = useState(params.boardId);
   const [boardName, setBoardName] = useState('');
-  const [count, setCount] = useState(0);
 
   console.log(params);
 
@@ -33,21 +32,21 @@ export default function PostWritePage() {
       handleBoardName(selectedOption);
   }, [selectedOption, boardList]);
 
-    const headers = {
-      'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    };
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
     
-    async function getData() {
-      await axios.get(`/api/board/allList`, { headers }).then(
-        (res) => {
-          setBoardList(res.data.result);
-        }
-        )
-        .catch((err)=>{
-          console.log(err);
-        });
+  async function getData() {
+    await axios.get(`/api/board/allList`, { headers }).then(
+      (res) => {
+        setBoardList(res.data.result);
+      }
+      )
+      .catch((err)=>{
+        console.log(err);
+      });
   } ;
 
   function onClickSave() {
