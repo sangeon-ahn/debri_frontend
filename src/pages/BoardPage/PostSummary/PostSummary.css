@@ -12,6 +12,7 @@
   position: relative;
   width: 262px;
   height: 38px;
+  cursor: pointer;
   /* margin-top: 10px;
   margin-left: 40px; */
   /* border: 1px solid white; */
@@ -49,13 +50,23 @@
   margin-left: -11px;
 }
 
+.post-like-green-icon {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-top: -9.5px;
+  margin-left: -11px;
+}
+
 .post-title {
-  /* max-width: 232px; */
+  width: 232px;
   overflow: hidden;
   margin-right: 10px;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .comment-number {
@@ -79,4 +90,8 @@
   width: 40px;
   height: 38px;
   text-align: center;
+}
+
+.white {
+  color: white
 }

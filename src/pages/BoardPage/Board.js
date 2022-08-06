@@ -19,56 +19,81 @@ export default function Board() {
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
+  const [board, setBoard] = useState(null);
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+  console.log(board);
 
   const fetchPosts = async (boardIdx) => {
       try {
-          setPosts(null);
           setError(null);
           setLoading(true); //로딩이 시작됨
           const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
-          setPosts(response.data);
+          if (response.data.isSuccess) {
+            const sortedPosts = response.data.result.sort((a, b) => b.postIdx - a.postIdx);
+            setPosts(sortedPosts);
+          }
+          console.log(response);
       } catch (e) {
           setError(e);
       }
       setLoading(false);
   };
 
+  const fetchBoard = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+      const response = await axios.get('/api/board/allList', {headers});
+      setBoard(...filterBoardData(response.data.result));
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  const filterBoardData = (boards) => {
+    return boards.filter(board => board.boardIdx === Number(params.boardId));
+  };
+
   useEffect( () =>{
       fetchPosts(params.boardId);
+      fetchBoard(params.bordId);
   },[]);
 
-  if (loading) return null;
   if (error) return null;
-  if (!posts) return null;
 
   return (
     <>
       <Header />
       <Search />
       <div className='board-title-container'>
-        <div className='board-title-box'>
-          <button className='back-button' onClick={() => navigate(-1)}>
+        {board && <>
+          <div className='board-title-box'>
+          <button className='back-button' onClick={() => navigate('/boards')}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>"파이썬 게시판"</div>
+          <div className='board-title'>{board.boardName}</div>
           <div className='favorite-button-box'>
             <img src={favoriteStar} alt=''/>
           </div>
         </div>
         <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
+        </>}
+    
         {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
-      <div className='post-list'>
-        {posts && posts.result.map(post => (
-            <PostSummary post={post} key={post.postIdx} state={state} />
+      
+      {posts && board && <div className='post-list'>
+        {posts.map(post => (
+            <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
         ))}
-      </div>
+      </div>}
+      
       <div className='write-post-container2'>
           <button
             className='write-post'

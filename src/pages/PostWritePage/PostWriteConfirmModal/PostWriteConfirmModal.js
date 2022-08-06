@@ -43,9 +43,8 @@ Modal.defaultStyles.content = {
 
 
 export default function PostWriteConfirmModal(props) {
-  const { isConfirmModalOpen, closeConfirmModal, postContent, postTitle } = props;
+  const { isConfirmModalOpen, closeConfirmModal, postContent, postTitle, boardId, boardName } = props;
   const navigate = useNavigate();
-  const params = useParams();
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
 
   const headers = {
@@ -64,7 +63,7 @@ export default function PostWriteConfirmModal(props) {
       );
       console.log('리턴', response);
       postIdxRef.current = response.data.result.postIdx;
-      navigate(`/boards/${params.boardId}/${postIdxRef.current}`);
+      navigate(`/boards/${boardId}/${postIdxRef.current}`, {state: {boardName: boardName}});
       return true;
     } catch (error) {
       console.error(error);
@@ -72,7 +71,7 @@ export default function PostWriteConfirmModal(props) {
   }
   
   const uploadPost = () => {
-    postData(params.boardId, userIdx, postContent, postTitle);
+    postData(boardId, userIdx, postContent, postTitle);
   };
   
   return (
@@ -88,7 +87,7 @@ export default function PostWriteConfirmModal(props) {
           <div className='confirm-icon-box'>
             <img src={confirmIcon} alt='' className='confirm-icon' />
           </div>
-          <span>"C언어" 게시판에 작성하시겠어요?</span>
+          <span>"{boardName}" 게시판에 작성하시겠어요?</span>
         </div>
         <div className='yesno-box'>
           <button className='confirm-yes-button' onClick={uploadPost}>네</button>

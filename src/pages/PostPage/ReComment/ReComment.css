@@ -1,0 +1,74 @@
+.recomment-icon {
+  /* vertical-align: auto; */
+  /* object-fit: fill; */
+  margin-right: 19px;
+  cursor: pointer;
+}
+
+.recomment-container {
+  width: 316px;
+  height: 54px;
+  background: #202E51;
+  border-top: 1px solid #2F343A;
+  display: flex;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.recomment-arrow-box {
+  padding: 0 14px 0 10px;
+  width: 19px;
+  height: 55px;
+  line-height: 55px;
+  align-items: center;
+}
+
+.recomment-arrow {
+  /* vertical-align: middle; */
+}
+
+.recomment-content {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #FFFFFF;
+margin-top: 10px;
+max-width: 200px;
+}
+
+.recomment-user-name {
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+line-height: 14px;
+color: #FFFFFF;
+}
+
+.recomment-detail {
+  display: flex;
+  width: 273px;
+  position: absolute;
+  bottom: 6px;
+}
+
+.recomment-button-box {
+  position: absolute;
+  display: flex;
+  right: 10px;
+  align-items: center;
+}
+
+.recomment-elapsed-time {
+  margin-left: 30px;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 300;
+font-size: 10px;
+line-height: 14px;
+
+color: #FFFFFF;
+}

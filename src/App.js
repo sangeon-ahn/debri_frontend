@@ -10,7 +10,7 @@ import LowBar from "./pages/LowBar/LowBar";
 import Header from "./pages/Header/Header";
 import PostPage from "./pages/PostPage/PostPage";
 import PostModifyPage from "./pages/PostModifyPage/PostModifyPage";
-import LecturePage from "./pages/LecturePage/LecturePage";
+import LecturesPage from "./pages/LecturesPage/LecturesPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
           <Route path='/' element={<LoginPage />} />
           <Route path='/account' element={<Account />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/lectures" element={<LecturePage />} />
+          <Route path="/lectures" element={<LecturesPage />} />
           <Route path="/boards" element={<BoardsPage />} />
           <Route path="/boards/:boardId" element={<Board />} />
           <Route path="/boards/:boardId/:postId" element={<PostPage />} />

@@ -23,7 +23,7 @@ export default function WriteComment(props) {
       setPlaceHolder('댓글 쓰기');
       setRootCommentIdx(null);
     });
-  }, [setPlaceHolder, setRootCommentIdx]);
+  }, []);
   
   // const deleteComment = async (commentId) => {
   //   try {

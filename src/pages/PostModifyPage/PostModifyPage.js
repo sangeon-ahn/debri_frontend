@@ -1,40 +1,65 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import './PostModifyPage.css';
 import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/writePost.png';
 import selectButton from '../../assets/selectButton.png';
 import leftArrow from '../../assets/leftArrow.png';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import PostModifyCancelModal from './PostModifyCancelModal/PostModifyCancelModal';
 import PostModifyConfirmModal from './PostModifyConfirmModal/PostModifyConfirmModal';
+import axios from 'axios';
 
 export default function PostModifyPage() {
   const location = useLocation();
-
-  const [title, setTitle] = useState(location.state.post.postName);
-  const [content, setContent] = useState(location.state.post.contents);
+  const { state } = location;
+  const [title, setTitle] = useState(state.post.postName);
+  const [content, setContent] = useState(state.post.contents);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [boardList,setBoardList] = useState([]);
+  const params = useParams();
+  const [selectedOption, setSelectedOption] = useState(params.boardId);
+
+  useEffect(() => {
+    getData();
+    }, []);
 
   console.log(location);
   const handleSelectOption = (e) => {
     setSelectedOption(e.target.value);
   };
-  // 게시판에서 글쓰기 버튼 누를 때 writepage로 링크타고 이동할텐데 이때 현재 있는 게시판 데이터 파라미터를 넘겨준 다음 이 데이터를 writepage에서 useParams로 받아서 useEffet setSelectedOption를 호출해주면 된다.
 
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
+    
+  async function getData() {
+    await axios.get(`/api/board/allList`, { headers }).then(
+      (res) => {
+        setBoardList(res.data.result);
+      }
+      )
+      .catch((err)=>{
+        console.log(err);
+      });
+  } ;
+
+  if (!selectedOption) return null;
   return (
     <div>
       <PostModifyCancelModal
         isCancelModalOpen={isCancelModalOpen}
         closeCancelModal={() => setIsCancelModalOpen(false)}
+        boardName={state.boardName}
       />
       <PostModifyConfirmModal
         isConfirmModalOpen={isConfirmModalOpen}
         closeConfirmModal={() => setIsConfirmModalOpen(false)}
         postContent={content}
-        postIdx={location.state.post.postIdx}
+        boardName={state.boardName}
       />
       <Header />
       <div className='post-write-container'>
@@ -53,11 +78,10 @@ export default function PostModifyPage() {
         </div>
         <div className='select-board'>
           <div className='select-box'>
-            <select name="fruits" onChange={handleSelectOption} value={selectedOption}>
-              <option value="apple">"C언어" 게시판</option>
-              <option value="orange">"JAVA" 게시판</option>
-              <option value="grape">"PYTHION" 게시판</option>
-              <option value="melon">"자유게시판"</option>
+            <select name="option" onChange={handleSelectOption} value={selectedOption}>
+              {boardList.map((board) => (
+                <option value={board.boardIdx} key={board.boardIdx}>{board.boardName}</option>
+              ))}
             </select>
           </div>
         </div>
