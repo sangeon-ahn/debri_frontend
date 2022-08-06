@@ -387,3 +387,97 @@ margin-right: 9px;
   border-radius: 10px;
   margin-bottom: 6px;
   }
+
+  .ad-spam-report {
+    box-sizing: border-box;
+    border-width: 2px 0px;
+border-style: solid;
+border-color: #0A1123;
+text-align: center;
+width: 300px;
+height: 48px;
+align-items: center;
+line-height: 44px;
+margin: 0 auto;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+color: #000000;
+  }
+
+.fish {
+text-align: center;
+width: 300px;
+height: 48px;
+align-items: center;
+line-height: 44px;
+margin: 0 auto;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+color: #000000;
+}
+
+.irrelevant {
+  box-sizing: border-box;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: #0A1123;
+  text-align: center;
+  width: 300px;
+  height: 48px;
+  align-items: center;
+  line-height: 44px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+color: #000000;
+}
+
+.hate {
+  text-align: center;
+width: 300px;
+height: 48px;
+align-items: center;
+line-height: 44px;
+margin: 0 auto;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+color: #000000;
+}
+
+.other {
+  box-sizing: border-box;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: #0A1123;
+  text-align: center;
+  width: 300px;
+  height: 48px;
+  align-items: center;
+  line-height: 44px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+
+color: #000000;
+cursor: pointer;
+}
+

@@ -70,6 +70,25 @@ export default function Comment(props) {
     setCommentReportDetailOn(false);
   };
 
+  const handleReportComment = (e) => {
+    const reportComment = async (commentIdx, reason) => {
+      try {
+        const response = await axios.post(`/api/report/commentReport`,
+          JSON.stringify({
+            postIdx: commentIdx,
+            reason: reason
+          }),
+          { headers });
+          console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log(parseInt(comment.commentIdx), e.target.innerText);
+    reportComment(parseInt(comment.commentIdx), e.target.innerText);
+    handleModalCloseClick();
+  };
+
   return (
     <div>
       <Modal
@@ -92,7 +111,14 @@ export default function Comment(props) {
               </div> :
               <div>
                 {commentReportDetailOn ?
-                <div className="post-report-detail"></div> :
+                <div className="post-report-detail">
+                  <div className="post-setting-modal-title">게시물 관리</div>
+                  <div className="ad-spam-report" onClick={handleReportComment}>상업적 광고 / 스팸 게시물</div>
+                  <div className="fish" onClick={handleReportComment}>낚시 / 도배 게시물</div>
+                  <div className="irrelevant" onClick={handleReportComment}>개발과 무관한 게시물</div>
+                  <div className="hate" onClick={handleReportComment}>욕설 / 비하를 포함한 게시물</div>
+                  <div className="other" onClick={handleReportComment}>기타 사유</div>
+                </div> :
                 <button className="post-report-button" onClick={handleReportClick}>
                   신고하기
                 </button>}

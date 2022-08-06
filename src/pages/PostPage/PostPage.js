@@ -302,6 +302,25 @@ export default function PostPage() {
   const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
   const [inputRef, setInputRef] = useState(null);
 
+  const handleReportPost = (e) => {
+    const reportPost = async (postIdx, reason) => {
+      try {
+        const response = await axios.post(`/api/report/postReport`,
+          JSON.stringify({
+            postIdx: postIdx,
+            reason: reason
+          }),
+          { headers });
+          console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // console.log(parseInt(postId), e.target.innerText);
+    reportPost(parseInt(postId), e.target.innerText);
+    handleModalCloseClick();
+  };
+
   if (loading) return null;
   if (error) return null;
   if (!post) return null;
@@ -338,7 +357,12 @@ export default function PostPage() {
               <div>
                 {postReportDetailOn ?
                 <div className="post-report-detail" ref={reportSettingModal}>
-
+                  <div className="post-setting-modal-title">게시물 관리</div>
+                  <div className="ad-spam-report" onClick={handleReportPost}>상업적 광고 / 스팸 게시물</div>
+                  <div className="fish" onClick={handleReportPost}>낚시 / 도배 게시물</div>
+                  <div className="irrelevant" onClick={handleReportPost}>개발과 무관한 게시물</div>
+                  <div className="hate" onClick={handleReportPost}>욕설 / 비하를 포함한 게시물</div>
+                  <div className="other" onClick={handleReportPost}>기타 사유</div>
                 </div> :
                 <button className="post-report-button" onClick={handleReportClick}>
                   신고하기
