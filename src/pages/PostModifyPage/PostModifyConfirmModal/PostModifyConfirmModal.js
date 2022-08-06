@@ -63,7 +63,7 @@ export default function PostWriteConfirmModal(props) {
           <div className='confirm-icon-box'>
             <img src={confirmIcon} alt='' className='confirm-icon' />
           </div>
-          <span>"C언어" 게시판에 작성하시겠어요?</span>
+          <span>"수정하시겠어요?"</span>
         </div>
         <div className='yesno-box'>
           <button className='confirm-yes-button' onClick={() => {

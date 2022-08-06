@@ -37,7 +37,7 @@ export default function PostWriteCancelModal(props) {
             <div className='alert-icon-box'>
               <img src={alertIcon} alt='' className='alert-icon' />
             </div>
-          <span>정말 작성을 취소하시겠어요?</span>
+          <span>정말 수정을 취소하시겠어요?</span>
           </div>
           <div className='yesno-box'>
             <button className='cancel-yes-button' onClick={() => navigate(-1)}>네</button>
