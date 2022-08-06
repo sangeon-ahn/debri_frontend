@@ -204,6 +204,7 @@ cursor: pointer;
   font-size: 12px;
   line-height: 17px;
   color: white;
+  margin-top: 30px;
 }
 
 .post-button-container {
@@ -236,6 +237,7 @@ cursor: pointer;
   line-height: 17px;
   position: relative;
   color: white;
+  cursor: pointer;
 }
 
 .liked-inpost-like-number {
@@ -297,6 +299,7 @@ font-weight: 700;
 font-size: 14px;
 line-height: 17px;
 position: relative;
+cursor: pointer;
 }
 
 .default-status-button img {
@@ -315,71 +318,7 @@ line-height: 14px;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
   color: white;
-}
-
-.comments-container {
-  width: 100%;
-  height: auto;
-  margin-bottom: 222px;
-}
-
-.comment-container {
-  border-top: 1px solid #2F343A;
-  width: 316px;
-  /* border: 1px solid white; */
-}
-
-.comment-content {
-  margin-top: 10px;
-  font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 200;
-font-size: 12px;
-line-height: 17px;
-color: white;
-}
-
-.comment-detail {
-  display: flex;
-  margin-top: 14px;
-  width: 100%;
-  height: 16px;
-  /* border: 1px solid white; */
-  margin-bottom: 6px;
-}
-
-.comment-user-name {
-  font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 700;
-font-size: 10px;
-line-height: 14px;
-margin-left: 20px;
-color: #FFFFFF;
-margin-right: 30px;
-/* width: 100px; */
-}
-
-.comment-elapsed-time {
-  font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 300;
-font-size: 10px;
-line-height: 14px;
-text-align: right;
-
-color: #FFFFFF;
-
-}
-
-.comment-button-box {
-  position: absolute;
-  display: flex;
-  /* width: 64px; */
-  height: 16px;
-  /* border: 1px solid white; */
-  right: 33px;
-  align-items: center;
+  cursor: pointer;
 }
 
 .up-thumb-button {
@@ -390,15 +329,6 @@ color: #FFFFFF;
   margin-right: 8px;
   background-color: transparent;
   border: none;
-}
-
-.gray-upthumb-icon {
-  /* display: block; */
-  /* vertical-align: middle; */
-  /* text-align: start; */
-  margin-right: 8.49px;
-  position: relative;
-  bottom: 1px;
 }
 
 .up-vote-number {
@@ -427,48 +357,10 @@ margin-right: 9px;
   align-items: center;
 } */
 
-.recomment-icon {
-  /* vertical-align: auto; */
-  /* object-fit: fill; */
-  margin-right: 19px;
-  cursor: pointer;
-}
+
 
 .comment-menu-icon {
   cursor: pointer;
-}
-
-.recomment-container {
-  width: 316px;
-  height: 54px;
-  background: #202E51;
-  border-top: 1px solid #2F343A;
-  display: flex;
-  margin-bottom: 5px;
-}
-
-.recomment-arrow-box {
-  padding: 0 14px 0 10px;
-  width: 19px;
-  height: 55px;
-  line-height: 55px;
-  align-items: center;
-}
-
-.recomment-arrow {
-  /* vertical-align: middle; */
-}
-
-.recomment-content {
-  font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 17px;
-
-color: #FFFFFF;
-margin-top: 10px;
-max-width: 200px;
 }
 
 /* 포스트 신고 모달창 */

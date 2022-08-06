@@ -117,14 +117,22 @@ export default function PostPage() {
     }
   };
 
-  // const handleScroll = e => {
-  //   const { innerHeight } = window;
-  //   const { scrollHeight } = document.body;
-  //   const myScroll = e.srcElement.scrollingElement.scrollTop;
-  //   console.log('전체 body 의 높이 : ' + scrollHeight);
-  //   console.log('전체 스크롤바 높이 : ' + innerHeight);
-  //   console.log('현재 스크롤 위치 : ' + myScroll);
-  // }
+  const handleCommentDelete = async (e, commentIdx) => {
+    const deletePost = async (commentIdx) => {
+      try {
+        const response = await axios.patch(`/api/comment/delete/${commentIdx}`,
+            { headers }
+        );
+        console.log(response.data);
+        if (response.data.isSuccess) {
+          setComments(state => state.filter(comment => comment.commentIdx !== commentIdx));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    deletePost(commentIdx);
+  };
 
   const handleEnterInput = (e, content, authorName) => {
     const uploadComment = async (userIdx, postIdx, content, authorName) => {
@@ -139,7 +147,7 @@ export default function PostPage() {
             }),
             { headers }
         );
-
+  
         console.log(response.data.result);
         setComments(state => {
           return [
@@ -147,13 +155,13 @@ export default function PostPage() {
             response.data.result
           ];
         });
-
+  
       } catch (e) {
         console.log(e);
         setError(e);
       }
     };
-
+    
     const uploadReComment = async (userIdx, postIdx, rootCommentIdx, content, authorName) => {
       try {
         const response = await axios.post(`/api/comment/replyOnReply/create`,
@@ -294,10 +302,10 @@ export default function PostPage() {
   const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
   const [inputRef, setInputRef] = useState(null);
 
-  if (loading) return <div>로딩중!</div>
-  if (error) return <div>에러발생!</div>
-  if (!post) return <div>로딩중!</div>;
-  if (!comments) return <div>로딩중!</div>;
+  if (loading) return null;
+  if (error) return null;
+  if (!post) return null;
+  if (!comments) return null;
 
   return (
     <>
@@ -358,12 +366,12 @@ export default function PostPage() {
             <div className="post-user-nickname">{post.authorName} ></div>
           </div>
         </div>
-        <div className="report-user-box">
+        {/* <div className="report-user-box">
           <div className="report-icon-box">
             <img src={userReport} alt='엑박' />
           </div>
           <div className="post-report-text">신고하기</div>
-        </div>
+        </div> */}
         <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
           {postLikeStatus ?
@@ -384,7 +392,7 @@ export default function PostPage() {
           }
           <button className="scrap-button" onClick={handleScrapButtonClick}>스크랩</button>
         </div>
-        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} />}
+        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} handleCommentDelete={handleCommentDelete} />}
       </div>
         <WriteComment
           handleEnterInput={handleEnterInput}

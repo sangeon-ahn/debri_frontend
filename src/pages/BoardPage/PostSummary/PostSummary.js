@@ -2,34 +2,13 @@ import './PostSummary.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import grayHeart from '../../../assets/grayHeart.png';
 import greenHeart from '../../../assets/greenHeart.png';
+import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 
 export default function PostSummary(props) {
   const { post } = props;
   const navigate = useNavigate();
 
-  const getTimeAfterCreated = (minute) => {
-    if (minute === 0) {
-      return '방금';
-    }
 
-    if (minute < 60) {
-      return String(minute) + '분 전';
-    }
-
-    if (minute < 60 * 24) {
-      return parseInt(minute / 60) + '시간 전';
-    }
-
-    if (minute < 60 * 24 * 30) {
-      return parseInt(minute / (60 * 24)) + '일 전';
-    }
-
-    if (minute < 60 * 24 * 30 * 12) {
-      return parseInt(minute / (60 * 24 * 30)) + '개월 전';
-    }
-    
-    return parseInt(minute / (60 * 24 * 30 * 12)) + '년 전';
-  };
 
   return (
     <div className="post-summary-container">
