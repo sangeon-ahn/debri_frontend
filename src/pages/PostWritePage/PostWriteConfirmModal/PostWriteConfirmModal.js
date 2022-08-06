@@ -63,7 +63,7 @@ export default function PostWriteConfirmModal(props) {
       );
       console.log('리턴', response);
       postIdxRef.current = response.data.result.postIdx;
-      navigate(`/boards/${boardId}/${postIdxRef.current}`);
+      navigate(`/boards/${boardId}/${postIdxRef.current}`, {state: {boardName: boardName}});
       return true;
     } catch (error) {
       console.error(error);

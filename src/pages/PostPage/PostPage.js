@@ -395,7 +395,7 @@ export default function PostPage() {
           <button className='back-button' onClick={() => navigate(`/boards/${boardId}`)}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>게시판제목</div>
+          <div className='board-title'>{state.boardName}</div>
         </div>
         {(!loading && !error && post) && <><Modal
           closeTimeoutMS={300}

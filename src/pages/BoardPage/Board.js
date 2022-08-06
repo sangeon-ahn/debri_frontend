@@ -88,9 +88,9 @@ export default function Board() {
         {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
       </div>
       
-      {posts && <div className='post-list'>
-        {posts && posts.map(post => (
-            <PostSummary post={post} key={post.postIdx} state={state} />
+      {posts && board && <div className='post-list'>
+        {posts.map(post => (
+            <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
         ))}
       </div>}
       

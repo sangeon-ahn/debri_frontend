@@ -5,7 +5,7 @@ import greenHeart from '../../../assets/greenHeart.png';
 import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 
 export default function PostSummary(props) {
-  const { post } = props;
+  const { post, boardName } = props;
   const navigate = useNavigate();
 
 
@@ -24,7 +24,7 @@ export default function PostSummary(props) {
         </>
         }
       </div>
-      <div className='post-summary-wrapper' onClick={() => navigate(`/boards/${post.boardIdx}/${post.postIdx}`, { state: {post} })} >
+      <div className='post-summary-wrapper' onClick={() => navigate(`/boards/${post.boardIdx}/${post.postIdx}`, { state: {boardName: boardName} })} >
         <div className='post-summary'>
           <div className='post-title'>{post.postName}</div>
           <div className='comment-number'>({post.commentNumber})</div>

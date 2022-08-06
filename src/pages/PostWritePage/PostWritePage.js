@@ -75,6 +75,7 @@ export default function PostWritePage() {
         isCancelModalOpen={isCancelModalOpen}
         closeCancelModal={() => setIsCancelModalOpen(false)}
         state={state}
+        boardName={boardName}
       />
       <PostWriteConfirmModal
         isConfirmModalOpen={isConfirmModalOpen}
