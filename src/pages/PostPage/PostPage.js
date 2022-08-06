@@ -408,7 +408,7 @@ export default function PostPage() {
             {Number(userIdx) === post.authorIdx ?
               <div className="post-setting-menu-container">
                 <div className="post-setting-modal-title">게시물 관리</div>
-                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post}})}>수정하기</button>
+                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
                 <button className="post-delete" onClick={() => {
                   handlePostDeleteClick(postId);
                   navigate(`/boards/${boardId}`);

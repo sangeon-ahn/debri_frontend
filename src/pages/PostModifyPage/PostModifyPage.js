@@ -12,9 +12,9 @@ import axios from 'axios';
 
 export default function PostModifyPage() {
   const location = useLocation();
-
-  const [title, setTitle] = useState(location.state.post.postName);
-  const [content, setContent] = useState(location.state.post.contents);
+  const { state } = location;
+  const [title, setTitle] = useState(state.post.postName);
+  const [content, setContent] = useState(state.post.contents);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [boardList,setBoardList] = useState([]);
@@ -47,16 +47,19 @@ export default function PostModifyPage() {
       });
   } ;
 
+  if (!selectedOption) return null;
   return (
     <div>
       <PostModifyCancelModal
         isCancelModalOpen={isCancelModalOpen}
         closeCancelModal={() => setIsCancelModalOpen(false)}
+        boardName={state.boardName}
       />
       <PostModifyConfirmModal
         isConfirmModalOpen={isConfirmModalOpen}
         closeConfirmModal={() => setIsConfirmModalOpen(false)}
         postContent={content}
+        boardName={state.boardName}
       />
       <Header />
       <div className='post-write-container'>

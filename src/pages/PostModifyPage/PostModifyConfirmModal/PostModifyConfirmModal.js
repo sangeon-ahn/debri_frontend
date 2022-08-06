@@ -23,12 +23,12 @@ const customStyles = {
 
 
 export default function PostWriteConfirmModal(props) {
-  const { isConfirmModalOpen, closeConfirmModal, postContent } = props;
+  const { isConfirmModalOpen, closeConfirmModal, postContent, boardName } = props;
   const navigate = useNavigate();
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
   const params = useParams();
   console.log(params);
-  
+
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
@@ -69,7 +69,7 @@ export default function PostWriteConfirmModal(props) {
         <div className='yesno-box'>
           <button className='confirm-yes-button' onClick={() => {
             modifyPost(userIdx, postContent, params.postId);
-            navigate(`/boards/${params.boardId}/${params.postId}`);
+            navigate(`/boards/${params.boardId}/${params.postId}`, {state: {boardName: boardName}});
           }}>네</button>
           <button className='confirm-no-button' onClick={() => closeConfirmModal()}>아니오</button>
         </div>
