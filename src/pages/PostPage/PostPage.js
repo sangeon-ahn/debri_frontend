@@ -33,12 +33,101 @@ export default function PostPage() {
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
   const [postLikeStatus, setPostLikeStatus] = useState(null);
   const [commentReported, setCommentReported] = useState(0);
-
+  const [pureStatus, setPureStatus] = useState(true);
+  const [postLikes, setPostLikes] = useState(0);
+  const [rootCommentIdx, setRootCommentIdx] = useState(null);
+  const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
+  const [inputRef, setInputRef] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [postScrapStatus, setPostScrapStatus] = useState(null);
+  const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const headers = {
-    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'ACCESS-TOKEN': jwt,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
+  console.log(location);
+  const customStyles = {
+      content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+      },
+    };
+
+  Modal.setAppElement('#root');
+  Modal.defaultStyles.overlay = {
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    bottom: 0,
+    left: 0,
+    position: "fixed",
+    right: 0,
+    top: 0,
+    zIndex: 99
+  }
+  Modal.defaultStyles.content = {
+    position: 'absolute',
+    top: '40px',
+    left: '40px',
+    right: '40px',
+    bottom: '40px',
+    WebkitOverflowScrolling: 'touch',
+    outline: 'none',
+    width: '316px',
+    backgroundColor: '#D9D9D9',
+    borderRadius: '10px',
+  }
+
+  useEffect(() => {
+      fetchPost(postId);
+      fetchComments(postId);
+      document.addEventListener('mousedown', clickModalOutside);
+
+      return () => {
+        document.addEventListener('mousedown', clickModalOutside);
+      }
+    }, []);
+
+  useEffect(() => {
+    if (!post) {
+      return;
+    }
+    console.log(post);
+    if (post.userLike) {
+      console.log('2', post.likeNumber);
+      setPostLikes(post.likeNumber);
+      setPostLikeStatus(true);
+    } else if (!post.userLike) {
+      console.log(3);
+      setPostLikeStatus(false);
+    }
+
+    if (post.userScrap) {
+      console.log(4);
+      setPostScrapStatus(true);
+    } else if (!post.userScrap) {
+      console.log(5);
+      setPostScrapStatus(false);
+    }
+  }, [post]);
+
+  useEffect(() => {
+    if (postLikeStatus !== null && !pureStatus) {
+      if (postLikeStatus) {
+        setPostLikes(state => state + 1);
+      } else {
+        setPostLikes(state => state - 1);
+    }
+    }
+  }, [postLikeStatus, pureStatus]);
+
+  useEffect(() => {
+    if (commentReported === 0) return;
+    fetchComments(postId);
+  }, [commentReported]);
 
   const fetchPost = async (postIdx) => {
     try {
@@ -72,58 +161,6 @@ export default function PostPage() {
     }
     setLoading(false);
   };
-
-  const [postLikes, setPostLikes] = useState(0);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetchPost(postId);
-    fetchComments(postId);
-    // window.addEventListener('scroll', handleScroll);
-    document.addEventListener('mousedown', clickModalOutside);
-
-    return () => {
-      document.addEventListener('mousedown', clickModalOutside);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!post) {
-      return;
-    }
-    console.log(post);
-    if (post.userLike) {
-      console.log('2', post.likeNumber);
-      setPostLikes(post.likeNumber);
-      setPostLikeStatus(true);
-    } else if (!post.userLike) {
-      console.log(3);
-      setPostLikeStatus(false);
-    }
-
-    if (post.userScrap) {
-      console.log(4);
-      setPostScrapStatus(true);
-    } else if (!post.userScrap) {
-      console.log(5);
-      setPostScrapStatus(false);
-    }
-  }, [post]);
-
-  useEffect(() => {
-    if (postLikeStatus !== null && count !== 0) {
-      if (postLikeStatus) {
-        setPostLikes(state => state + 1);
-      } else {
-        setPostLikes(state => state - 1);
-    }
-    }
-  }, [postLikeStatus]);
-
-  useEffect(() => {
-    if (commentReported === 0) return;
-    fetchComments(postId);
-  }, [commentReported]);
 
   const clickModalOutside = e => {
     if (e.target.className === "ReactModal__Overlay ReactModal__Overlay--after-open") {
@@ -169,7 +206,6 @@ export default function PostPage() {
     console.log(parseInt(commentIdx), e.target.innerText);
     reportComment(parseInt(commentIdx), e.target.innerText);
   };
-
 
   const handleEnterInput = (e, content, authorName) => {
     const uploadComment = async (userIdx, postIdx, content, authorName) => {
@@ -233,40 +269,6 @@ export default function PostPage() {
     }
   };
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
-  Modal.setAppElement('#root');
-  Modal.defaultStyles.overlay = {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    bottom: 0,
-    left: 0,
-    position: "fixed",
-    right: 0,
-    top: 0,
-    zIndex: 99
-  }
-  Modal.defaultStyles.content = {
-    position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
-    WebkitOverflowScrolling: 'touch',
-    outline: 'none',
-    width: '316px',
-    backgroundColor: '#D9D9D9',
-    borderRadius: '10px',
-  }
-
   const handlePostDeleteClick = async (postId) => {
     const deletePost = async (postId) => {
       try {
@@ -282,6 +284,42 @@ export default function PostPage() {
     deletePost(postId);
   };
 
+  const handleReportClick = () => {
+    setPostReportDetailOn(true);
+  };
+
+  const handleModalCloseClick = () => {
+    setIsPostSettingModalOn(false);
+    setPostReportDetailOn(false);
+  };
+
+  const handleReportPost = (e) => {
+    const reportPost = async (postIdx, reason) => {
+      try {
+        const response = await axios.post(`/api/report/postReport`,
+          JSON.stringify({
+            postIdx: postIdx,
+            reason: reason
+          }),
+          { headers });
+          console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    reportPost(parseInt(postId), e.target.innerText);
+    handleModalCloseClick();
+    navigate(`/boards/${boardId}`);
+  };
+  
+  const handleSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
+
   const postLike = async (userIdx, postIdx, likeStatus) => {
     try {
       const response = await axios.post(`/api/post/like`,
@@ -293,15 +331,13 @@ export default function PostPage() {
         { headers }
         );
       console.log(response);
-      setCount(state => state + 1);
-      setPostLikeStatus(true);
     } catch (e) {
       console.log(e);
       setError(e);
     }
   };
 
-  const postCancelLike = useCallback(async (userIdx, postIdx) => {
+  const postCancelLike = async (userIdx, postIdx) => {
     try {
       const response = await axios.patch('/api/post/like/cancel',
         {
@@ -311,13 +347,11 @@ export default function PostPage() {
         { headers }
         );
         console.log(response);
-        setPostLikeStatus(false);
-        setCount(state => state + 1);
     } catch (e) {
       console.log(e);
       setError(e);
     }
-  }, [headers]);
+  };
 
   const postCancelScrap = async (postIdx) => {
     try {
@@ -348,51 +382,9 @@ export default function PostPage() {
     }
   };
 
-  const [postReportDetailOn, setPostReportDetailOn] = useState(false);
+  
 
-  const handleReportClick = () => {
-    setPostReportDetailOn(true);
-  };
-
-  const handleModalCloseClick = () => {
-    setIsPostSettingModalOn(false);
-    setPostReportDetailOn(false);
-  };
-
-  const reportSettingModal = useRef();
-
-  const [rootCommentIdx, setRootCommentIdx] = useState(null);
-  const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
-  const [inputRef, setInputRef] = useState(null);
-
-  const handleReportPost = (e) => {
-    const reportPost = async (postIdx, reason) => {
-      try {
-        const response = await axios.post(`/api/report/postReport`,
-          JSON.stringify({
-            postIdx: postIdx,
-            reason: reason
-          }),
-          { headers });
-          console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // console.log(parseInt(postId), e.target.innerText);
-    reportPost(parseInt(postId), e.target.innerText);
-    handleModalCloseClick();
-    navigate(`/boards/${boardId}`);
-  };
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [postScrapStatus, setPostScrapStatus] = useState(null);
-  const handleSnackbarClose = (e, reason) => {
-    if (reason === 'clickway') {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
+  
   return (
     <>
       <Header />
@@ -423,7 +415,7 @@ export default function PostPage() {
               </div> :
               <div>
                 {postReportDetailOn ?
-                <div className="post-report-detail" ref={reportSettingModal}>
+                <div className="post-report-detail">
                   <div className="post-setting-modal-title">게시물 관리</div>
                   <div className="ad-spam-report" onClick={handleReportPost}>상업적 광고 / 스팸 게시물</div>
                   <div className="fish" onClick={handleReportPost}>낚시 / 도배 게시물</div>
@@ -454,27 +446,29 @@ export default function PostPage() {
             <div className="post-user-profile">
               <img src={postUserProfile} alt="엑박" />
             </div>
-            <div className="post-user-nickname">{post.authorName} ></div>
+            <div className="post-user-nickname">{post.authorName} &gt;</div>
           </div>
         </div>
-        {/* <div className="report-user-box">
-          <div className="report-icon-box">
-            <img src={userReport} alt='엑박' />
-          </div>
-          <div className="post-report-text">신고하기</div>
-        </div> */}
         <div className="post-main-content">{post.contents}</div>
         <div className="post-button-container">
           {postLikeStatus ?
           <>
-            <button className='like-status-button' onClick={() => postCancelLike(userIdx, postId)}>
+            <button className='like-status-button' onClick={() => {
+              setPostLikeStatus(false);
+              setPureStatus(false);
+              postCancelLike(userIdx, postId);
+            }}>
               <div className="liked-inpost-like-number">{postLikes}</div>
               <img src={greenHeart} alt=""/>
               추천
             </button>
           </> :
           <>
-            <button className='default-status-button' onClick={() => postLike(userIdx, postId, "LIKE")}>
+            <button className='default-status-button' onClick={() => {
+              setPostLikeStatus(true);
+              setPureStatus(false);
+              postLike(userIdx, postId, "LIKE");
+            }}>
               <div className="default-inpost-like-number">{postLikes}</div>
               <img src={whiteHeart} alt="" />
               <div>추천</div>

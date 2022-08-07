@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './PostModifyConfirmModal.css';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -28,12 +28,18 @@ export default function PostWriteConfirmModal(props) {
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
   const params = useParams();
   console.log(params);
+  const [isModified, setIsModified] = useState(false);
 
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+
+  useEffect(() => {
+    if (!isModified) return;
+    navigate(`/boards/${params.boardId}/${params.postId}`, {state: {boardName: boardName}});
+  }, [isModified]);
 
   const modifyPost = async (userIdx, postContent, postIdx) => {
     try {
@@ -46,6 +52,7 @@ export default function PostWriteConfirmModal(props) {
           { headers }
       );
       console.log(response.data);
+      setIsModified(true);
     } catch (e) {
       console.log(e);
     }
@@ -69,7 +76,6 @@ export default function PostWriteConfirmModal(props) {
         <div className='yesno-box'>
           <button className='confirm-yes-button' onClick={() => {
             modifyPost(userIdx, postContent, params.postId);
-            navigate(`/boards/${params.boardId}/${params.postId}`, {state: {boardName: boardName}});
           }}>네</button>
           <button className='confirm-no-button' onClick={() => closeConfirmModal()}>아니오</button>
         </div>

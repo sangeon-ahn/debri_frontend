@@ -71,14 +71,13 @@ export default function PostModifyPage() {
             type='text'
             className='title-input'
             value={title}
-            placeholder='제목'
-            onChange={(e) => setTitle(e.target.value)}
             spellCheck="false"
+            disabled
            />
         </div>
         <div className='select-board'>
           <div className='select-box'>
-            <select name="option" onChange={handleSelectOption} value={selectedOption}>
+            <select name="option" onChange={handleSelectOption} value={selectedOption} disabled>
               {boardList.map((board) => (
                 <option value={board.boardIdx} key={board.boardIdx}>{board.boardName}</option>
               ))}
