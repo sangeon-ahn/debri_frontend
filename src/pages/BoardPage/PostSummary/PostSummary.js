@@ -15,7 +15,7 @@ export default function PostSummary(props) {
       <div className='post-likes'>
         {post.likeStatus === 'LIKE' ?
         <>
-          <div className='post-like-number white'>{post.likeNumber}</div>
+          <div className='post-like-number like-number-white'>{post.likeNumber}</div>
           <img className='post-like-green-icon' src={greenHeart} alt=''/>
         </>:
         <>
