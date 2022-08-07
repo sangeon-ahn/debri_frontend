@@ -17,6 +17,7 @@ import whiteHeart from '../../assets/whiteHeart.png';
 import scrapped from '../../assets/scrapped.png';
 import unScrapped from '../../assets/unScrapped.png';
 import { getTimeAfterCreated } from "../../utils/getTimeAfterCreated";
+import { ScrapSnackbar } from "./ScrapSnackbar/ScrapSnackbar";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -383,9 +384,15 @@ export default function PostPage() {
     handleModalCloseClick();
     navigate(`/boards/${boardId}`);
   };
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [postScrapStatus, setPostScrapStatus] = useState(null);
+  const handleSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
 
+    setSnackbarOpen(false);
+  };
   return (
     <>
       <Header />
@@ -476,13 +483,20 @@ export default function PostPage() {
           }
           {postScrapStatus ?
           <>
-            <button className='scrap-status-button' onClick={() => {setPostScrapStatus(false); postCancelScrap(postId)}}>
+            <button className='scrap-status-button' onClick={() => {
+              setPostScrapStatus(false);
+              postCancelScrap(postId)}}
+            >
               <img src={scrapped} alt=""/>
               <div>스크랩</div>
             </button>
           </> :
           <>
-            <button className='default-status-scrap-button' onClick={() => {setPostScrapStatus(true); postScrap(postId)}}>
+            <button className='default-status-scrap-button' onClick={() => {
+              setSnackbarOpen(true);
+              setPostScrapStatus(true);
+              postScrap(postId)}}
+            >
               <img src={unScrapped} alt="" />
               <div>스크랩</div>
             </button>
@@ -490,7 +504,6 @@ export default function PostPage() {
           }
         </div>
         {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} handleCommentDelete={handleCommentDelete} setCommentReported={setCommentReported} handleReportComment={handleReportComment} />}</>}
-        
       </div>
         <WriteComment
           handleEnterInput={handleEnterInput}
@@ -502,6 +515,7 @@ export default function PostPage() {
           setRootCommentIdx={setRootCommentIdx}
         />
        <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
+       <ScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );
 }
