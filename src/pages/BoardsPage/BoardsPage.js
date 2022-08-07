@@ -74,12 +74,6 @@ export default function BoardsPage() {
         { headers }
       );
       console.log('리턴', response);
-      if (response.data.isSuccess) {
-        setScrappedBoards(state =>
-          [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === boardIdx)]);
-        setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== boardIdx));
-      }
-
     } catch (error) {
       console.error(error);
     }
@@ -93,11 +87,6 @@ export default function BoardsPage() {
         { headers }
       );
       console.log('리턴', response);
-      if (response.data.isSuccess) {
-        setUnScrappedBoards(state => 
-          [...state, ...scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === boardIdx)]);
-        setScrappedBoards(scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx !== boardIdx));
-      }
     } catch (error) {
       console.error(error);
       setError(error);
@@ -106,10 +95,16 @@ export default function BoardsPage() {
 
   function onScrap(e) {
       scrapBoard(e);
+      setScrappedBoards(state =>
+        [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === e)]);
+      setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== e));
     }
 
   function onCancelScrap(e) {
     unScrapBoard(e);
+    setUnScrappedBoards(state =>
+      [...state, ...scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === e)]);
+    setScrappedBoards(scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx !== e));
   }
 
   function handleScrappedBoardsToggle() {
