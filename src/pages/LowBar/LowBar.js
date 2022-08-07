@@ -17,6 +17,7 @@ import lectureIcon3 from '../../assets/lectureIcon3.png';
 
 export default function LowBar() {
   const navigate = useNavigate();
+
   const [isButtonClicked, setIsButtonClicked] = useState({
     homeButton: false,
     lectureButton: false,
@@ -38,6 +39,8 @@ export default function LowBar() {
     });
     navigate(path);
   };
+
+  if (window.location.pathname === '/account') return null;
 
   return (
     <div className="low-bar">
