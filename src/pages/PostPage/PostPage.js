@@ -5,19 +5,20 @@ import './PostPage.css';
 import leftArrow from '../../assets/leftArrow.png';
 // import greenUpThumb from '../../assets/greenUpThumb.png';
 import postUserProfile from '../../assets/postUserProfile.png';
-import userReport from '../../assets/userReport.png';
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useLayoutEffect } from "react";
 import axios from "axios";
 import Comments from "./Comments/Comments";
 import WriteComment from "./WriteComment/WriteComment";
 import postMenuIcon from "../../assets/postMenuIcon.png";
-import Modal from 'react-modal';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
 import scrappedIcon from '../../assets/scrapped.png';
 import unScrappedIcon from '../../assets/unScrapped.png';
 import { getTimeAfterCreated } from "../../utils/getTimeAfterCreated";
 import { PostScrapSnackbar } from "./PostScrapSnackbar/PostScrapSnackbar";
+import PostReportOtherModal from "./PostReportOtherModal/PostReportOtherModal";
+import PostMenuModal from "./PostMenuModal/PostMenuModal";
+import PostReportSnackbar from "./PostReportSnackbar/PostReportSnackbar";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -38,7 +39,8 @@ export default function PostPage() {
   const [rootCommentIdx, setRootCommentIdx] = useState(null);
   const [placeHolder, setPlaceHolder] = useState('댓글쓰기');
   const [inputRef, setInputRef] = useState(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [scrapSnackbarOpen, setScrapSnackbarOpen] = useState(false);
+  const [reportSnackbarOpen, setReportSnackbarOpen] = useState(false);
   const [postScrapStatus, setPostScrapStatus] = useState(null);
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,40 +51,6 @@ export default function PostPage() {
     'Content-Type': 'application/json',
   };
   console.log(location);
-  const customStyles = {
-      content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-      },
-    };
-
-  Modal.setAppElement('#root');
-  Modal.defaultStyles.overlay = {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    bottom: 0,
-    left: 0,
-    position: "fixed",
-    right: 0,
-    top: 0,
-    zIndex: 99
-  }
-  Modal.defaultStyles.content = {
-    position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
-    WebkitOverflowScrolling: 'touch',
-    outline: 'none',
-    width: '316px',
-    backgroundColor: '#D9D9D9',
-    borderRadius: '10px',
-  }
-
   useEffect(() => {
       fetchPost(postId);
       fetchComments(postId);
@@ -188,7 +156,7 @@ export default function PostPage() {
     deletePost(commentIdx);
   };
 
-  const handleReportComment = (e, commentIdx) => {
+  const handleReportComment = (e, commentIdx, reason) => {
     const reportComment = async (commentIdx, reason) => {
       try {
         const response = await axios.post(`/api/report/commentReport`,
@@ -205,8 +173,13 @@ export default function PostPage() {
         console.log(error);
       }
     };
-    console.log(parseInt(commentIdx), e.target.innerText);
-    reportComment(parseInt(commentIdx), e.target.innerText);
+    // console.log(parseInt(commentIdx), e.target.innerText);
+    if (e.target.innerText !== '네') {
+      reportComment(parseInt(commentIdx), e.target.innerText);
+    } else {
+      reportComment(parseInt(commentIdx), reason);
+    }
+    setReportSnackbarOpen(true);
   };
 
   const handleEnterInput = (e, content, authorName) => {
@@ -271,29 +244,20 @@ export default function PostPage() {
     }
   };
 
-  const handlePostDeleteClick = async (postId) => {
-    const deletePost = async (postId) => {
-      try {
-        const response = await axios.patch(`/api/post/${postId}/status`,
-          JSON.stringify({}),
-          { headers }
-        );
-        console.log(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    deletePost(postId);
-  };
-
   const handleReportClick = () => {
     setPostReportDetailOn(true);
   };
 
   const handleModalCloseClick = () => {
     setIsPostSettingModalOn(false);
-    setPostReportDetailOn(false);
   };
+
+  useLayoutEffect(() => {
+    if (isPostSettingModalOn) {
+      setPostReportDetailOn(false);
+    }
+
+  }, [isPostSettingModalOn]);
 
   const handleReportPost = (e) => {
     const reportPost = async (postIdx, reason) => {
@@ -310,16 +274,24 @@ export default function PostPage() {
       }
     };
     reportPost(parseInt(postId), e.target.innerText);
-    handleModalCloseClick();
-    navigate(`/boards/${boardId}?scrapped=${scrapped}`);
+    setIsPostSettingModalOn(false);
+    setReportSnackbarOpen(true);
   };
-  
-  const handleSnackbarClose = (e, reason) => {
+
+  const handleScrapSnackbarClose = (e, reason) => {
     if (reason === 'clickway') {
       return;
     }
 
-    setSnackbarOpen(false);
+    setScrapSnackbarOpen(false);
+  };
+
+  const handleReportSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setReportSnackbarOpen(false);
   };
 
   const postLike = async (userIdx, postIdx, likeStatus) => {
@@ -383,10 +355,13 @@ export default function PostPage() {
       setError(e);
     }
   };
+  const [postReportOtherModalOn, setPostReportOtherModalOn] = useState(false);
+  const handleReportOtherClick = () => {
+    setPostReportOtherModalOn(true);
+    // setIsPostSettingModalOn(false);
+    handleModalCloseClick();
+  };
 
-  
-
-  
   return (
     <>
       <Header />
@@ -398,108 +373,104 @@ export default function PostPage() {
           </button>
           <div className='board-title'>{state.boardName}</div>
         </div>
-        {(!loading && !error && post) && <><Modal
-          closeTimeoutMS={300}
-          isOpen={isPostSettingModalOn}
-          onRequestClose={() => setIsPostSettingModalOn(state => !state)}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-         <div className="post-setting-container">
-            {Number(userIdx) === post.authorIdx ?
-              <div className="post-setting-menu-container">
-                <div className="post-setting-modal-title">게시물 관리</div>
-                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify?scrapped=${scrapped}`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
-                <button className="post-delete" onClick={() => {
-                  handlePostDeleteClick(postId);
-                  navigate(`/boards/${boardId}?scrapped=${scrapped}`);
-                }}>삭제하기</button>
-              </div> :
-              <div>
-                {postReportDetailOn ?
-                <div className="post-report-detail">
-                  <div className="post-setting-modal-title">게시물 관리</div>
-                  <div className="ad-spam-report" onClick={handleReportPost}>상업적 광고 / 스팸 게시물</div>
-                  <div className="fish" onClick={handleReportPost}>낚시 / 도배 게시물</div>
-                  <div className="irrelevant" onClick={handleReportPost}>개발과 무관한 게시물</div>
-                  <div className="hate" onClick={handleReportPost}>욕설 / 비하를 포함한 게시물</div>
-                  <div className="other" onClick={handleReportPost}>기타 사유</div>
-                </div> :
-                <button className="post-report-button" onClick={handleReportClick}>
-                  신고하기
-                </button>}
+        {(!loading && !error && post) &&
+          <>
+            <PostMenuModal
+              isOpen={isPostSettingModalOn}
+              onRequestClose={handleModalCloseClick}
+              post={post}
+              postReportDetailOn={postReportDetailOn}
+              handleReportPost={handleReportPost}
+              handleReportOtherClick={handleReportOtherClick}
+              handleReportClick={handleReportClick}
+              handleModalCloseClick={handleModalCloseClick}
+              setReportSnackbarOpen={setReportSnackbarOpen}
+            />
+            <PostReportOtherModal
+              isOpen={postReportOtherModalOn}
+              onRequestClose={() => setPostReportOtherModalOn(false)}
+              setReportSnackbarOpen={setReportSnackbarOpen}
+            />
+            <div className="post-subject">
+            <div className="post-title-container">
+              <div className="post-title-wrapper">
+                <div className="post-title-box">{post.postName}</div>
+                <div className="post-comment-number">({comments.length})</div>
+                <button className="post-menu-button" onClick={() => setIsPostSettingModalOn(state=>!state)}>
+                  <img className="post-menu-icon" src={postMenuIcon} alt=""/>
+                </button>
               </div>
+              <div className="post-elapsed-time">{getTimeAfterCreated(post.timeAfterCreated)}</div>
+            </div>
+            <div className="post-user-info">
+              <div className="post-user-profile">
+                <img src={postUserProfile} alt="엑박" />
+              </div>
+              <div className="post-user-nickname">{post.authorName} &gt;</div>
+            </div>
+            </div>
+            <div className="post-main-content">{post.contents}</div>
+            <div className="post-button-container">
+              {postLikeStatus ?
+                <>
+                  <button className='like-status-button' onClick={() => {
+                    setPostLikeStatus(false);
+                    setPureStatus(false);
+                    postCancelLike(userIdx, postId);
+                  }}>
+                  <div className="liked-inpost-like-number">{postLikes}</div>
+                  <img src={greenHeart} alt=""/>
+                  추천
+                  </button>
+                </>
+                :
+                <>
+                  <button className='default-status-button' onClick={() => {
+                    setPostLikeStatus(true);
+                    setPureStatus(false);
+                    postLike(userIdx, postId, "LIKE");
+                  }}>
+                    <div className="default-inpost-like-number">{postLikes}</div>
+                    <img src={whiteHeart} alt="" />
+                    <div>추천</div>
+                  </button>
+                </>
+              }
+              {postScrapStatus ?
+                <>
+                  <button className='scrap-status-button' onClick={() => {
+                    setPostScrapStatus(false);
+                    postCancelScrap(postId)}}
+                  >
+                    <img src={scrappedIcon} alt=""/>
+                    <div>스크랩</div>
+                  </button>
+                </> :
+                <>
+                  <button className='default-status-scrap-button' onClick={() => {
+                    setScrapSnackbarOpen(true);
+                    setPostScrapStatus(true);
+                    postScrap(postId)}}
+                  >
+                    <img src={unScrappedIcon} alt="" />
+                    <div>스크랩</div>
+                  </button>
+                </>
+              }
+            </div>
+            {comments &&
+              <Comments
+                comments={comments}
+                setRootCommentIdx={setRootCommentIdx}
+                setPlaceHolder={setPlaceHolder}
+                inputRef={inputRef}
+                handleCommentDelete={handleCommentDelete}
+                setCommentReported={setCommentReported}
+                handleReportComment={handleReportComment}
+              />
             }
-            <button className="post-setting-cancel-container" onClick={handleModalCloseClick}>닫기</button>
-          </div>
-        </Modal>
-        <div className="post-subject">
-          <div className="post-title-container">
-            <div className="post-title-wrapper">
-              <div className="post-title-box">{post.postName}</div>
-              <div className="post-comment-number">({post.commentNumber})</div>
-              <button className="post-menu-button" onClick={() => setIsPostSettingModalOn(state=>!state)}>
-                <img className="post-menu-icon" src={postMenuIcon} alt=""/>
-              </button>
-            </div>
-            <div className="post-elapsed-time">{getTimeAfterCreated(post.timeAfterCreated)}</div>
-          </div>
-          <div className="post-user-info">
-            <div className="post-user-profile">
-              <img src={postUserProfile} alt="엑박" />
-            </div>
-            <div className="post-user-nickname">{post.authorName} &gt;</div>
-          </div>
-        </div>
-        <div className="post-main-content">{post.contents}</div>
-        <div className="post-button-container">
-          {postLikeStatus ?
-          <>
-            <button className='like-status-button' onClick={() => {
-              setPostLikeStatus(false);
-              setPureStatus(false);
-              postCancelLike(userIdx, postId);
-            }}>
-              <div className="liked-inpost-like-number">{postLikes}</div>
-              <img src={greenHeart} alt=""/>
-              추천
-            </button>
-          </> :
-          <>
-            <button className='default-status-button' onClick={() => {
-              setPostLikeStatus(true);
-              setPureStatus(false);
-              postLike(userIdx, postId, "LIKE");
-            }}>
-              <div className="default-inpost-like-number">{postLikes}</div>
-              <img src={whiteHeart} alt="" />
-              <div>추천</div>
-            </button>
           </>
-          }
-          {postScrapStatus ?
-          <>
-            <button className='scrap-status-button' onClick={() => {
-              setPostScrapStatus(false);
-              postCancelScrap(postId)}}
-            >
-              <img src={scrappedIcon} alt=""/>
-              <div>스크랩</div>
-            </button>
-          </> :
-          <>
-            <button className='default-status-scrap-button' onClick={() => {
-              setSnackbarOpen(true);
-              setPostScrapStatus(true);
-              postScrap(postId)}}
-            >
-              <img src={unScrappedIcon} alt="" />
-              <div>스크랩</div>
-            </button>
-          </>
-          }
-        </div>
-        {comments && <Comments comments={comments} setRootCommentIdx={setRootCommentIdx} setPlaceHolder={setPlaceHolder} inputRef={inputRef} handleCommentDelete={handleCommentDelete} setCommentReported={setCommentReported} handleReportComment={handleReportComment} />}</>}
+        }
       </div>
         <WriteComment
           handleEnterInput={handleEnterInput}
@@ -510,8 +481,9 @@ export default function PostPage() {
           setPlaceHolder={setPlaceHolder}
           setRootCommentIdx={setRootCommentIdx}
         />
-       <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
-       <PostScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
+       <PostScrapSnackbar handleClose={handleScrapSnackbarClose} open={scrapSnackbarOpen}/>
+       <PostReportSnackbar handleClose={handleReportSnackbarClose} open={reportSnackbarOpen}/>
+       <div className="bottom-bar-blocker" ></div>
     </>
   );
 }

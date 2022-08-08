@@ -7,6 +7,8 @@ import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import CommentMenuModal from '../CommentMenuModal/CommentMenuModal';
+import CommentReportOtherModal from '../CommentReportOtherModal/CommentReportOtherModal';
 
 export default function Comment(props) {
   const { comment, reComments, setRootCommentIdx, setPlaceHolder, inputRef, handleCommentDelete, setCommentReported, handleReportComment } = props;
@@ -33,31 +35,47 @@ export default function Comment(props) {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      borderRadius: '10px',
+      position: 'absolute',
+      WebkitOverflowScrolling: 'touch',
+      outline: 'none',
+      width: '316px',
+      backgroundColor:'transparent',
+      border: 'none'
     },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      bottom: 0,
+      left: 0,
+      position: "fixed",
+      right: 0,
+      top: 0,
+      zIndex: 99
+    }
   };
 
   Modal.setAppElement('#root');
-  Modal.defaultStyles.overlay = {
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    bottom: 0,
-    left: 0,
-    position: "fixed",
-    right: 0,
-    top: 0,
-    zIndex: 99
-  }
-  Modal.defaultStyles.content = {
-    position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
-    WebkitOverflowScrolling: 'touch',
-    outline: 'none',
-    width: '316px',
-    backgroundColor: '#D9D9D9',
-    borderRadius: '10px',
-  }
+  // Modal.defaultStyles.overlay = {
+  //   backgroundColor: "rgba(0, 0, 0, 0.6)",
+  //   bottom: 0,
+  //   left: 0,
+  //   position: "fixed",
+  //   right: 0,
+  //   top: 0,
+  //   zIndex: 99
+  // }
+  // Modal.defaultStyles.content = {
+  //   position: 'absolute',
+  //   top: '40px',
+  //   left: '40px',
+  //   right: '40px',
+  //   bottom: '40px',
+  //   WebkitOverflowScrolling: 'touch',
+  //   outline: 'none',
+  //   width: '316px',
+  //   backgroundColor: '#D9D9D9',
+  //   borderRadius: '10px',
+  // }
   console.log(comment);
 
   const [commentReportDetailOn, setCommentReportDetailOn] = useState(false);
@@ -70,10 +88,16 @@ export default function Comment(props) {
     setIsCommentSettingModalOn(false);
     setCommentReportDetailOn(false);
   };
-
+  const [commentReportOtherModalOn, setCommentReportOtherModalOn] = useState(false);
+  const [reportSnackbarOpen, setReportSnackbarOpen] = useState(false);
+  const handleReportOtherClick = () => {
+    setCommentReportOtherModalOn(true);
+    // setIsPostSettingModalOn(false);
+    handleModalCloseClick();
+  };
   return (
     <div>
-      <Modal
+      {/* <Modal
           closeTimeoutMS={300}
           isOpen={isCommentSettingModalOn}
           onRequestClose={() => setIsCommentSettingModalOn(state => !state)}
@@ -123,20 +147,42 @@ export default function Comment(props) {
             }
             <button className="post-setting-cancel-container" onClick={handleModalCloseClick}>닫기</button>
           </div>
-        </Modal>
+        </Modal> */}
+      <CommentMenuModal
+        isOpen={isCommentSettingModalOn}
+        onRequestClose={() => setIsCommentSettingModalOn(false)}
+        reportedComment={reportedComment}
+        commentReportDetailOn={commentReportDetailOn}
+        handleCommentDelete={handleCommentDelete}
+        handleModalCloseClick={handleModalCloseClick}
+        handleReportComment={handleReportComment}
+        handleReportClick={handleReportClick}
+        setReportSnackbarOpen={setReportSnackbarOpen}
+        handleReportOtherClick={handleReportOtherClick}
+      />
+      <CommentReportOtherModal
+        isOpen={commentReportOtherModalOn}
+        onRequestClose={() => setCommentReportOtherModalOn(false)}
+        setReportSnackbarOpen={setReportSnackbarOpen}
+        handleReportComment={handleReportComment}
+        reportedComment={reportedComment}
+      />
       <div className="comment-container">
         <div className="comment-content">
           {comment.commentContent}
         </div>
         <div className="comment-detail">
-          <div className="comment-user-name"><span>{comment.authorName} ></span></div>
+          <div className="comment-user-name"><span>{comment.authorName} &gt;</span></div>
           <div className="comment-elapsed-time">{getTimeAfterCreated(comment.timeAfterCreated)}</div>
           <div className="comment-button-box">
               <img src={grayUpThumb} alt='' className="gray-upthumb-icon" />
               <div className="up-vote-number">0</div>
               <div className="barrier-line"></div>
               <img src={reCommentIcon} alt='' className="recomment-icon" onClick={handleRecommentButton}/>
-              <img src={commentMenuIcon} alt="" className="comment-menu-icon" onClick={() => setIsCommentSettingModalOn(state=>!state)} />
+              <button className='comment-menu-button' onClick={() => setIsCommentSettingModalOn(state=>!state)}>
+                <img src={commentMenuIcon} alt="" className="comment-menu-icon"  />
+                j
+              </button>
           </div>
         </div>
       </div>

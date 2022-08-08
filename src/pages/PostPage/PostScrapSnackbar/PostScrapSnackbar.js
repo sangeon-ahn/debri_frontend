@@ -33,7 +33,7 @@ export const PostScrapSnackbar = (props) => {
   return (
     <>
       <Snackbar
-        autoHideDuration={1500}
+        autoHideDuration={1000}
         open={open}
         onClose={handleClose}
         anchorOrigin={{
@@ -41,7 +41,9 @@ export const PostScrapSnackbar = (props) => {
           horizontal: 'center',
         }}
         sx={{
-          bottom: '31px'
+          bottom: '31px',
+          width: '316px',
+          left: '22px'
         }}
       >
         <Alert icon={<PostScrapSuccessIcon />} sx={alertStyle}>

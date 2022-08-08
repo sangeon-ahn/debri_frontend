@@ -6,40 +6,45 @@ import confirmIcon from '../../../assets/confirmIcon.png';
 import axios from 'axios';
 const customStyles = {
   content: {
+    position: 'absolute',
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
+    height: "86px",
     transform: 'translate(-50%, -50%)',
-    height: "86px"
+    backgroundColor: '#D9D9D9',
+    borderRadius: '10px',
+    WebkitOverflowScrolling: 'touch',
+    outline: 'none',
+    width: '316px',
+    boxSizing: 'border-box',
+    padding: '0px'
   },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    bottom: 0,
+    left: 0,
+    position: "fixed",
+    right: 0,
+    top: 0,
+    zIndex: 99
+  }
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
-Modal.defaultStyles.overlay = {
-  backgroundColor: "rgba(0, 0, 0, 0.6)",
-  bottom: 0,
-  left: 0,
-  position: "fixed",
-  right: 0,
-  top: 0,
-  zIndex: 99
-}
-Modal.defaultStyles.content = {
-  position: 'absolute',
-  top: '40px',
-  left: '40px',
-  right: '40px',
-  bottom: '40px',
-  WebkitOverflowScrolling: 'touch',
-  outline: 'none',
-  width: '316px',
-  height: '86px',
-  backgroundColor: '#D9D9D9',
-  borderRadius: '10px',
-}
+// Modal.defaultStyles.overlay = {
+//   backgroundColor: "rgba(0, 0, 0, 0.6)",
+//   bottom: 0,
+//   left: 0,
+//   position: "fixed",
+//   right: 0,
+//   top: 0,
+//   zIndex: 99
+// }
+
 
 
 export default function PostWriteConfirmModal(props) {

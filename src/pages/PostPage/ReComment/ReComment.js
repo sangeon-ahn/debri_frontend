@@ -7,6 +7,11 @@ import './ReComment.css';
 export default function ReComment(props) {
   const { reComment, setIsCommentSettingModalOn, setReportedComment } = props;
 
+  const handleRecommentMenuButtonClick = () => {
+    setReportedComment(reComment);
+    setIsCommentSettingModalOn(state => !state);
+  };
+
   return (
     <div className="recomment-container">
       <div className="recomment-arrow-box">
@@ -15,16 +20,15 @@ export default function ReComment(props) {
       <div className="recomment-main">
         <div className="recomment-content">{reComment.commentContent}</div>
         <div className='recomment-detail'>
-          <div className="recomment-user-name">{reComment.authorName} ></div>
+          <div className="recomment-user-name">{reComment.authorName} &gt;</div>
           <div className='recomment-elapsed-time'>0분 전</div>
           <div className='recomment-button-box'>
             <img src={grayUpThumb} alt='' className="gray-upthumb-icon" />
             <div className='up-vote-number'>0</div>
             <div className='barrier-line'></div>
-            <img src={recommentMenuIcon} alt="" className="recomment-menu-icon" onClick={() => {
-              setReportedComment(reComment);
-              setIsCommentSettingModalOn(state => !state);
-            }} />
+            <button className='recomment-menu-button' onClick={handleRecommentMenuButtonClick}>
+              <img src={recommentMenuIcon} alt="" className="recomment-menu-icon"  />
+            </button>
           </div>
         </div>
       </div>
