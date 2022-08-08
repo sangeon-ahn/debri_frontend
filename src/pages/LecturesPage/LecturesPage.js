@@ -60,12 +60,14 @@ export default React.memo(function LecturesPage() {
           handleTypeClick={handleTypeClick}
           handlePriceClick={handlePriceClick}
         />
-        {(!subject && !material && !pricing && !searchInput) && <ScrappedLectures />}
+        {(!subject && !material && !pricing && !searchInput) && <ScrappedLectures />
+        }
         {(subject || material || pricing || searchInput) && <Lectures
           lang={subject}
           type={material}
           price={pricing}
           searchInput={searchInput}
+          title="검색된 강의"
         />}
       </div>
     </>
