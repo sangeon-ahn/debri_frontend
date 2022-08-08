@@ -38,6 +38,9 @@
   height: 26px;
   line-height: 20px;
   right: 30.25px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .favorite-button-box img {

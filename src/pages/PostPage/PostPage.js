@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
 import './PostPage.css';
@@ -14,8 +14,8 @@ import postMenuIcon from "../../assets/postMenuIcon.png";
 import Modal from 'react-modal';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
-import scrapped from '../../assets/scrapped.png';
-import unScrapped from '../../assets/unScrapped.png';
+import scrappedIcon from '../../assets/scrapped.png';
+import unScrappedIcon from '../../assets/unScrapped.png';
 import { getTimeAfterCreated } from "../../utils/getTimeAfterCreated";
 import { PostScrapSnackbar } from "./PostScrapSnackbar/PostScrapSnackbar";
 
@@ -41,6 +41,8 @@ export default function PostPage() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [postScrapStatus, setPostScrapStatus] = useState(null);
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
   const headers = {
     'ACCESS-TOKEN': jwt,
     'Accept': 'application/json',
@@ -309,7 +311,7 @@ export default function PostPage() {
     };
     reportPost(parseInt(postId), e.target.innerText);
     handleModalCloseClick();
-    navigate(`/boards/${boardId}`);
+    navigate(`/boards/${boardId}?scrapped=${scrapped}`);
   };
   
   const handleSnackbarClose = (e, reason) => {
@@ -391,7 +393,7 @@ export default function PostPage() {
       <Search />
       <div className="post-container">
         <div className='board-title-box'>
-          <button className='back-button' onClick={() => navigate(`/boards/${boardId}`)}>
+          <button className='back-button' onClick={() => navigate(`/boards/${boardId}?scrapped=${scrapped}`)}>
             <img src={leftArrow} alt=''/>
           </button>
           <div className='board-title'>{state.boardName}</div>
@@ -407,10 +409,10 @@ export default function PostPage() {
             {Number(userIdx) === post.authorIdx ?
               <div className="post-setting-menu-container">
                 <div className="post-setting-modal-title">게시물 관리</div>
-                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
+                <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify?scrapped=${scrapped}`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
                 <button className="post-delete" onClick={() => {
                   handlePostDeleteClick(postId);
-                  navigate(`/boards/${boardId}`);
+                  navigate(`/boards/${boardId}?scrapped=${scrapped}`);
                 }}>삭제하기</button>
               </div> :
               <div>
@@ -481,7 +483,7 @@ export default function PostPage() {
               setPostScrapStatus(false);
               postCancelScrap(postId)}}
             >
-              <img src={scrapped} alt=""/>
+              <img src={scrappedIcon} alt=""/>
               <div>스크랩</div>
             </button>
           </> :
@@ -491,7 +493,7 @@ export default function PostPage() {
               setPostScrapStatus(true);
               postScrap(postId)}}
             >
-              <img src={unScrapped} alt="" />
+              <img src={unScrappedIcon} alt="" />
               <div>스크랩</div>
             </button>
           </>

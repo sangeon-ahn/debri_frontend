@@ -44,7 +44,6 @@ export default function BoardScrapSnackbar(props) {
         }}
       >
         <Alert icon={<BoardScrapSuccessIcon />} sx={alertStyle}>
-          {/* <span style={messageStyle}>홈 &#62; 내 스크랩</span> */}
           <span style={restStyle}>새로운 즐겨찾기가 추가되었습니다!</span>
         </Alert>
       </Snackbar>

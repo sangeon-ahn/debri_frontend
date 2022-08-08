@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import './PostWriteCancelModal.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import alertIcon from '../../../assets/alertIcon.png';
 
 const customStyles = {
@@ -47,6 +47,8 @@ export default function PostWriteCancelModal(props) {
   const { isCancelModalOpen, closeCancelModal, state, boardName } = props;
   const navigate = useNavigate();
   const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
   
   return (
     <div>
@@ -64,7 +66,7 @@ export default function PostWriteCancelModal(props) {
           <span>정말 작성을 취소하시겠어요?</span>
           </div>
           <div className='yesno-box'>
-            <button className='cancel-yes-button' onClick={() => navigate(`/boards/${params.boardId}`, {state: {boardName: boardName}})}>네</button>
+            <button className='cancel-yes-button' onClick={() => navigate(`/boards/${params.boardId}?scrapped=${scrapped}`, {state: {boardName: boardName}})}>네</button>
             <button className='cancel-no-button' onClick={() => closeCancelModal()}>아니오</button>
           </div>
       </Modal>

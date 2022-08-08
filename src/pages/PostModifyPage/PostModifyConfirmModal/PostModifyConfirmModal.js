@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './PostModifyConfirmModal.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import confirmIcon from '../../../assets/confirmIcon.png';
 import axios from 'axios';
 
@@ -29,7 +29,8 @@ export default function PostWriteConfirmModal(props) {
   const params = useParams();
   console.log(params);
   const [isModified, setIsModified] = useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
@@ -38,7 +39,7 @@ export default function PostWriteConfirmModal(props) {
 
   useEffect(() => {
     if (!isModified) return;
-    navigate(`/boards/${params.boardId}/${params.postId}`, {state: {boardName: boardName}});
+    navigate(`/boards/${params.boardId}/${params.postId}?scrapped=${scrapped}`, {state: {boardName: boardName}});
   }, [isModified]);
 
   const modifyPost = async (userIdx, postContent, postIdx) => {

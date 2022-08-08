@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Modal from 'react-modal';
 import './PostWriteConfirmModal.css';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import confirmIcon from '../../../assets/confirmIcon.png';
 import axios from 'axios';
 const customStyles = {
@@ -46,7 +46,8 @@ export default function PostWriteConfirmModal(props) {
   const { isConfirmModalOpen, closeConfirmModal, postContent, postTitle, boardId, boardName } = props;
   const navigate = useNavigate();
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
@@ -63,7 +64,7 @@ export default function PostWriteConfirmModal(props) {
       );
       console.log('리턴', response);
       postIdxRef.current = response.data.result.postIdx;
-      navigate(`/boards/${boardId}/${postIdxRef.current}`, {state: {boardName: boardName}});
+      navigate(`/boards/${boardId}/${postIdxRef.current}?scrapped=${scrapped}`, {state: {boardName: boardName}});
       return true;
     } catch (error) {
       console.error(error);

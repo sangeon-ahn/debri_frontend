@@ -16,7 +16,7 @@ export default function ScrappedBoards(props) {
                 <img src={favoriteStar} alt="엑박" className='scrap-star'/>
               </button>
             </div>
-            <div onClick={() => navigate(`/boards/${board.boardIdx}`)} className="board-name">
+            <div onClick={() => navigate(`/boards/${board.boardIdx}?scrapped=true`)} className="board-name">
               <div style={{display:'flex', alignItems:'center'}}>
                 <div>{board.boardName}</div>
                 <img src={rightArrow} alt="엑박" width="9.44px" height="16.19px" className='right-arrow'/>
