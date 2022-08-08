@@ -1,8 +1,8 @@
 import { Snackbar, Button, createTheme, ThemeProvider, Alert } from "@mui/material";
 import { useState } from 'react';
-import ScrapSuccessIcon from "./ScrapSuccessIcon";
+import PostScrapSuccessIcon from "./PostScrapSuccessIcon";
 
-export const ScrapSnackbar = (props) => {
+export const PostScrapSnackbar = (props) => {
   const { open, handleClose } = props;
 
   const messageStyle = {
@@ -44,7 +44,7 @@ export const ScrapSnackbar = (props) => {
           bottom: '31px'
         }}
       >
-        <Alert icon={<ScrapSuccessIcon />} sx={alertStyle}>
+        <Alert icon={<PostScrapSuccessIcon />} sx={alertStyle}>
           <span style={messageStyle}>홈 &#62; 내 스크랩</span>
           <span style={restStyle}> 에 저장 되었습니다!</span>
         </Alert>

@@ -1,6 +1,6 @@
 import scrapSuccess from '../../../assets/scrapSuccess.png';
 
-export default function ScrapSuccessIcon() {
+export default function PostScrapSuccessIcon() {
   return (
       <img src={scrapSuccess} alt='' />
   );

@@ -17,7 +17,7 @@ import whiteHeart from '../../assets/whiteHeart.png';
 import scrapped from '../../assets/scrapped.png';
 import unScrapped from '../../assets/unScrapped.png';
 import { getTimeAfterCreated } from "../../utils/getTimeAfterCreated";
-import { ScrapSnackbar } from "./ScrapSnackbar/ScrapSnackbar";
+import { PostScrapSnackbar } from "./PostScrapSnackbar/PostScrapSnackbar";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -509,7 +509,7 @@ export default function PostPage() {
           setRootCommentIdx={setRootCommentIdx}
         />
        <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
-       <ScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
+       <PostScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );
 }

@@ -9,7 +9,7 @@ import toggleDown from '../../assets/toggleDown.png';
 import toggleUp from '../../assets/toggleUp.png';
 import ScrappedBoards from './ScrappedBoards';
 import UnScrappedBoards from './UnScrappedBoards';
-
+import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
@@ -19,16 +19,13 @@ export default function BoardsPage() {
   const [isGetData, setIsGetData] = useState(0);
   const [scrappedBoards, setScrappedBoards] = useState([]);
   const [unScrappedBoards, setUnScrappedBoards] = useState([]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   //boardList 가져오기
   useEffect( () => {
       fetchScrappedBoards();
       fetchUnScrappedBoards();
   }, []);
-
-  // useEffect(() => {
-
-  // }, [scrappedBoards, unScrappedBoards])
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -98,6 +95,7 @@ export default function BoardsPage() {
       setScrappedBoards(state =>
         [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === e)]);
       setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== e));
+      setSnackbarOpen(true);
     }
 
   function onCancelScrap(e) {
@@ -110,6 +108,14 @@ export default function BoardsPage() {
   function handleScrappedBoardsToggle() {
     setIsOpened(state => !state);
   }
+
+  const handleSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
 
   return (
     <div>
@@ -129,7 +135,6 @@ export default function BoardsPage() {
               <ScrappedBoards scrappedBoards={scrappedBoards} onCancelScrap={onCancelScrap}/>
             }
         </div>
-
         <div className='all-boards'>
           <div className='all-boards-title'>
             <p>전체 게시판</p>
@@ -137,6 +142,7 @@ export default function BoardsPage() {
           {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
         </div>
       </div>
+      <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </div>
   );
 }
