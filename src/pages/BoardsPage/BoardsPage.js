@@ -1,6 +1,5 @@
 import './BoardsPage.css';
 import Header from '../Header/Header';
-import Search from '../Search/Search';
 import LowBar from '../LowBar/LowBar';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
@@ -9,6 +8,10 @@ import toggleDown from '../../assets/toggleDown.png';
 import toggleUp from '../../assets/toggleUp.png';
 import ScrappedBoards from './ScrappedBoards';
 import UnScrappedBoards from './UnScrappedBoards';
+import searchIcon from '../../assets/searchIcon.png';
+import searchIconGreen from '../../assets/searchIconGreen.png';
+import favoriteStar from '../../assets/favoriteStar.png';
+import leftArrow from '../../assets/leftArrow.png';
 
 
 export default function BoardsPage() {
@@ -19,6 +22,8 @@ export default function BoardsPage() {
   const [isGetData, setIsGetData] = useState(0);
   const [scrappedBoards, setScrappedBoards] = useState([]);
   const [unScrappedBoards, setUnScrappedBoards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [text, setText] = useState(false);
 
   //boardList 가져오기
   useEffect( () => {
@@ -116,11 +121,44 @@ export default function BoardsPage() {
     setIsOpened(state => !state);
   }
 
+  //검색
+  const onChange =(e)=>{
+    setText(true)
+    if(e.target.value===''){
+      setText(false)
+    }
+    e.preventDefault() 
+    setSearchTerm(e.target.value)
+    console.log(e.target.value)
+  }
+
   return (
     <div>
       <Header />
-      <Search />
-      <div className='board-list'>
+
+      <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
+        {text ? <img src={searchIconGreen} alt="액박" className="search-icon" onClick={() => navigate(-1)}/> : <img src={searchIcon} alt="액박" className="search-icon" onClick={() => navigate(-1)}/>}
+        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}
+          {...scrappedBoards.filter((val) =>{
+              if(searchTerm === ""){
+                return val
+              }else if(val.boardName.toLowerCase().includes(searchTerm.toLowerCase())){
+                return val
+              }
+            }).map(data =>{
+              <p style={{color:"white"}}>{data.boardName}</p>
+          })}/>
+      </div>
+
+      {text ? 
+        <div className='board-list'>
+          <div className="search-result">
+            <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow'/>
+            <p>게시판 검색 결과</p>
+          </div>
+        </div>
+        :
+        <div className='board-list'>
           <div className="favorite-boards">
             <div className="favorite-title">
               <p>즐겨찾기된 게시판</p>
@@ -133,15 +171,16 @@ export default function BoardsPage() {
             {isOpened && !loading && scrappedBoards &&
               <ScrappedBoards scrappedBoards={scrappedBoards} onCancelScrap={onCancelScrap}/>
             }
-        </div>
-
-        <div className='all-boards'>
-          <div className='all-boards-title'>
-            <p>전체 게시판</p>
           </div>
-          {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
+
+          <div className='all-boards'>
+            <div className='all-boards-title'>
+              <p>전체 게시판</p>
+            </div>
+            {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 }

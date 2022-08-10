@@ -1,5 +1,4 @@
 import Header from '../Header/Header';
-import Search from '../Search/Search';
 import './Board.css';
 import PostSummary from './PostSummary/PostSummary';
 import leftArrow from '../../assets/leftArrow.png';
@@ -8,6 +7,8 @@ import favoriteStar from '../../assets/favoriteStar.png';
 import emptyStar from '../../assets/emptyStar.png';
 import LowBar from '../LowBar/LowBar';
 import pencil from '../../assets/pencil.png';
+import searchIcon from '../../assets/searchIcon.png';
+import searchIconGreen from '../../assets/searchIconGreen.png';
 import writePost from '../../assets/글쓰기.png';
 import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
@@ -20,6 +21,7 @@ export default function Board() {
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
   const [board, setBoard] = useState(null);
+  const [text, setText] = useState(false);
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -67,10 +69,24 @@ export default function Board() {
 
   if (error) return null;
 
+  //검색
+  const onChange =(e)=>{
+    setText(true)
+    if(e.target.value===''){
+      setText(false)
+    }
+    console.log(e.target.value)
+  }
+
   return (
     <>
       <Header />
-      <Search />
+
+      <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
+        {text ? <img src={searchIconGreen} alt="액박" className="search-icon" /> : <img src={searchIcon} alt="액박" className="search-icon" />}
+        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}/>
+      </div>
+
       <div className='board-title-container'>
         {board && <>
           <div className='board-title-box'>

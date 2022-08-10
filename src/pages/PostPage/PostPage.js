@@ -1,11 +1,12 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header/Header";
-import Search from "../Search/Search";
 import './PostPage.css';
 import leftArrow from '../../assets/leftArrow.png';
 // import greenUpThumb from '../../assets/greenUpThumb.png';
 import postUserProfile from '../../assets/postUserProfile.png';
 import userReport from '../../assets/userReport.png';
+import searchIcon from '../../assets/searchIcon.png';
+import searchIconGreen from '../../assets/searchIconGreen.png';
 import { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
 import Comments from "./Comments/Comments";
@@ -389,7 +390,7 @@ export default function PostPage() {
   return (
     <>
       <Header />
-      <Search />
+
       <div className="post-container">
         <div className='board-title-box'>
           <button className='back-button' onClick={() => navigate(`/boards/${boardId}`)}>
