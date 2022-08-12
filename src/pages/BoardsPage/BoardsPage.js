@@ -1,24 +1,31 @@
 import './BoardsPage.css';
 import Header from '../Header/Header';
-import Search from '../Search/Search';
 import LowBar from '../LowBar/LowBar';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import toggleDown from '../../assets/toggleDown.png';
 import toggleUp from '../../assets/toggleUp.png';
 import ScrappedBoards from './ScrappedBoards';
 import UnScrappedBoards from './UnScrappedBoards';
+import searchIcon from '../../assets/searchIcon.png';
+import searchIconGreen from '../../assets/searchIconGreen.png';
+import favoriteStar from '../../assets/favoriteStar.png';
+import leftArrow from '../../assets/leftArrow.png';
 import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  let currentPath = "";
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
   const [isOpened, setIsOpened] = useState(true);
   const [isGetData, setIsGetData] = useState(0);
   const [scrappedBoards, setScrappedBoards] = useState([]);
   const [unScrappedBoards, setUnScrappedBoards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [text, setText] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   //boardList 가져오기
@@ -109,6 +116,22 @@ export default function BoardsPage() {
     setIsOpened(state => !state);
   }
 
+  //검색
+  function back() {
+    setText(false)
+    setSearchTerm("")
+  }
+
+  const onChange =(e)=>{
+    setText(true)
+    if(e.target.value===''){
+      setText(false)
+    }
+    e.preventDefault() 
+    setSearchTerm(e.target.value)
+    console.log(e.target.value)
+  }
+
   const handleSnackbarClose = (e, reason) => {
     if (reason === 'clickway') {
       return;
@@ -120,8 +143,33 @@ export default function BoardsPage() {
   return (
     <div>
       <Header />
-      <Search />
-      <div className='board-list'>
+
+      <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
+        {text ? 
+          <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
+          <img src={searchIcon} alt="액박" className="search-icon"/>
+        }
+        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}
+          {...scrappedBoards.filter((val) =>{
+              if(searchTerm === ""){
+                return val
+              }else if(val.boardName.toLowerCase().includes(searchTerm.toLowerCase())){
+                return val
+              }
+            }).map(data =>{
+              <p style={{color:"white"}}>{data.boardName}</p>
+          })}/>
+      </div>
+
+      {text ? 
+        <div className='board-list'>
+          <div className="search-result">
+            <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
+            <p>게시판 검색 결과</p>
+          </div>
+        </div>
+        :
+        <div className='board-list'>
           <div className="favorite-boards">
             <div className="favorite-title">
               <p>즐겨찾기된 게시판</p>
@@ -134,15 +182,17 @@ export default function BoardsPage() {
             {isOpened && !loading && scrappedBoards &&
               <ScrappedBoards scrappedBoards={scrappedBoards} onCancelScrap={onCancelScrap}/>
             }
-        </div>
-        <div className='all-boards'>
-          <div className='all-boards-title'>
-            <p>전체 게시판</p>
           </div>
-          {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
+
+          <div className='all-boards'>
+            <div className='all-boards-title'>
+              <p>전체 게시판</p>
+            </div>
+            {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
+          </div>
+          <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
         </div>
-      </div>
-      <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
+      }
     </div>
   );
 }

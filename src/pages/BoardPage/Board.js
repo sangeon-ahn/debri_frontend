@@ -1,5 +1,4 @@
 import Header from '../Header/Header';
-import Search from '../Search/Search';
 import './Board.css';
 import PostSummary from './PostSummary/PostSummary';
 import leftArrow from '../../assets/leftArrow.png';
@@ -9,6 +8,8 @@ import emptyStar from '../../assets/emptyStar.png';
 import LowBar from '../LowBar/LowBar';
 import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/글쓰기.png';
+import searchIcon from '../../assets/searchIcon.png';
+import searchIconGreen from '../../assets/searchIconGreen.png';
 import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
 import BoardScrapSnackbar from '../BoardsPage/BoardScrapSnackbar/BoardScrapSnackbar';
@@ -25,6 +26,9 @@ export default function Board() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrapped, setScrapped] = useState(searchParams.get('scrapped'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+  const [text, setText] = useState(false);
 
   console.log(board);
 
@@ -121,50 +125,104 @@ export default function Board() {
     
   if (error) return null;
 
+  //검색
+  function back() {
+    setText(false)
+    setSearchTerm("")
+  }
+
+  const onChange =(e)=>{
+    setText(true)
+    if(e.target.value===''){
+      setText(false)
+    }
+    e.preventDefault() 
+    setSearchTerm(e.target.value)
+    SearchPost(params.boardId, searchTerm );
+
+  }
+
+  const SearchPost = async (boardIdx, key) => {
+    try {
+        setError(null);
+        setLoading(true); //로딩이 시작됨
+        const response = await axios.get(`/api/post/boardPostList/${boardIdx}?key=${key}`, { headers });
+        setSearchResult(response.data.result)
+        console.log(response.data);
+    } catch (e) {
+        setError(e);
+    }
+    setLoading(false);
+};
+
   return (
     <>
       <Header />
-      <Search />
-      <div className='board-title-container'>
-        {board && <>
-          <div className='board-title-box'>
-          <button className='back-button' onClick={() => navigate('/boards')}>
-            <img src={leftArrow} alt=''/>
-          </button>
-          <div className='board-title'>{board.boardName}</div>
-          {JSON.parse(scrapped) ?
-          <button className='favorite-button-box' onClick={handleUnScrap}>
-            <img src={favoriteStar} alt=''/>
-          </button> :
-          <button className='favorite-button-box' onClick={handleScrap}>
-          <img src={emptyStar} alt=''/>
-        </button>
+
+      <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
+        {text ? 
+          <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
+          <img src={searchIcon} alt="액박" className="search-icon"/>
         }
+        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}/>
+      </div>
+
+      {text ?
+        <div className='board-list'>
+          <div className="search-result">
+            <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
+            <p>게시판 검색 결과</p>
+          </div>
+          <div>
+            {searchResult && <div>
+              {searchResult.map(post => (
+                <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
+              ))}
+            </div>}
+          </div>
         </div>
-        <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
-        </>}
+        :
+        <div>
+          <div className='board-title-container'>
+            {board && <>
+              <div className='board-title-box'>
+              <button className='back-button' onClick={() => navigate('/boards')}>
+                <img src={leftArrow} alt=''/>
+              </button>
+              <div className='board-title'>{board.boardName}</div>
+              {JSON.parse(scrapped) ?
+              <button className='favorite-button-box' onClick={handleUnScrap}>
+                <img src={favoriteStar} alt=''/>
+              </button> :
+              <button className='favorite-button-box' onClick={handleScrap}>
+              <img src={emptyStar} alt=''/>
+            </button>
+            }
+            </div>
+            <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
+            </>}
+          </div>
 
-        {/* <div className='board-detail'>{boardTitle[boardId]}</div> */}
-      </div>
+          {posts && board && <div className='post-list'>
+            {posts.map(post => (
+                <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
+            ))}
+          </div>}
 
-      {posts && board && <div className='post-list'>
-        {posts.map(post => (
-            <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
-        ))}
-      </div>}
-
-      <div className='write-post-container2'>
-          <button
-            className='write-post'
-            onClick={() => navigate(`/boards/${params.boardId}/postwrite?scrapped=${scrapped}`, { state })}>
-              <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
-                <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
-              </div>
-              <div style={{height: '14px'}}>
-                <img src={writePost} alt="엑박" className='write-post-text' />
-              </div>
-          </button>
-      </div>
+          <div className='write-post-container2'>
+              <button
+                className='write-post'
+                onClick={() => navigate(`/boards/${params.boardId}/postwrite?scrapped=${scrapped}`, { state })}>
+                  <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
+                    <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
+                  </div>
+                  <div style={{height: '14px'}}>
+                    <img src={writePost} alt="엑박" className='write-post-text' />
+                  </div>
+              </button>
+          </div>
+        </div>        
+      }    
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );
