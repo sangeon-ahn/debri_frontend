@@ -66,6 +66,29 @@
     margin-right: 22px;
   }
 
+/* scrap posts */
+.scrapPosts {
+    width: 316px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid #66CC66;
+    border-radius: 10px;
+    margin-bottom: 25px;;
+}
+.bookmarkPosts{   
+    float: left;
+    margin:10px 5px;
+}
+.scrappoststitle{
+    float: left;
+    color:white;
+    margin: 10px 15px;
+}
+.rightarrow{
+    float: right;
+    margin:10px 5px;
+}
+
 /* favorite-boards */
 .favorite-title {
     display: flex;

@@ -137,9 +137,7 @@ export default function Board() {
       setText(false)
     }
     e.preventDefault() 
-    setSearchTerm(e.target.value)
-    SearchPost(params.boardId, searchTerm );
-
+    SearchPost(params.boardId, e.target.value);
   }
 
   const SearchPost = async (boardIdx, key) => {
@@ -153,7 +151,7 @@ export default function Board() {
         setError(e);
     }
     setLoading(false);
-};
+  };
 
   return (
     <>
@@ -171,7 +169,7 @@ export default function Board() {
         <div className='board-list'>
           <div className="search-result">
             <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
-            <p>게시판 검색 결과</p>
+            <p>검색 결과</p>
           </div>
           <div>
             {searchResult && <div>

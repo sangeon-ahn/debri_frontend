@@ -1,6 +1,6 @@
 import './BoardsPage.css';
 import Header from '../Header/Header';
-import LowBar from '../LowBar/LowBar';
+import PostSummary from '../BoardPage/PostSummary/PostSummary';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
@@ -12,11 +12,14 @@ import searchIcon from '../../assets/searchIcon.png';
 import searchIconGreen from '../../assets/searchIconGreen.png';
 import favoriteStar from '../../assets/favoriteStar.png';
 import leftArrow from '../../assets/leftArrow.png';
+import rightArrow from '../../assets/rightArrow.png';
+import bookmarkGreen from '../../assets/bookmarkGreen.png';
 import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { state } = useLocation();
   let currentPath = "";
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
@@ -27,6 +30,7 @@ export default function BoardsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [text, setText] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [searchResult, setSearchResult] = useState(null);
 
   //boardList 가져오기
   useEffect( () => {
@@ -128,8 +132,19 @@ export default function BoardsPage() {
       setText(false)
     }
     e.preventDefault() 
-    setSearchTerm(e.target.value)
-    console.log(e.target.value)
+    SearchPost(e.target.value);
+  }
+
+  async function SearchPost(keyword) {
+    try {
+      const response = await axios.post(`/api/post/getSearchList`,
+        JSON.stringify({keyword : keyword}),
+        { headers }
+      );
+      setSearchResult(response.data.result)
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleSnackbarClose = (e, reason) => {
@@ -140,6 +155,7 @@ export default function BoardsPage() {
     setSnackbarOpen(false);
   };
 
+
   return (
     <div>
       <Header />
@@ -149,27 +165,30 @@ export default function BoardsPage() {
           <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
           <img src={searchIcon} alt="액박" className="search-icon"/>
         }
-        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}
-          {...scrappedBoards.filter((val) =>{
-              if(searchTerm === ""){
-                return val
-              }else if(val.boardName.toLowerCase().includes(searchTerm.toLowerCase())){
-                return val
-              }
-            }).map(data =>{
-              <p style={{color:"white"}}>{data.boardName}</p>
-          })}/>
+        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}/>
       </div>
 
       {text ? 
         <div className='board-list'>
           <div className="search-result">
             <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
-            <p>게시판 검색 결과</p>
+            <p>전체 게시글 검색 결과</p>
+          </div>
+          <div>
+            {searchResult && <div>
+              {searchResult.map(post => (
+                <PostSummary post={post} key={post.postIdx} state={state} boardName={null} />
+              ))}
+            </div>}
           </div>
         </div>
         :
         <div className='board-list'>
+          <button className="scrapPosts" onClick={()=>{navigate("/scrapPostsList")}}>
+            <img src={bookmarkGreen} alt="액박" className="bookmarkPosts"/>
+            <div className='scrappoststitle'>내가 스크랩한 게시물</div>
+            <img src={rightArrow} alt="액박" className="rightarrow"></img>
+          </button>
           <div className="favorite-boards">
             <div className="favorite-title">
               <p>즐겨찾기된 게시판</p>
