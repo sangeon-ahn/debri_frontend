@@ -5,13 +5,17 @@ import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import LoginPage from './pages/LoginPage/LoginPage';
 import Board from './pages/BoardPage/Board';
 import PostWritePage from "./pages/PostWritePage/PostWritePage";
-import HomePage from "./pages/HomePage/HomePage";
+import BeginPage from "./pages/BeginPage/BeginPage";
 import LowBar from "./pages/LowBar/LowBar";
 import Header from "./pages/Header/Header";
 import PostPage from "./pages/PostPage/PostPage";
 import PostModifyPage from "./pages/PostModifyPage/PostModifyPage";
 import LecturesPage from "./pages/LecturesPage/LecturesPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
+import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage';
+import BeginNewRoadmap from './pages/BeginNewRoadmap/BeginNewRoadmap';
+import BeginNewCurrPage from './pages/BeginNewCurrPage/BeginNewCurrPage';
+import HomePage from './pages/HomePage/HomePage';
 
 function App() {
   useEffect(() => {
