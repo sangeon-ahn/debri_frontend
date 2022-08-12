@@ -137,7 +137,7 @@ export default function Board() {
       setText(false)
     }
     e.preventDefault() 
-    SearchPost(params.boardId, e.target.value);
+    SearchPost(params.boardId, e.target.value );
   }
 
   const SearchPost = async (boardIdx, key) => {
