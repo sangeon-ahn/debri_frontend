@@ -4,6 +4,7 @@ import Account from "./pages/Account/Account";
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import LoginPage from './pages/LoginPage/LoginPage';
 import Board from './pages/BoardPage/Board';
+import ScrapPostsList from "./pages/BoardPage/ScrapPostsList";
 import PostWritePage from "./pages/PostWritePage/PostWritePage";
 import HomePage from "./pages/HomePage/HomePage";
 import LowBar from "./pages/LowBar/LowBar";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/boards/:boardId/:postId/modify" element={<PostModifyPage />} />
           <Route path="/boards/:boardId/postwrite" element={<PostWritePage />} />
           <Route path="/curriculum" element={<CurriculumPage />} />
+          <Route path="/scrapPostsList" element={<ScrapPostsList />} />
         </Routes>
         <LowBar />
       </BrowserRouter>
