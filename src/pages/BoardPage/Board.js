@@ -137,8 +137,7 @@ export default function Board() {
       setText(false)
     }
     e.preventDefault() 
-    setSearchTerm(e.target.value)
-    SearchPost(params.boardId, searchTerm );
+    SearchPost(params.boardId, e.target.value );
 
   }
 
