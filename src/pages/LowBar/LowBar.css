@@ -1,11 +1,12 @@
 .low-bar {
   position: fixed;
   display: flex;
-  width: 316px;
+  width: 318px;
   height: 61px;
   bottom: 38px;
   left: 22px;
   justify-content: space-between;
+  background-color: #0A1123;
 }
 
 .home-button {

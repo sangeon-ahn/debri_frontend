@@ -24,6 +24,16 @@
   /* border: 1px solid white; */
 }
 
+.comment-menu-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.comment-menu-icon {
+  /* cursor: pointer; */
+  vertical-align: middle;
+}
+
 .comment-content {
   margin-top: 10px;
   font-family: 'Noto Sans KR';
@@ -62,9 +72,7 @@ font-weight: 300;
 font-size: 10px;
 line-height: 14px;
 text-align: right;
-
 color: #FFFFFF;
-
 }
 
 .comment-button-box {
@@ -73,6 +81,6 @@ color: #FFFFFF;
   /* width: 64px; */
   height: 16px;
   /* border: 1px solid white; */
-  right: 33px;
+  right: 23px;
   align-items: center;
 }

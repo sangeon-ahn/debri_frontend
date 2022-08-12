@@ -5,7 +5,7 @@ import lectureLikesIcon from '../../../assets/lectureLikesIcon.png';
 import lectureUserNumberIcon from '../../../assets/curriUserNumberIcon.png';
 import lectureDetailIcon from '../../../assets/lectureDetailIcon.png';
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Lecture(props) {
   const { lecture, isScrappedLecture } = props;
@@ -18,8 +18,6 @@ export default function Lecture(props) {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
-  const count = useRef(0);
 
   const setColor = (lecture) => {
     if (lecture.langTag === "Front") {

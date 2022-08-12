@@ -357,12 +357,6 @@ margin-right: 9px;
   align-items: center;
 } */
 
-
-
-.comment-menu-icon {
-  cursor: pointer;
-}
-
 /* 포스트 신고 모달창 */
 .post-report-button {
   width: 316px;
@@ -543,4 +537,12 @@ cursor: pointer;
 .scrap-status-button div {
   position: absolute;
   left: 30px;
+}
+
+.bottom-bar-blocker {
+  position: fixed;
+  width: 360px;
+  height: 100px;
+  background-color: #0A1123;
+  bottom: 10px;
 }

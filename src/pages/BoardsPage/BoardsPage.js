@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import LowBar from '../LowBar/LowBar';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import toggleDown from '../../assets/toggleDown.png';
 import toggleUp from '../../assets/toggleUp.png';
 import ScrappedBoards from './ScrappedBoards';
@@ -12,10 +12,12 @@ import searchIcon from '../../assets/searchIcon.png';
 import searchIconGreen from '../../assets/searchIconGreen.png';
 import favoriteStar from '../../assets/favoriteStar.png';
 import leftArrow from '../../assets/leftArrow.png';
-
+import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  let currentPath = "";
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
   const [isOpened, setIsOpened] = useState(true);
@@ -24,16 +26,13 @@ export default function BoardsPage() {
   const [unScrappedBoards, setUnScrappedBoards] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [text, setText] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   //boardList 가져오기
   useEffect( () => {
       fetchScrappedBoards();
       fetchUnScrappedBoards();
   }, []);
-
-  // useEffect(() => {
-
-  // }, [scrappedBoards, unScrappedBoards])
 
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -79,12 +78,6 @@ export default function BoardsPage() {
         { headers }
       );
       console.log('리턴', response);
-      if (response.data.isSuccess) {
-        setScrappedBoards(state =>
-          [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === boardIdx)]);
-        setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== boardIdx));
-      }
-
     } catch (error) {
       console.error(error);
     }
@@ -98,11 +91,6 @@ export default function BoardsPage() {
         { headers }
       );
       console.log('리턴', response);
-      if (response.data.isSuccess) {
-        setUnScrappedBoards(state => 
-          [...state, ...scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === boardIdx)]);
-        setScrappedBoards(scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx !== boardIdx));
-      }
     } catch (error) {
       console.error(error);
       setError(error);
@@ -111,10 +99,17 @@ export default function BoardsPage() {
 
   function onScrap(e) {
       scrapBoard(e);
+      setScrappedBoards(state =>
+        [...state, ...unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx === e)]);
+      setUnScrappedBoards(unScrappedBoards.filter(unScrappedBoard => unScrappedBoard.boardIdx !== e));
+      setSnackbarOpen(true);
     }
 
   function onCancelScrap(e) {
     unScrapBoard(e);
+    setUnScrappedBoards(state =>
+      [...state, ...scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx === e)]);
+    setScrappedBoards(scrappedBoards.filter(scrappedBoard => scrappedBoard.boardIdx !== e));
   }
 
   function handleScrappedBoardsToggle() {
@@ -122,6 +117,11 @@ export default function BoardsPage() {
   }
 
   //검색
+  function back() {
+    setText(false)
+    setSearchTerm("")
+  }
+
   const onChange =(e)=>{
     setText(true)
     if(e.target.value===''){
@@ -132,12 +132,23 @@ export default function BoardsPage() {
     console.log(e.target.value)
   }
 
+  const handleSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
+
   return (
     <div>
       <Header />
 
       <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
-        {text ? <img src={searchIconGreen} alt="액박" className="search-icon" onClick={() => navigate(-1)}/> : <img src={searchIcon} alt="액박" className="search-icon" onClick={() => navigate(-1)}/>}
+        {text ? 
+          <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
+          <img src={searchIcon} alt="액박" className="search-icon"/>
+        }
         <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}
           {...scrappedBoards.filter((val) =>{
               if(searchTerm === ""){
@@ -153,7 +164,7 @@ export default function BoardsPage() {
       {text ? 
         <div className='board-list'>
           <div className="search-result">
-            <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow'/>
+            <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
             <p>게시판 검색 결과</p>
           </div>
         </div>
@@ -179,6 +190,7 @@ export default function BoardsPage() {
             </div>
             {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
           </div>
+          <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
         </div>
       }
     </div>

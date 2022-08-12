@@ -41,6 +41,7 @@ export default function LowBar() {
   };
 
   if (window.location.pathname === '/account') return null;
+  if (window.location.pathname.includes('/boards/') && window.location.pathname.includes('modify')) return null;
 
   return (
     <div className="low-bar">

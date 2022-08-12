@@ -73,8 +73,18 @@ font-style: normal;
 .lecture-list {
   margin-top: 14px;
   height: 350px;
+  /* overflow: hidden; */
 }
 
+.lectures-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  margin-top: 34px;
+}
 .red {
   background-color: #CB3953;
   border: none;
