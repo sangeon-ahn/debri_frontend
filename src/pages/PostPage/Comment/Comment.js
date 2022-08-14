@@ -220,7 +220,7 @@ export default function Comment(props) {
           <div className="comment-elapsed-time">{getTimeAfterCreated(comment.timeAfterCreated)}</div>
           <div className="comment-button-box">
             {pressLike ? 
-              <img src={greenUpThumb} alt='' className="green-upthumb-icon" onClick={()=> onCancelLike(comment.commentIdx)} style={{marginRight:"8.49px"}}/> :
+              <img src={greenUpThumb} alt='' className="green-upthumb-icon" onClick={()=> onCancelLike(comment.commentIdx)} style={{ margin:'-1px 8.49px 1px 0'}}/> :
               <img src={grayUpThumb} alt='' className="gray-upthumb-icon" onClick={()=> onLike(comment.commentIdx)} />
             }   
               <div className="up-vote-number">{voteCount}</div>
