@@ -47,8 +47,9 @@ export default function PostPage() {
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const scrapped = searchParams.get('scrapped');
+
   const headers = {
-    'ACCESS-TOKEN': jwt,
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
@@ -73,15 +74,12 @@ export default function PostPage() {
       setPostLikes(post.likeNumber);
       setPostLikeStatus(true);
     } else if (!post.userLike) {
-      console.log(3);
       setPostLikeStatus(false);
     }
 
     if (post.userScrap) {
-      console.log(4);
       setPostScrapStatus(true);
     } else if (!post.userScrap) {
-      console.log(5);
       setPostScrapStatus(false);
     }
   }, [post]);
@@ -119,11 +117,9 @@ export default function PostPage() {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get(`/api/comment/get/${postIdx}`,
-        JSON.stringify({}),
-        { headers });
+      const response = await axios.get(`/api/comment/get/${postIdx}`,{ headers });
       if (response.data.isSuccess) {
-        console.log(1, response.data.result);
+        console.log(response.data.result);
         setComments(response.data.result);
       }
       console.log(response);
