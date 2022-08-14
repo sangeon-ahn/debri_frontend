@@ -2,10 +2,11 @@ import recommentArrow from '../../../assets/recommentArrow.png';
 import recommentMenuIcon from "../../../assets/commentMenuIcon.png";
 import grayUpThumb from '../../../assets/grayUpThumb.png';
 import greenUpThumb from '../../../assets/greenUpThumb.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 import './ReComment.css';
+import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 
 export default function ReComment(props) {
   const { reComment, setIsCommentSettingModalOn, setReportedComment } = props;
@@ -47,9 +48,15 @@ export default function ReComment(props) {
   }
 
   function onLike(e) {
-    createLike(e);
-    setVoteCount(voteCount+1);
+    setVoteCount(state => {
+      if (isNaN(state)) {
+        return 1;
+      }
+
+      return state + 1;
+    });
     setPressLike(true);
+    createLike(e);
   }
 
   function onCancelLike(e) {
@@ -62,6 +69,8 @@ export default function ReComment(props) {
     setReportedComment(reComment);
     setIsCommentSettingModalOn(state => !state);
   };
+
+  console.log(voteCount);
 
   return (
     <div className="recomment-container">
@@ -78,7 +87,7 @@ export default function ReComment(props) {
               <img src={greenUpThumb} alt='' className="green-upthumb-icon" onClick={()=> onCancelLike(reComment.commentIdx)} style={{ margin:'-1px 8.49px 1px 0'}}/> :
               <img src={grayUpThumb} alt='' className="gray-upthumb-icon" onClick={()=> onLike(reComment.commentIdx)} />
             }   
-            <div className="up-vote-number">{voteCount}</div>
+            <div className="up-vote-number">{isNaN(voteCount) ? 0 : voteCount}</div>
             <div className='barrier-line'></div>
             <button className='recomment-menu-button' onClick={handleRecommentMenuButtonClick}>
               <img src={recommentMenuIcon} alt="" className="recomment-menu-icon"  />

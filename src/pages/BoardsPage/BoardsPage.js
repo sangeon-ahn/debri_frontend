@@ -20,7 +20,6 @@ export default function BoardsPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = useLocation();
-  let currentPath = "";
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
   const [isOpened, setIsOpened] = useState(true);

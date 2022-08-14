@@ -15,16 +15,6 @@ import LecturesPage from "./pages/LecturesPage/LecturesPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 
 function App() {
-  useEffect(() => {
-    window.addEventListener('unload', () => {
-      localStorage.removeItem('userData');
-    });
-    
-    return window.addEventListener('unload', () => {
-      localStorage.removeItem('userData');
-    });
-  });
-  
   return (
     <>
       <BrowserRouter>
