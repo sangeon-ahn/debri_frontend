@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 import './ReComment.css';
-import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 
 export default function ReComment(props) {
   const { reComment, setIsCommentSettingModalOn, setReportedComment } = props;
