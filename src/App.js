@@ -13,7 +13,7 @@ import PostModifyPage from "./pages/PostModifyPage/PostModifyPage";
 import LecturesPage from "./pages/LecturesPage/LecturesPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage';
-import BeginNewRoadmap from './pages/BeginNewRoadmap/BeginNewRoadmap';
+import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage';
 import BeginNewCurrPage from './pages/BeginNewCurrPage/BeginNewCurrPage';
 import HomePage from './pages/HomePage/HomePage';
 

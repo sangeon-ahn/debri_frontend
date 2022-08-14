@@ -1,14 +1,14 @@
 import Header from "../Header/Header";
 import roadmapIcon from '../../assets/roadmapIcon.png';
 import leftSideIcon from '../../assets/leftSideIcon.png';
-import './BeginNewRoadmap.css';
+import './BeginNewRoadmapPage.css';
 import curriDurationIcon from '../../assets/curriDurationIcon.png';
 import roadmapOrderIcon from '../../assets/roadmapOrderIcon.png';
 import roadmapCheckboxIcon from '../../assets/roadmapCheckboxIcon.png';
 import Lecture from "../LecturesPage/Lecture/Lecture";
 import { useState } from "react";
 
-export default function BeginNewRoadmap() {
+export default function BeginNewRoadmapPage() {
   const initLecture = {
     langTag: "Python",
     lectureName: "파이썬 정복자",
