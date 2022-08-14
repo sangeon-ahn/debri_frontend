@@ -66,26 +66,28 @@ export default function PostWritePage() {
 
     setBoardName(board.boardName);
   };
-
-  if (!boardName) return;
-
+  console.log('??');
   return (
-    <div>
-      <PostWriteCancelModal
-        isCancelModalOpen={isCancelModalOpen}
-        closeCancelModal={() => setIsCancelModalOpen(false)}
-        state={state}
-        boardName={boardName}
-      />
-      <PostWriteConfirmModal
-        isConfirmModalOpen={isConfirmModalOpen}
-        closeConfirmModal={() => setIsConfirmModalOpen(false)}
-        postTitle={postTitle}
-        postContent={postContent}
-        boardId={selectedOption}
-        boardName={boardName}
-      />
+    <>
       <Header />
+      {boardName &&
+      <>
+        <PostWriteCancelModal
+          isCancelModalOpen={isCancelModalOpen}
+          closeCancelModal={() => setIsCancelModalOpen(false)}
+          state={state}
+          boardName={boardName}
+        />
+        <PostWriteConfirmModal
+          isConfirmModalOpen={isConfirmModalOpen}
+          closeConfirmModal={() => setIsConfirmModalOpen(false)}
+          postTitle={postTitle}
+          postContent={postContent}
+          boardId={selectedOption}
+          boardName={boardName}
+        />
+      </>
+      }
       <div className='post-write-container'>
         <button className='go-past-button' onClick={() => setIsCancelModalOpen(true)}>
           <img src={leftArrow} alt=''/>
@@ -133,6 +135,6 @@ export default function PostWritePage() {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

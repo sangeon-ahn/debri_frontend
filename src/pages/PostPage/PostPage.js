@@ -389,84 +389,86 @@ export default function PostPage() {
               onRequestClose={() => setPostReportOtherModalOn(false)}
               setReportSnackbarOpen={setReportSnackbarOpen}
             />
-            <div className="post-subject">
-            <div className="post-title-container">
-              <div className="post-title-wrapper">
-                <div className="post-title-box">{post.postName}</div>
-                <div className="post-comment-number">({comments.length})</div>
-                <button className="post-menu-button" onClick={() => setIsPostSettingModalOn(state=>!state)}>
-                  <img className="post-menu-icon" src={postMenuIcon} alt=""/>
-                </button>
+            <div className="post-scroll-part">
+              <div className="post-subject">
+              <div className="post-title-container">
+                <div className="post-title-wrapper">
+                  <div className="post-title-box">{post.postName}</div>
+                  <div className="post-comment-number">({comments.length})</div>
+                  <button className="post-menu-button" onClick={() => setIsPostSettingModalOn(state=>!state)}>
+                    <img className="post-menu-icon" src={postMenuIcon} alt=""/>
+                  </button>
+                </div>
+                <div className="post-elapsed-time">{getTimeAfterCreated(post.timeAfterCreated)}</div>
               </div>
-              <div className="post-elapsed-time">{getTimeAfterCreated(post.timeAfterCreated)}</div>
-            </div>
-            <div className="post-user-info">
-              <div className="post-user-profile">
-                <img src={postUserProfile} alt="엑박" />
+              <div className="post-user-info">
+                <div className="post-user-profile">
+                  <img src={postUserProfile} alt="엑박" />
+                </div>
+                <div className="post-user-nickname">{post.authorName} &gt;</div>
               </div>
-              <div className="post-user-nickname">{post.authorName} &gt;</div>
-            </div>
-            </div>
-            <div className="post-main-content">{post.contents}</div>
-            <div className="post-button-container">
-              {postLikeStatus ?
-                <>
-                  <button className='like-status-button' onClick={() => {
-                    setPostLikeStatus(false);
-                    setPureStatus(false);
-                    postCancelLike(userIdx, postId);
-                  }}>
-                  <div className="liked-inpost-like-number">{postLikes}</div>
-                  <img src={greenHeart} alt=""/>
-                  추천
-                  </button>
-                </>
-                :
-                <>
-                  <button className='default-status-button' onClick={() => {
-                    setPostLikeStatus(true);
-                    setPureStatus(false);
-                    postLike(userIdx, postId, "LIKE");
-                  }}>
-                    <div className="default-inpost-like-number">{postLikes}</div>
-                    <img src={whiteHeart} alt="" />
-                    <div>추천</div>
-                  </button>
-                </>
+              </div>
+              <div className="post-main-content">{post.contents}</div>
+              <div className="post-button-container">
+                {postLikeStatus ?
+                  <>
+                    <button className='like-status-button' onClick={() => {
+                      setPostLikeStatus(false);
+                      setPureStatus(false);
+                      postCancelLike(userIdx, postId);
+                    }}>
+                    <div className="liked-inpost-like-number">{postLikes}</div>
+                    <img src={greenHeart} alt=""/>
+                    추천
+                    </button>
+                  </>
+                  :
+                  <>
+                    <button className='default-status-button' onClick={() => {
+                      setPostLikeStatus(true);
+                      setPureStatus(false);
+                      postLike(userIdx, postId, "LIKE");
+                    }}>
+                      <div className="default-inpost-like-number">{postLikes}</div>
+                      <img src={whiteHeart} alt="" />
+                      <div>추천</div>
+                    </button>
+                  </>
+                }
+                {postScrapStatus ?
+                  <>
+                    <button className='scrap-status-button' onClick={() => {
+                      setPostScrapStatus(false);
+                      postCancelScrap(postId)}}
+                    >
+                      <img src={scrappedIcon} alt=""/>
+                      <div>스크랩</div>
+                    </button>
+                  </> :
+                  <>
+                    <button className='default-status-scrap-button' onClick={() => {
+                      setScrapSnackbarOpen(true);
+                      setPostScrapStatus(true);
+                      postScrap(postId)}}
+                    >
+                      <img src={unScrappedIcon} alt="" />
+                      <div>스크랩</div>
+                    </button>
+                  </>
+                }
+              </div>
+              {comments &&
+                <Comments
+                  comments={comments}
+                  setRootCommentIdx={setRootCommentIdx}
+                  setPlaceHolder={setPlaceHolder}
+                  inputRef={inputRef}
+                  handleCommentDelete={handleCommentDelete}
+                  setCommentReported={setCommentReported}
+                  handleReportComment={handleReportComment}
+                />
               }
-              {postScrapStatus ?
-                <>
-                  <button className='scrap-status-button' onClick={() => {
-                    setPostScrapStatus(false);
-                    postCancelScrap(postId)}}
-                  >
-                    <img src={scrappedIcon} alt=""/>
-                    <div>스크랩</div>
-                  </button>
-                </> :
-                <>
-                  <button className='default-status-scrap-button' onClick={() => {
-                    setScrapSnackbarOpen(true);
-                    setPostScrapStatus(true);
-                    postScrap(postId)}}
-                  >
-                    <img src={unScrappedIcon} alt="" />
-                    <div>스크랩</div>
-                  </button>
-                </>
-              }
             </div>
-            {comments &&
-              <Comments
-                comments={comments}
-                setRootCommentIdx={setRootCommentIdx}
-                setPlaceHolder={setPlaceHolder}
-                inputRef={inputRef}
-                handleCommentDelete={handleCommentDelete}
-                setCommentReported={setCommentReported}
-                handleReportComment={handleReportComment}
-              />
-            }
           </>
         }
       </div>
@@ -481,7 +483,7 @@ export default function PostPage() {
         />
        <PostScrapSnackbar handleClose={handleScrapSnackbarClose} open={scrapSnackbarOpen}/>
        <PostReportSnackbar handleClose={handleReportSnackbarClose} open={reportSnackbarOpen}/>
-       <div className="bottom-bar-blocker" ></div>
+       <div className="bottom-bar-blocker2" ></div>
     </>
   );
 }

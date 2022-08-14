@@ -1,11 +1,30 @@
 .post-container {
   box-sizing: border-box;
-  padding: 20px 22px 0 22px ;
+  padding: 5px 22px 0 22px ;
   /* border: 1px solid white; */
   width: 360px;
-  height: auto;
+  height: 600px;
   z-index: 10;
   position: relative;
+}
+
+.post-scroll-part {
+  overflow-x: hidden;
+  height: 550px;
+  width: 338px;
+}
+.post-scroll-part::-webkit-scrollbar {
+  width: 8px;
+}
+
+.post-scroll-part::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.post-scroll-part::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 
 .post-subject {
@@ -539,11 +558,13 @@ cursor: pointer;
   left: 30px;
 }
 
-.bottom-bar-blocker {
+.bottom-bar-blocker2 {
   position: fixed;
   width: 360px;
   height: 100px;
   background-color: #0A1123;
   bottom: 0px;
   z-index: 1;
+  box-shadow: 0px -9px 13px -6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px 10px 0px 0px;
 }

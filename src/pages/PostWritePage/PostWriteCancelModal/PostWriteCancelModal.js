@@ -4,7 +4,13 @@ import './PostWriteCancelModal.css';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import alertIcon from '../../../assets/alertIcon.png';
 
-const customStyles = {
+export default function PostWriteCancelModal(props) {
+  const { isCancelModalOpen, closeCancelModal, state, boardName } = props;
+  const navigate = useNavigate();
+  const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
+  const customStyles = {
   content: {
     position: 'absolute',
     top: '50%',
@@ -33,10 +39,7 @@ const customStyles = {
   }
 };
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement('#root');
-// console.log(Modal.defaultStyles.overlay);
-Modal.defaultStyles.overlay = {
+  Modal.defaultStyles.overlay = {
   backgroundColor: "rgba(0, 0, 0, 0.6)",
   bottom: 0,
   left: 0,
@@ -45,28 +48,7 @@ Modal.defaultStyles.overlay = {
   top: 0,
   zIndex: 99
 }
-// Modal.defaultStyles.content = {
-//   position: 'absolute',
-//   top: '40px',
-//   left: '40px',
-//   right: '40px',
-//   bottom: '40px',
-//   WebkitOverflowScrolling: 'touch',
-//   outline: 'none',
-//   width: '316px',
-//   height: '86px',
-//   backgroundColor: '#D9D9D9',
-//   borderRadius: '10px',
-// }
-
-console.log(Modal.defaultStyles.overlay);
-export default function PostWriteCancelModal(props) {
-  const { isCancelModalOpen, closeCancelModal, state, boardName } = props;
-  const navigate = useNavigate();
-  const params = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const scrapped = searchParams.get('scrapped');
-
+  console.log('aa');
   return (
     <div>
       <Modal
