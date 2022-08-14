@@ -365,7 +365,7 @@ export default function PostPage() {
       <Header />
 
       <div className="post-container">
-        <div className='board-title-box'>
+        <div className='board-title-box2'>
           <button className='back-button' onClick={() => navigate(`/boards/${boardId}?scrapped=${scrapped}`)}>
             <img src={leftArrow} alt=''/>
           </button>

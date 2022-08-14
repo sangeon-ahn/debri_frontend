@@ -69,8 +69,6 @@ export default function ReComment(props) {
     setIsCommentSettingModalOn(state => !state);
   };
 
-  console.log(voteCount);
-
   return (
     <div className="recomment-container">
       <div className="recomment-arrow-box">
