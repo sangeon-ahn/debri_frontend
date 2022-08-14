@@ -18,9 +18,7 @@ export default function LoginPage() {
     'Content-Type': 'application/json',
   };
 
-  const setLocalstorage = (loginData) => {
-    localStorage.setItem("userData", JSON.stringify(loginData));
-  };
+
 
   async function postData(email, pwd) {
     try {
@@ -33,7 +31,6 @@ export default function LoginPage() {
         { headers });
       console.log('리턴', response);
       if (response.data.isSuccess) {
-        setLocalstorage()
         localStorage.setItem("userData", JSON.stringify(response.data.result));
         localStorage.setItem("idPassword", JSON.stringify({id: email, pwd: pwd}));
         navigate('/home');
