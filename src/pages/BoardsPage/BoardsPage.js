@@ -164,7 +164,7 @@ export default function BoardsPage() {
           <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
           <img src={searchIcon} alt="액박" className="search-icon"/>
         }
-        <input type="text" className="search" placeholder="검색어를 입력하세요" onChange={onChange}/>
+        <input type="text" className="search" placeholder="전체 게시물 검색하기" onChange={onChange}/>
       </div>
 
       {text ? 

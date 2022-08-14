@@ -4,7 +4,7 @@ import grayUpThumb from '../../../assets/grayUpThumb.png';
 import greenUpThumb from '../../../assets/greenUpThumb.png';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 import './ReComment.css';
 import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 
