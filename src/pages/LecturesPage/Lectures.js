@@ -1,9 +1,10 @@
 import { useState, useCallback, useLayoutEffect } from "react";
 import Lecture from "./Lecture/Lecture";
 import axios from "axios";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 export default function Lectures(props) {
-  const { lang, type, price, searchInput, title } = props;
+  const { lang, type, price, searchInput, title, filterHeight } = props;
 
   const [lectures, setLectures] = useState(null);
   const [error, setError] = useState(false);
@@ -31,12 +32,19 @@ export default function Lectures(props) {
     }
   };
 
+  const lectureListStyle = {
+    width: '338px',
+    marginTop: '14px',
+    height: (460 - filterHeight) + 'px',
+    overflowX: 'hidden'
+  
+  }
   if (error) return null;
 
   return (
     <div className="lectures-container">
       <div className="lectures-title">{title}</div>
-      <div className="lecture-list">
+      <div className="lecture-list" style={lectureListStyle}>
         {lectures && lectures.map(lecture => {
           return <Lecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.userScrap} />
         })}

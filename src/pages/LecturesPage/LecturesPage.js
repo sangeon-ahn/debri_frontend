@@ -41,6 +41,8 @@ export default React.memo(function LecturesPage() {
     setPricing(null);
   }
 
+  const [filterHeight, setFilterHeight] = useState(null);
+  
   return (
     <>
       <Header />
@@ -59,6 +61,7 @@ export default React.memo(function LecturesPage() {
           handleSubjectClick={handleSubjectClick}
           handleTypeClick={handleTypeClick}
           handlePriceClick={handlePriceClick}
+          setFilterHeight={setFilterHeight}
         />
         {(!subject && !material && !pricing && !searchInput) && <ScrappedLectures />
         }
@@ -68,6 +71,7 @@ export default React.memo(function LecturesPage() {
           price={pricing}
           searchInput={searchInput}
           title="검색된 강의"
+          filterHeight={filterHeight}
         />}
       </div>
     </>

@@ -10,7 +10,7 @@ html, body {
 }
 
 #root {
-  position: relative;
+  position: fixed;
   width: 360px;
   /* height: 800px; */
 }

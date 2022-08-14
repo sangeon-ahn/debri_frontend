@@ -17,12 +17,12 @@ border-radius: 10px;
 }
 
 .lecture-description {
-  width: 200px;
+  width: 215px;
   margin-top: 10px;
 }
 
 .lecture-detail-box {
-  width: 50px;
+  width: 45px;
   height: 80px;
 }
 
@@ -52,6 +52,10 @@ border-radius: 10px;
   line-height: 23px;
   color: #FFFFFF;
   margin-right: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 172px;
 }
 
 .lecture-chapters {

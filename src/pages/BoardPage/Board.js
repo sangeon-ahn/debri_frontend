@@ -180,7 +180,7 @@ export default function Board() {
           </div>
         </div>
         :
-        <div>
+        <div className='board-main-container'>
           <div className='board-title-container'>
             {board && <>
               <div className='board-title-box'>

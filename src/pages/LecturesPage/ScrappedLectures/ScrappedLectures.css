@@ -13,5 +13,21 @@
 
 .scrapped-lectures {
   margin-top: 14px;
-  width: 316px;
+  width: 338px;
+  overflow-x: hidden;
+  height: 300px;
+}
+
+.scrapped-lectures::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrapped-lectures::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.scrapped-lectures::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }

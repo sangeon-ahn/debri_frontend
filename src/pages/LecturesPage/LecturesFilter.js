@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
 import keywordMinusIcon from '../../assets/deleteFilterIcon.png';
 import keywordPlusIcon from '../../assets/keywordPlusIcon.png';
 
 export default function LecturesFilter(props) {
-  const { subject, material, pricing, handleSubjectClick, handleTypeClick, handlePriceClick } = props;
+  const { subject, material, pricing, handleSubjectClick, handleTypeClick, handlePriceClick, setFilterHeight } = props;
+
+  useEffect(() => {
+    const $keywordsContainer = document.querySelector('.keywords-container');
+    setFilterHeight($keywordsContainer.clientHeight);
+    console.log($keywordsContainer.clientHeight);
+  }, [subject, material, pricing]);
 
   return (
     <>

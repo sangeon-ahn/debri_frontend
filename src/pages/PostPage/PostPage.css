@@ -544,5 +544,6 @@ cursor: pointer;
   width: 360px;
   height: 100px;
   background-color: #0A1123;
-  bottom: 10px;
+  bottom: 0px;
+  z-index: 1;
 }

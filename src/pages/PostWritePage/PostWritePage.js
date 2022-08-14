@@ -133,7 +133,6 @@ export default function PostWritePage() {
           </button>
         </div>
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
     </div>
   );
 }
