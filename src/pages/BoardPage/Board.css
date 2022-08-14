@@ -72,6 +72,7 @@ left: 11px;
   line-height: 17px;
   color: white;
   text-align: center;
+  border-left: 2px solid #66CC66;
 }
 
 .board-title {
@@ -146,4 +147,22 @@ left: 11px;
 .board-main-container {
   width: 360px;
   height: 573px;
+}
+
+/* 스크랩한 게시물 */
+.left-arrow {
+  float:left;
+  margin:5px;
+}
+.scrapPostTitle{
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  float:left;
+  margin:0 10px;
+}
+.bookmark_Posts{
+  margin: 5px 10px;
+  float:right;
 }

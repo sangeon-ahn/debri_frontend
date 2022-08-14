@@ -4,7 +4,7 @@ import grayUpThumb from '../../../assets/grayUpThumb.png';
 import greenUpThumb from '../../../assets/greenUpThumb.png';
 import { useState } from 'react';
 import axios from 'axios';
-
+import { getTimeAfterCreated } from '../../../utils/getTimeAfterCreated';
 import './ReComment.css';
 
 export default function ReComment(props) {
@@ -72,7 +72,7 @@ export default function ReComment(props) {
         <div className="recomment-content">{reComment.commentContent}</div>
         <div className='recomment-detail'>
           <div className="recomment-user-name">{reComment.authorName} &gt;</div>
-          <div className='recomment-elapsed-time'>0분 전</div>
+          <div className='recomment-elapsed-time'>{getTimeAfterCreated(reComment.timeAfterCreated)}</div>
           <div className='recomment-button-box'>
           {pressLike ? 
               <img src={greenUpThumb} alt='' className="green-upthumb-icon" onClick={()=> onCancelLike(reComment.commentIdx)} style={{ margin:'-1px 8.49px 1px 0'}}/> :

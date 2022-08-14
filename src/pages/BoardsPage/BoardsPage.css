@@ -81,7 +81,13 @@
 }
 .scrappoststitle{
     float: left;
-    color:white;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #FFFFFF;
     margin: 10px 15px;
 }
 .rightarrow{
