@@ -35,7 +35,7 @@ export default function Lectures(props) {
   const lectureListStyle = {
     width: '338px',
     marginTop: '14px',
-    height: (460 - filterHeight) + 'px',
+    height: (440 - filterHeight) + 'px',
     overflowX: 'hidden'
   
   }
