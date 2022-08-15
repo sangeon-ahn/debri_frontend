@@ -1,0 +1,38 @@
+.start-curriculum {
+  width: 320px;
+  height: 320px;
+  border-radius: 160px;
+  border: 8px solid #66CC66;
+  margin-top: 142px;
+  margin-left: 20px;
+  text-align: center;
+  /* line-height: 336px; */
+  color: white;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.start-curriculum:hover {
+  background-color: #66CC66;
+  
+}
+
+.start-curriculum-plus-icon {
+  margin: 70px 0 28px 0;
+}
+
+.start-curriculum-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 7px;
+}
+
+.start-curriculum-detail-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 12px;
+}

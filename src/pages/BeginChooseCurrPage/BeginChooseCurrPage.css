@@ -1,0 +1,199 @@
+.start-new-curr-text-box {
+  margin-top: 38px;
+  margin: 0 auto;
+}
+
+.start-new-curr-text-bold {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.start-new-curr-text-light {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+  color: #f7eeee;
+}
+
+.roadmaps-area {
+  width: 324.6px;
+  margin-left: 17px;
+  margin-top: 36px;
+}
+
+.roadmaps-area-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 17px;
+  color: #f7eeee;
+  margin-left: 7.26px;
+}
+
+.roadmaps-container {
+  margin-top: 27px;
+  width: 324.26px;
+}
+
+.roadmap {
+  display: flex;
+  width: 324.26px;
+}
+
+.roadmap-icon-box {
+  width: 86px;
+  height: 86px;
+}
+.roadmap-icon-box img {
+  width: 86px;
+  height: 86px;
+  /* object-fit: fill; */
+}
+.roadmap-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+color: #FFFFFF;
+margin-bottom: 3px;
+margin-top: 5px;
+}
+
+.roadmap-description {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 200;
+font-size: 10px;
+line-height: 14px;
+margin-bottom: 17px;
+color: #FFFFFF;
+}
+
+.roadmap-madeby {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 9px;
+line-height: 13px;
+
+color: #FFFFFF;
+}
+
+.by {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 9px;
+line-height: 13px;
+color: #FFFFFF;
+margin-right: 5px;
+}
+
+.team-debri {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+line-height: 13px;
+
+color: #FFFFFF;
+}
+
+.roadmap-detail-box {
+  margin-left: 10.26px;
+  width: 212px;
+}
+
+.madeby {
+  display: flex;
+}
+
+.roadmap-main-go-button-box {
+  width: 24.6px;
+  text-align: center;
+  line-height: 80px;
+}
+
+.curriculums-area {
+  width: 324.26px;
+  margin-top: 36px;
+  margin-left: 22px;
+}
+
+.curriculums-area-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 17px;
+  color: #f7eeee;
+  margin-left: 7px;
+}
+
+.curriculums-container {
+  margin-top: 27px;
+  width: 324.26px;
+}
+
+.curriculum {
+  display: flex;
+}
+
+.start-new-curriculum-area {
+  display: flex;
+  margin-top: 26px;
+  margin-left: 22px;
+}
+
+.start-curri-circle-icon {
+  position: absolute;
+}
+
+.start-curri-mini-plus-icon {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+}
+
+.start-new-curriculum-box {
+  width: 76px;
+  height: 76px;
+  position: relative;
+}
+
+.start-new-curriculum-text {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 76px;
+color: #FFFFFF;
+margin-left: 15px;
+}
+
+.roadmap-navi-container {
+  display: flex;
+}
+
+.curriculum-Icon-box {
+  width: 76.5px;
+  height: 76px;
+}
+
+.curriculum-Icon-box img {
+  width: 76.5px;
+  height: 76px;
+  object-fit: cover;
+}
+

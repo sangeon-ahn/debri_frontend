@@ -75,8 +75,7 @@ export default function PostMenuModal(props) {
           <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify?scrapped=${scrapped}`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
           <button className="post-delete" onClick={() => {
             handlePostDeleteClick(postId);
-            // navigate(`/boards/${boardId}?scrapped=${scrapped}`);
-            setReportSnackbarOpen(true);
+            navigate(`/boards/${boardId}?scrapped=${scrapped}`);
           }}>삭제하기</button>
         </div> :
         <div>

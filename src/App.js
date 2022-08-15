@@ -6,13 +6,17 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import Board from './pages/BoardPage/Board';
 import ScrapPostsList from "./pages/BoardPage/ScrapPostsList";
 import PostWritePage from "./pages/PostWritePage/PostWritePage";
-import HomePage from "./pages/HomePage/HomePage";
+import BeginPage from "./pages/BeginPage/BeginPage";
 import LowBar from "./pages/LowBar/LowBar";
 import Header from "./pages/Header/Header";
 import PostPage from "./pages/PostPage/PostPage";
 import PostModifyPage from "./pages/PostModifyPage/PostModifyPage";
 import LecturesPage from "./pages/LecturesPage/LecturesPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
+import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage';
+import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage';
+import BeginNewCurrPage from './pages/BeginNewCurrPage/BeginNewCurrPage';
+import HomePage from './pages/HomePage/HomePage';
 
 function App() {
   return (
@@ -21,7 +25,8 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/account' element={<Account />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={<BeginPage />} />
+          <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
           <Route path="/lectures" element={<LecturesPage />} />
           <Route path="/boards" element={<BoardsPage />} />
           <Route path="/boards/:boardId" element={<Board />} />
