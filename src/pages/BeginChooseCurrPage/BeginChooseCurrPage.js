@@ -1,9 +1,10 @@
 import Header from "../Header/Header";
 import './BeginChooseCurrPage.css';
-import roadmapIcon from '../../assets/roadmapIcon.png';
+import roadmapIcon from '../../assets/orbit.gif';
 import roadmapRightArrowIcon from '../../assets/roadmapRightArrowIcon.png';
 import curriCircleIcon from '../../assets/curriCircleIcon.png';
 import curriMiniPlusIcon from '../../assets/curriMiniPlusIcon.png';
+import JavaCurriIcon from '../../assets/JavaCurriIcon.png';
 
 export default function BeginChooseCurrPage() {
   return (
@@ -22,16 +23,36 @@ export default function BeginChooseCurrPage() {
             <div className="roadmap-icon-box">
               <img src={roadmapIcon} alt="" />
             </div>
-            <div className="roadmap-detail-box">
-              <div className="roadmap-title">서버 로드맵</div>
-              <div className="roadmap-description">Server 및 Backend 에 대한 기초 및 심화</div>
-              <div className="madeby">
-                <div className="by">by</div>
-                <div className="team-debri">Team Debri</div>
+            <div className="roadmap-navi-container">
+              <div className="roadmap-detail-box">
+                <div className="roadmap-title">서버 로드맵</div>
+                <div className="roadmap-description">Server 및 Backend 에 대한 기초 및 심화</div>
+                <div className="madeby">
+                  <div className="by">by</div>
+                  <div className="team-debri">Team Debri</div>
+                </div>
+              </div>
+              <div className="roadmap-main-go-button-box">
+                <img src={roadmapRightArrowIcon} alt="" />
               </div>
             </div>
-            <div className="roadmap-main-go-button-box">
-              <img src={roadmapRightArrowIcon} alt="" />
+          </div>
+          <div className="roadmap">
+            <div className="roadmap-icon-box">
+              <img src={roadmapIcon} alt="" />
+            </div>
+            <div className="roadmap-navi-container">
+              <div className="roadmap-detail-box">
+                <div className="roadmap-title">안드로이드 로드맵</div>
+                <div className="roadmap-description">Server 및 Backend 에 대한 기초 및 심화</div>
+                <div className="madeby">
+                  <div className="by">by</div>
+                  <div className="team-debri">Team Debri</div>
+                </div>
+              </div>
+              <div className="roadmap-main-go-button-box">
+                <img src={roadmapRightArrowIcon} alt="" />
+              </div>
             </div>
           </div>
         </div>
@@ -42,8 +63,8 @@ export default function BeginChooseCurrPage() {
         </div>
         <div className="curriculums-container">
           <div className="curriculum">
-          <div className="roadmap-icon-box">
-              <img src={roadmapIcon} alt="" />
+          <div className="curriculum-Icon-box">
+              <img src={JavaCurriIcon} alt="" />
             </div>
             <div className="roadmap-detail-box">
               <div className="roadmap-title">"자바 첫 걸음"</div>

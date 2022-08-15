@@ -34,7 +34,8 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/account' element={<Account />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={<BeginPage />} />
+          <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
           <Route path="/lectures" element={<LecturesPage />} />
           <Route path="/boards" element={<BoardsPage />} />
           <Route path="/boards/:boardId" element={<Board />} />
