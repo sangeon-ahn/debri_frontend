@@ -12,6 +12,7 @@ import Header from "./pages/Header/Header";
 import PostPage from "./pages/PostPage/PostPage";
 import PostModifyPage from "./pages/PostModifyPage/PostModifyPage";
 import LecturesPage from "./pages/LecturesPage/LecturesPage";
+import LectureDetailPage from "./pages/LecturesPage/LectureDetailPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage';
 import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/home" element={<BeginPage />} />
           <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
           <Route path="/lectures" element={<LecturesPage />} />
+          <Route path="/lectures/detail/:lectureIdx" element={<LectureDetailPage />} />
           <Route path="/boards" element={<BoardsPage />} />
           <Route path="/boards/:boardId" element={<Board />} />
           <Route path="/boards/:boardId/:postId" element={<PostPage />} />
