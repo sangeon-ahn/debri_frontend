@@ -138,7 +138,7 @@ left: 11px;
 .write-post-container2 {
   position: fixed;
     z-index: 2;
-    width: 100%;
+    width: 360px;
     margin: 0 auto;
     bottom: 84px;
 

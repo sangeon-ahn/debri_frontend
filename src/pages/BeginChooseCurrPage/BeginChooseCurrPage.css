@@ -167,9 +167,17 @@ color: #FFFFFF;
 }
 
 .start-new-curriculum-box {
-  width: 76px;
-  height: 76px;
   position: relative;
+  width: 76.5px;
+  height: 76px;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 38px;
+  border: 4px solid white;
+}
+
+.start-new-curriculum-box:hover {
+  background-color: #f7eeee;
 }
 
 .start-new-curriculum-text {

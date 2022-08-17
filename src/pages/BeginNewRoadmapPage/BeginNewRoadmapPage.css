@@ -127,6 +127,7 @@ color: #000000;
   border-radius: 6px;
   margin-left: 4px;
   margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .roadmap-content {
@@ -153,7 +154,9 @@ margin-bottom: 6px;
   line-height: 14px;
   color: #FFFFFF;
   margin-left: 16px;
+  margin-bottom: 8px;
 }
+
 
 .roadmap-content-checkbox {
   position: absolute;
@@ -165,7 +168,7 @@ margin-bottom: 6px;
   width: 316px;
   margin-top: 45px;
   margin-left: 22px;
-  height: 400px;
+  margin-bottom: 105px;
 }
 
 .relative-lectures-title {

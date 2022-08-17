@@ -15,6 +15,8 @@ import leftArrow from '../../assets/leftArrow.png';
 import rightArrow from '../../assets/rightArrow.png';
 import bookmarkGreen from '../../assets/bookmarkGreen.png';
 import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
+import pencil from '../../assets/pencil.png';
+import writePost from '../../assets/글쓰기.png';
 
 export default function BoardsPage() {
   const navigate = useNavigate();
@@ -135,6 +137,7 @@ export default function BoardsPage() {
   }
 
   async function SearchPost(keyword) {
+    
     try {
       const response = await axios.post(`/api/post/getSearchList`,
         JSON.stringify({keyword : keyword}),
@@ -207,6 +210,18 @@ export default function BoardsPage() {
               <p>전체 게시판</p>
             </div>
             {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
+          </div>
+          <div className='write-post-container3'>
+              <button
+                className='write-post'
+                onClick={() => navigate(`/boards/1/postwrite`)}>
+                  <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
+                    <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
+                  </div>
+                  <div style={{height: '14px'}}>
+                    <img src={writePost} alt="엑박" className='write-post-text' />
+                  </div>
+              </button>
           </div>
           <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
         </div>

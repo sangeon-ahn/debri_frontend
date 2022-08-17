@@ -5,8 +5,10 @@ import roadmapRightArrowIcon from '../../assets/roadmapRightArrowIcon.png';
 import curriCircleIcon from '../../assets/curriCircleIcon.png';
 import curriMiniPlusIcon from '../../assets/curriMiniPlusIcon.png';
 import JavaCurriIcon from '../../assets/JavaCurriIcon.png';
+import { useNavigate } from "react-router-dom";
 
 export default function BeginChooseCurrPage() {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -23,7 +25,7 @@ export default function BeginChooseCurrPage() {
             <div className="roadmap-icon-box">
               <img src={roadmapIcon} alt="" />
             </div>
-            <div className="roadmap-navi-container">
+            <div className="roadmap-navi-container" onClick={() => navigate('/roadmaps?field=server')}>
               <div className="roadmap-detail-box">
                 <div className="roadmap-title">서버 로드맵</div>
                 <div className="roadmap-description">Server 및 Backend 에 대한 기초 및 심화</div>
@@ -41,7 +43,7 @@ export default function BeginChooseCurrPage() {
             <div className="roadmap-icon-box">
               <img src={roadmapIcon} alt="" />
             </div>
-            <div className="roadmap-navi-container">
+            <div className="roadmap-navi-container" onClick={() => navigate('/roadmaps?field=android')}>
               <div className="roadmap-detail-box">
                 <div className="roadmap-title">안드로이드 로드맵</div>
                 <div className="roadmap-description">Server 및 Backend 에 대한 기초 및 심화</div>
@@ -80,11 +82,10 @@ export default function BeginChooseCurrPage() {
           </div>
         </div>
       </div>
-      <div className="start-new-curriculum-area">
-        <div className="start-new-curriculum-box">
-          <img src={curriCircleIcon} alt="" className="start-curri-circle-icon"/>
+      <div className="start-new-curriculum-area" onClick={() => navigate('/createCurri')}>
+        <button className="start-new-curriculum-box">
           <img src={curriMiniPlusIcon} alt="" className="start-curri-mini-plus-icon"/>
-        </div>
+        </button>
         <div className="start-new-curriculum-text">새로운 커리큘럼 시작하기</div>
       </div>
     </>

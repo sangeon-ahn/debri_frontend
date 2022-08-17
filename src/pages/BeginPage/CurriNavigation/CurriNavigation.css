@@ -1,7 +1,7 @@
 .curri-navigation-container {
   display: flex;
   width: 333px;
-  height: 50px;
+  height: 66px;
   margin-left: 13px;
   justify-content: space-between;
   align-items: center;
@@ -12,9 +12,17 @@
   height: 38px;
 }
 
+.left-swipe-box img {
+  cursor: pointer;
+}
+
 .right-swipe-box {
   width: 18px;
   height: 38px;
+}
+
+.right-swipe-box {
+  cursor: pointer;
 }
 
 .curri-navi-title {

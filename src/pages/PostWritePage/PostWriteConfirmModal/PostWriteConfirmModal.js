@@ -47,7 +47,7 @@ export default function PostWriteConfirmModal(props) {
   };
   
   const postIdxRef = useRef(0);
-
+  Modal.setAppElement('#root');
   async function postData(boardIdx,userIdx,postContent, postName) {
     try {
       const response = await axios.post(`/api/post/create`,

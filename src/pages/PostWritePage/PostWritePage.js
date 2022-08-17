@@ -66,7 +66,6 @@ export default function PostWritePage() {
 
     setBoardName(board.boardName);
   };
-  console.log('??');
   return (
     <>
       <Header />

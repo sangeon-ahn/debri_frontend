@@ -187,3 +187,8 @@
     cursor: pointer;
 }
 
+.write-post-container3 {
+    position: fixed;
+    bottom: 86px;
+    left: 120px;
+}

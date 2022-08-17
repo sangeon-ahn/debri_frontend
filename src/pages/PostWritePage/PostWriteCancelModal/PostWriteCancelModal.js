@@ -39,15 +39,6 @@ export default function PostWriteCancelModal(props) {
   }
 };
 
-  Modal.defaultStyles.overlay = {
-  backgroundColor: "rgba(0, 0, 0, 0.6)",
-  bottom: 0,
-  left: 0,
-  position: "fixed",
-  right: 0,
-  top: 0,
-  zIndex: 99
-}
   console.log('aa');
   return (
     <div>

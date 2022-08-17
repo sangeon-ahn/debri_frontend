@@ -7,11 +7,12 @@ import CurriMain from "./CurriMain/CurriMain";
 
 export default function BeginPage() {
 
-  const [curriList, setCurriList] = useState([]);
+  const [curriList, setCurriList] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [curri, setCurri] = useState([]);
+  const [curri, setCurri] = useState(null);
   const [error, setError] = useState(null);
   const [displayedCurri, setDisplayedCurri] = useState(0);
+
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
     'Accept': 'application/json',
@@ -22,23 +23,23 @@ export default function BeginPage() {
     try {
       setLoading(true);
       const response = await axios.get('/api/curri/getList', { headers });
-      console.log(response);
+      console.log("커리리스트", response);
       setCurriList(response.data.result);
     } catch(e) {
-      console.log(e);
+      console.log("커리 리스트 오류", e);
       setError(e);
     }
     setLoading(false);
   };
-
+  console.log(getCurriList);
   const getCurriDetail = async (curriIdx) => {
     try {
       setLoading(true);
       const response = await axios.get(`/api/curri/getThisCurri/${curriIdx}`, { headers });
-      console.log(response);
+      console.log("커리 디테일", response);
       setCurri(response.data.result);
     } catch (e) {
-      console.log(e);
+      console.log("커리 디테일 오류", e);
       setError(e);
     }
     setLoading(false);
@@ -49,6 +50,8 @@ export default function BeginPage() {
   }, []);
 
   useEffect(() => {
+    console.log('ff');
+    if (curriList === null) return;
     if (curriList.length === 0) return;
     if (displayedCurri === curriList.length) return;
 
@@ -68,7 +71,7 @@ export default function BeginPage() {
   return (
     <>
       <Header />
-      {curriList.length !== 0 &&
+      {curriList !== null && !(curriList.length !== 0 && curri === null) &&
         <>
           <CurriNavigation
             showPrevCurri={showPrevCurri}
@@ -81,6 +84,7 @@ export default function BeginPage() {
             curri={curri}
             currentCurriPosition={displayedCurri}
             numberOfCurries={curriList.length}
+            getCurriList={getCurriList}
           />
         </>
       }

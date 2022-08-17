@@ -99,6 +99,12 @@ export default function PostPage() {
     fetchComments(postId);
   }, [commentReported]);
 
+  // useEffect(() => {
+  //   if (comments === []) return;
+  //   const $postScrollPart = document.querySelector('.post-scroll-part');
+  //   $postScrollPart.scrollHeight = $postScrollPart.clientHeight + $postScrollPart.scrollTop;
+  // }, [comments]);
+
   const fetchPost = async (postIdx) => {
     try {
       setError(null);
@@ -206,6 +212,8 @@ export default function PostPage() {
         console.log(e);
         setError(e);
       }
+      const $postScrollPart = document.querySelector('.post-scroll-part');
+      $postScrollPart.scrollTop = $postScrollPart.scrollHeight ;
     };
 
     const uploadReComment = async (userIdx, postIdx, rootCommentIdx, content, authorName) => {

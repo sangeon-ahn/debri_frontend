@@ -18,10 +18,13 @@ import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage
 import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage';
 import BeginNewCurrPage from './pages/BeginNewCurrPage/BeginNewCurrPage';
 import HomePage from './pages/HomePage/HomePage';
+import { RecoilRoot } from 'recoil';
+import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
 
 function App() {
   return (
     <>
+    <RecoilRoot>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
@@ -37,9 +40,12 @@ function App() {
           <Route path="/boards/:boardId/postwrite" element={<PostWritePage />} />
           <Route path="/curriculum" element={<CurriculumPage />} />
           <Route path="/scrapPostsList" element={<ScrapPostsList />} />
+          <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
+          <Route path='/createCurri' element={<CreateCurriPage />} />
         </Routes>
         <LowBar />
       </BrowserRouter>
+    </RecoilRoot>
     </>
   );
 }
