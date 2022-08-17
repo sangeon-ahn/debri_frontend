@@ -1,0 +1,184 @@
+.roadmap-back-box {
+  width: 56.74px;
+  height: 76px;
+  position: relative;
+}
+
+.roadmap-back-box img {
+  margin-left: 13px;
+  margin-top: 19px;
+}
+
+.curri-durration-and-start-container {
+  display: flex;
+  width: 310px;
+  height: 42px;
+  justify-content: space-between;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
+.curri-duration {
+  display: flex;
+  height: 42px;
+}
+
+.curri-start {
+  width: 120px;
+  height: 40px;
+
+}
+
+.curri-start {
+  background: #66CC66;
+border: 2px solid #0A1123;
+border-radius: 10px;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 900;
+font-size: 14px;
+line-height: 20px;
+
+color: #000000;
+}
+
+.curri-duration-content {
+  width: 94px;
+  height: 42px;
+  margin-left: 6.5px;
+}
+
+.curri-duration-arrow {
+  box-sizing: border-box;
+  padding-top: 6px;
+}
+.curri-duration-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.curri-duration-day {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #66CC66;
+}
+
+.day {
+  color: white;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.curri-duration-main {
+  display: flex;
+}
+
+.roadmap-full-container {
+  width: 316px;
+}
+
+.roadmap-orders-container {
+  width: 20.5px;
+  margin-top: 30px;
+}
+
+.roadmap-contents-container {
+  width: 288px;
+  margin-left: 10.5px;
+}
+
+.roadmap-full-container {
+  display: flex;
+  margin-top: 51px;
+  margin-left: 19px;
+}
+
+.roadmap-order-container {
+  margin-bottom: 31.5px;
+  width: 20.5px;
+  height: 79.5px;
+}
+
+.roadmap-order-container:nth-last-child(1) {
+  margin-bottom: 0px;
+}
+
+.roadmap-content-layer1 {
+  position: relative;
+  width: 288px;
+  border: 3px solid #FFFFFF;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.roadmap-content-layer2 {
+  position: relative;
+  display: flex;
+  width: 280px;
+  background: #484848;
+  border-radius: 6px;
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+.roadmap-content {
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+.roadmap-content-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+
+color: #FFFFFF;
+margin-bottom: 6px;
+}
+
+.roadmap-content-description {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  color: #FFFFFF;
+  margin-left: 16px;
+}
+
+.roadmap-content-checkbox {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.relative-lectures-container {
+  width: 316px;
+  margin-top: 45px;
+  margin-left: 22px;
+  height: 400px;
+}
+
+.relative-lectures-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #FFFFFF;
+}
+
+.relative-lectures {
+  width: 316px;
+  margin-top: 20px;
+}

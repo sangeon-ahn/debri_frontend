@@ -12,21 +12,20 @@ import "./LowBar.css";
 
 export default function LowBar() {
   const navigate = useNavigate();
-
   const [isButtonClicked, setIsButtonClicked] = useState({
-    homeButton: false,
+    homeButton: true,
     lectureButton: false,
     boardButton: false,
     curriButton: false
   });
-
+  
   const handleLowButtonClick = (e, path) => {
     
     setIsButtonClicked(state => {
       for (const button in state) {
-          state[button] = false;
+        state[button] = false;
       }
-
+      
       return {
         ...state,
         [e.target.id]: true
@@ -34,12 +33,13 @@ export default function LowBar() {
     });
     navigate(path);
   };
-
+  
+  if (window.location.pathname === '/') return null;
   if (window.location.pathname === '/account') return null;
   if (window.location.pathname.includes('/boards/') && window.location.pathname.includes('modify')) return null;
-  if (window.location.pathname === '/') return null;
   if (window.location.pathname.includes('/boards/') && window.location.pathname.includes('postwrite')) return null;
   if (window.location.pathname.includes('/lectures/') && window.location.pathname.includes('detail')) return null;
+  
   return (
     <div className="low-bar">
       <div className="home-button" onClick={(e) => handleLowButtonClick(e, '/home')} id="homeButton">

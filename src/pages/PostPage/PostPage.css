@@ -575,4 +575,5 @@ cursor: pointer;
   height: 33px;
   color: white;
   align-items: center;
+  margin-left: -10px;
 }

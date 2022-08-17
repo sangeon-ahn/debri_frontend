@@ -6,7 +6,10 @@ html, body {
   background-color: #0A1123;
   font-family: 'Noto Sans KR', sans-serif;
   width: 360px;
-  /* height: 800px; */
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 #root {
