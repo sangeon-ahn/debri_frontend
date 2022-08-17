@@ -201,11 +201,13 @@ export default function Board() {
             </>}
           </div>
 
-          {posts && board && <div className='post-list'>
-            {posts.map(post => (
-                <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
-            ))}
-          </div>}
+          {posts && board && 
+            <div className='post-list'>
+              {posts.map(post => (
+                  <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
+              ))}
+            </div>
+          }
 
           <div className='write-post-container2'>
               <button

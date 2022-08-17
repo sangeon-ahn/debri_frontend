@@ -4,15 +4,20 @@ import scrappedStar from '../../../assets/favoriteStar.png';
 import lectureLikesIcon from '../../../assets/lectureLikesIcon.png';
 import lectureUserNumberIcon from '../../../assets/curriUserNumberIcon.png';
 import lectureDetailIcon from '../../../assets/lectureDetailIcon.png';
+import grayHeart from '../../../assets/grayHeart.png';
+import greenHeart from '../../../assets/greenHeart.png';
 import axios from "axios";
 import { useState } from "react";
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function Lecture(props) {
+  const navigate = useNavigate();
   const { lecture, isScrappedLecture } = props;
   const [error, setError] = useState(false);
   const [isScrapped, setIsScrapped] = useState(isScrappedLecture);
   console.log(isScrapped);
   const userData = JSON.parse(localStorage.getItem("userData"));
+
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -79,7 +84,7 @@ export default function Lecture(props) {
                 <img src={unScrappedStar} alt="" onClick={lectureScrap}/>
               }
             </div>
-            <div className="lecture-description">
+            <div className="lecture-description" onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
               <div className={setColor(lecture)}>{lecture.langTag}</div>
               <div className="lecture-title-box">
                 <div className="lecture-name">{lecture.lectureName}</div>
@@ -87,13 +92,16 @@ export default function Lecture(props) {
               </div>
               <div className="lecture-info">
                 <div>
-                  <img className="lecture-likes-icon" src={lectureLikesIcon} alt="" />
+                  {lecture.userLike ?
+                    <img src={greenHeart} alt='' style={{height: '10px',width: '11.5px', margin:'2px 7px'}}/> :
+                    <img src={grayHeart} alt='' style={{height: '10px',width: '11.5px', margin:'2px 7px'}}/>
+                  }
                 </div>
-                <div className="lecture-likes-number">103</div>
+                <div className="lecture-likes-number">{lecture.likeNumber}</div>
                 <div>
                   <img className="lecture-user-number-icon" src={lectureUserNumberIcon} alt="" />
                 </div>
-                <div className="lecture-likes-number">84</div>
+                <div className="lecture-likes-number">{lecture.usedCount}</div>
                 <div className="lecture-info-vertical-line"></div>
                 <div className="lecture-material-type">{lecture.materialType}</div>
                 <div className="lecture-price">{lecture.pricing}</div>
