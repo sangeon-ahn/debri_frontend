@@ -255,7 +255,7 @@ export default function LecturesDeatilPage() {
                 </div>
               </div>
               <div>
-                <button className='add_curri'>커리큘럼에 추가하기</button>
+                <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: params.lectureIdx})}}>커리큘럼에 추가하기</button>
                 <button className='srcLink'><a href={lectureDetail.srcLink} className='srcLinktext'>강의 정보 확인하기</a></button>
               </div>
               {lectureLikeStatus ?

@@ -5,8 +5,8 @@ import './CreateCurriPage.css';
 
 export default function CreateCurriPage() {
   const [curriName, setCurriName] = useState('');
-  const [visibleStatus, setVisibleStatus] = useState(0);
-  const [langTag, setLangTag] = useState(0);
+  const [visibleStatus, setVisibleStatus] = useState("ACTIVE");
+  const [langTag, setLangTag] = useState("BACK");
   const curriAuthor = JSON.parse(localStorage.getItem("userData")).userName;
   const navigate = useNavigate();
 

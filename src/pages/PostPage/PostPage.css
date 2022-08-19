@@ -395,7 +395,7 @@ margin-right: 9px;
 /* 포스트 신고 버튼 누른 후 모달창 */
 .post-report-detail {
   width: 316px;
-  height: 282px;
+  /* height: 282px; */
   background: #8B95A1;
   border-radius: 10px;
   margin-bottom: 6px;

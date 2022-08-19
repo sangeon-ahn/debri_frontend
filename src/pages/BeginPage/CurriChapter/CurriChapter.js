@@ -47,7 +47,7 @@ export default function CurriChapter(props) {
     if (chIdx === 2) return 'curri-stone-two-box';
     if (chIdx === 3) return 'curri-stone-three-box';
   };
-  console.log(1, getCurriList);
+  
   return (
     <div className='curri-stone-check-one'>
       <div className={getStoneClass(chapter.chIdx)}>

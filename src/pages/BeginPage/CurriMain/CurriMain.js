@@ -17,6 +17,7 @@ import { useState } from 'react';
 import Wave from 'react-wavify';
 import { useRecoilState } from 'recoil';
 import { lowbarSelect } from '../../../Atom';
+import CurriRenameModal from '../CurriRenameModal/CurriRenameModal';
 
 export default function CurriMain(props) {
   const navigate = useNavigate();
@@ -25,14 +26,27 @@ export default function CurriMain(props) {
   const handleCheckboxClick = () => {
     console.log('hi');
   };
-  const [active, setActive] = useState(foo);
+  const [active, setActive] = useState(initialActiveStatus);
+  const [publicStatus, setPublicStatus] = useState(initialPublicStatus);
   const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
+  const [curriSettingModalOn, setCurriSettingModalOn] = useState(false);
+  const [curriRenameModalOn, setCurriRenameModalOn] = useState(false);
 
-  function foo() {
+  function initialActiveStatus() {
     if (curri) {
       if (curri.status === 'ACTIVE') {
         return true;
       } else if (curri.status === 'INACTIVE') {
+        return false;
+      }
+    }
+  }
+
+  function initialPublicStatus() {
+    if (curri) {
+      if (curri.visibleStatus === 'ACTIVE') {
+        return true;
+      } else if (curri.visibleStatus === 'INACTIVE') {
         return false;
       }
     }
@@ -70,6 +84,66 @@ export default function CurriMain(props) {
       console.log(e);
     }
   };
+
+  const patchCurriVisibility = async (curriIdx, visibleStatus) => {
+    let setVisibleStatus = '';
+
+    if (visibleStatus === 'ACTIVE') {
+      setVisibleStatus = 'INACTIVE';
+    } else if (visibleStatus === 'INACTIVE') {
+      setVisibleStatus = 'ACTIVE';
+    }
+
+    try {
+      const response = await axios.patch('/api/curri/modify/visibleStatus',
+        JSON.stringify({
+          curriIdx: curriIdx,
+          visibleStatus: setVisibleStatus
+        }),
+        { headers }
+      );
+      console.log(response);
+      setCurriSettingModalOn(false);
+      getCurriList();
+      scrollTop();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const scrollTop = () => {
+    const $curriScrollArea = document.querySelector('.curri-scroll-area');
+      $curriScrollArea.scrollTop = 0 ;
+  }
+
+  const deleteCurri = async (curriIdx) => {
+    try {
+      const response = await axios.patch(`/api/curri/delete/${curriIdx}`, JSON.stringify({}), { headers });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+    setCurriSettingModalOn(false);
+    getCurriList();
+  };
+
+  const renameCurri = () => {
+    setCurriSettingModalOn(false);
+    setCurriRenameModalOn(true);
+  };
+
+  const resetCurri = async (curriIdx) => {
+    try {
+      const response = await axios.patch(`/api/curri/reset/${curriIdx}`, JSON.stringify({}), { headers });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+    setCurriSettingModalOn(false);
+    getCurriList();
+    scrollTop();
+  };
+
   const handleCurriActivation = () => {
     setActive(state => !state);
 
@@ -88,7 +162,11 @@ export default function CurriMain(props) {
     });
     navigate('/lectures');
   };
-  console.log(getCurriList);
+
+  const handleModalCloseClick = () => {
+    setCurriSettingModalOn(false);
+  };
+
   return (
     <>
       {currentCurriPosition !== numberOfCurries ?
@@ -190,7 +268,7 @@ export default function CurriMain(props) {
                 </div>
               </div>
             </div>
-            <div className='curri-setting'>
+            <div className='curri-setting' onClick={() => setCurriSettingModalOn(state=>!state)}>
               <div className='curri-setting-icon-box'>
                 <img src={curriSettingIcon} alt="" />
               </div>
@@ -198,7 +276,24 @@ export default function CurriMain(props) {
                 설정 변경
               </div>
             </div>
-            <CurriSettingModal />
+            <CurriSettingModal
+              isOpen={curriSettingModalOn}
+              onRequestClose={() => setCurriSettingModalOn(false)}
+              patchCurriActivation={patchCurriActivation}
+              patchCurriVisibility={patchCurriVisibility}
+              deleteCurri={deleteCurri}
+              curri={curri}
+              renameCurri={renameCurri}
+              resetCurri={resetCurri}
+              handleModalCloseClick={handleModalCloseClick}
+              getCurriList={getCurriList}
+            />
+            <CurriRenameModal
+              isOpen={curriRenameModalOn}
+              onRequestClose={() => setCurriRenameModalOn(false)}
+              getCurriList={getCurriList}
+              curri={curri}
+            />
           </div>
         </div>
       </div>

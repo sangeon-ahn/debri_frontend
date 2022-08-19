@@ -31,7 +31,6 @@ export default function BeginPage() {
     }
     setLoading(false);
   };
-  console.log(getCurriList);
   const getCurriDetail = async (curriIdx) => {
     try {
       setLoading(true);

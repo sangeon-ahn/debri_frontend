@@ -6,9 +6,35 @@ import curriCircleIcon from '../../assets/curriCircleIcon.png';
 import curriMiniPlusIcon from '../../assets/curriMiniPlusIcon.png';
 import JavaCurriIcon from '../../assets/JavaCurriIcon.png';
 import { useNavigate } from "react-router-dom";
+import TopTenCurriculum from "./TopTenCurriculum";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function BeginChooseCurrPage() {
   const navigate = useNavigate();
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const [topTenCurriList, setTopTenCurriList] = useState(null);
+
+  const getTopTenCurriList = async () => {
+    try {
+      const response = await axios.get('/api/curri/scrap/topList', { headers });
+      console.log(response);
+      setTopTenCurriList(response.data.result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getTopTenCurriList();
+  }, []);
+
+  if (topTenCurriList === null) return null;
+
   return (
     <>
       <Header />
@@ -64,22 +90,9 @@ export default function BeginChooseCurrPage() {
           유저들이 제공하는 커리큘럼 TOP 10
         </div>
         <div className="curriculums-container">
-          <div className="curriculum">
-          <div className="curriculum-Icon-box">
-              <img src={JavaCurriIcon} alt="" />
-            </div>
-            <div className="roadmap-detail-box">
-              <div className="roadmap-title">"자바 첫 걸음"</div>
-              <div className="roadmap-description">JAVA는 이걸로 자바봐...</div>
-              <div className="madeby">
-                <div className="by">by</div>
-                <div className="team-debri">자바왕 김자바</div>
-              </div>
-            </div>
-            <div className="roadmap-main-go-button-box">
-              <img src={roadmapRightArrowIcon} alt="" />
-            </div>
-          </div>
+          {topTenCurriList.map(curri => {
+            return <TopTenCurriculum curri={curri} key={curri.curriIdx} />
+          })}
         </div>
       </div>
       <div className="start-new-curriculum-area" onClick={() => navigate('/createCurri')}>

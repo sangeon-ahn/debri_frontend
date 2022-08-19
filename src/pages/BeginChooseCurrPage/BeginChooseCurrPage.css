@@ -148,12 +148,20 @@ color: #FFFFFF;
 
 .curriculum {
   display: flex;
+  cursor: pointer;
 }
+
+.curriculum:hover {
+  background-color: #434343;
+}
+
+
 
 .start-new-curriculum-area {
   display: flex;
   margin-top: 26px;
-  margin-left: 22px;
+  margin-left: 25px;
+  margin-bottom: 132px;
 }
 
 .start-curri-circle-icon {
@@ -195,13 +203,12 @@ margin-left: 15px;
 }
 
 .curriculum-Icon-box {
-  width: 76.5px;
-  height: 76px;
+  width: 86px;
+  height: 86px;
 }
 
 .curriculum-Icon-box img {
-  width: 76.5px;
-  height: 76px;
-  object-fit: cover;
+  width: 86px;
+  height: 86px;
 }
 

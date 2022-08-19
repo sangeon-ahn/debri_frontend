@@ -16,10 +16,9 @@ import LectureDetailPage from "./pages/LecturesPage/LectureDetailPage";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 import BeginChooseCurrPage from './pages/BeginChooseCurrPage/BeginChooseCurrPage';
 import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage';
-import BeginNewCurrPage from './pages/BeginNewCurrPage/BeginNewCurrPage';
-import HomePage from './pages/HomePage/HomePage';
 import { RecoilRoot } from 'recoil';
 import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
+import AddLectureToCurri from './pages/LecturesPage/AddLectureToCurriPage';
 
 function App() {
   return (
@@ -38,10 +37,11 @@ function App() {
           <Route path="/boards/:boardId/:postId" element={<PostPage />} />
           <Route path="/boards/:boardId/:postId/modify" element={<PostModifyPage />} />
           <Route path="/boards/:boardId/postwrite" element={<PostWritePage />} />
-          <Route path="/curriculum" element={<CurriculumPage />} />
+          <Route path="/curriculum/:curriIdx" element={<CurriculumPage />} />
           <Route path="/scrapPostsList" element={<ScrapPostsList />} />
           <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
           <Route path='/createCurri' element={<CreateCurriPage />} />
+          <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
         </Routes>
         <LowBar />
       </BrowserRouter>
