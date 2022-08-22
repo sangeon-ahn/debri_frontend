@@ -1,0 +1,44 @@
+.curri-stone-one-box {
+  width: 132px;
+  height: 132px;
+  margin: 10px 4px 0 38px;
+}
+
+.curri-stone-two-box {
+  margin: 10px 4px 0 0;
+}
+
+.curri-stone-three-box {
+  margin: 10px 4px 8px 38px;
+} 
+
+.chapter-stone-icon {
+  width: 132px;
+  height: 132px;
+}
+
+/* .curri-chapter-main {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 2vw;
+line-height: 20px;
+width: 150px;
+color: #FFFFFF;
+} */
+
+.curri-chapter {
+  position: relative;
+  flex: 2;
+  display: flex;
+  margin-top: 70px;
+}
+
+.curri-chapter-checkbox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}

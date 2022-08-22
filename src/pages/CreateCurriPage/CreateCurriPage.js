@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './CreateCurriPage.css';
 
@@ -7,12 +7,19 @@ export default function CreateCurriPage() {
   const [curriName, setCurriName] = useState('');
   const [visibleStatus, setVisibleStatus] = useState("ACTIVE");
   const [langTag, setLangTag] = useState("BACK");
+  const [curriDesc, setCurriDesc] = useState('');
+  const [result , setResult] = useState(null);
+
   const curriAuthor = JSON.parse(localStorage.getItem("userData")).userName;
   const navigate = useNavigate();
 
   const handleCurriName = (e) => {
     setCurriName(e.target.value);
   }
+
+  const handleCurriDesc = (e) => {
+    setCurriDesc(e.target.value);
+  };
 
   const handleSelectedStatus = (e) => {
     setVisibleStatus(e.target.value);
@@ -40,6 +47,7 @@ export default function CreateCurriPage() {
         { headers }
       );
       console.log(response);
+      setResult(response.data.result);
     } catch (e) {
       console.log(e);
     }
@@ -49,14 +57,23 @@ export default function CreateCurriPage() {
     if (curriName === '') return;
 
     postCreateCurri(curriName, curriAuthor, visibleStatus, langTag);
-    navigate('/home');
   };
+
+  useEffect(() => {
+    if (result !== null) {
+      navigate('/home');
+    }
+  }, [result]);
 
   return (
     <div className='create-curri-page-container'>
       <div className='curri-name'>
         <div style={{color: 'white', width: '80px'}}>커리큘럼명</div>
         <input type='text' value={curriName} onChange={handleCurriName} className='curri-name-input' placeholder='커리큘럼 명을 입력해 주세요' spellCheck={false} />
+      </div>
+      <div className='curri-name'>
+        <div style={{color: 'white', width: '80px', fontSize: "13px"}}>커리큘럼 설명</div>
+        <input type='text' value={curriDesc} onChange={handleCurriDesc} className='curri-name-input' placeholder='커리큘럼 설명을 입력해 주세요' spellCheck={false} />
       </div>
       <div className='select-board'>
         <div className='select-box'>

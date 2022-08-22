@@ -19,6 +19,7 @@ import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage
 import { RecoilRoot } from 'recoil';
 import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
 import AddLectureToCurri from './pages/LecturesPage/AddLectureToCurriPage';
+import CurriculumTabPage from './pages/CurriculumTabPage/CurriculumTabPage';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
           <Route path='/createCurri' element={<CreateCurriPage />} />
           <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
+          <Route path='/curriculum' element={<CurriculumTabPage />} />
         </Routes>
         <LowBar />
       </BrowserRouter>

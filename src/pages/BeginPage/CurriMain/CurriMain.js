@@ -18,6 +18,11 @@ import Wave from 'react-wavify';
 import { useRecoilState } from 'recoil';
 import { lowbarSelect } from '../../../Atom';
 import CurriRenameModal from '../CurriRenameModal/CurriRenameModal';
+import redCircleIcon from '../../../assets/curriRedCircleIcon.png';
+import { CurriPublicSnackbar } from '../CurriPublicSnackbar/CurriPublicSnackbar';
+import { CurriPrivateSnackbar } from '../CurriPrivateSnackbar/CurriPrivateSnackbar';
+import CurriResetModal from '../CurriResetModal/CurriResetModal';
+import CurriDeleteModal from '../CurriDeleteModal/CurriDeleteModal';
 
 export default function CurriMain(props) {
   const navigate = useNavigate();
@@ -123,7 +128,7 @@ export default function CurriMain(props) {
     } catch (e) {
       console.log(e);
     }
-    setCurriSettingModalOn(false);
+    setCurriDeleteModalOn(false);
     getCurriList();
   };
 
@@ -139,7 +144,7 @@ export default function CurriMain(props) {
     } catch (e) {
       console.log(e);
     }
-    setCurriSettingModalOn(false);
+    setCurriResetModalOn(false);
     getCurriList();
     scrollTop();
   };
@@ -167,14 +172,55 @@ export default function CurriMain(props) {
     setCurriSettingModalOn(false);
   };
 
+  const [publicSnackbarOpen, setPublicSnackbarOpen] = useState(false);
+  const [privateSnackbarOpen, setPrivateSnackbarOpen] = useState(false);
+  const [curriResetModalOn, setCurriResetModalOn] = useState(false);
+  const [curriDeleteModalOn, setCurriDeleteModalOn] = useState(false);
+
+  const handlePublicSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setPublicSnackbarOpen(false);
+  };
+
+  const handlePrivateSnackbarClose = (e, reason) => {
+    if (reason === 'clickway') {
+      return;
+    }
+
+    setPrivateSnackbarOpen(false);
+  };
+
+  const resetModalControl = () => {
+    setCurriSettingModalOn(false);
+    setCurriResetModalOn(true);
+  };
+
+  const deleteModalControl = () => {
+    setCurriSettingModalOn(false);
+    setCurriDeleteModalOn(true);
+  };
+
   return (
     <>
       {currentCurriPosition !== numberOfCurries ?
       <div className='curri-scroll-area'>
         <div className='curri-sub-info'>
+          <div className='curri-private'>
+            <div className='curri-private-img-box'>
+              <img src={curri.visibleStatus === 'ACTIVE' ? curriVisibleIcon : curriPrivateIcon} alt="" />
+            </div>
+            <div className='curri-private-text'>{curri.visibleStatus === 'ACTIVE' ? '공개중' : '비공개'}</div>
+          </div>
           <div className='dday-achieved-container'>
-            <div className='dday'>D - {curri.dday}</div>
-            <div className='horizontal-line'></div>
+
+            <div className='dday-container'>
+              <div className='dday'>D-</div>
+              <div className={curri.dday === 0 ? 'dday' : 'dday-green'}>{curri.dday <= 9 ? '0' + curri.dday : curri.dday}</div>
+            </div>
+            {/* <div className='horizontal-line'></div> */}
             <div className='achieved-rate'>
               <div className='achieved-text'>달성률</div>
               <div className='percent-text'>
@@ -183,71 +229,73 @@ export default function CurriMain(props) {
               </div>
             </div>
           </div>
-          <div className='curri-private'>
-            <div className='curri-private-img-box'>
-              <img src={curri.visibleStatus === 'ACTIVE' ? curriVisibleIcon : curriPrivateIcon} alt="" />
-            </div>
-            <div className='curri-private-text'>{curri.visibleStatus === 'ACTIVE' ? '공개중' : '비공개'}</div>
-          </div>
         </div>
         <div className='curri-middle-area'>
-          {curri.status === 'ACTIVE' ?
+          {curri.lectureListResList.length === 0 ?
             <>
-            <div className='curri-green-circle-border'></div>
-            <div className='curri-green-circle-inner'></div>
-              <Wave fill='#66CC66' style={waveStyle}
-              paused={false}
-              options={{
-              height: 290 - (curri.progressRate / 100) * 300,
-              amplitude: 10,
-              speed: 0.3,
-              points: 3
-              }}
-            />
-              <div className='curri-stone-checks'>
-                {curri.chapterListResList.map(chapter =>
-                  <CurriChapter
-                    key={chapter.chIdx}
-                    chapter={chapter}
-                    handleCheckboxClick={handleCheckboxClick}
-                    getCurriList={getCurriList}
-                  />
-                )}
+              <div className='curri-red-circle-box'>
+                <img src={redCircleIcon} alt="" />
+                <div className='curri-red-circle-text'>현재 선택된 강의가 없어요!</div>
               </div>
             </> :
-            <>
-            {active ?
-              <>
-                <div className='curri-green-circle-border'></div>
-                <div className='curri-green-circle-inner'></div>
+              curri.status === 'ACTIVE' ?
+                <>
+                  <div className='curri-green-circle-border'></div>
+                  <div className='curri-green-circle-inner'></div>
+                  <Wave fill='#66CC66' style={waveStyle}
+                    paused={false}
+                    options={{
+                    height: 290 - (curri.progressRate / 100) * 300,
+                    amplitude: 10,
+                    speed: 0.3,
+                    points: 3
+                    }}
+                  />
                   <div className='curri-stone-checks'>
                     {curri.chapterListResList.map(chapter =>
                       <CurriChapter
                         key={chapter.chIdx}
                         chapter={chapter}
                         handleCheckboxClick={handleCheckboxClick}
+                        getCurriList={getCurriList}
                       />
                     )}
                   </div>
-              </> :
-            <div className='curri-inactive-container'>
-              <div className='curri-inactive-circle-icon-box'>
-                <img src={curriInactiveCircleIcon} alt="" />
-              </div>
-              <div className='curri-inactive-main'>
-                <div className='curri-inactive-text'>커리큘럼 비활성화 중</div>
-                <div className='curri-inactive-explain'>한 번에 하나의 커리큘럼만 진행할 수 있어요</div>
-                <button className='curri-activate-button' onClick={handleCurriActivation}>
-                  <div className='curri-active-button-img-box'>
-                    <img src={curriActiveButtonImgIcon} alt="" />
+                </> :
+                <>
+                {active ?
+                  <>
+                    <div className='curri-green-circle-border'></div>
+                    <div className='curri-green-circle-inner'></div>
+                      <div className='curri-stone-checks'>
+                        {curri.chapterListResList.map(chapter =>
+                          <CurriChapter
+                            key={chapter.chIdx}
+                            chapter={chapter}
+                            handleCheckboxClick={handleCheckboxClick}
+                          />
+                        )}
+                      </div>
+                  </> :
+                <div className='curri-inactive-container'>
+                  <div className='curri-inactive-circle-icon-box'>
+                    <img src={curriInactiveCircleIcon} alt="" />
                   </div>
-                  <div className='curri-active-button-text'>
-                    커리큘럼 활성화
+                  <div className='curri-inactive-main'>
+                    <div className='curri-inactive-text'>커리큘럼 비활성화 중</div>
+                    <div className='curri-inactive-explain'>한 번에 하나의 커리큘럼만 진행할 수 있어요</div>
+                    <button className='curri-activate-button' onClick={handleCurriActivation}>
+                      <div className='curri-active-button-img-box'>
+                        <img src={curriActiveButtonImgIcon} alt="" />
+                      </div>
+                      <div className='curri-active-button-text'>
+                        커리큘럼 활성화
+                      </div>
+                    </button>
                   </div>
-                </button>
-              </div>
-            </div>}
-            </>
+                </div>}
+                </>
+              
           }
           <div className='curri-horizontal-line'></div>
           <div className='curri-lectures-area'>
@@ -281,12 +329,14 @@ export default function CurriMain(props) {
               onRequestClose={() => setCurriSettingModalOn(false)}
               patchCurriActivation={patchCurriActivation}
               patchCurriVisibility={patchCurriVisibility}
-              deleteCurri={deleteCurri}
               curri={curri}
               renameCurri={renameCurri}
-              resetCurri={resetCurri}
+              deleteModalControl={deleteModalControl}
+              resetModalControl={resetModalControl}
               handleModalCloseClick={handleModalCloseClick}
               getCurriList={getCurriList}
+              setPublicSnackbarOpen={setPublicSnackbarOpen}
+              setPrivateSnackbarOpen={setPrivateSnackbarOpen}
             />
             <CurriRenameModal
               isOpen={curriRenameModalOn}
@@ -294,11 +344,27 @@ export default function CurriMain(props) {
               getCurriList={getCurriList}
               curri={curri}
             />
+            <CurriResetModal
+              isOpen={curriResetModalOn}
+              onRequestClose={() => setCurriResetModalOn(false)}
+              getCurriList={getCurriList}
+              curri={curri}
+              resetCurri={resetCurri}
+            />
+            <CurriDeleteModal
+              isOpen={curriDeleteModalOn}
+              onRequestClose={() => setCurriDeleteModalOn(false)}
+              getCurriList={getCurriList}
+              curri={curri}
+              deleteCurri={deleteCurri}
+            />
           </div>
         </div>
+      <CurriPublicSnackbar handleClose={handlePublicSnackbarClose} open={publicSnackbarOpen} />
+      <CurriPrivateSnackbar handleClose={handlePrivateSnackbarClose} open={privateSnackbarOpen} />
       </div>
        : <BeginCurriButton />
-    }
+      }
     </>
   );
 }
