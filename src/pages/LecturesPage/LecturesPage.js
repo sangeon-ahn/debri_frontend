@@ -54,6 +54,13 @@ export default React.memo(function LecturesPage() {
           </div>
         </div>
         <LectureSearch setSearchInput={setSearchInput}/>
+        <div className="filter-title">
+          <div className="filter-lang-title">언어</div>
+          <div className="filter-vertical-line"></div>
+          <div className="filter-material-title">매체</div>
+          <div className="filter-vertical-line"></div>
+          <div className="filter-pricing-title">유/무료</div>
+        </div>
         <LecturesFilter
           subject={subject}
           material={material}

@@ -27,7 +27,6 @@
 .curri-icon {
   width: 86px;
   height: 86px;
-  margin-right: 5px;
 }
 
 .top-curri-name {
@@ -43,10 +42,17 @@
   font-size: 12px;
   line-height: 17px;
   color: #FFFFFF;
+  width: 261px;
 }
 
 .top-curri-navigator {
   position: absolute;
   right: 21.29px;
   cursor: pointer;
+}
+
+.curri-img-box {
+  width: 86px;
+  height: 86px;
+  margin-right: 5px;
 }

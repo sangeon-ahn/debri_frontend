@@ -54,7 +54,7 @@ export default function CurriculumTabPage() {
   useInterval(() => setVisibility(state => !state), 1000);
 
   if (error) return null;
-
+  
   return (
     <>
       <Header />
@@ -69,32 +69,32 @@ export default function CurriculumTabPage() {
             <img src={rightArrow} alt="" />
           </div>
         </div>
-        <div className='curriculumTab-scroll-area'>
-          <div className='curri-top5-text'>유저들이 추천하는 커리큘럼 TOP 5</div>
-          <div className='curri-top5'>
-            {topFiveCurriList &&
-              topFiveCurriList.map(curri => {
+        {(topFiveCurriList && latestFiveCurriList) &&
+          <div className='curriculumTab-scroll-area'>
+            <div className='curri-top5-text'>유저들이 추천하는 커리큘럼 TOP 5</div>
+            <div className='curri-top5'>
+              {topFiveCurriList.map(curri => {
                 return <TopCurri key={curri.curriIdx} curri={curri}/>
-              })
-            }
-          </div>
-          <div className='latest-curries-top-area'>
-            <div className='latest-curries-text'>최신 등록 커리큘럼</div>
-            <div className='latest-curries-live'>
-              <div className='onair-icon-box' alt="">
-                <img src={liveIcon} alt="" style={liveIconStyle}/>
+                })
+              }
+            </div>
+            <div className='latest-curries-top-area'>
+              <div className='latest-curries-text'>최신 등록 커리큘럼</div>
+              <div className='latest-curries-live'>
+                <div className='onair-icon-box' alt="">
+                  <img src={liveIcon} alt="" style={liveIconStyle}/>
+                </div>
+                <div className='live-text'>LIVE</div>
               </div>
-              <div className='live-text'>LIVE</div>
+            </div>
+            <div className='latest-curries'>
+              {latestFiveCurriList.map(curri => {
+                return <LatestCurri key={curri.curriIdx} curri={curri}/>
+                })
+              }
             </div>
           </div>
-          <div className='latest-curries'>
-            {latestFiveCurriList &&
-              latestFiveCurriList.map(curri => {
-                return <LatestCurri key={curri.curriIdx} curri={curri}/>
-              })
-            }
-          </div>
-        </div>
+        }
       </div>
     </>
   );
