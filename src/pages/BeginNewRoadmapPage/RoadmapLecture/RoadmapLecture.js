@@ -6,8 +6,10 @@ import lectureUserNumberIcon from '../../../assets/curriUserNumberIcon.png';
 import lectureDetailIcon from '../../../assets/lectureDetailIcon.png';
 import axios from "axios";
 import { useState } from "react";
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function RoadmapLecture(props) {
+  const navigate = useNavigate();
   const { lecture, isScrappedLecture } = props;
   const [error, setError] = useState(false);
   const [isScrapped, setIsScrapped] = useState(isScrappedLecture);

@@ -169,7 +169,7 @@ export default function CurriMain(props) {
 
   return (
     <>
-      {currentCurriPosition !== numberOfCurries ?
+      {currentCurriPosition !== numberOfCurries && curri ?
       <div className='curri-scroll-area'>
         <div className='curri-sub-info'>
           <div className='dday-achieved-container'>

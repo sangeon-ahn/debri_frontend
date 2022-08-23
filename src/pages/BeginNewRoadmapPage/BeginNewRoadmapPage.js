@@ -107,7 +107,7 @@ export default function BeginNewRoadmapPage() {
         <div className="relative-lectures-title">관련 강의자료</div>
         <div className="relative-lectures">
           {lectures && lectures.map(lecture => 
-            <RoadmapLecture lecture={lecture} isScrappedLecture={lecture.userScrap} />
+            <RoadmapLecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.userScrap}/>
           )}
         </div>
       </div>
