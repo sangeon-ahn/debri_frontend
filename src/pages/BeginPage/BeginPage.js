@@ -24,7 +24,7 @@ export default function BeginPage() {
       setLoading(true);
       const response = await axios.get('/api/curri/getList', { headers });
       console.log("커리리스트", response);
-      setCurriList(response.data.result);
+      setCurriList(response.data.result.sort((a, b) => b.createdAt - a.createdAt));
     } catch(e) {
       console.log("커리 리스트 오류", e);
       setError(e);

@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams, useSearchParams } from 'react-rout
 import axios from 'axios';
 
 export default function CurriSettingModal(props) {
-  const { isOpen, onRequestClose, handleModalCloseClick, patchCurriActivation, patchCurriVisibility, deleteCurri, curri, renameCurri, resetCurri, getCurriList} = props;
+  const { isOpen, onRequestClose, handleModalCloseClick, patchCurriVisibility, curri, renameCurri, resetModalControl, setPublicSnackbarOpen, setPrivateSnackbarOpen, deleteModalControl} = props;
   const navigate = useNavigate();
   const { jwt } = JSON.parse(localStorage.getItem('userData'));
   const customStyles = {
@@ -40,8 +40,15 @@ export default function CurriSettingModal(props) {
     'Content-Type': 'application/json',
   };
 
+  const handleVisibility = () => {
+    if (curri.visibleStatus === "INACTIVE") {
+      setPublicSnackbarOpen(true);
+    } else if (curri.visibleStatus === 'ACTIVE') {
+      setPrivateSnackbarOpen(true);
+    }
+    patchCurriVisibility(curri.curriIdx, curri.visibleStatus);
+  }
 
-  
 Modal.setAppElement('#root');
   return (
     <Modal
@@ -54,10 +61,10 @@ Modal.setAppElement('#root');
     <div className="post-setting-container">
       <div className="post-report-detail">
         <div className="post-setting-modal-title">커리큘럼 설정 변경</div>
-        <div className="ad-spam-report" onClick={() => patchCurriVisibility(curri.curriIdx, curri.visibleStatus)}>{curri.visibleStatus === 'ACTIVE' ? '비공개로 전환하기' : '공개로 전환하기'}</div>
+        <div className="ad-spam-report" onClick={handleVisibility}>{curri.visibleStatus === 'ACTIVE' ? '비공개로 전환하기' : '공개로 전환하기'}</div>
         <div className="fish" onClick={renameCurri}>커리큘럼 이름 변경하기</div>
-        <div className="reset-curri" onClick={() => resetCurri(curri.curriIdx)}>커리큘럼 초기화하기</div>
-        <div className="delete-curri" onClick={() => deleteCurri(curri.curriIdx)}>커리큘럼 삭제하기</div>
+        <div className="reset-curri" onClick={resetModalControl}>커리큘럼 초기화하기</div>
+        <div className="delete-curri" onClick={deleteModalControl}>커리큘럼 삭제하기</div>
       </div>
       <button className="post-setting-cancel-container" onClick={handleModalCloseClick}>닫기</button>
     </div>

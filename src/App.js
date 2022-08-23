@@ -20,6 +20,7 @@ import { RecoilRoot } from 'recoil';
 import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
 import AddLectureToCurri from './pages/LecturesPage/AddLectureToCurriPage';
 import MyPage from "./pages/MyPage/MyPage";
+import CurriculumTabPage from './pages/CurriculumTabPage/CurriculumTabPage';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/createCurri' element={<CreateCurriPage />} />
           <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
           <Route path='/mypage' element={<MyPage />} />
+          <Route path='/curriculum' element={<CurriculumTabPage />} />
         </Routes>
         <LowBar />
       </BrowserRouter>

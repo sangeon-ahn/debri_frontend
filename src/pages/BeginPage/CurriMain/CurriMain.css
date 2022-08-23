@@ -44,15 +44,19 @@
   .curri-sub-info {
     display: flex;
     margin-top: 19px;
-    margin-left: 140px;
+    margin-left: 64px;
   }
   
   .curri-private {
     display: flex;
-    /* margin-right: 25px; */
+    margin-right: 20.67px;
     margin-top: 10px;
   }
-  
+  .dday-container {
+    display: flex;
+    height: 33px;
+    border-bottom: 2px solid white ;
+  }
   .dday-achieved-container {
     margin-right: 20px;
   }
@@ -147,6 +151,33 @@
     /* margin: 0 auto; */
   }
   
+  .dday-green {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    color: #66CC66;
+    line-height: 26px;
+    text-align: center;
+  }
+  .curri-red-circle-box {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    left: 22px;
+    margin-bottom: 20px;
+  }
+  .curri-red-circle-text {
+    position: absolute;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    left: 81px;
+    top: 152px;
+  }
   .curri-green-circle-inner {
     position: absolute;
     width: 290px;
@@ -194,33 +225,6 @@
     height: 150px;
   }
   
-  .curri-chapter {
-    position: relative;
-    display: flex;
-    margin-top: 70px;
-  }
-  
-  .curri-stone-one-box {
-    margin: 18px 7px 0 61px;
-  }
-  
-  .curri-stone-two-box {
-    margin: 18px 18.5px 0 6px;
-  }
-  
-  .curri-stone-three-box {
-    margin: 18px 10px 0 46px;
-  }
-  
-  .curri-chapter-checkbox {
-    position: relative;
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
   .checkbox-border-icon {
     /* position: absolute; */
   }
@@ -230,16 +234,6 @@
     top: 50%;
     left: 50%;
     margin: -6px 0 0 -8px;
-  }
-  
-  .curri-chapter-main {
-    font-family: 'Noto Sans KR';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  width: 150px;
-  color: #FFFFFF;
   }
   
   .curri-chapter-subject {
@@ -264,7 +258,7 @@
     font-size: 31px;
     line-height: 45px;
     color: #66CC66;
-    right: 10px;
+    right: 25px;
     top: -26px;
   }
 
@@ -276,7 +270,7 @@
     font-size: 31px;
     line-height: 45px;
     color: white;
-    right: 10px;
+    right: 25px;
     top: -26px;
   }
   

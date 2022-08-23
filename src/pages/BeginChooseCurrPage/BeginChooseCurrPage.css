@@ -1,5 +1,4 @@
 .start-new-curr-text-box {
-  margin-top: 38px;
   margin: 0 auto;
 }
 
@@ -27,7 +26,7 @@
 .roadmaps-area {
   width: 324.6px;
   margin-left: 17px;
-  margin-top: 36px;
+  margin-top: 26px;
 }
 
 .roadmaps-area-title {
@@ -120,9 +119,9 @@ color: #FFFFFF;
 }
 
 .roadmap-main-go-button-box {
-  width: 24.6px;
   text-align: center;
   line-height: 80px;
+  cursor: pointer;
 }
 
 .curriculums-area {
@@ -212,3 +211,23 @@ margin-left: 15px;
   height: 86px;
 }
 
+.choose-curri-scroll-container {
+  width: 360px;
+  height: 640px;
+  overflow-x: hidden;
+  margin-top: 10px;
+}
+
+.choose-curri-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.choose-curri-scroll-container::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.choose-curri-scroll-container::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1); 
+}

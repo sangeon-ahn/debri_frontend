@@ -7,7 +7,7 @@ export default function TopTenCurriculum(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="curriculum" onClick={() => navigate(`/curriculum/39`)}>
+    <div className="curriculum" onClick={() => navigate(`/curriculum/${curri.curriIdx}`)}>
       <div className="curriculum-Icon-box">
           <img src={CurriIcon} alt="" />
         </div>

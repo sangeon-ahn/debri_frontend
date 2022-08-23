@@ -49,52 +49,67 @@ export default function BeginNewRoadmapPage() {
     setLectures(lectureList);
   }, [roadmap]);
 
-  if (!roadmap) return null;
-
   return (
     <>
       <Header />
-      <div className="roadmap">
-        <div className="roadmap-back-box" onClick={() => navigate(-1)}>
-          <img src={leftSideIcon} alt="" />
-        </div>
-        <div className="roadmap-icon-box">
-          <img src={roadmapIcon} alt="" />
-        </div>
-        <div className="roadmap-detail-box">
-          <div className="roadmap-title">{roadmap.roadmapName}</div>
-          <div className="roadmap-description">{roadmap.roadmapExplain}</div>
-          <div className="madeby">
-            <div className="by">by</div>
-            <div className="team-debri">{roadmap.authorName}</div>
-          </div>
-        </div>
-      </div>
-      <div className="curri-durration-and-start-container">
-        <div className="curri-duration">
-          <div className="curri-duration-arrow">
-            <img src={curriDurationIcon} alt="" />
-          </div>
-          <div className="curri-duration-content">
-            <div className="curri-duration-text">커리큘럼 진행 기간</div>
-            <div className="curri-duration-main">
-              <div className="curri-duration-day">{roadmap.requireDay}</div>
-              <div className="day">일</div>
+      {roadmap &&
+        <>
+          <div className="roadmap">
+            <div className="roadmap-back-box" onClick={() => navigate(-1)}>
+              <img src={leftSideIcon} alt="" />
+            </div>
+            <div className="roadmap-icon-box">
+              <img src={roadmapIcon} alt="" />
+            </div>
+            <div className="roadmap-detail-box">
+              <div className="roadmap-title">{roadmap.roadmapName}</div>
+              <div className="roadmap-description">{roadmap.roadmapExplain}</div>
+              <div className="madeby">
+                <div className="by">by</div>
+                <div className="team-debri">{roadmap.authorName}</div>
+              </div>
             </div>
           </div>
-        </div>
-        <button className="curri-start">시작하기</button>
-      </div>
-      <div className="roadmap-full-container">
-        {/* <div className="roadmap-orders-container">
-          <div className="roadmap-order-container">
-            <img src={roadmapOrderIcon} alt="" />
+          <div className="curri-durration-and-start-container">
+            <div className="curri-duration">
+              <div className="curri-duration-arrow">
+                <img src={curriDurationIcon} alt="" />
+              </div>
+              <div className="curri-duration-content">
+                <div className="curri-duration-text">커리큘럼 진행 기간</div>
+                <div className="curri-duration-main">
+                  <div className="curri-duration-day">{roadmap.requireDay}</div>
+                  <div className="day">일</div>
+                </div>
+              </div>
+            </div>
+            <button className="curri-start">시작하기</button>
           </div>
-          <div className="roadmap-order-container">
-            <img src={roadmapOrderIcon} alt="" />
+          <div className="roadmap-full-container">
+            {/* <div className="roadmap-orders-container">
+              <div className="roadmap-order-container">
+                <img src={roadmapOrderIcon} alt="" />
+              </div>
+              <div className="roadmap-order-container">
+                <img src={roadmapOrderIcon} alt="" />
+              </div>
+              <div className="roadmap-order-container">
+                <img src={roadmapOrderIcon} alt="" />
+              </div>
+            </div> */}
+            <div className="roadmap-contents-container">
+              {roadmap.roadmapChildCurriList.map(child => 
+                <RoadmapChild curri={child} setLectures={setLectures} key={child.childCurriIdx}/>
+              )}
+            </div>
           </div>
-          <div className="roadmap-order-container">
-            <img src={roadmapOrderIcon} alt="" />
+          <div className="relative-lectures-container">
+            <div className="relative-lectures-title">관련 강의자료</div>
+            <div className="relative-lectures">
+              {lectures && lectures.map(lecture => 
+                <RoadmapLecture lecture={lecture} isScrappedLecture={lecture.userScrap} />
+              )}
+            </div>
           </div>
         </div> */}
         <div className="roadmap-contents-container">
@@ -111,6 +126,8 @@ export default function BeginNewRoadmapPage() {
           )}
         </div>
       </div>
+        </>
+      }
     </>
   )
 }

@@ -89,10 +89,12 @@ export default function CurriculumPage() {
   };
 
   
+  if (curri === null) return null;
   return (
     <>
-      <Header />
-      {curri && <div>
+    {curri && 
+      <>
+        <Header />
         <div className="roadmap">
           <div className="roadmap-back-box" onClick={() => navigate(-1)}>
             <img src={leftSideIcon} alt="" />
@@ -119,6 +121,28 @@ export default function CurriculumPage() {
               <div className="curri-duration-main">
                 <div className="curri-duration-day">100</div>
                 <div className="day">일</div>
+              </div>
+            </div>
+          </div>
+          <button className="curri-start">시작하기</button>
+        </div>
+        <div className='user-number'>총 1089명이 이 커리큘럼을 활용했어요!</div>
+        <div className='lectures-in-curr-container'>
+          {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
+          {curri.lectureListResList.map(lecture =>
+                  <CurriLecture lecture={lecture} key={lecture.lectureIdx} />
+                )}
+        </div>
+        <div className='user-reviews-area'>
+          <div className='user-reviews-title'>유저들의 커리큘럼 한줄평</div>
+          <div className='user-reviews-container'>
+            <div className='user-review'>
+              <div className='user-review-text'>
+                자바가 너무 쉬워졌어요 어떡하죠?
+              </div>
+              <div className='review-container'>
+                <div className='review-by'>by</div>
+                <div className='review-who'>데브리 짱짱맨</div>
               </div>
             </div>
           </div>
@@ -166,6 +190,8 @@ export default function CurriculumPage() {
               />
             </div>
             <div className="bottomBar-blocker2"></div>
+      </>
+    }
     </>
   )
 }

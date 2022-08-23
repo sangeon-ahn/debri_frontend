@@ -1,0 +1,58 @@
+.top-curri-container {
+  display: flex;
+  width: 325px;
+  height: 86px;
+  margin-top: 21px;
+  align-items: center;
+}
+
+.ranking {
+  width: 34px;
+  height: 34px;
+  background: #D9D9D9;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 33px;
+  font-weight: 900;
+  font-size: 16px;
+  color: #000000;
+  margin-right: 18px;
+}
+
+.top-curri-desc {
+  display: flex;
+  width: 261px;
+}
+
+.curri-icon {
+  width: 86px;
+  height: 86px;
+}
+
+.top-curri-name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-bottom: 3px;
+}
+
+.top-curri-desc {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+  width: 261px;
+}
+
+.top-curri-navigator {
+  position: absolute;
+  right: 21.29px;
+  cursor: pointer;
+}
+
+.curri-img-box {
+  width: 86px;
+  height: 86px;
+  margin-right: 5px;
+}

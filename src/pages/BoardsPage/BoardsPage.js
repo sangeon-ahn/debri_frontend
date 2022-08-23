@@ -12,7 +12,7 @@ import searchIcon from '../../assets/searchIcon.png';
 import searchIconGreen from '../../assets/searchIconGreen.png';
 import favoriteStar from '../../assets/favoriteStar.png';
 import leftArrow from '../../assets/leftArrow.png';
-import rightArrow from '../../assets/rightArrow.png';
+import rightArrow from '../../assets/roadmapRightArrowIcon.png';
 import bookmarkGreen from '../../assets/bookmarkGreen.png';
 import BoardScrapSnackbar from './BoardScrapSnackbar/BoardScrapSnackbar';
 import pencil from '../../assets/pencil.png';

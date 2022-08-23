@@ -8,8 +8,8 @@ export const PostScrapSnackbar = (props) => {
   const messageStyle = {
     fontFamily: 'Noto Sans KR',
     fontStyle: 'normal',
-    fontWeight: 600,
-    fontSize: '16px',
+    fontWeight: 700,
+    fontSize: '14px',
     lineHeight: '20px',
     color: '#000000'
   };
@@ -47,7 +47,7 @@ export const PostScrapSnackbar = (props) => {
         }}
       >
         <Alert icon={<PostScrapSuccessIcon />} sx={alertStyle}>
-          <span style={messageStyle}>홈 &#62; 내 스크랩</span>
+          <span style={messageStyle}>내가 스크랩한 게시물</span>
           <span style={restStyle}> 에 저장 되었습니다!</span>
         </Alert>
       </Snackbar>
