@@ -111,6 +111,21 @@ export default function BeginNewRoadmapPage() {
               )}
             </div>
           </div>
+        </div> */}
+        <div className="roadmap-contents-container">
+          {roadmap.roadmapChildCurriList.map(child => 
+            <RoadmapChild curri={child} setLectures={setLectures} />
+          )}
+        </div>
+      </div>
+      <div className="relative-lectures-container">
+        <div className="relative-lectures-title">관련 강의자료</div>
+        <div className="relative-lectures">
+          {lectures && lectures.map(lecture => 
+            <RoadmapLecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.userScrap}/>
+          )}
+        </div>
+      </div>
         </>
       }
     </>

@@ -4,10 +4,12 @@ import roadmapIcon from '../../assets/roadmapIcon.png';
 import leftSideIcon from '../../assets/leftSideIcon.png';
 import curriDurationIcon from '../../assets/curriDurationIcon.png';
 import Lecture from '../LecturesPage/Lecture/Lecture';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React ,{useState,useEffect, useRef}from 'react';
+import ReactDOM, { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CurriLecture from '../BeginPage/CurriLecture/CurriLecture';
+import writeCommentIcon from '../../assets/writeCommentIcon.png';
+
 export default function CurriculumPage() {
   const params = useParams();
   const navigate = useNavigate();
@@ -15,6 +17,9 @@ export default function CurriculumPage() {
   const [curri, setCurri] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState('한 줄 평 쓰기');
+  const [comments, setComments] = useState([]);
+  const [commentContent, setCommentContent] = useState('');
 
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
@@ -22,13 +27,11 @@ export default function CurriculumPage() {
     'Content-Type': 'application/json',
   };
 
-  const initLecture = {
-    langTag: "Python",
-    lectureName: "파이썬 정복자",
-    chapterNumber: 4,
-    materialType: '인강',
-    pricing: '500백만'
-  };
+  useEffect( () =>{
+    getCurriDetail(curriIdx);
+    // getCurriReview(curriIdx);
+  },[]);
+
 
   const getCurriDetail = async (curriIdx) => {
     try {
@@ -42,11 +45,50 @@ export default function CurriculumPage() {
     }
     setLoading(false);
   };
+  
 
-  useEffect(() => {
-    getCurriDetail(curriIdx);
-  }, []);
+  //리뷰 가져오기
+  const getCurriReview = async (curriIdx) => {
+    try {
+        setError(null);
+        setLoading(true); //로딩이 시작됨
+        const response = await axios.get(`/api/curri/review/getList/${curriIdx}`, { headers });
+        setComments(response.data.result);
+        console.log(response.data.result);
+    } catch (e) {
+        setError(e);
+    }
+    setLoading(false);
+  };
 
+
+
+  //리뷰쓰기
+  const handleCommentInput = (e) => {
+    setCommentContent(e.target.value);
+  };
+
+  const handleEnterInput = async (curriIdx, content) => {
+    try {
+      const response = await axios.post(`/api/curri/review/create`,
+        JSON.stringify(
+          {
+            curriIdx: curriIdx,
+            authorName: `${JSON.parse(localStorage.getItem("userData")).userName}`,
+            content: content
+          }),
+          { headers }
+      );
+
+      console.log(response.data.result);
+      setComments([...comments, response.data.result]);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
+  
   if (curri === null) return null;
   return (
     <>
@@ -104,10 +146,52 @@ export default function CurriculumPage() {
               </div>
             </div>
           </div>
+          <button className="curri-start">시작하기</button>
         </div>
+        <div className='user-number'>총 1089명이 이 커리큘럼을 활용했어요!</div>
+        <div className='lectures-in-curr-container' style={{padding:'0'}}>
+          {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
+          {curri.lectureListResList.map(lecture =>
+                  <CurriLecture lecture={lecture} key={lecture.lectureIdx}/>
+                )}
+        </div>
+      </div>}
+
+      {curri && <div className='CurriReview'>
+            <div className='CurriReviewTitle'>유저들의 한 줄 평</div>
+              <div className='CurriReviewLive'>● LIVE</div>
+              {comments && <div style={{marginBottom:'100px'}}>
+                {comments.map((reivew,i) => (
+                  <div key={i} className='CurriReviewContents'>
+                    <div className='CurriReviewContent'>{reivew.content}</div>
+                    <div className='CurriReviewName'><span style={{fontSize:'9px'}}>by </span>{reivew.authorName}</div>
+                  </div>
+                ))}
+              </div>}
+            </div>}
+
+            <div className="writeComment-box">
+              <div className="writeComment-icon-box">
+                <img src={writeCommentIcon} alt="" />
+              </div>
+              <input
+                type="text"
+                className="writeComment-input"
+                placeholder={placeHolder ? placeHolder : "한 줄 평 쓰기"}
+                value={commentContent}
+                onChange={handleCommentInput}
+                onKeyDown={(e) => {
+                  if (e.key !== "Enter") {
+                    return;
+                  }
+                  handleEnterInput(curriIdx, commentContent);
+                  setCommentContent('');
+                }}
+              />
+            </div>
+            <div className="bottomBar-blocker2"></div>
       </>
     }
-      
     </>
   )
 }

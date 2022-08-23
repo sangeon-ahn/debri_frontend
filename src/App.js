@@ -19,6 +19,7 @@ import BeginNewRoadmapPage from './pages/BeginNewRoadmapPage/BeginNewRoadmapPage
 import { RecoilRoot } from 'recoil';
 import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
 import AddLectureToCurri from './pages/LecturesPage/AddLectureToCurriPage';
+import MyPage from "./pages/MyPage/MyPage";
 import CurriculumTabPage from './pages/CurriculumTabPage/CurriculumTabPage';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
           <Route path="/lectures" element={<LecturesPage />} />
           <Route path="/lectures/detail/:lectureIdx" element={<LectureDetailPage />} />
+          <Route path="/curriculum/:curriIdx/:lectureIdx" element={<LectureDetailPage />} />
           <Route path="/boards" element={<BoardsPage />} />
           <Route path="/boards/:boardId" element={<Board />} />
           <Route path="/boards/:boardId/:postId" element={<PostPage />} />
@@ -43,6 +45,7 @@ function App() {
           <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
           <Route path='/createCurri' element={<CreateCurriPage />} />
           <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
+          <Route path='/mypage' element={<MyPage />} />
           <Route path='/curriculum' element={<CurriculumTabPage />} />
         </Routes>
         <LowBar />
