@@ -146,16 +146,7 @@ export default function CurriculumPage() {
               </div>
             </div>
           </div>
-          <button className="curri-start">시작하기</button>
         </div>
-        <div className='user-number'>총 1089명이 이 커리큘럼을 활용했어요!</div>
-        <div className='lectures-in-curr-container' style={{padding:'0'}}>
-          {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
-          {curri.lectureListResList.map(lecture =>
-                  <CurriLecture lecture={lecture} key={lecture.lectureIdx}/>
-                )}
-        </div>
-      </div>}
 
       {curri && <div className='CurriReview'>
             <div className='CurriReviewTitle'>유저들의 한 줄 평</div>
