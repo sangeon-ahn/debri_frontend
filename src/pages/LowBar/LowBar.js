@@ -35,6 +35,8 @@ export default function LowBar() {
   if (window.location.pathname === '/boards/postwrite') return null;
   if (window.location.pathname === '/roadmaps') return null;
   if (window.location.pathname === '/home/beginCurri') return null;
+  if (window.location.pathname === '/createCurri') return null;
+  
   return (
     <div className="low-bar">
       <div className="home-button" onClick={(e) => handleLowButtonClick(e, '/home')} id="homeButton">
