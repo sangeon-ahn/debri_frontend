@@ -258,13 +258,24 @@ export default function LecturesDeatilPage() {
                 <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: params.lectureIdx})}}>커리큘럼에 추가하기</button>
                 <button className='srcLink'><a href={lectureDetail.srcLink} className='srcLinktext'>강의 정보 확인하기</a></button>
               </div>
+          
               {lectureLikeStatus ?
-                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}><img src={whiteHeart} alt=''/>추천</button> :
-                <button className='likebtn' onClick={handleLike}><img src={whiteHeart} alt=''/>추천</button>
+                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
+                  <div className='curri-liked-box'>
+                    <img src={greenHeart} alt=''/>
+                  </div>
+                  <div className='curri-like-text'>추천</div>
+                </button> :
+                <button className='likebtn' onClick={handleLike}>
+                  <div className='curri-liked-box'>
+                    <img src={whiteHeart} alt=''/>
+                  </div>
+                  <div>추천</div>
+                </button>
               }
             </div>}
             
-            <div style={{width: '200px',height: '0px', border: '2px solid #1D361D', margin:'30px auto'}}></div>
+            <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
 
             {lectureDetail && <div className='LectureReview'>
               <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
@@ -273,7 +284,7 @@ export default function LecturesDeatilPage() {
                 {comments.map((reivew,i) => (
                   <div key={i} className='LectureReviewContents'>
                     <div className='LectureReviewContent'>{reivew.content}</div>
-                    <div className='LectureReviewName'><span style={{fontSize:'9px'}}>by </span>{reivew.authorName}</div>
+                    <div className='LectureReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by&nbsp;  </span>{reivew.authorName}</div>
                   </div>
                 ))}
               </div>}

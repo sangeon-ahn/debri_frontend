@@ -73,12 +73,15 @@
     background-color: transparent;
     border: 2px solid #66CC66;
     border-radius: 10px;
-    margin-bottom: 25px;;
+    margin-bottom: 25px;
+    cursor: pointer;
 }
+
 .bookmarkPosts{   
     float: left;
     margin:10px 5px;
 }
+
 .scrappoststitle{
     float: left;
     font-family: 'Noto Sans KR';

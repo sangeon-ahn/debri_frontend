@@ -40,6 +40,7 @@ export default function CommentReportOtherModal(props) {
   const handleReportCancel = () => {
     onRequestClose();
   };
+Modal.setAppElement('#root');
 
   return (
     <Modal

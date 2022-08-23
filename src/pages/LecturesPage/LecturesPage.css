@@ -157,6 +157,7 @@ color: #FFFFFF;
   position:absolute;
   top:110px;
   left:13px;
+  cursor: pointer;
 }
 .lecture_title{
   float : left;
@@ -221,6 +222,7 @@ color: #FFFFFF;
   line-height: 17px;  
   color: #FFFFFF;
   margin: 22px 15px 22px 0;
+  cursor: pointer;
 }
 .srcLink{
   width: 147px;
@@ -228,6 +230,7 @@ color: #FFFFFF;
   border: 2px solid #FFFFFF;
   border-radius: 10px;
   background-color: inherit;
+  cursor: pointer;
 }
 .srcLinktext{
   text-decoration:none;
@@ -240,6 +243,8 @@ color: #FFFFFF;
   color: #FFFFFF;
 }
 .likebtn{
+  display: flex;
+  align-items: center;
   width: 90px;
   height: 40px;
   border: 2px solid #FFFFFF;
@@ -251,8 +256,9 @@ color: #FFFFFF;
   font-size: 14px;
   line-height: 20px;
   color: #FFFFFF;
-  margin: 0 110px;
-  padding: 2px;
+  margin: 0 auto;
+  /* padding: 2px; */
+  cursor: pointer;
 }
 
 /* 리뷰 */
@@ -329,7 +335,7 @@ color: #FFFFFF;
   margin:20px 5px;
   font-weight: 700;
   font-size: 8px;
-  line-height: 12px;
+  line-height: 16px;
   color: #FF0000;
   width: 43px;
   height: 16px;
@@ -348,13 +354,23 @@ color: #FFFFFF;
   padding:5px;
 }
 .LectureReviewContent{
+  margin-top: 8px;
+  margin-left: 3px;
   float: left;
+  font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #0A1123;
+
 }
 .LectureReviewName{
   float:right;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 14px;
   line-height: 25px;
+  margin-top: 5px;
+  margin-right: 3px;
 }
 .bottomBar-blocker2 {
   position: fixed;

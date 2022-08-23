@@ -60,6 +60,7 @@ export default function PostMenuModal(props) {
     deletePost(postId);
   };
 
+  Modal.setAppElement('#root');
   return (
     <Modal
       closeTimeoutMS={300}

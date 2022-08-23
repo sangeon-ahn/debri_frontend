@@ -9,6 +9,8 @@ import ReactDOM, { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CurriLecture from '../BeginPage/CurriLecture/CurriLecture';
 import writeCommentIcon from '../../assets/writeCommentIcon.png';
+import greenHeart from '../../assets/greenHeart.png';
+import whiteHeart from '../../assets/whiteHeart.png';
 
 export default function CurriculumPage() {
   const params = useParams();
@@ -20,6 +22,10 @@ export default function CurriculumPage() {
   const [placeHolder, setPlaceHolder] = useState('한 줄 평 쓰기');
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState('');
+  const [isCurriSuccess, setIsCopySuccess] = useState(false);
+  const [curriLikeStatus, setCurriLikeStatus] = useState(false);
+  const [curriLikes, setCurriLikes] = useState(0);
+  const [pureStatus, setPureStatus] = useState(true);
 
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
@@ -27,11 +33,47 @@ export default function CurriculumPage() {
     'Content-Type': 'application/json',
   };
 
-  useEffect( () =>{
+  useEffect(() => {
     getCurriDetail(curriIdx);
-    // getCurriReview(curriIdx);
+    getCurriReview(curriIdx);
   },[]);
 
+  useEffect(() => {
+    if (isCurriSuccess) {
+      navigate('/home');
+    }
+  }, [isCurriSuccess]);
+
+  useEffect(() => {
+    if (!curri) {
+      return;
+    }
+    console.log(curri);
+    if (curri.curriLikeStatus === 'ACTIVE') {
+      console.log('2', curri.curriLikeCount);
+      setCurriLikes(curri.curriLikeCount);
+      setCurriLikeStatus(true);
+    } else if (curri.curriLikeStatus === 'INACTIVE') {
+      setCurriLikes(curri.curriLikeCount);
+      setCurriLikeStatus(false);
+    }
+
+    // if (curri.userScrap) {
+    //   setLectureScrapStatus(true);
+    // } else if (!curri.userScrap) {
+    //   setLectureScrapStatus(false);
+    // }
+  }, [curri]);
+
+  useEffect(() => {
+    if (curriLikeStatus !== null && !pureStatus) {
+      if (curriLikeStatus) {
+        setCurriLikes(state => state + 1);
+      } else {
+        setCurriLikes(state => state - 1);
+    }
+    }
+  }, [curriLikeStatus, pureStatus]);
 
   const getCurriDetail = async (curriIdx) => {
     try {
@@ -46,6 +88,22 @@ export default function CurriculumPage() {
     setLoading(false);
   };
   
+  const postCopyCurri = async (targetCurriIdx, targetOwnerNickName) => {
+    try {
+      setLoading(true);
+      const response = await axios.post('/api/curri/copy',
+        JSON.stringify({
+          targetCurriIdx: targetCurriIdx,
+          targetOwnerNickName: targetOwnerNickName
+        }),
+      { headers });
+      console.log('커리복사', response);
+      setIsCopySuccess(response.data.result.curriCopySuccess);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
 
   //리뷰 가져오기
   const getCurriReview = async (curriIdx) => {
@@ -54,7 +112,7 @@ export default function CurriculumPage() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`/api/curri/review/getList/${curriIdx}`, { headers });
         setComments(response.data.result);
-        console.log(response.data.result);
+        console.log('리뷰', response.data.result);
     } catch (e) {
         setError(e);
     }
@@ -88,13 +146,52 @@ export default function CurriculumPage() {
     }
   };
 
-  
-  if (curri === null) return null;
+  // 추천
+  async function postLikeCurri(curriIdx) {
+    try {
+      const response = await axios.post(`/api/curri/scrap/${curriIdx}`,
+        JSON.stringify({}),
+        { headers }
+      );
+      console.log('추천', response);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  }
+
+  async function patchUnlikeCurri(scrapIdx) {
+    try {
+      const response = await axios.patch(`/api/curri/unScrap/${scrapIdx}`,
+        JSON.stringify({}),
+        { headers }
+      );
+      console.log('추천해제', response);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  }
+
+  const handleLike = () => {
+    postLikeCurri(curriIdx);
+    // getCurriDetail(curriIdx);
+    setCurriLikeStatus(true);
+    setPureStatus(false);
+  };
+
+  const handleUnLike = () => {
+    patchUnlikeCurri(curri.scrapIdx);
+    // getCurriDetail(curriIdx);
+    setCurriLikeStatus(false)
+    setPureStatus(false);
+  };
+
   return (
     <>
+        <Header />
     {curri && 
       <>
-        <Header />
         <div className="roadmap">
           <div className="roadmap-back-box" onClick={() => navigate(-1)}>
             <img src={leftSideIcon} alt="" />
@@ -104,7 +201,7 @@ export default function CurriculumPage() {
           </div>
           <div className="roadmap-detail-box">
             <div className="roadmap-title">{curri.curriName}</div>
-            <div className="roadmap-description">JAVA는 이걸로 자바봐...</div>
+            <div className="roadmap-description">{curri.Desc}</div>
             <div className="madeby">
               <div className="by">by</div>
               <div className="team-debri">{curri.curriAuthor}</div>
@@ -119,21 +216,39 @@ export default function CurriculumPage() {
             <div className="curri-duration-content">
               <div className="curri-duration-text">커리큘럼 진행 기간</div>
               <div className="curri-duration-main">
-                <div className="curri-duration-day">100</div>
+                <div className="curri-duration-day">{curri.totalDday}</div>
                 <div className="day">일</div>
               </div>
             </div>
           </div>
-          <button className="curri-start">시작하기</button>
+          <button className="curri-start" onClick={() => {
+            postCopyCurri(curriIdx, curri.curriAuthor);
+          }}>시작하기</button>
         </div>
-        <div className='user-number'>총 1089명이 이 커리큘럼을 활용했어요!</div>
+        <div className='user-number'>총 {curriLikes}명이 이 커리큘럼을 추천했어요!</div>
         <div className='lectures-in-curr-container'>
           {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
           {curri.lectureListResList.map(lecture =>
-                  <CurriLecture lecture={lecture} key={lecture.lectureIdx} />
+                  // <CurriLecture lecture={lecture} key={lecture.lectureIdx} />
+                  <Lecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.scrapStatus === 'ACTIVE' ? true : false} />
                 )}
         </div>
-        <div className='user-reviews-area'>
+        <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
+        {curriLikeStatus ?
+                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
+                  <div className='curri-liked-box'>
+                    <img src={greenHeart} alt=''/>
+                  </div>
+                  <div className='curri-like-text'>추천</div>
+                </button> :
+                <button className='likebtn' onClick={handleLike}>
+                  <div className='curri-liked-box'>
+                    <img src={whiteHeart} alt=''/>
+                  </div>
+                  <div>추천</div>
+                </button>
+              }
+        {/* <div className='user-reviews-area'>
           <div className='user-reviews-title'>유저들의 커리큘럼 한줄평</div>
           <div className='user-reviews-container'>
             <div className='user-review'>
@@ -146,21 +261,19 @@ export default function CurriculumPage() {
               </div>
             </div>
           </div>
-        </div>
-
+        </div> */}
       {curri && <div className='CurriReview'>
-            <div className='CurriReviewTitle'>유저들의 한 줄 평</div>
+            <div className='CurriReviewTitle'>유저들의 커리큘럼 한 줄 평</div>
               <div className='CurriReviewLive'>● LIVE</div>
               {comments && <div style={{marginBottom:'100px'}}>
                 {comments.map((reivew,i) => (
                   <div key={i} className='CurriReviewContents'>
                     <div className='CurriReviewContent'>{reivew.content}</div>
-                    <div className='CurriReviewName'><span style={{fontSize:'9px'}}>by </span>{reivew.authorName}</div>
+                    <div className='CurriReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by &nbsp;</span>{reivew.authorName}</div>
                   </div>
                 ))}
               </div>}
             </div>}
-
             <div className="writeComment-box">
               <div className="writeComment-icon-box">
                 <img src={writeCommentIcon} alt="" />

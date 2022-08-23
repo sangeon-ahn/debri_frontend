@@ -47,7 +47,7 @@ export default function MyPage() {
     navigate(`/`);
   }
 
-
+  console.log(curriList);
   return (
     <div style={{color:'white'}}>
       <div className="header">
@@ -72,7 +72,7 @@ export default function MyPage() {
         {curriList &&
           <div>
             {curriList.map(curri => 
-              <div>
+              <div key={curri.curriIdx}>
               {(curri.progressRate > 0 && curri.progressRate < 100) &&
                 <div className="curriculum" style={{margin:'10px 20px'}} onClick={() => navigate(`/curriculum/39`)}>
                   <div className="curriculum-Icon-box">

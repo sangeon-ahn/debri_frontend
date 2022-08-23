@@ -214,7 +214,7 @@ export default function BoardsPage() {
           <div className='write-post-container3'>
               <button
                 className='write-post'
-                onClick={() => navigate(`/boards/1/postwrite`)}>
+                onClick={() => navigate(`/boards/1/postwrite`, {state : {prevPath: 'boards'}})}>
                   <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
                     <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
                   </div>

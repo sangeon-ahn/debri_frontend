@@ -21,6 +21,8 @@ import { PostScrapSnackbar } from "./PostScrapSnackbar/PostScrapSnackbar";
 import PostReportOtherModal from "./PostReportOtherModal/PostReportOtherModal";
 import PostMenuModal from "./PostMenuModal/PostMenuModal";
 import PostReportSnackbar from "./PostReportSnackbar/PostReportSnackbar";
+import UserBlockModal from "./UserBlockModal/UserBlockModal";
+import { refreshAccessToken } from "../../utils/refreshAccessToken";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -281,7 +283,8 @@ export default function PostPage() {
     };
     reportPost(parseInt(postId), e.target.innerText);
     setIsPostSettingModalOn(false);
-    setReportSnackbarOpen(true);
+    // setReportSnackbarOpen(true);
+    setUserBlockOpen(true);
   };
 
   const handleScrapSnackbarClose = (e, reason) => {
@@ -368,6 +371,8 @@ export default function PostPage() {
     handleModalCloseClick();
   };
 
+  const [userBlockOpen, setUserBlockOpen] = useState(false);
+  
   return (
     <>
       <Header />
@@ -391,10 +396,17 @@ export default function PostPage() {
               handleReportClick={handleReportClick}
               handleModalCloseClick={handleModalCloseClick}
               setReportSnackbarOpen={setReportSnackbarOpen}
+              setUserBlockOpen={setUserBlockOpen}
             />
             <PostReportOtherModal
               isOpen={postReportOtherModalOn}
               onRequestClose={() => setPostReportOtherModalOn(false)}
+              setReportSnackbarOpen={setReportSnackbarOpen}
+              setUserBlockOpen={setUserBlockOpen}
+            />
+            <UserBlockModal 
+              isOpen={userBlockOpen}
+              onRequestClose={() => setUserBlockOpen(false)}
               setReportSnackbarOpen={setReportSnackbarOpen}
             />
             <div className="post-scroll-part">
@@ -457,7 +469,9 @@ export default function PostPage() {
                     <button className='default-status-scrap-button' onClick={() => {
                       setScrapSnackbarOpen(true);
                       setPostScrapStatus(true);
-                      postScrap(postId)}}
+                      postScrap(postId);
+                    }
+                    }
                     >
                       <img src={unScrappedIcon} alt="" />
                       <div>스크랩</div>

@@ -24,6 +24,7 @@ border-radius: 10px;
 .lecture-detail-box {
   width: 45px;
   height: 80px;
+  cursor: pointer;
 }
 
 .lecture-subject {

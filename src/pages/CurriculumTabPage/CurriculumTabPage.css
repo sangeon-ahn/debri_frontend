@@ -38,16 +38,13 @@ margin-bottom: 20px;
 
 .me-liked-curries {
   display: flex;
+  cursor: pointer;
   box-sizing: border-box;
-
-
-width: 316px;
-height: 50px;
-
-
-border: 2px solid #66CC66;
-border-radius: 10px;
-align-items: center;
+  width: 316px;
+  height: 50px;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  align-items: center;
 }
 
 .curri-like-box {

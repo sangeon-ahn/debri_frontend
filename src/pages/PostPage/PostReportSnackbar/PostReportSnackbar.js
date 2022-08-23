@@ -37,7 +37,7 @@ export default function PostReportSnackbar(props) {
         }}
       >
         <Alert icon={<PostReportSnackbarIcon />} sx={alertStyle}>
-          <span style={messageStyle}>신고가 접수되었습니다!</span>
+          <span style={messageStyle}>해당 유저가 차단되었습니다!</span>
         </Alert>
       </Snackbar>
     </>

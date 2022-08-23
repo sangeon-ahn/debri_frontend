@@ -34,7 +34,7 @@ export default function CommentMenuModal(props) {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
+Modal.setAppElement('#root');
   return (
     <Modal
           closeTimeoutMS={300}

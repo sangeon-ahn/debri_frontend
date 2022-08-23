@@ -14,6 +14,7 @@
   margin-top: 12px;
   width: 121px;
   height: 31px;
+  cursor: pointer;
 }
 
 .profile {
@@ -22,6 +23,7 @@
   width: 54px;
   height: 54px;
   margin-left: 139px;
+  cursor: pointer;
 }
 
 .human {
@@ -30,4 +32,5 @@
   height: 24.6px;
   right: 39px;
   top: 14.7px;
+  cursor: pointer;
 }
