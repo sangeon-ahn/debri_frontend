@@ -99,7 +99,7 @@ export default function BeginNewRoadmapPage() {
             </div> */}
             <div className="roadmap-contents-container">
               {roadmap.roadmapChildCurriList.map(child => 
-                <RoadmapChild curri={child} setLectures={setLectures} />
+                <RoadmapChild curri={child} setLectures={setLectures} key={child.childCurriIdx}/>
               )}
             </div>
           </div>

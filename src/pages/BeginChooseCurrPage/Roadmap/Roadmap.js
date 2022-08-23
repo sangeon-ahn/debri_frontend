@@ -11,7 +11,7 @@ export default function Roadmap(props) {
       <div className="roadmap-icon-box">
         <img src={roadmapIcon} alt="" />
       </div>
-      <div className="roadmap-navi-container" onClick={() => navigate('/roadmaps?field=server')}>
+      <div className="roadmap-navi-container" onClick={() => navigate(`/roadmaps?field=${roadmap.mod}`)}>
         <div className="roadmap-detail-box">
           <div className="roadmap-title">{roadmap.roadmapName}</div>
           <div className="roadmap-description">{roadmap.roadmapExplain}</div>
