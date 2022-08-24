@@ -27,16 +27,16 @@ export default function LowBar() {
     navigate(path);
   };
   
-  if (window.location.pathname === '/') return null;
-  if (window.location.pathname === '/account') return null;
-  if (window.location.pathname.includes('/boards/') && window.location.pathname.includes('modify')) return null;
-  if (window.location.pathname.includes('/boards/') && window.location.pathname.includes('postwrite')) return null;
-  if (window.location.pathname.includes('/lectures/') && window.location.pathname.includes('detail')) return null;
-  if (window.location.pathname === '/boards/postwrite') return null;
-  if (window.location.pathname === '/roadmaps') return null;
-  if (window.location.pathname === '/home/beginCurri') return null;
-  if (window.location.pathname === '/mypage') return null;
-  if (window.location.pathname === '/createCurri') return null;
+  if (window.location.hash === '#/') return null;
+  if (window.location.hash === '#/account') return null;
+  if (window.location.hash.includes('/boards/') && window.location.hash.includes('modify')) return null;
+  if (window.location.hash.includes('/boards/') && window.location.hash.includes('postwrite')) return null;
+  if (window.location.hash.includes('/lectures/') && window.location.hash.includes('detail')) return null;
+  if (window.location.hash === '#/boards/postwrite') return null;
+  if (window.location.hash === '#/roadmaps') return null;
+  if (window.location.hash === '#/home/beginCurri') return null;
+  if (window.location.hash === '#/mypage') return null;
+  if (window.location.hash === '#/createCurri') return null;
   
   return (
     <div className="low-bar">

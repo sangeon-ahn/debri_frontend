@@ -13,9 +13,3 @@ export const lowbarSelect = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
-
-// export const unScrappedBoardsAtom = atom({
-//   key: 'unScrappedBoards',
-//   default: [],
-//   effects_UNSTABLE: [persistAtom],
-// });

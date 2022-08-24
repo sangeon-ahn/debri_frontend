@@ -25,7 +25,7 @@ export default function Comment(props) {
   const [pressLike, setPressLike] = useState(comment.likeStatus);
   const [loading,setLoading] = useState(false); // 로딩되는지 여부
   const [error,setError] = useState(null); //에러
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleRecommentButton = e => {
     setRootCommentIdx(comment.commentIdx);
     setPlaceHolder('대댓글 쓰기');
@@ -35,7 +35,7 @@ export default function Comment(props) {
   //좋아요 생성
   async function createLike(commentIdx) {
     try {
-      const response = await axios.post(`/api/comment/like/create/${commentIdx}`,
+      const response = await axios.post(`${baseUrl}/api/comment/like/create/${commentIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -48,7 +48,7 @@ export default function Comment(props) {
   //좋아요 취소
   async function cancelLike(commentIdx) {
     try {
-      const response = await axios.patch(`/api/comment/like/delete/${commentIdx}`,
+      const response = await axios.patch(`${baseUrl}/api/comment/like/delete/${commentIdx}`,
         JSON.stringify({}),
         { headers }
       );

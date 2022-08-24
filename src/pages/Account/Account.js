@@ -19,6 +19,7 @@ const Account =()=>{
   const [marketingCheck, setMarketingCheck] = useState(false);
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   function onClickSave(event){
     event.preventDefault() 
@@ -41,7 +42,7 @@ const Account =()=>{
 
   async function postData(id,password, passwordCheck, birthday, nickname) {
     try {
-      const response = await axios.post(`/api/user/signUp`,
+      const response = await axios.post(`${baseUrl}/api/user/signUp`,
         JSON.stringify(
           {
             userId : id,

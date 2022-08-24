@@ -29,7 +29,7 @@ export default function Board() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [text, setText] = useState(false);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   console.log(board);
 
   const headers = {
@@ -47,7 +47,7 @@ export default function Board() {
       try {
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`/api/post/getList/${boardIdx}`, { headers });
+          const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}`, { headers });
           if (response.data.isSuccess) {
             const sortedPosts = response.data.result.sort((a, b) => b.postIdx - a.postIdx);
             setPosts(sortedPosts);
@@ -63,7 +63,7 @@ export default function Board() {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get('/api/board/allList', {headers});
+      const response = await axios.get(`${baseUrl}/api/board/allList`, {headers});
       setBoard(...filterBoardData(response.data.result));
     } catch (e) {
       setError(e);
@@ -75,7 +75,7 @@ export default function Board() {
 
   async function scrapBoard(boardIdx) {
     try {
-      const response = await axios.post(`/api/board/scrap/${boardIdx}/`,
+      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}/`,
         JSON.stringify({}),
         { headers }
       );
@@ -87,7 +87,7 @@ export default function Board() {
 
   async function unScrapBoard(boardIdx) {
     try {
-      const response = await axios.patch(`/api/board/scrap/cancel/${boardIdx}/`,
+      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}/`,
         JSON.stringify({}),
         { headers }
       );
@@ -144,7 +144,7 @@ export default function Board() {
     try {
         setError(null);
         setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`/api/post/boardPostList/${boardIdx}?key=${key}`, { headers });
+        const response = await axios.get(`${baseUrl}/api/post/boardPostList/${boardIdx}?key=${key}`, { headers });
         setSearchResult(response.data.result)
         console.log(response.data);
     } catch (e) {

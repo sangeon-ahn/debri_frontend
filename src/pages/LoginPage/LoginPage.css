@@ -72,12 +72,20 @@
 }
 
 .pw_input {
+    font: small-caption;
     position: absolute;
     background-color: transparent;
     border: none;
     outline: none;
     color: white;
     left: 56px;
+    font-size: 30px;
+    line-height: 30px;
+    width: 200px;
+}
+
+.pw_input::placeholder {
+    /* font-size: 15px; */
 }
 
 /*login_content --> account 값 불러옴, 수정 필요*/
@@ -97,6 +105,10 @@
     padding-left: 13px;
 }
 
+.login_content_failed {
+    border: 2px solid #FF0000;
+}
+
 .input_keyword {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -105,6 +117,11 @@
     line-height: 23px;
     color: #FFFFFF;
 }
+
+.input_keyword_failed {
+    color: #FF0000;
+}
+
 .vertical_line {
     position: absolute;
     width: 23.16px;
@@ -113,6 +130,10 @@
     transform: rotate(90deg);
     background-color: transparent;
     left: 35px;
+}
+
+.vertical_line_failed {
+    border-bottom: 1px solid #FF0000;
 }
 
 .capslock_icon {
@@ -183,3 +204,23 @@ color: #283659;
     left: 78px;
     z-index: 2;
 }
+
+input.password {
+    font: small-caption;
+    font-size: 16px;
+  }
+
+/* input.password::-webkit-input-placeholder {
+        transform: scale(0.77);
+        transform-origin: 0 50%;
+    }
+
+input.password::-moz-placeholder {
+        font-size: 14px;
+        opacity: 1;
+    }
+
+input.password:-ms-input-placeholder {
+        font-size: 14px;
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    } */

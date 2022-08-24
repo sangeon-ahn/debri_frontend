@@ -45,12 +45,12 @@ export default function PostWriteConfirmModal(props) {
       zIndex: 99
     }
   };
-  
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const postIdxRef = useRef(0);
   Modal.setAppElement('#root');
   async function postData(boardIdx,userIdx,postContent, postName) {
     try {
-      const response = await axios.post(`/api/post/create`,
+      const response = await axios.post(`${baseUrl}/api/post/create`,
         JSON.stringify({boardIdx,userIdx,postContent, postName}),
         { headers }
       );

@@ -17,7 +17,7 @@ export default function Lecture(props) {
   const [isScrapped, setIsScrapped] = useState(isScrappedLecture);
   console.log(isScrapped);
   const userData = JSON.parse(localStorage.getItem("userData"));
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -38,7 +38,7 @@ export default function Lecture(props) {
 
   const postLectureScrap = async (lectureIdx) => {
     try {
-      const response = await axios.post(`/api/lecture/scrap/create`,
+      const response = await axios.post(`${baseUrl}/api/lecture/scrap/create`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -52,7 +52,7 @@ export default function Lecture(props) {
   
   const postLectureUnScrap = async (lectureIdx) => {
     try {
-      const response = await axios.patch(`/api/lecture/scrap/delete`,
+      const response = await axios.patch(`${baseUrl}/api/lecture/scrap/delete`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx

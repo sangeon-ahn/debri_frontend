@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams, useSearchParams } from 'react-rout
 import axios from 'axios';
 
 export default function PostMenuModal(props) {
-  const { isOpen, onRequestClose, post, postReportDetailOn, handleReportPost, handleReportOtherClick, handleReportClick, handleModalCloseClick, setReportSnackbarOpen } = props;
+  const { isOpen, onRequestClose, post, postReportDetailOn, handleReportPost, handleReportOtherClick, handleReportClick, handleModalCloseClick, setReportSnackbarOpen, setUserBlockOpen } = props;
   const params = useParams();
   const { boardId, postId } = params;
   const navigate = useNavigate();
@@ -44,11 +44,11 @@ export default function PostMenuModal(props) {
   };
   const [searchParams, setSearchParams] = useSearchParams();
   const scrapped = searchParams.get('scrapped');
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handlePostDeleteClick = async (postId) => {
     const deletePost = async (postId) => {
       try {
-        const response = await axios.patch(`/api/post/${postId}/status`,
+        const response = await axios.patch(`${baseUrl}/api/post/${postId}/status`,
           JSON.stringify({}),
           { headers }
         );

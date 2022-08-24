@@ -20,7 +20,7 @@ export default function PostModifyPage() {
   const [boardList,setBoardList] = useState([]);
   const params = useParams();
   const [selectedOption, setSelectedOption] = useState(params.boardId);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     getData();
     }, []);
@@ -37,7 +37,7 @@ export default function PostModifyPage() {
   };
     
   async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then(
+    await axios.get(`${baseUrl}/api/board/allList`, { headers }).then(
       (res) => {
         setBoardList(res.data.result);
       }

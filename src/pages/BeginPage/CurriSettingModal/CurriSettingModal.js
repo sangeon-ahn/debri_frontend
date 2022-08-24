@@ -34,12 +34,6 @@ export default function CurriSettingModal(props) {
     }
   };
 
-  const headers = {
-    'ACCESS-TOKEN': jwt,
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  };
-
   const handleVisibility = () => {
     if (curri.visibleStatus === "INACTIVE") {
       setPublicSnackbarOpen(true);

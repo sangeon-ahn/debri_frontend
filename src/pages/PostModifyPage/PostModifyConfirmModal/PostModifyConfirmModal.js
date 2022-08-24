@@ -53,7 +53,7 @@ export default function PostWriteConfirmModal(props) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     if (!isModified) return;
     navigate(`/boards/${params.boardId}/${params.postId}?scrapped=${scrapped}`, {state: {boardName: boardName}});
@@ -61,7 +61,7 @@ export default function PostWriteConfirmModal(props) {
 
   const modifyPost = async (userIdx, postContent, postIdx) => {
     try {
-      const response = axios.patch(`/api/post/${postIdx}`,
+      const response = axios.patch(`${baseUrl}/api/post/${postIdx}`,
         JSON.stringify(
           {
             userIdx: userIdx,

@@ -50,7 +50,7 @@ const { jwt } = JSON.parse(localStorage.getItem('userData'));
   };
   const postBlockUser = async (postIdx, reason) => {
     try {
-      const response = await axios.post(`/api/report/user/${postIdx}`,
+      const response = await axios.post(`${baseUrl}/api/report/user/${postIdx}`,
         JSON.stringify({
           reason: reason
         }),
@@ -61,7 +61,7 @@ const { jwt } = JSON.parse(localStorage.getItem('userData'));
       setError(e);
     }
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleBackClick = () => {
     onRequestClose();
     setReportSnackbarOpen(true);

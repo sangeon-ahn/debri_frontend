@@ -44,10 +44,10 @@ export default function CurriRenameModal(props) {
   const handleReasonChange = (e) => {
     setCurriName(e.target.value);
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleRename = () => {
     const renameCurri = async (curriIdx, curriName) => {
-      const response = await axios.patch(`/api/curri/modify/name`,
+      const response = await axios.patch(`${baseUrl}/api/curri/modify/name`,
         JSON.stringify({
           curriIdx: curriIdx,
           curriName: curriName

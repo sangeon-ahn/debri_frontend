@@ -26,7 +26,7 @@ export default function CurriculumPage() {
   const [curriLikeStatus, setCurriLikeStatus] = useState(false);
   const [curriLikes, setCurriLikes] = useState(0);
   const [pureStatus, setPureStatus] = useState(true);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
     'Accept': 'application/json',
@@ -78,7 +78,7 @@ export default function CurriculumPage() {
   const getCurriDetail = async (curriIdx) => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/curri/getThisCurri/${curriIdx}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/getThisCurri/${curriIdx}`, { headers });
       console.log("커리 디테일", response);
       setCurri(response.data.result);
     } catch (e) {
@@ -91,7 +91,7 @@ export default function CurriculumPage() {
   const postCopyCurri = async (targetCurriIdx, targetOwnerNickName) => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/curri/copy',
+      const response = await axios.post(`${baseUrl}/api/curri/copy`,
         JSON.stringify({
           targetCurriIdx: targetCurriIdx,
           targetOwnerNickName: targetOwnerNickName
@@ -110,7 +110,7 @@ export default function CurriculumPage() {
     try {
         setError(null);
         setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`/api/curri/review/getList/${curriIdx}`, { headers });
+        const response = await axios.get(`${baseUrl}/api/curri/review/getList/${curriIdx}`, { headers });
         setComments(response.data.result);
         console.log('리뷰', response.data.result);
     } catch (e) {
@@ -128,7 +128,7 @@ export default function CurriculumPage() {
 
   const handleEnterInput = async (curriIdx, content) => {
     try {
-      const response = await axios.post(`/api/curri/review/create`,
+      const response = await axios.post(`${baseUrl}/api/curri/review/create`,
         JSON.stringify(
           {
             curriIdx: curriIdx,
@@ -149,7 +149,7 @@ export default function CurriculumPage() {
   // 추천
   async function postLikeCurri(curriIdx) {
     try {
-      const response = await axios.post(`/api/curri/scrap/${curriIdx}`,
+      const response = await axios.post(`${baseUrl}/api/curri/scrap/${curriIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -162,7 +162,7 @@ export default function CurriculumPage() {
 
   async function patchUnlikeCurri(scrapIdx) {
     try {
-      const response = await axios.patch(`/api/curri/unScrap/${scrapIdx}`,
+      const response = await axios.patch(`${baseUrl}/api/curri/unScrap/${scrapIdx}`,
         JSON.stringify({}),
         { headers }
       );

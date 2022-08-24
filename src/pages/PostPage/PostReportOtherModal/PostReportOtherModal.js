@@ -46,10 +46,10 @@ export default function PostReportOtherModal(props) {
   const handleReasonChange = (e) => {
     setReason(e.target.value);
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleReportSubmit = () => {
     const ReportPost = async (postIdx, reason) => {
-      const response = await axios.post(`/api/report/postReport`,
+      const response = await axios.post(`${baseUrl}/api/report/postReport`,
         JSON.stringify({
           postIdx: postIdx,
           reason: reason

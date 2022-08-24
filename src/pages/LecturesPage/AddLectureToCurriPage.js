@@ -8,7 +8,7 @@ export default function AddLectureToCurri() {
   const [error, setError] = useState(false);
   const { state } = useLocation();
   const lectureIdx = state.lectureIdx;
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
     'Accept': 'application/json',
@@ -18,7 +18,7 @@ export default function AddLectureToCurri() {
   const getCurriList = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/curri/getList', { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/getList`, { headers });
       console.log("커리리스트", response);
       setCurriList(response.data.result);
     } catch(e) {
@@ -31,7 +31,7 @@ export default function AddLectureToCurri() {
   const postInsertLecture = async (curriIdx, lectureIdx) => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/curri/insertLecture',
+      const response = await axios.post(`${baseUrl}/api/curri/insertLecture`,
         JSON.stringify({
           curriIdx: curriIdx,
           lectureIdx: lectureIdx

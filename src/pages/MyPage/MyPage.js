@@ -18,7 +18,7 @@ export default function MyPage() {
   const [error,setError] = useState(null); //에러
   const [curriList, setCurriList] = useState(null);
   const [whatTime, setWhatTime] = useState(null);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -34,7 +34,7 @@ export default function MyPage() {
     try {
       setError(null);
       setLoading(true); //로딩이 시작됨
-      const response = await axios.get(`/api/curri/getList`, { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/getList`, { headers });
       setCurriList(response.data.result);
     } catch (e) {
       setError(e);
@@ -47,7 +47,7 @@ export default function MyPage() {
     navigate(`/`);
   }
 
-  console.log(curriList);
+
   return (
     <div style={{color:'white'}}>
       <div className="header">

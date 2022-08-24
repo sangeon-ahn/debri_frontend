@@ -20,7 +20,7 @@ export default function RoadmapLecture(props) {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const setColor = (lecture) => {
     if (lecture.childLangTag === "Front") {
       return 'lecture-subject red';
@@ -35,7 +35,7 @@ export default function RoadmapLecture(props) {
 
   const postLectureScrap = async (lectureIdx) => {
     try {
-      const response = await axios.post(`/api/lecture/scrap/create`,
+      const response = await axios.post(`${baseUrl}/api/lecture/scrap/create`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -49,7 +49,7 @@ export default function RoadmapLecture(props) {
   
   const postLectureUnScrap = async (lectureIdx) => {
     try {
-      const response = await axios.patch(`/api/lecture/scrap/delete`,
+      const response = await axios.patch(`${baseUrl}/api/lecture/scrap/delete`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx

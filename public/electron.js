@@ -12,6 +12,7 @@ function createWindow() {
       nodeIntegration: true,
       enableRemoteModule: true,
       devTools: isDev,
+      webSecurity: false
     },
     autoHideMenuBar: true
   });

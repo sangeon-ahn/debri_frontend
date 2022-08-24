@@ -213,7 +213,7 @@ color: #FFFFFF;
 .add_curri{
   background: #66CC66;
   border-radius: 10px;
-  width: 150px;
+  width: 147px;
   height: 44px;
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -221,16 +221,20 @@ color: #FFFFFF;
   font-size: 12px;
   line-height: 17px;  
   color: #FFFFFF;
-  margin: 22px 15px 22px 0;
+  margin: 22px 22px 22px 0;
   cursor: pointer;
 }
 .srcLink{
+  /* box-sizing: border-box; */
+  display: flex;
+  align-items: center;
   width: 147px;
   height: 40px;
   border: 2px solid #FFFFFF;
   border-radius: 10px;
   background-color: inherit;
   cursor: pointer;
+  
 }
 .srcLinktext{
   text-decoration:none;
@@ -427,4 +431,20 @@ transform: rotate(90deg);
 .filter-minus-box {
   width: 10px;
   height: 10px;
+}
+
+.external-link-icon-box {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.check-lecture-info-text {
+  font-weight: 500;
+font-size: 12px;
+line-height: 17px;
+text-align: center;
+
+color: #FFFFFF;
+
 }

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import curriInactiveCircleIcon from '../../../assets/curriInactiveCircleIcon.png';
 import curriActiveButtonImgIcon from '../../../assets/curriActiveButtonIcon.png';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Wave from 'react-wavify';
 import { useRecoilState } from 'recoil';
 import { lowbarSelect } from '../../../Atom';
@@ -36,7 +36,8 @@ export default function CurriMain(props) {
   const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
   const [curriSettingModalOn, setCurriSettingModalOn] = useState(false);
   const [curriRenameModalOn, setCurriRenameModalOn] = useState(false);
-
+  const [rightPosition, setRightPosition] = useState(-348);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   function initialActiveStatus() {
     if (curri) {
       if (curri.status === 'ACTIVE') {
@@ -77,7 +78,7 @@ export default function CurriMain(props) {
 
   const patchCurriActivation = async (curriIdx, status) => {
     try {
-      const response = await axios.patch(`/api/curri/modify/status`,
+      const response = await axios.patch(`${baseUrl}/api/curri/modify/status`,
       JSON.stringify({
         curriIdx: curriIdx,
         status: status
@@ -100,7 +101,7 @@ export default function CurriMain(props) {
     }
 
     try {
-      const response = await axios.patch('/api/curri/modify/visibleStatus',
+      const response = await axios.patch(`${baseUrl}/api/curri/modify/visibleStatus`,
         JSON.stringify({
           curriIdx: curriIdx,
           visibleStatus: setVisibleStatus
@@ -123,7 +124,7 @@ export default function CurriMain(props) {
 
   const deleteCurri = async (curriIdx) => {
     try {
-      const response = await axios.patch(`/api/curri/delete/${curriIdx}`, JSON.stringify({}), { headers });
+      const response = await axios.patch(`${baseUrl}/api/curri/delete/${curriIdx}`, JSON.stringify({}), { headers });
       console.log(response);
     } catch (e) {
       console.log(e);
@@ -139,7 +140,7 @@ export default function CurriMain(props) {
 
   const resetCurri = async (curriIdx) => {
     try {
-      const response = await axios.patch(`/api/curri/reset/${curriIdx}`, JSON.stringify({}), { headers });
+      const response = await axios.patch(`${baseUrl}/api/curri/reset/${curriIdx}`, JSON.stringify({}), { headers });
       console.log(response);
     } catch (e) {
       console.log(e);
@@ -204,7 +205,7 @@ export default function CurriMain(props) {
   };
 
   return (
-    <>
+    <div className='curri-main'>
       {currentCurriPosition !== numberOfCurries && curri ?
       <div className='curri-scroll-area'>
         <div className='curri-sub-info'>
@@ -365,6 +366,6 @@ export default function CurriMain(props) {
       </div>
        : <BeginCurriButton />
       }
-    </>
+    </div>
   );
 }

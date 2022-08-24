@@ -32,7 +32,7 @@ export default function BoardsPage() {
   const [text, setText] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   //boardList 가져오기
   useEffect( () => {
       fetchScrappedBoards();
@@ -49,7 +49,7 @@ export default function BoardsPage() {
     try {
       setError(null);
       setLoading(true); //로딩이 시작됨
-      const response = await axios.get(`/api/board/scrap/getList`, { headers });
+      const response = await axios.get(`${baseUrl}/api/board/scrap/getList`, { headers });
       console.log(response);
       if (response.data.isSuccess) {
         setScrappedBoards(response.data.result);
@@ -64,7 +64,7 @@ export default function BoardsPage() {
     try {
         setError(null);
         setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`api/board/unscrap/getList`, { headers });
+        const response = await axios.get(`${baseUrl}/api/board/unscrap/getList`, { headers });
         console.log(response.data);
         if (response.data.isSuccess) {
           setUnScrappedBoards(response.data.result);
@@ -78,7 +78,7 @@ export default function BoardsPage() {
   //스크랩 생성
   async function scrapBoard(boardIdx) {
     try {
-      const response = await axios.post(`/api/board/scrap/${boardIdx}`,
+      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -91,7 +91,7 @@ export default function BoardsPage() {
   //스크랩취소
   async function unScrapBoard(boardIdx) {
     try {
-      const response = await axios.patch(`/api/board/scrap/cancel/${boardIdx}`,
+      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -139,7 +139,7 @@ export default function BoardsPage() {
   async function SearchPost(keyword) {
     
     try {
-      const response = await axios.post(`/api/post/getSearchList`,
+      const response = await axios.post(`${baseUrl}/api/post/getSearchList`,
         JSON.stringify({keyword : keyword}),
         { headers }
       );

@@ -18,11 +18,11 @@ export default function ReComment(props) {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   //좋아요 생성
   async function createLike(commentIdx) {
     try {
-      const response = await axios.post(`/api/comment/like/create/${commentIdx}`,
+      const response = await axios.post(`${baseUrl}/api/comment/like/create/${commentIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -35,7 +35,7 @@ export default function ReComment(props) {
   //좋아요 취소
   async function cancelLike(commentIdx) {
     try {
-      const response = await axios.patch(`/api/comment/like/delete/${commentIdx}`,
+      const response = await axios.patch(`${baseUrl}/api/comment/like/delete/${commentIdx}`,
         JSON.stringify({}),
         { headers }
       );

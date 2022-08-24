@@ -1,7 +1,9 @@
 import './CurriLecture.css';
 import curriLectureDetailIcon from '../../../assets/curriLectureDetailIcon.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function CurriLecture(props) {
+  const navigate = useNavigate();
   const { lecture } = props;
   const greenProgressBarStyle = {
     boxSizing: 'border-box',
@@ -21,7 +23,7 @@ export default function CurriLecture(props) {
   };
 
   return (
-    <div className={lecture.progressRate === 100 ? 'curri-lecture-completed' :'curri-lecture'}>
+    <div className={lecture.progressRate === 100 ? 'curri-lecture-completed' :'curri-lecture'} onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
       <div className={lecture.progressRate === 100 ? 'lecture-progress-ratio-completed' :'lecture-progress-ratio'}>{Math.floor(lecture.progressRate)}%</div>
       <div className='lecture-vertical-line'></div>
       <div className='curri-lecture-main'>
