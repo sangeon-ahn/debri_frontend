@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const idRef = useRef();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const headers = {
     Accept: 'application/json',
@@ -22,7 +23,7 @@ export default function LoginPage() {
 
   async function postData(email, pwd) {
     try {
-      const response = await axios.post(`/api/auth/login`,
+      const response = await axios.post(`${baseUrl}/api/auth/login`,
         JSON.stringify(
           {
             email : email,

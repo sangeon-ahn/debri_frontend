@@ -13,6 +13,7 @@ export default function BoardsPage() {
     const [scrapPostslist, setScrapPostslist] = useState(null);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;
+
     const headers = {
         'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
         'Accept': 'application/json',
@@ -27,11 +28,7 @@ export default function BoardsPage() {
         try {
             setError(null);
             setLoading(true); //로딩이 시작됨
-<<<<<<< HEAD
-            const response = await axios.get(`/api/post/getMyScrap`, { headers });
-=======
-            const response = await axios.get(`${baseUrl}api/post/getMyScrap`, { headers });
->>>>>>> 3f0105f89ba306c906030acd1778abef9aa5625c
+            const response = await axios.get(`${baseUrl}/api/post/getMyScrap`, { headers });
             setScrapPostslist(response.data.result)
             console.log(response.data);
         } catch (e) {

@@ -20,12 +20,9 @@ export default function CurriculumTabPage() {
   const [latestFiveCurriList, setLatestFiveCurriList] = useState(null);
   const [visibility, setVisibility] = useState(true);
   const [error, setError] = useState(null);
-<<<<<<< HEAD
   const navigate = useNavigate();
-
-=======
   const baseUrl = process.env.REACT_APP_BASE_URL;
->>>>>>> 3f0105f89ba306c906030acd1778abef9aa5625c
+
   const getTopTenCurriList = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/curri/scrap/topList`, { headers });
