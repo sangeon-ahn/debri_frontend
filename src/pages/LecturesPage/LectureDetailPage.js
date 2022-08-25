@@ -14,6 +14,8 @@ import { AddLectureSnackbar } from "./AddLectureSnackbar/AddLectureSnackbar";
 import {useRecoilState} from 'recoil';
 import {AddSnackbarOpen} from '../../Atom';
 import externalLinkIcon from '../../assets/externalLinkIcon.png';
+import liveIcon from '../../assets/liveIcon.png';
+import useInterval from '../CurriculumTabPage/useInterval';
 
 export default function LecturesDeatilPage() {
     const params = useParams();
@@ -29,6 +31,8 @@ export default function LecturesDeatilPage() {
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState('');
     const [addSnackbarOpen, setAddSnackbarOpen] = useRecoilState(AddSnackbarOpen);
+    const [visibility, setVisibility] = useState(true);
+
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const headers = {
         'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -226,6 +230,13 @@ export default function LecturesDeatilPage() {
         setAddSnackbarOpen(false);
     };
 
+    const liveIconStyle = {
+      opacity: visibility ? '1' : '0',
+      transition: 'all .0.5s ease-out'
+    };
+
+    useInterval(() => setVisibility(state => !state), 1000);
+
 
     return (
         <div>
@@ -297,7 +308,12 @@ export default function LecturesDeatilPage() {
 
             {lectureDetail && <div className='LectureReview'>
               <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
-              <div className='LectureReviewLive'>● LIVE</div>
+              <div className='latest-curries-live'>
+                <div className='onair-icon-box' alt="">
+                  <img src={liveIcon} alt="" style={liveIconStyle}/>
+                </div>
+                <div className='live-text'>LIVE</div>
+              </div>
               {comments && <div style={{marginBottom:'100px'}}>
                 {comments.map((reivew,i) => (
                   <div key={i} className='LectureReviewContents'>
