@@ -130,9 +130,11 @@ export default function Comment(props) {
               <div className="up-vote-number">{isNaN(voteCount) ? 0 : voteCount}</div>
               <div className="barrier-line"></div>
               <img src={reCommentIcon} alt='' className="recomment-icon" onClick={handleRecommentButton}/>
-              <button className='comment-menu-button' onClick={() => setIsCommentSettingModalOn(state=>!state)}>
+              <button className='comment-menu-button' onClick={() => {
+                setReportedComment(comment);
+                setIsCommentSettingModalOn(state=>!state);
+              } }>
                 <img src={commentMenuIcon} alt="" className="comment-menu-icon"  />
-                j
               </button>
           </div>
         </div>

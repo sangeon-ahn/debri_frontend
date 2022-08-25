@@ -243,7 +243,7 @@ export default function CurriMain(props) {
           </div>
         </div>
         <div className='curri-middle-area'>
-          {curri.lectureListResList.length === 0 ?
+          {curri.lectureListResList.length === 0 && active ?
             <>
               <div className='curri-red-circle-box'>
                 <img src={redCircleIcon} alt="" />
@@ -295,7 +295,7 @@ export default function CurriMain(props) {
                   </div>
                   <div className='curri-inactive-main'>
                     <div className='curri-inactive-text'>커리큘럼 비활성화 중</div>
-                    <div className='curri-inactive-explain'>한 번에 하나의 커리큘럼만 진행할 수 있어요</div>
+                    {/* <div className='curri-inactive-explain'>한 번에 하나의 커리큘럼만 진행할 수 있어요</div> */}
                     <button className='curri-activate-button' onClick={handleCurriActivation}>
                       <div className='curri-active-button-img-box'>
                         <img src={curriActiveButtonImgIcon} alt="" />

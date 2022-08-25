@@ -14,7 +14,7 @@ export default function LatestCurri(props) {
         </div>
         <div className='latest-curri-text-container'>
           <div className='latest-curri-name'>{curri.curriName}</div>
-          <div className='latest-curri-desc'>fff</div>
+          <div className='latest-curri-desc'>{curri.curriDesc}</div>
           <div className='who-made-container'>
             <div className='by'>by</div>
             <div className='who-made'>{curri.curriAuthor}</div>

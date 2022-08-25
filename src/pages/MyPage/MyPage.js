@@ -11,6 +11,8 @@ import curriVisibleIcon from '../../assets/visibleCurriIcon.png';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
 import { Unix_timestamp } from '../../utils/unixTimeStamp';
+import { useRecoilState } from 'recoil';
+import { lowbarSelect } from '../../Atom';
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function MyPage() {
   const [error,setError] = useState(null); //에러
   const [curriList, setCurriList] = useState(null);
   const [whatTime, setWhatTime] = useState(null);
+  const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -54,7 +57,15 @@ export default function MyPage() {
   return (
     <div style={{color:'white'}}>
       <div className="header">
-        <img src={logo} alt="액박" className="logo" onClick={()=>{navigate("/home")}}/>
+        <img src={logo} alt="액박" className="logo" onClick={()=>{
+          navigate("/home");
+          setLowbar({
+            homeButton: true,
+            lectureButton: false,
+            boardButton: false,
+            curriButton: false
+          });
+          }}/>
       </div>
 
       <div className="roadmap-back-box" onClick={() => navigate(-1)}>

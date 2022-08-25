@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "homepage": "./",
+  "productName": "Debri",
   "main": "public/electron.js",
   "version": "0.1.0",
   "private": true,
@@ -67,5 +68,5 @@
     "productName": "Debri",
     "asar": true,
     "appId": "com.project"
-  }
+}
 }

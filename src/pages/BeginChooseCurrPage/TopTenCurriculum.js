@@ -13,7 +13,7 @@ export default function TopTenCurriculum(props) {
         </div>
         <div className="roadmap-detail-box">
           <div className="roadmap-title">{curri.curriName}</div>
-          <div className="roadmap-description">JAVA는 이걸로 자바봐...</div>
+          <div className="roadmap-description">{curri.curriDesc}</div>
           <div className="madeby">
             <div className="by">by</div>
             <div className="team-debri">{curri.curriAuthor}</div>

@@ -1,12 +1,14 @@
 const { app, BrowserWindow, Menu, Tray, Notification} = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+const sound = require("sound-play");
 
 let mainWindow;
 let tray;
 //트레이 아이콘
 function initTrayIconMenu(){
-  tray = new Tray(path.join(__dirname, '/debriLogo.png'));
+  tray = new Tray(path.join(__dirname, '/assets/icon.png'));
+  console.log(path.join(__dirname, '/icon.png'));
   const myMenu = Menu.buildFromTemplate([
     {label: '앱 열기', type: 'normal', checked: true, click: ()=>{
       mainWindow.show();
@@ -44,15 +46,14 @@ function createWindow() {
       webSecurity: false
     },
     autoHideMenuBar: true,
-    icon: __dirname + '/debriLogo.png',
+    icon: `${path.join(__dirname, '/assets/icon.png')}`
   });
 
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
+      : `${path.join(__dirname, "/index.html")}`
   );
-  
     // contextMenu();
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: "detach" });
@@ -78,8 +79,9 @@ mainWindow.on('close', function (event) {
           }).show();
         
           // Play custom sound
-          const sound = require("sound-play");
-          sound.play(path.join(__dirname, '/closeToTraySound.mp3'));
+          
+          // console.log(__dirname);
+          sound.play(`${path.join(__dirname, "/closeToTraySound.mp3")}`);
         };
         showNotification();
     }
