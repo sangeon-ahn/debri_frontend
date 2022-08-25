@@ -17,15 +17,18 @@
   height: 132px;
 }
 
-/* .curri-chapter-main {
+.curri-chapter-main {
   font-family: 'Noto Sans KR';
 font-style: normal;
 font-weight: 700;
-font-size: 2vw;
+font-size: 14px;
 line-height: 20px;
-width: 150px;
+width: 140px;
 color: #FFFFFF;
-} */
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
 
 .curri-chapter {
   position: relative;

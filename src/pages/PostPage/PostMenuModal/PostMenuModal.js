@@ -1,6 +1,7 @@
 import Modal from 'react-modal';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function PostMenuModal(props) {
   const { isOpen, onRequestClose, post, postReportDetailOn, handleReportPost, handleReportOtherClick, handleReportClick, handleModalCloseClick, setReportSnackbarOpen, setUserBlockOpen } = props;
@@ -10,6 +11,9 @@ export default function PostMenuModal(props) {
   const location = useLocation();
   const { state } = location;
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
+
+  const [isPostDeleted, setIsPostDeleted] = useState(false);
+
   const customStyles = {
     content: {
       top: '50%',
@@ -53,6 +57,9 @@ export default function PostMenuModal(props) {
           { headers }
         );
         console.log(response.data);
+        if (response.data.isSuccess) {
+          setIsPostDeleted(true);
+        }
       } catch (e) {
         console.log(e);
       }
@@ -60,6 +67,11 @@ export default function PostMenuModal(props) {
     deletePost(postId);
   };
 
+  useEffect(() => {
+    if (!isPostDeleted) return;
+    navigate(`/boards/${boardId}?scrapped=${scrapped}`);
+  }, [isPostDeleted]);
+  
   Modal.setAppElement('#root');
   return (
     <Modal
@@ -76,7 +88,6 @@ export default function PostMenuModal(props) {
           <button className="post-modify" onClick={() => navigate(`/boards/${boardId}/${postId}/modify?scrapped=${scrapped}`, {state: {post: post, boardName: state.boardName}})}>수정하기</button>
           <button className="post-delete" onClick={() => {
             handlePostDeleteClick(postId);
-            navigate(`/boards/${boardId}?scrapped=${scrapped}`);
           }}>삭제하기</button>
         </div> :
         <div>

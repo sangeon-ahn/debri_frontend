@@ -6,13 +6,17 @@ import logoType from '../../assets/LOGO_TYPE.png';
 import './LoginPage.css';
 import capsLockIcon from '../../assets/capsLockIcon.png';
 import Modal from 'react-modal';
+import { useRecoilState } from 'recoil';
+import { lowbarSelect } from '../../Atom';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState("");
+  const [isLoginFailed, setIsLoginFailed] = useState(false);
   const navigate = useNavigate();
   const idRef = useRef();
   const baseUrl = process.env.REACT_APP_BASE_URL;
+  const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
 
   const headers = {
     Accept: 'application/json',
@@ -35,12 +39,17 @@ export default function LoginPage() {
         localStorage.setItem("userData", JSON.stringify(response.data.result));
         localStorage.setItem("idPassword", JSON.stringify({id: email, pwd: pwd}));
         navigate('/home');
+        setLowbar({
+          homeButton: true,
+          lectureButton: false,
+          boardButton: false,
+          curriButton: false
+        });
       } else {
-        alert(" 아이디 혹은 비밀번호를 확인해 주세요.");
+        setIsLoginFailed(true);
       }
     } catch (error) {
       console.error(error);
-      alert(" 아이디 혹은 비밀번호를 확인해 주세요.");
     }
   }
     const goToAccount = () => {
@@ -77,14 +86,14 @@ export default function LoginPage() {
             <p className='logotext'>“개발과 관련된 모든 것들을 연결합니다.”</p>
           </div>
           <div className='login_warp'>
-            <div className='login_content'>
-              <div className='input_keyword'>ID</div>
-              <div className='vertical_line'></div>
+            <div className={isLoginFailed ? 'login_content login_content_failed' : 'login_content'}>
+              <div className={isLoginFailed ? 'input_keyword input_keyword_failed' : 'input_keyword'}>ID</div>
+              <div className={isLoginFailed ? 'vertical_line vertical_line_failed' : 'vertical_line'}></div>
               <input ref={idRef} className='id_input' placeholder="email 형식" type="email" value={email} onChange={e => {setEmail(e.target.value)}} />
             </div>
-            <div className='login_content'>
-              <div className='input_keyword'>PW</div>
-              <div className='vertical_line'></div>
+            <div className={isLoginFailed ? 'login_content login_content_failed' : 'login_content'}>
+              <div className={isLoginFailed ? 'input_keyword input_keyword_failed' : 'input_keyword'}>PW</div>
+              <div className={isLoginFailed ? 'vertical_line vertical_line_failed' : 'vertical_line'}></div>
               <input className='pw_input' placeholder="비밀번호" type="password" value={password} onChange={e => {setPassword(e.target.value)}} onKeyDown={detectEnterInput} />
               <img  className='capslock_icon' src={capsLockIcon} alt="" />
             </div>

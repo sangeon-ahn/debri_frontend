@@ -217,3 +217,28 @@ color: #000000;
   height: 19px;
   margin: 9.22px 9.23px 8.14px 9.23px;
 }
+
+.curriculum-header {
+  display: flex;
+    width: 324.26px;
+}
+
+.curri-detail-scroll-area {
+  width: 360px;
+  height: 500px;
+  overflow-x: hidden;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}

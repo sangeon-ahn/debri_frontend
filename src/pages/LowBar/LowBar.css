@@ -16,6 +16,11 @@ border-radius: 10px 10px 0px 0px;
   width: 60px;
   text-align: center;
   position: relative;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #131927;
 }
 
 .home-icon-box {
@@ -37,12 +42,22 @@ border-radius: 10px 10px 0px 0px;
   height: 100%;
   width: 60px;
   text-align: center;
+  cursor: pointer;
+}
+
+.lecture-button:hover {
+  background-color: #131927;
 }
 
 .board-button {
   height: 100%;
   width: 60px;
   text-align: center;
+  cursor: pointer;
+}
+
+.board-button:hover {
+  background-color: #131927;
 }
 
 .curriculum-button {
@@ -50,8 +65,12 @@ border-radius: 10px 10px 0px 0px;
   width: 60px;
   text-align: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+  cursor: pointer;
+}
+
+.curriculum-button:hover {
+  background-color: #131927;
 }
 
 a:active {

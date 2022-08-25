@@ -10,6 +10,7 @@ import curriMiniPlusIcon from '../../assets/curriMiniPlusIcon.png';
 import Header from '../Header/Header';
 import {useRecoilState} from 'recoil';
 import {AddSnackbarOpen} from '../../Atom';
+import { Unix_timestamp } from "../../utils/unixTimeStamp";
 
 export default function AddLectureToCurri() {
   const [loading, setLoading] = useState(false);
@@ -83,16 +84,18 @@ export default function AddLectureToCurri() {
           <button className='back-button-curri' onClick={() => navigate(-1)}>
             <img src={leftArrow} alt=''/>
           </button>
-          <div className='board-title'>"{lecture.lectureName}"<span style={{fontSize:'10px'}}> 을 추가할 커리큘럼</span></div>
+          <div className='add-curri-title'>"{lecture.lectureName}"<span style={{fontSize:'14px', fontWeight: '500', lineHeight: '20px'}}> 추가할 커리큘럼</span></div>
         </div>
+        <div className="ongoing-curries">진행 중인 커리큘럼</div>
+          <div className="add-curri-scroll-page">
             {curriList.map(curri => (
-                <div className="curriculum" style={{margin:'10px 20px'}} onClick={() => handleAddLectureToCurri(curri.curriIdx)}>
+                <div className="curriculum" style={{margin:'10px 0', padding: '0 20px'}} onClick={() => handleAddLectureToCurri(curri.curriIdx)} key={curri.curriIdx}>
                   <div className="curriculum-Icon-box">
                     <img src={CurriIcon} alt="" />
                   </div>
                   <div className="roadmap-detail-box">
                     <div className="roadmap-title">{curri.curriName}</div>
-                    <div className="roadmap-description">{curri.createdAt}</div>
+                    <div className="roadmap-description">{Unix_timestamp(curri.createdAt)}</div>
                     <div className='curri-private'>
                       <div className='curri-private-img-box'>
                         <img src={curri.visibleStatus === 'ACTIVE' ? curriVisibleIcon : curriPrivateIcon} alt="" />
@@ -111,6 +114,7 @@ export default function AddLectureToCurri() {
             </button>
             <div className="start-new-curriculum-text">새로운 커리큘럼 시작하기</div>
           </div>
+        </div>
     </div>
   );
 }

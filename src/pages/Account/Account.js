@@ -154,15 +154,15 @@ const Account =()=>{
             <div>
               <div className={`agree_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`}>
                 <input className='textinput' type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent}/>
-                <label for="all-check"><div className='agree_text'>전체 약관에 동의합니다.</div></label>
+                <label htmlFor="all-check"><div className='agree_text'>전체 약관에 동의합니다.</div></label>
               </div>
               <div className={`agree_btn ${!login ? '' :(useCheck ? 'success' : 'fail')}`}>
                 <input className='textinput' type="checkbox" id="check2" checked={useCheck}  onChange={useBtnEvent}/>
-                <label for="check2"><div className='agree_text'>개인정보 약관에 동의합니다. (필수)</div></label>
+                <label htmlFor="check2"><div className='agree_text'>개인정보 약관에 동의합니다. (필수)</div></label>
               </div>
               <div className='agree_btn' style={{marginBottom:"100px"}}>
                 <input className='textinput' type="checkbox" id="check3" checked={marketingCheck}  onChange={marketingBtnEvent}/>
-                <label for="check3"><div className='agree_text'>서비스 홍보 약관에 동의합니다. (선택)</div></label>
+                <label htmlFor="check3"><div className='agree_text'>서비스 홍보 약관에 동의합니다. (선택)</div></label>
               </div>
             </div>
           </div>

@@ -8,6 +8,10 @@
   padding: 10px 14px 6px 0;
 }
 
+.post-summary-container:hover {
+  background-color: #131927;
+}
+
 .post-summary-wrapper {
   position: relative;
   width: 262px;

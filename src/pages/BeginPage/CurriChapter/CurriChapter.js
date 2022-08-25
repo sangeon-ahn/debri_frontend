@@ -65,15 +65,15 @@ export default function CurriChapter(props) {
   };
 
 
-  useEffect(() => {
-    const $ChapterMain = document.querySelector(`.curri-stone-checks > div:nth-child(${chapter.progressOrder}) .curri-chapter-main`);
+  // useEffect(() => {
+  //   const $ChapterMain = document.querySelector(`.curri-stone-checks > div:nth-child(${chapter.progressOrder}) .curri-chapter-main`);
   
-    // console.log($ChapterMain);
+  //   // console.log($ChapterMain);
 
-    if ($ChapterMain !== null && $ChapterMain.clientHeight > 20) {
-      setMainFontSize(state => state - 1);
-    }
-  }, [mainFontSize]);
+  //   if ($ChapterMain !== null && $ChapterMain.clientHeight > 20) {
+  //     setMainFontSize(state => state - 1);
+  //   }
+  // }, [mainFontSize]);
 
   if (error) return null;
 
@@ -95,7 +95,7 @@ export default function CurriChapter(props) {
         </div>
         <div className='curri-chapter-text'>
           <div className='curri-chapter-subject'>{chapter.langTag}</div>
-          <div style={mainStyle} className='curri-chapter-main'>{chapter.chName}</div>
+          <div className='curri-chapter-main'>{chapter.chName}</div>
         </div>
         <div className={chapter.chComplete === 'FALSE' ? 'curri-not-done' : 'curri-done'}>{chapter.progressOrder}/{chapter.chNumber}</div>
       </div>

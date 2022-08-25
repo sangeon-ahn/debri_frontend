@@ -1,5 +1,5 @@
 import Header from "../Header/Header";
-import roadmapIcon from '../../assets/roadmapIcon.png';
+import roadmapIcon from '../../assets/orbit.gif';
 import leftSideIcon from '../../assets/leftSideIcon.png';
 import './BeginNewRoadmapPage.css';
 import curriDurationIcon from '../../assets/curriDurationIcon.png';

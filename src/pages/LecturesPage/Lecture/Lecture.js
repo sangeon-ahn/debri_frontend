@@ -107,7 +107,7 @@ export default function Lecture(props) {
                 <div className="lecture-price">#{lecture.pricing}</div>
               </div>
             </div>
-            <div className="lecture-detail-box">
+            <div className="lecture-detail-box" onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
               <img src={lectureDetailIcon} alt="" />
             </div>
           </div>

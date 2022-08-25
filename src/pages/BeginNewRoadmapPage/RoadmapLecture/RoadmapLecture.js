@@ -77,11 +77,11 @@ export default function RoadmapLecture(props) {
     <div className="lecture">
       <div className="lecture-scrap-box">
         {isScrapped ?
-          <img src={scrappedStar} alt="" onClick={lectureUnScrap}/> :
-          <img src={unScrappedStar} alt="" onClick={lectureScrap}/>
+          <img src={scrappedStar} alt="" onClick={lectureUnScrap} style={{cursor:"pointer"}}/> :
+          <img src={unScrappedStar} alt="" onClick={lectureScrap} style={{cursor:"pointer"}}/>
         }
       </div>
-      <div className="lecture-description">
+      <div className="lecture-description" onClick={()=>{navigate(`/lectures/detail/${lecture.childLectureIdx}`)}}>
         <div className={setColor(lecture)}>{lecture.childLangTag}</div>
         <div className="lecture-title-box">
           <div className="lecture-name">{lecture.childLectureName}</div>
@@ -101,7 +101,7 @@ export default function RoadmapLecture(props) {
           <div className="lecture-price">{lecture.childPricing}</div>
         </div>
       </div>
-      <div className="lecture-detail-box">
+      <div className="lecture-detail-box" onClick={()=>{navigate(`/lectures/detail/${lecture.childLectureIdx}`)}}>
         <img src={lectureDetailIcon} alt="" />
       </div>
     </div>

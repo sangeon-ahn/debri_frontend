@@ -127,10 +127,10 @@ export default function PostPage() {
       setLoading(true);
       const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}`,{ headers });
       if (response.data.isSuccess) {
-        console.log(response.data.result);
+        console.log('댓글', response.data.result);
         setComments(response.data.result);
       }
-      console.log(response);
+      console.log('댓글실패', response);
     } catch (e) {
       setError(e);
       console.log(e);
@@ -202,7 +202,7 @@ export default function PostPage() {
             { headers }
         );
 
-        console.log(response.data.result);
+        console.log('댓작성완', response);
         setComments(state => {
           return [
             ...state,
@@ -246,6 +246,7 @@ export default function PostPage() {
     };
 
     if (rootCommentIdx === null) {
+      console.log('댓글작성')
       uploadComment(userIdx, postId, content, authorName);
     } else {
       uploadReComment(userIdx, postId, rootCommentIdx, content, authorName);

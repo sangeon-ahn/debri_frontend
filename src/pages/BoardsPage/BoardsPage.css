@@ -122,11 +122,16 @@
 .board-menu {
     height: 40px;
     /* padding: 5px 0; */
-    width: 100%;
+    width: 316px;
     display: flex;
     align-items: center;
     position: relative;
     vertical-align:middle;
+    cursor: pointer;
+}
+
+.board-menu:hover {
+    background-color: #131927;
 }
 
 .board-menu button {
@@ -175,15 +180,22 @@
 }
 
 .scrap-star {
+    position: relative;
     cursor: pointer;
+    z-index: 10;
 }
 
 .unscrap-star {
+    position: relative;
     cursor: pointer;
+    z-index: 10;
 }
 
 .board-name {
     cursor: pointer;
+    width: 260px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .boards-toggle-button {

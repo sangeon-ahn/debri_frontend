@@ -9,6 +9,10 @@ border: 1px solid #FFFFFF;
 border-radius: 10px;
 }
 
+.lecture:hover {
+  background-color: rgb(65, 66, 66);
+}
+
 .lecture-scrap-box {
   width: 56px;
   height: 80px;
@@ -18,7 +22,8 @@ border-radius: 10px;
 
 .lecture-description {
   width: 215px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
+  cursor: pointer;
 }
 
 .lecture-detail-box {

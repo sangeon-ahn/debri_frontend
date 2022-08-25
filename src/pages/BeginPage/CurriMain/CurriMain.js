@@ -23,6 +23,7 @@ import { CurriPublicSnackbar } from '../CurriPublicSnackbar/CurriPublicSnackbar'
 import { CurriPrivateSnackbar } from '../CurriPrivateSnackbar/CurriPrivateSnackbar';
 import CurriResetModal from '../CurriResetModal/CurriResetModal';
 import CurriDeleteModal from '../CurriDeleteModal/CurriDeleteModal';
+import curriNonActivateIcon from '../../../assets/curriNonActivateIcon.png';
 
 export default function CurriMain(props) {
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ export default function CurriMain(props) {
   const [curriSettingModalOn, setCurriSettingModalOn] = useState(false);
   const [curriRenameModalOn, setCurriRenameModalOn] = useState(false);
   const [rightPosition, setRightPosition] = useState(-348);
+  const [activate, setActivate] = useState(0);
+
   const baseUrl = process.env.REACT_APP_BASE_URL;
   function initialActiveStatus() {
     if (curri) {
@@ -86,6 +89,7 @@ export default function CurriMain(props) {
       { headers }
       );
       console.log(response);
+      setActivate(state => state + 1);
     } catch (e) {
       console.log(e);
     }
@@ -131,6 +135,7 @@ export default function CurriMain(props) {
     }
     setCurriDeleteModalOn(false);
     getCurriList();
+    scrollTop();
   };
 
   const renameCurri = () => {
@@ -151,13 +156,13 @@ export default function CurriMain(props) {
   };
 
   const handleCurriActivation = () => {
-    setActive(state => !state);
-
-    if (curri.status === 'ACTIVE') {
+    console.log(curri.active, active);
+    if (active === true) {
       patchCurriActivation(curri.curriIdx, 'INACTIVE');
     } else {
       patchCurriActivation(curri.curriIdx, 'ACTIVE');
     }
+    scrollTop();
   };
   const handleCurriInsertLecture = () => {
     setLowbar({
@@ -204,6 +209,12 @@ export default function CurriMain(props) {
     setCurriDeleteModalOn(true);
   };
 
+  useEffect(() => {
+    if (activate === 0) return;
+
+    setActive(state => !state);
+  }, [activate]);
+
   return (
     <div className='curri-main'>
       {currentCurriPosition !== numberOfCurries && curri ?
@@ -239,7 +250,7 @@ export default function CurriMain(props) {
                 <div className='curri-red-circle-text'>현재 선택된 강의가 없어요!</div>
               </div>
             </> :
-              curri.status === 'ACTIVE' ?
+              curri.status === 'ACTIVE' && active ?
                 <>
                   <div className='curri-green-circle-border'></div>
                   <div className='curri-green-circle-inner'></div>
@@ -317,12 +328,20 @@ export default function CurriMain(props) {
                 </div>
               </div>
             </div>
-            <div className='curri-setting' onClick={() => setCurriSettingModalOn(state=>!state)}>
-              <div className='curri-setting-icon-box'>
-                <img src={curriSettingIcon} alt="" />
+            <div className='curri-option-container'>
+              <div className='curri-nonactivate' onClick={handleCurriActivation}>
+                <div className='curri-nonactivate-icon-box'>
+                  <img src={curriNonActivateIcon} alt="" />
+                </div>
+                <div className='curri-nonactivate-text'>비활성화</div>
               </div>
-              <div className='curri-setting-text'>
-                설정 변경
+              <div className='curri-setting' onClick={() => setCurriSettingModalOn(state=>!state)}>
+                <div className='curri-setting-icon-box'>
+                  <img src={curriSettingIcon} alt="" />
+                </div>
+                <div className='curri-setting-text'>
+                  설정 변경
+                </div>
               </div>
             </div>
             <CurriSettingModal

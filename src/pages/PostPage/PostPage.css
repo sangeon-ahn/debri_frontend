@@ -101,12 +101,25 @@
 
 .post-setting-menu-container {
   width: 316px;
-  height: 139px;
+  height: 137px;
   background: #8B95A1;
   border-radius: 10px;
   margin-bottom: 6px;
   text-align: center;
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+}
+
+.comment-setting-menu-container {
+  width: 316px;
+  height: 91px;
+  background: #8B95A1;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  text-align: center;
+  /* display: flex; */
   flex-direction: column;
   /* justify-content: space-evenly; */
   border: 1px solid black;
@@ -125,6 +138,8 @@ color: #FFFFFF;
 text-align: center;
 border: 1px solid black;
 cursor: pointer;
+
+
 }
 
 .post-setting-modal-title {
@@ -134,7 +149,7 @@ font-weight: 400;
 font-size: 12px;
 line-height: 43px;
 text-align: center;
-flex: 1;
+/* flex: 1; */
 
 color: #0A1123;
 }
@@ -170,6 +185,25 @@ color: #000000;
 background-color: transparent;
 border: none;
 cursor: pointer;
+}
+
+.comment-delete {
+  /* flex: 1; */
+  width: 300px;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 23px;
+text-align: center;
+height: 47px;
+color: #000000;
+background-color: transparent;
+/* border: none; */
+cursor: pointer;
+border: none;
+border-top: 2px solid #0A1123;
+/* border-style: solid; */
 }
 
 .post-menu-button {

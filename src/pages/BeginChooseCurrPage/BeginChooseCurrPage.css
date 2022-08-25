@@ -47,6 +47,11 @@
 .roadmap {
   display: flex;
   width: 324.26px;
+  cursor: pointer;
+}
+
+.roadmap:hover {
+  background-color: #131927;
 }
 
 .roadmap-icon-box {
@@ -151,16 +156,19 @@ color: #FFFFFF;
 }
 
 .curriculum:hover {
-  background-color: #434343;
+  background-color: #131927;
 }
-
-
 
 .start-new-curriculum-area {
   display: flex;
   margin-top: 26px;
   margin-left: 25px;
   margin-bottom: 132px;
+  cursor: pointer;
+}
+
+.start-new-curriculum-area:hover {
+  background-color: #131927;
 }
 
 .start-curri-circle-icon {
@@ -181,10 +189,6 @@ color: #FFFFFF;
   cursor: pointer;
   border-radius: 38px;
   border: 4px solid white;
-}
-
-.start-new-curriculum-box:hover {
-  background-color: #f7eeee;
 }
 
 .start-new-curriculum-text {

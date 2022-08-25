@@ -108,7 +108,7 @@ height: 16px;
 border: 1px solid #FF0000;
 border-radius: 9px;
 align-items: center;
-right: 20px;
+right: 22px;
 }
 
 .live-text {
@@ -129,6 +129,7 @@ right: 20px;
 .left-arrow {
   float:left;
   margin:5px;
+  cursor: pointer;
 }
 .scrapCurriTitle{
   font-weight: 900;

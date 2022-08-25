@@ -72,14 +72,12 @@
 }
 
 .pw_input {
-    font: small-caption;
     position: absolute;
     background-color: transparent;
     border: none;
     outline: none;
     color: white;
     left: 56px;
-    font-size: 30px;
     line-height: 30px;
     width: 200px;
 }

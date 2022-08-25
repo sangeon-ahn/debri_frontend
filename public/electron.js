@@ -1,20 +1,50 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, Tray, Notification} = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
 let mainWindow;
+let tray;
+//트레이 아이콘
+function initTrayIconMenu(){
+  tray = new Tray(path.join(__dirname, '/debriLogo.png'));
+  const myMenu = Menu.buildFromTemplate([
+    {label: '앱 열기', type: 'normal', checked: true, click: ()=>{
+      mainWindow.show();
+      tray.destroy();
+    } },
+    {label: '앱 종료', type: 'normal', click: ()=>{
+      app.isQuiting = true;
+      app.quit();
+    }},
+  ]);
+  tray.setToolTip('데브리')
+  tray.setContextMenu(myMenu);
+  tray.addListener('double-click', ()=>{
+    mainWindow.show()
+    tray.destroy();
+  });
+}
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 376,
+    frame: false,
+    width: 360,
     height: 839,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#2f3241',
+      symbolColor: '#74b1be',
+      height: 20,
+  
+    },
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
       devTools: isDev,
       webSecurity: false
     },
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    icon: __dirname + '/debriLogo.png',
   });
 
   mainWindow.loadURL(
@@ -22,14 +52,39 @@ function createWindow() {
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
-
+  
+    // contextMenu();
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: "detach" });
   }
-
-  mainWindow.setResizable(true);
-  mainWindow.on("closed", () => (mainWindow = null));
+  mainWindow.setResizable(false);
+  // mainWindow.on("closed", () => (mainWindow = null));
   mainWindow.focus();
+//   mainWindow.on('minimize',function(event){
+//     event.preventDefault();
+//     mainWindow.hide();
+// });
+
+mainWindow.on('close', function (event) {
+    if(!app.isQuiting){
+        event.preventDefault();
+        mainWindow.hide();
+        initTrayIconMenu();
+        const showNotification = () => {
+          new Notification({
+            title: "데브리",
+            body: "데브리를 트레이에 보관합니다",
+            silent: true, //// Disable sound by operating system
+          }).show();
+        
+          // Play custom sound
+          const sound = require("sound-play");
+          sound.play(path.join(__dirname, '/closeToTraySound.mp3'));
+        };
+        showNotification();
+    }
+    return false;
+});
 }
 
 app.on("ready", createWindow);

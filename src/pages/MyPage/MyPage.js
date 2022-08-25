@@ -10,6 +10,7 @@ import curriPrivateIcon from '../../assets/curriPrivateIcon.png';
 import curriVisibleIcon from '../../assets/visibleCurriIcon.png';
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
+import { Unix_timestamp } from '../../utils/unixTimeStamp';
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -47,16 +48,7 @@ export default function MyPage() {
     navigate(`/`);
   }
 
-  function Unix_timestamp(t){
-    var date = new Date(t*1000);
-    var year = date.getFullYear();
-    var month = "0" + (date.getMonth()+1);
-    var day = "0" + date.getDate();
-    var hour = "0" + date.getHours();
-    var minute = "0" + date.getMinutes();
-    var second = "0" + date.getSeconds();
-    return year + "년 " + month.substr(-2) + "월 " + day.substr(-2) + "일";
-  }
+  
 
 
   return (

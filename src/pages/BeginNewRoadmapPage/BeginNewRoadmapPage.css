@@ -2,6 +2,7 @@
   width: 56.74px;
   height: 76px;
   position: relative;
+  cursor: pointer;
 }
 
 .roadmap-back-box img {
@@ -38,7 +39,7 @@ font-style: normal;
 font-weight: 900;
 font-size: 14px;
 line-height: 20px;
-
+cursor: pointer;
 color: #000000;
 }
 

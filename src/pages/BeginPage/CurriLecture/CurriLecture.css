@@ -10,6 +10,11 @@
   border-radius: 0px 10px 10px 0px;
   align-items: center;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.curri-lecture:hover {
+  background-color: rgb(65, 66, 66);
 }
 
 .curri-lecture-completed {
@@ -24,6 +29,10 @@
   border-radius: 0px 10px 10px 0px;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.curri-lecture-completd:hover {
+  background-color: rgb(65, 66, 66);
 }
 
 .curri-lecture-title {

@@ -203,7 +203,7 @@ export default function CurriculumPage() {
         <Header />
     {curri && 
       <>
-        <div className="roadmap">
+        <div className="curriculum-header">
           <div className="roadmap-back-box" onClick={() => navigate(-1)}>
             <img src={leftSideIcon} alt="" />
           </div>
@@ -236,55 +236,57 @@ export default function CurriculumPage() {
             postCopyCurri(curriIdx, curri.curriAuthor);
           }}>시작하기</button>
         </div>
-        <div className='user-number'>총 {curriLikes}명이 이 커리큘럼을 추천했어요!</div>
-        <div className='lectures-in-curr-container'>
-          {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
-          {curri.lectureListResList.map(lecture =>
-                  // <CurriLecture lecture={lecture} key={lecture.lectureIdx} />
-                  <Lecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.scrapStatus === 'ACTIVE' ? true : false} />
-                )}
-        </div>
-        <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
-        {curriLikeStatus ?
-                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
-                  <div className='curri-liked-box'>
-                    <img src={greenHeart} alt=''/>
-                  </div>
-                  <div className='curri-like-text'>추천</div>
-                </button> :
-                <button className='likebtn' onClick={handleLike}>
-                  <div className='curri-liked-box'>
-                    <img src={whiteHeart} alt=''/>
-                  </div>
-                  <div>추천</div>
-                </button>
-              }
-        {/* <div className='user-reviews-area'>
-          <div className='user-reviews-title'>유저들의 커리큘럼 한줄평</div>
-          <div className='user-reviews-container'>
-            <div className='user-review'>
-              <div className='user-review-text'>
-                자바가 너무 쉬워졌어요 어떡하죠?
-              </div>
-              <div className='review-container'>
-                <div className='review-by'>by</div>
-                <div className='review-who'>데브리 짱짱맨</div>
+        <div className='curri-detail-scroll-area'>
+          <div className='user-number'>총 {curriLikes}명이 이 커리큘럼을 추천했어요!</div>
+          <div className='lectures-in-curr-container'>
+            {/* <Lecture lecture={lecture} isLectureScrapped={true} /> */}
+            {curri.lectureListResList.map(lecture =>
+                    // <CurriLecture lecture={lecture} key={lecture.lectureIdx} />
+                    <Lecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.scrapStatus === 'ACTIVE' ? true : false} />
+                  )}
+          </div>
+          <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
+          {curriLikeStatus ?
+                  <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
+                    <div className='curri-liked-box'>
+                      <img src={greenHeart} alt=''/>
+                    </div>
+                    <div className='curri-like-text'>추천</div>
+                  </button> :
+                  <button className='likebtn' onClick={handleLike}>
+                    <div className='curri-liked-box'>
+                      <img src={whiteHeart} alt=''/>
+                    </div>
+                    <div>추천</div>
+                  </button>
+                }
+          {/* <div className='user-reviews-area'>
+            <div className='user-reviews-title'>유저들의 커리큘럼 한줄평</div>
+            <div className='user-reviews-container'>
+              <div className='user-review'>
+                <div className='user-review-text'>
+                  자바가 너무 쉬워졌어요 어떡하죠?
+                </div>
+                <div className='review-container'>
+                  <div className='review-by'>by</div>
+                  <div className='review-who'>데브리 짱짱맨</div>
+                </div>
               </div>
             </div>
-          </div>
-        </div> */}
-      {curri && <div className='CurriReview'>
-            <div className='CurriReviewTitle'>유저들의 커리큘럼 한 줄 평</div>
-              <div className='CurriReviewLive'>● LIVE</div>
-              {comments && <div style={{marginBottom:'100px'}}>
-                {comments.map((reivew,i) => (
-                  <div key={i} className='CurriReviewContents'>
-                    <div className='CurriReviewContent'>{reivew.content}</div>
-                    <div className='CurriReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by &nbsp;</span>{reivew.authorName}</div>
-                  </div>
-                ))}
+          </div> */}
+        {curri && <div className='CurriReview'>
+              <div className='CurriReviewTitle'>유저들의 커리큘럼 한 줄 평</div>
+                <div className='CurriReviewLive'>● LIVE</div>
+                {comments && <div style={{marginBottom:'100px'}}>
+                  {comments.map((reivew,i) => (
+                    <div key={i} className='CurriReviewContents'>
+                      <div className='CurriReviewContent'>{reivew.content}</div>
+                      <div className='CurriReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by &nbsp;</span>{reivew.authorName}</div>
+                    </div>
+                  ))}
+                </div>}
               </div>}
-            </div>}
+        </div>
             <div className="writeComment-box">
               <div className="writeComment-icon-box">
                 <img src={writeCommentIcon} alt="" />

@@ -4,6 +4,11 @@
   height: 86px;
   align-items: center;
   margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.latest-curri-container:hover {
+  background-color: #131927;
 }
 
 .curri-icon {

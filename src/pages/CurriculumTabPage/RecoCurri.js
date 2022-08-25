@@ -38,20 +38,22 @@ export default function BoardsPage() {
       };
 
     return (
-        <div>
+        <>
             <Header></Header>
             <div className='post-list'>
                 <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={()=>{navigate("/curriculum")}}/>
                 <div className='scrapCurriTitle'>내가 추천한 커리큘럼</div>
                 <img src={greenHeart} alt="액박" className="bookmark_Curri"/>
-                <div>
-                    {scrapCurrilist && <div>
+                <>
+                    {scrapCurrilist &&
+                    <div style={{marginTop:'50px', clear:'both' }}>
                     {scrapCurrilist.map(curri => {
                         return <LatestCurri key={curri.curriIdx} curri={curri}/>
                     })}
-                    </div>}
-                </div>
+                    </div>
+                    }
+                </>
             </div>                   
-        </div>
+        </>
     )
 }

@@ -45,10 +45,10 @@ Modal.setAppElement('#root');
         >
          <div className="post-setting-container">
             {Number(userIdx) === reportedComment.authorIdx ?
-              <div className="post-setting-menu-container">
+              <div className="comment-setting-menu-container">
                 <div className="post-setting-modal-title">댓글 관리</div>
-                <button className="post-modify">수정하기</button>
-                <button className="post-delete" onClick={(e) => {
+                {/* <button className="post-modify">수정하기</button> */}
+                <button className="comment-delete" onClick={(e) => {
                   console.log(reportedComment.commentIdx);
                   handleCommentDelete(e, reportedComment.commentIdx);
                   handleModalCloseClick();

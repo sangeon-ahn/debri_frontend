@@ -59,6 +59,11 @@ line-height: 17px;
 color: #FFFFFF;
 }
 
+.keyword:hover {
+  background-color: #282a31;
+
+}
+
 .keyword:nth-child(3n) {
   margin-right: 0px;
 }
@@ -150,14 +155,14 @@ color: #FFFFFF;
 
 /* LectureDetail */
 .LectureDetail{
-  padding : 22px;
+  padding : 0 22px 22px 22px;
 }
 
 .left_slide{
-  position:absolute;
-  top:110px;
-  left:13px;
-  cursor: pointer;
+  position: relative;
+    top: 13px;
+    left: -302px;
+    cursor: pointer;
 }
 .lecture_title{
   float : left;
@@ -179,7 +184,7 @@ color: #FFFFFF;
   position: absolute;
   height: 26px;
   line-height: 20px;
-  right: 30px;
+  right: -34px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -201,7 +206,7 @@ color: #FFFFFF;
   background: #0A1123;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
-  margin:0 0 15px 0;
+  margin:0 15px 15px 0;
 }
 .lecture_reco{
   border-left: 2px solid #8B95A1;
@@ -325,14 +330,11 @@ color: #FFFFFF;
 }
 
 .LectureReviewTitle{
-  float:left;
-  margin:20px 5px;
-  font-family: 'Noto Sans KR';
-  font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 17px;
-  color: #FFFFFF;
+font-size: 12px;
+line-height: 17px;
+
+color: #FFFFFF;
 }
 .LectureReviewLive{
   float:right;
@@ -437,7 +439,7 @@ transform: rotate(90deg);
 .curri-title-box2 {
   display: flex;
   width: 100%;
-  height: 33px;
+  /* height: 33px; */
   color: white;
   align-items: center;
   margin-left: -10px;
@@ -467,4 +469,60 @@ transform: rotate(90deg);
 
   color: #FFFFFF;
 
+}
+
+.ongoing-curries {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-left: 60px;
+  margin-top: 19px;
+  margin-bottom: 2px;
+}
+
+.add-curri-title {
+  width: 250px;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.lecture-detail-scroll-area {
+  width: 338px;
+  height: 575px;
+  overflow-x: hidden;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.add-curri-scroll-page {
+  height: 500px;
+  overflow-x: hidden;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }

@@ -45,6 +45,10 @@ export default function CurriRenameModal(props) {
     setCurriName(e.target.value);
   };
   const baseUrl = process.env.REACT_APP_BASE_URL;
+  const scrollTop = () => {
+    const $curriScrollArea = document.querySelector('.curri-scroll-area');
+      $curriScrollArea.scrollTop = 0 ;
+  }
   const handleRename = () => {
     const renameCurri = async (curriIdx, curriName) => {
       const response = await axios.patch(`${baseUrl}/api/curri/modify/name`,
@@ -59,6 +63,7 @@ export default function CurriRenameModal(props) {
     renameCurri(curri.curriIdx, curriName);
     // setReportSnackbarOpen(true);
     getCurriList();
+    scrollTop();
   };
 
   const handleRenameCancel = () => {

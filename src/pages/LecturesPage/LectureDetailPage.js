@@ -242,87 +242,94 @@ export default function LecturesDeatilPage() {
         <div>
           <Header/>
           <div className="LectureDetail" style={{color:'white'}}>
-            <img className="left_slide" src={left_slide} alt='' onClick={()=>{navigate(-1)}}/>
-            {lectureDetail && <div className='LectureDetailContent'>
-              <div style={{height:'110px'}}>
-                <div className='lecture_title'>
-                  <div className={setColor(lectureDetail)} style={{width: '40px', height: '16px'}}>{lectureDetail.langTag}</div>
-                  <div>{lectureDetail.lectureName}</div>
+            <div className='lecture-detail-scroll-area'>
+              {lectureDetail && <div className='LectureDetailContent'>
+                <div style={{height:'110px'}}>
+                <img className="left_slide" src={left_slide} alt='' onClick={()=>{navigate(-1)}}/>
+                  <div className='lecture_title'>
+                    <div className={setColor(lectureDetail)} style={{width: '40px', height: '16px'}}>{lectureDetail.langTag}</div>
+                    <div>{lectureDetail.lectureName}</div>
+                  </div>
+                  <div className='lecture_info'>
+                    <div style={{position: 'relative'}}>총 {lectureDetail.chapterNumber}챕터
+                      {lectureScrapStatus ?
+                        <button className='favorite-button' onClick={handleUnScrap}>
+                          <img src={favoriteStar} alt=''/>
+                        </button> :
+                        <button className='favorite-button' onClick={handleScrap}>
+                          <img src={emptyStar} alt=''/>
+                        </button>
+                      }
+                    </div>
+                    <div className='lecture_info_1'>#{lectureDetail.materialType}</div>
+                    <div className='lecture_info_1'>#{lectureDetail.pricing}</div>
+                  </div>
                 </div>
-                <div className='lecture_info'>
-                  <div>총 {lectureDetail.chapterNumber}챕터
-                    {lectureScrapStatus ?
-                      <button className='favorite-button' onClick={handleUnScrap}>
-                        <img src={favoriteStar} alt=''/>
-                      </button> :
-                      <button className='favorite-button' onClick={handleScrap}>
-                        <img src={emptyStar} alt=''/>
-                      </button>
+                <div className='lecture_desc'>{lectureDetail.lectureDesc}</div>
+                <div className='lecture_reco'>
+                  <div>
+                    {lectureLikeStatus ?
+                      <img src={greenHeart} alt='' style={{height: '12.4px',width: '14.3px'}}/> :
+                      <img src={grayHeart} alt='' style={{height: '12.4px',width: '14.3px'}}/>
                     }
+                    <span style={{margin:'5px', fontSize:'14px'}}>{lectureLikes}</span>명이 강의를 추천했어요!
                   </div>
-                  <div className='lecture_info_1'>#{lectureDetail.materialType}</div>
-                  <div className='lecture_info_1'>#{lectureDetail.pricing}</div>
+                  <div>
+                    <img className="addCurri" src={lectureUserNumberIcon} alt="" />
+                    <span style={{margin:'5px', fontSize:'14px'}}>{lectureDetail.usedCount}</span>명이 강의를 커리큘럼에 추가했어요! 
+                  </div>
                 </div>
-              </div>
-              <div className='lecture_desc'>{lectureDetail.lectureDesc}</div>
-              <div className='lecture_reco'>
-                <div>
-                  {lectureLikeStatus ?
-                    <img src={greenHeart} alt='' style={{height: '12.4px',width: '14.3px'}}/> :
-                    <img src={grayHeart} alt='' style={{height: '12.4px',width: '14.3px'}}/>
-                  }
-                  <span style={{margin:'5px', fontSize:'14px'}}>{lectureLikes}</span>명이 강의를 추천했어요!
+                <div style={{alignItems: 'center', display: 'flex'}}>
+                <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: lectureDetail})}}>커리큘럼에 추가하기</button>
+                  <button className='srcLink' onClick={openExternalPage}>
+                    <div className='external-link-icon-box'>
+                      <img src={externalLinkIcon} alt="" />
+                    </div>
+                    <div className='check-lecture-info-text'>강의 정보 확인하기</div>
+                  </button>
                 </div>
-                <div>
-                  <img className="addCurri" src={lectureUserNumberIcon} alt="" />
-                  <span style={{margin:'5px', fontSize:'14px'}}>{lectureDetail.usedCount}</span>명이 강의를 커리큘럼에 추가했어요! 
-                </div>
-              </div>
-              <div style={{alignItems: 'center', display: 'flex'}}>
-              <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: lectureDetail})}}>커리큘럼에 추가하기</button>
-                <button className='srcLink' onClick={openExternalPage}>
-                  <div className='external-link-icon-box'>
-                    <img src={externalLinkIcon} alt="" />
-                  </div>
-                  <div className='check-lecture-info-text'>강의 정보 확인하기</div>
-                </button>
-              </div>
-          
-              {lectureLikeStatus ?
-                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
-                  <div className='curri-liked-box'>
-                    <img src={greenHeart} alt=''/>
-                  </div>
-                  <div className='curri-like-text'>추천</div>
-                </button> :
-                <button className='likebtn' onClick={handleLike}>
-                  <div className='curri-liked-box'>
-                    <img src={whiteHeart} alt=''/>
-                  </div>
-                  <div>추천</div>
-                </button>
-              }
-            </div>}
             
-            <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
-
-            {lectureDetail && <div className='LectureReview'>
-              <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
-              <div className='latest-curries-live'>
-                <div className='onair-icon-box' alt="">
-                  <img src={liveIcon} alt="" style={liveIconStyle}/>
-                </div>
-                <div className='live-text'>LIVE</div>
-              </div>
-              {comments && <div style={{marginBottom:'100px'}}>
-                {comments.map((reivew,i) => (
-                  <div key={i} className='LectureReviewContents'>
-                    <div className='LectureReviewContent'>{reivew.content}</div>
-                    <div className='LectureReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by&nbsp;  </span>{reivew.authorName}</div>
-                  </div>
-                ))}
+                {lectureLikeStatus ?
+                  <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
+                    <div className='curri-liked-box'>
+                      <img src={greenHeart} alt=''/>
+                    </div>
+                    <div className='curri-like-text'>추천</div>
+                  </button> :
+                  <button className='likebtn' onClick={handleLike}>
+                    <div className='curri-liked-box'>
+                      <img src={whiteHeart} alt=''/>
+                    </div>
+                    <div>추천</div>
+                  </button>
+                }
               </div>}
-            </div>}
+              
+              <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'40px auto'}}></div>
+
+              {lectureDetail && 
+              <div className='LectureReview'>
+                <div style={{display:'flex', width: '335px', position: 'relative', marginBottom: '20px'}}>
+                  <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
+                  <div className='latest-curries-live'>
+                    <div className='onair-icon-box' alt="">
+                      <img src={liveIcon} alt="" style={liveIconStyle}/>
+                    </div>
+                    <div className='live-text'>LIVE</div>
+                  </div>
+                </div>
+
+                {comments && <div style={{marginBottom:'100px'}}>
+                  {comments.map((reivew,i) => (
+                    <div key={i} className='LectureReviewContents'>
+                      <div className='LectureReviewContent'>{reivew.content}</div>
+                      <div className='LectureReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by&nbsp;  </span>{reivew.authorName}</div>
+                    </div>
+                  ))}
+                </div>}
+              </div>}
+
+            </div>
 
             <div className="writeComment-box">
               <div className="writeComment-icon-box">

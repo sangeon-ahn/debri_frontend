@@ -2,6 +2,7 @@ import './CurriNavigation.css';
 import leftSwipeIcon from '../../../assets/leftSideIcon.png';
 import rightSwipeIcon from '../../../assets/rightSlideIcon.png';
 import { getCurriCreatedAt } from '../../../utils/getCurriCreatedAt';
+import { getCurriCompletedAt } from '../../../utils/getCurriCompleteAt';
 
 
 export default function CurriNavigation(props) {
@@ -19,7 +20,7 @@ export default function CurriNavigation(props) {
       }
         <div className='curri-navigation-middle'>
           <div className='curri-navi-title'>{currentCurriPosition === lastCurriPosition ? '' : curri.curriName}</div>
-          <div className='curri-when-started'>{currentCurriPosition === lastCurriPosition ? '' : getCurriCreatedAt(curri.createdAt)}</div>
+          <div className='curri-when-started'>{currentCurriPosition === lastCurriPosition ? '' : curri.progressRate === 100 ? getCurriCompletedAt(curri.completeAt) :  getCurriCreatedAt(curri.createdAt)}</div>
         </div>
         {currentCurriPosition === lastCurriPosition ?
           <div className='right-swipe-box'></div> :

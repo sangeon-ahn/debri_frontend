@@ -4,6 +4,11 @@
   height: 86px;
   margin-top: 21px;
   align-items: center;
+  cursor: pointer;
+}
+
+.top-curri-container:hover {
+  background-color: #131927;
 }
 
 .ranking {
