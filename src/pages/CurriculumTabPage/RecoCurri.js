@@ -1,16 +1,16 @@
 import React ,{useState, useEffect, useLayoutEffect}from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
-import './Board.css';
-import PostSummary from './PostSummary/PostSummary';
+import './CurriculumTabPage.css';
 import leftArrow from '../../assets/leftArrow.png';
-import bookmarkGreen from '../../assets/bookmarkGreen.png';
+import greenHeart from '../../assets/greenHeart.png';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import LatestCurri from './LatestCurri/LatestCurri';
 
 export default function BoardsPage() {
     const [loading,setLoading] = useState(false); // 로딩되는지 여부
     const [error,setError] = useState(null); //에러
-    const [scrapPostslist, setScrapPostslist] = useState(null);
+    const [scrapCurrilist, setScrapCurrilist] = useState(null);
     const navigate = useNavigate();
 
     const headers = {
@@ -20,15 +20,15 @@ export default function BoardsPage() {
     };
 
     useEffect( () =>{
-        searchScrapPostsList();
+        searchScrapCurriList();
     },[]);
 
-    const searchScrapPostsList = async () => {
+    const searchScrapCurriList = async () => {
         try {
             setError(null);
             setLoading(true); //로딩이 시작됨
-            const response = await axios.get(`/api/post/getMyScrap`, { headers });
-            setScrapPostslist(response.data.result)
+            const response = await axios.get(`/api/curri/getScrapList`, { headers });
+            setScrapCurrilist(response.data.result)
             console.log(response.data);
         } catch (e) {
             setError(e);
@@ -40,14 +40,14 @@ export default function BoardsPage() {
         <div>
             <Header></Header>
             <div className='post-list'>
-                <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={()=>{navigate("/boards")}}/>
-                <div className='scrapPostTitle'>내가 스크랩한 게시물</div>
-                <img src={bookmarkGreen} alt="액박" className="bookmark_Posts"/>
+                <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={()=>{navigate("/curriculum")}}/>
+                <div className='scrapCurriTitle'>내가 추천한 커리큘럼</div>
+                <img src={greenHeart} alt="액박" className="bookmark_Curri"/>
                 <div>
-                    {scrapPostslist && <div>
-                    {scrapPostslist.map(post => (
-                        <PostSummary post={post} key={post.postIdx} boardName={null} />
-                    ))}
+                    {scrapCurrilist && <div>
+                    {scrapCurrilist.map(curri => {
+                        return <LatestCurri key={curri.curriIdx} curri={curri}/>
+                    })}
                     </div>}
                 </div>
             </div>                   

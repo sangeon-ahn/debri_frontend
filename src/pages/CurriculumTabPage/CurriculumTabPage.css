@@ -127,3 +127,21 @@ right: 20px;
   margin-left: 4px;
   margin-right: 5px;
 }
+
+/* 내가 추천한 커리큘럼 */
+.left-arrow {
+  float:left;
+  margin:5px;
+}
+.scrapCurriTitle{
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  float:left;
+  margin:0 10px;
+}
+.bookmark_Curri{
+  margin: 5px 10px;
+  float:right;
+}

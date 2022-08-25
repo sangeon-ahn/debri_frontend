@@ -3,6 +3,7 @@ import './CurriculumTabPage.css';
 import greenHeart from '../../assets/greenHeart.png';
 import rightArrow from '../../assets/roadmapRightArrowIcon.png';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import TopCurri from './TopCurri/TopCurri';
 import LatestCurri from './LatestCurri/LatestCurri';
@@ -19,6 +20,7 @@ export default function CurriculumTabPage() {
   const [latestFiveCurriList, setLatestFiveCurriList] = useState(null);
   const [visibility, setVisibility] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const getTopTenCurriList = async () => {
     try {
@@ -60,7 +62,7 @@ export default function CurriculumTabPage() {
       <Header />
       <div className='curries-container'>
         <div className='curri-tab-title'>커리큘럼</div>
-        <div className='me-liked-curries'>
+        <div className='me-liked-curries' onClick={()=>{navigate("/recoCurri")}}>
           <div className='curri-like-box'>
             <img src={greenHeart} alt="" />
           </div>

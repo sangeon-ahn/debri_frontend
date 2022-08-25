@@ -37,6 +37,7 @@ export default function LowBar() {
   if (window.location.pathname === '/home/beginCurri') return null;
   if (window.location.pathname === '/mypage') return null;
   if (window.location.pathname === '/createCurri') return null;
+  if (window.location.pathname === '/addLectureToCurri') return null;
   
   return (
     <div className="low-bar">

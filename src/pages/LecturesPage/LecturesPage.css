@@ -412,3 +412,24 @@ transform: rotate(90deg);
   width: 10px;
   height: 10px;
 }
+
+/* 커리큘럼 추가하기 */
+.curri-title-box2 {
+  display: flex;
+  width: 100%;
+  height: 33px;
+  color: white;
+  align-items: center;
+  margin-left: -10px;
+}
+
+.back-button-curri {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.back-button-curri img {
+  vertical-align: middle;
+}

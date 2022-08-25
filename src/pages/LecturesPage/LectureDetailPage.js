@@ -10,6 +10,9 @@ import grayHeart from '../../assets/grayHeart.png';
 import greenHeart from '../../assets/greenHeart.png';
 import lectureUserNumberIcon from '../../assets/curriUserNumberIcon.png';
 import writeCommentIcon from '../../assets/writeCommentIcon.png';
+import { AddLectureSnackbar } from "./AddLectureSnackbar/AddLectureSnackbar";
+import {useRecoilState} from 'recoil';
+import {AddSnackbarOpen} from '../../Atom';
 
 export default function LecturesDeatilPage() {
     const params = useParams();
@@ -24,6 +27,7 @@ export default function LecturesDeatilPage() {
     const [lectureScrapStatus, setLectureScrapStatus] = useState(null);
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState('');
+    const [addSnackbarOpen, setAddSnackbarOpen] = useRecoilState(AddSnackbarOpen);
 
     const headers = {
         'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -41,16 +45,13 @@ export default function LecturesDeatilPage() {
       if (!lectureDetail) {
         return;
       }
-      console.log(lectureDetail);
       if (lectureDetail.userLike) {
-        console.log('2', lectureDetail.likeNumber);
         setLectureLikes(lectureDetail.likeNumber);
         setLectureLikeStatus(true);
       } else if (!lectureDetail.userLike) {
         setLectureLikes(lectureDetail.likeNumber);
         setLectureLikeStatus(false);
-      }
-  
+      } 
       if (lectureDetail.userScrap) {
         setLectureScrapStatus(true);
       } else if (!lectureDetail.userScrap) {
@@ -214,6 +215,14 @@ export default function LecturesDeatilPage() {
     };
 
 
+    const handleScrapSnackbarClose = (e, reason) => {
+      if (reason === 'clickway') {
+          return;
+      }
+        setAddSnackbarOpen(false);
+    };
+
+
     return (
         <div>
           <Header/>
@@ -255,7 +264,7 @@ export default function LecturesDeatilPage() {
                 </div>
               </div>
               <div>
-                <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: params.lectureIdx})}}>커리큘럼에 추가하기</button>
+                <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: lectureDetail})}}>커리큘럼에 추가하기</button>
                 <button className='srcLink'><a href={lectureDetail.srcLink} className='srcLinktext'>강의 정보 확인하기</a></button>
               </div>
               {lectureLikeStatus ?
@@ -300,6 +309,7 @@ export default function LecturesDeatilPage() {
             </div>
             <div className="bottomBar-blocker2"></div>
           </div>
+          <AddLectureSnackbar handleClose={handleScrapSnackbarClose} open={addSnackbarOpen}/>
         </div>
     )
 }

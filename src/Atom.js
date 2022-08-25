@@ -14,6 +14,12 @@ export const lowbarSelect = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const AddSnackbarOpen = atom({
+  key: 'AddSnackbarOpen',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+}); 
+
 // export const unScrappedBoardsAtom = atom({
 //   key: 'unScrappedBoards',
 //   default: [],
