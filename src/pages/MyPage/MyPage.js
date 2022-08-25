@@ -47,6 +47,17 @@ export default function MyPage() {
     navigate(`/`);
   }
 
+  function Unix_timestamp(t){
+    var date = new Date(t*1000);
+    var year = date.getFullYear();
+    var month = "0" + (date.getMonth()+1);
+    var day = "0" + date.getDate();
+    var hour = "0" + date.getHours();
+    var minute = "0" + date.getMinutes();
+    var second = "0" + date.getSeconds();
+    return year + "년 " + month.substr(-2) + "월 " + day.substr(-2) + "일";
+  }
+
 
   return (
     <div style={{color:'white'}}>
@@ -80,7 +91,7 @@ export default function MyPage() {
                   </div>
                   <div className="roadmap-detail-box">
                     <div className="roadmap-title">{curri.curriName}</div>
-                    <div className="roadmap-description">{curri.createdAt}</div>
+                    <div className="roadmap-description">{Unix_timestamp(curri.createdAt)}에 시작함</div>
                     <div className='curri-private'>
                       <div className='curri-private-img-box'>
                         <img src={curri.visibleStatus === 'ACTIVE' ? curriVisibleIcon : curriPrivateIcon} alt="" />

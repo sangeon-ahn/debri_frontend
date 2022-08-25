@@ -11,6 +11,7 @@ import CurriLecture from '../BeginPage/CurriLecture/CurriLecture';
 import writeCommentIcon from '../../assets/writeCommentIcon.png';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
+import curriIcon from '../../assets/orbit.gif';
 
 export default function CurriculumPage() {
   const params = useParams();
@@ -196,8 +197,8 @@ export default function CurriculumPage() {
           <div className="roadmap-back-box" onClick={() => navigate(-1)}>
             <img src={leftSideIcon} alt="" />
           </div>
-          <div className="roadmap-icon-box">
-            <img src={roadmapIcon} alt="" />
+          <div className='curri-img-box'>
+            <img src={curriIcon} alt="" className='curri-icon'/>
           </div>
           <div className="roadmap-detail-box">
             <div className="roadmap-title">{curri.curriName}</div>
