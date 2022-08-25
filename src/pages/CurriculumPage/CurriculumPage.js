@@ -11,6 +11,8 @@ import CurriLecture from '../BeginPage/CurriLecture/CurriLecture';
 import writeCommentIcon from '../../assets/writeCommentIcon.png';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
+import { useRecoilState } from 'recoil';
+import { lowbarSelect } from '../../Atom';
 
 export default function CurriculumPage() {
   const params = useParams();
@@ -26,6 +28,8 @@ export default function CurriculumPage() {
   const [curriLikeStatus, setCurriLikeStatus] = useState(false);
   const [curriLikes, setCurriLikes] = useState(0);
   const [pureStatus, setPureStatus] = useState(true);
+  const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
+
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
@@ -41,6 +45,12 @@ export default function CurriculumPage() {
   useEffect(() => {
     if (isCurriSuccess) {
       navigate('/home');
+      setLowbar({
+        homeButton: true,
+        lectureButton: false,
+        boardButton: false,
+        curriButton: false
+      });
     }
   }, [isCurriSuccess]);
 
