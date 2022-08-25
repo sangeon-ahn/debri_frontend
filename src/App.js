@@ -21,6 +21,7 @@ import CreateCurriPage from './pages/CreateCurriPage/CreateCurriPage';
 import AddLectureToCurri from './pages/LecturesPage/AddLectureToCurriPage';
 import MyPage from "./pages/MyPage/MyPage";
 import CurriculumTabPage from './pages/CurriculumTabPage/CurriculumTabPage';
+import RecoCurri from './pages/CurriculumTabPage/RecoCurri';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
           <Route path='/mypage' element={<MyPage />} />
           <Route path='/curriculum' element={<CurriculumTabPage />} />
+          <Route path='/recoCurri' element={<RecoCurri />} />
         </Routes>
         <LowBar />
       </HashRouter>
