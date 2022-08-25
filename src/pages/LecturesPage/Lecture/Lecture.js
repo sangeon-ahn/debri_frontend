@@ -17,7 +17,7 @@ export default function Lecture(props) {
   const [isScrapped, setIsScrapped] = useState(isScrappedLecture);
   console.log(isScrapped);
   const userData = JSON.parse(localStorage.getItem("userData"));
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -38,7 +38,7 @@ export default function Lecture(props) {
 
   const postLectureScrap = async (lectureIdx) => {
     try {
-      const response = await axios.post(`/api/lecture/scrap/create`,
+      const response = await axios.post(`${baseUrl}/api/lecture/scrap/create`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -52,7 +52,7 @@ export default function Lecture(props) {
   
   const postLectureUnScrap = async (lectureIdx) => {
     try {
-      const response = await axios.patch(`/api/lecture/scrap/delete`,
+      const response = await axios.patch(`${baseUrl}/api/lecture/scrap/delete`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -80,8 +80,8 @@ export default function Lecture(props) {
     <div className="lecture">
             <div className="lecture-scrap-box">
               {isScrapped ?
-                <img src={scrappedStar} alt="" onClick={lectureUnScrap}/> :
-                <img src={unScrappedStar} alt="" onClick={lectureScrap}/>
+                <img src={scrappedStar} alt="" style={{cursor: 'pointer'}} onClick={lectureUnScrap}/> :
+                <img src={unScrappedStar} alt="" style={{cursor: 'pointer'}} onClick={lectureScrap}/>
               }
             </div>
             <div className="lecture-description" onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
@@ -97,14 +97,14 @@ export default function Lecture(props) {
                     <img src={grayHeart} alt='' style={{height: '10px',width: '11.5px', margin:'2px 7px'}}/>
                   }
                 </div>
-                <div className="lecture-likes-number">{lecture.likeNumber}</div>
+                <div className="lecture-likes-number">{lecture.likeNumber === undefined ? lecture.lectureLikeCount : lecture.likeNumber}</div>
                 <div>
                   <img className="lecture-user-number-icon" src={lectureUserNumberIcon} alt="" />
                 </div>
                 <div className="lecture-likes-number">{lecture.usedCount}</div>
                 <div className="lecture-info-vertical-line"></div>
-                <div className="lecture-material-type">{lecture.materialType}</div>
-                <div className="lecture-price">{lecture.pricing}</div>
+                <div className="lecture-material-type">#{lecture.materialType === undefined ? lecture.type : lecture.materialType}</div>
+                <div className="lecture-price">#{lecture.pricing}</div>
               </div>
             </div>
             <div className="lecture-detail-box">

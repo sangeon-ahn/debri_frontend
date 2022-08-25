@@ -8,10 +8,11 @@ import checkboxBorderIcon from '../../../assets/checkBoxIcon.png';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function CurriChapter(props) {
-  const {chapter, getCurriList } = props;
+  const {chapter, getCurriList, totalChapterNumber } = props;
   const [mainFontSize, setMainFontSize] = useState(14);
   const [error, setError] = useState(null);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  // console.log('챕터', chapter);
   // const [chComplete, setChComplete] = useState(chapter.chComplete);
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -25,7 +26,7 @@ export default function CurriChapter(props) {
 
   const postChapterStatus = async (chIdx, curriIdx, lectureIdx) => {
     try {
-      const response = await axios.patch('/api/curri/chapter/status',
+      const response = await axios.patch(`${baseUrl}/api/curri/chapter/status`,
         JSON.stringify({
           chIdx: chIdx,
           curriIdx: curriIdx,
@@ -39,17 +40,17 @@ export default function CurriChapter(props) {
       setError(e);
     }
   };
-
-  const getStoneImg = (chIdx) => {
-    if (chIdx === 1) return curriStoneOneIcon;
-    if (chIdx === 2) return curriStoneTwoIcon;
-    if (chIdx === 3) return curriStoneThreeIcon;
+  // console.log(totalChapterNumber);
+  const getStoneImg = (progressOrder) => {
+    if (progressOrder === 1) return curriStoneOneIcon;
+    if (progressOrder === 2) return curriStoneTwoIcon;
+    if (progressOrder === 3) return curriStoneThreeIcon;
   };
 
-  const getStoneClass = (chIdx) => {
-    if (chIdx === 1) return 'curri-stone-one-box';
-    if (chIdx === 2) return 'curri-stone-two-box';
-    if (chIdx === 3) return 'curri-stone-three-box';
+  const getStoneClass = (progressOrder) => {
+    if (progressOrder === 1) return 'curri-stone-one-box';
+    if (progressOrder === 2) return 'curri-stone-two-box';
+    if (progressOrder === 3) return 'curri-stone-three-box';
   };
 
   const mainStyle = {
@@ -65,9 +66,9 @@ export default function CurriChapter(props) {
 
 
   useEffect(() => {
-    const $ChapterMain = document.querySelector(`.curri-stone-checks > div:nth-child(${chapter.chIdx}) .curri-chapter-main`);
+    const $ChapterMain = document.querySelector(`.curri-stone-checks > div:nth-child(${chapter.progressOrder}) .curri-chapter-main`);
   
-    console.log($ChapterMain);
+    // console.log($ChapterMain);
 
     if ($ChapterMain !== null && $ChapterMain.clientHeight > 20) {
       setMainFontSize(state => state - 1);
@@ -78,8 +79,8 @@ export default function CurriChapter(props) {
 
   return (
     <div className='curri-stone-check-one'>
-      <div className={getStoneClass(chapter.chIdx)}>
-        <img src={getStoneImg(chapter.chIdx)} alt="" className='chapter-stone-icon'/>
+      <div className={getStoneClass(chapter.progressOrder)}>
+        <img src={getStoneImg(chapter.progressOrder)} alt="" className='chapter-stone-icon'/>
       </div>
       <div className='curri-chapter'>
         <div className='curri-chapter-checkbox' onClick={handleCheckboxClick}>
@@ -96,7 +97,7 @@ export default function CurriChapter(props) {
           <div className='curri-chapter-subject'>{chapter.langTag}</div>
           <div style={mainStyle} className='curri-chapter-main'>{chapter.chName}</div>
         </div>
-        <div className={chapter.chComplete === 'FALSE' ? 'curri-not-done' : 'curri-done'}>{chapter.chIdx}/3</div>
+        <div className={chapter.chComplete === 'FALSE' ? 'curri-not-done' : 'curri-done'}>{chapter.progressOrder}/{chapter.chNumber}</div>
       </div>
     </div>
   )

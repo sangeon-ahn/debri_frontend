@@ -20,7 +20,7 @@ export default function CreateCurriPage() {
   const [subject, setSubject] = useState(null);
   const curriAuthor = JSON.parse(localStorage.getItem("userData")).userName;
   const navigate = useNavigate();
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleCurriName = (e) => {
     setCurriName(e.target.value);
   }
@@ -41,7 +41,7 @@ export default function CreateCurriPage() {
 
   const postCreateCurri = async (curriName, curriAuthor, visibleStatus, langTag, curriDesc) => {
     try {
-      const response = await axios.post('/api/curri/create',
+      const response = await axios.post(`${baseUrl}/api/curri/create`,
         JSON.stringify({
           curriName: curriName,
           curriAuthor: curriAuthor,

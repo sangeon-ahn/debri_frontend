@@ -1,7 +1,4 @@
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-
-const { persistAtom } = recoilPersist()
+import { atom } from 'recoil';
 
 export const lowbarSelect = atom({
   key: 'lowbarSelect',
@@ -11,7 +8,6 @@ export const lowbarSelect = atom({
     boardButton: false,
     curriButton: false
   },
-  effects_UNSTABLE: [persistAtom],
 });
 
 export const AddSnackbarOpen = atom({
@@ -25,3 +21,4 @@ export const AddSnackbarOpen = atom({
 //   default: [],
 //   effects_UNSTABLE: [persistAtom],
 // });
+

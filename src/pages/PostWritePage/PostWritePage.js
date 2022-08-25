@@ -37,9 +37,9 @@ export default function PostWritePage() {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-    
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then(
+    await axios.get(`${baseUrl}/api/board/allList`, { headers }).then(
       (res) => {
         setBoardList(res.data.result);
       }

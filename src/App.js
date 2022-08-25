@@ -1,5 +1,5 @@
 import React, { Component, useEffect }  from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
 import Account from "./pages/Account/Account";
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -27,7 +27,7 @@ function App() {
   return (
     <>
     <RecoilRoot>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/account' element={<Account />} />
@@ -51,7 +51,7 @@ function App() {
           <Route path='/recoCurri' element={<RecoCurri />} />
         </Routes>
         <LowBar />
-      </BrowserRouter>
+      </HashRouter>
     </RecoilRoot>
     </>
   );

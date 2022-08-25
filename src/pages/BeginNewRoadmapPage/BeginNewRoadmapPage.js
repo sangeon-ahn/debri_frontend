@@ -17,7 +17,7 @@ export default function BeginNewRoadmapPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [lectures, setLectures] = useState(null);
   const [roadmap, setRoadmap] = useState(null);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
     'Accept': 'application/json',
@@ -26,7 +26,7 @@ export default function BeginNewRoadmapPage() {
   console.log(searchParams.get('field'));
   const getRoadmapDetail = async (mod) => {
     try {
-      const response = await axios.get(`/api/lecture/roadmap/view?mod=${mod}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/lecture/roadmap/view?mod=${mod}`, { headers });
       setRoadmap(response.data.result[0]);
       console.log(response.data.result[0]);
     } catch (e) {

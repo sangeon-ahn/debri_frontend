@@ -21,10 +21,10 @@ export default function BeginChooseCurrPage() {
   const [topTenCurriList, setTopTenCurriList] = useState(null);
   const [roadmapList, setRoadmapList] = useState(null);
   const [error, setError] = useState(null);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const getTopTenCurriList = async () => {
     try {
-      const response = await axios.get('/api/curri/scrap/topList', { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/scrap/topList`, { headers });
       console.log(response);
       setTopTenCurriList(response.data.result);
     } catch (e) {
@@ -35,7 +35,7 @@ export default function BeginChooseCurrPage() {
 
   const getRoadmapList = async () => {
     try {
-      const response = await axios.get(`/api/lecture/roadmap/list`, { headers });
+      const response = await axios.get(`${baseUrl}/api/lecture/roadmap/list`, { headers });
       console.log(response);
       setRoadmapList(response.data.result);
     } catch (e) {

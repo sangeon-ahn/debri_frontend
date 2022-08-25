@@ -8,7 +8,7 @@ import './PostReportOtherModal.css';
 export default function PostReportOtherModal(props) {
   const params = useParams();
   const navigate = useNavigate();
-  const {isOpen, onRequestClose, setReportSnackbarOpen } = props;
+  const {isOpen, onRequestClose, setReportSnackbarOpen, setUserBlockOpen } = props;
   const customStyles = {
     content: {
       top: '40%',
@@ -46,10 +46,10 @@ export default function PostReportOtherModal(props) {
   const handleReasonChange = (e) => {
     setReason(e.target.value);
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const handleReportSubmit = () => {
     const ReportPost = async (postIdx, reason) => {
-      const response = await axios.post(`/api/report/postReport`,
+      const response = await axios.post(`${baseUrl}/api/report/postReport`,
         JSON.stringify({
           postIdx: postIdx,
           reason: reason
@@ -58,15 +58,16 @@ export default function PostReportOtherModal(props) {
         console.log(response);
     };
     ReportPost(params.postId, reason);
+    setUserBlockOpen(true);
     onRequestClose();
     // navigate(`/boards/${params.boardId}?scrapped=${scrapped}`);
-    setReportSnackbarOpen(true);
+    // setReportSnackbarOpen(true);
   };
 
   const handleReportCancel = () => {
     onRequestClose();
   };
-
+Modal.setAppElement('#root');
   return (
     <Modal
       closeTimeoutMS={300}

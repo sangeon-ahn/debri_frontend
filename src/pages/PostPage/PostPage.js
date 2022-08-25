@@ -21,6 +21,8 @@ import { PostScrapSnackbar } from "./PostScrapSnackbar/PostScrapSnackbar";
 import PostReportOtherModal from "./PostReportOtherModal/PostReportOtherModal";
 import PostMenuModal from "./PostMenuModal/PostMenuModal";
 import PostReportSnackbar from "./PostReportSnackbar/PostReportSnackbar";
+import UserBlockModal from "./UserBlockModal/UserBlockModal";
+import { refreshAccessToken } from "../../utils/refreshAccessToken";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ export default function PostPage() {
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const scrapped = searchParams.get('scrapped');
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -109,7 +111,7 @@ export default function PostPage() {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get(`/api/post/get/${postIdx}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/post/get/${postIdx}`, { headers });
       setPost(response.data.result);
       console.log(response);
     } catch (e) {
@@ -123,7 +125,7 @@ export default function PostPage() {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get(`/api/comment/get/${postIdx}`,{ headers });
+      const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}`,{ headers });
       if (response.data.isSuccess) {
         console.log(response.data.result);
         setComments(response.data.result);
@@ -145,7 +147,7 @@ export default function PostPage() {
   const handleCommentDelete = async (e, commentIdx) => {
     const deletePost = async (commentIdx) => {
       try {
-        const response = await axios.patch(`/api/comment/delete/${commentIdx}`,
+        const response = await axios.patch(`${baseUrl}/api/comment/delete/${commentIdx}`,
           JSON.stringify({}),
           { headers }
         );
@@ -163,7 +165,7 @@ export default function PostPage() {
   const handleReportComment = (e, commentIdx, reason) => {
     const reportComment = async (commentIdx, reason) => {
       try {
-        const response = await axios.post(`/api/report/commentReport`,
+        const response = await axios.post(`${baseUrl}/api/report/commentReport`,
           JSON.stringify({
             commentIdx: parseInt(commentIdx),
             reason: reason
@@ -189,7 +191,7 @@ export default function PostPage() {
   const handleEnterInput = (e, content, authorName) => {
     const uploadComment = async (userIdx, postIdx, content, authorName) => {
       try {
-        const response = await axios.post(`/api/comment/replyOnPost/create`,
+        const response = await axios.post(`${baseUrl}/api/comment/replyOnPost/create`,
           JSON.stringify(
             {
               userIdx: userIdx,
@@ -218,7 +220,7 @@ export default function PostPage() {
 
     const uploadReComment = async (userIdx, postIdx, rootCommentIdx, content, authorName) => {
       try {
-        const response = await axios.post(`/api/comment/replyOnReply/create`,
+        const response = await axios.post(`${baseUrl}/api/comment/replyOnReply/create`,
           JSON.stringify(
             {
               userIdx,
@@ -268,7 +270,7 @@ export default function PostPage() {
   const handleReportPost = (e) => {
     const reportPost = async (postIdx, reason) => {
       try {
-        const response = await axios.post(`/api/report/postReport`,
+        const response = await axios.post(`${baseUrl}/api/report/postReport`,
           JSON.stringify({
             postIdx: postIdx,
             reason: reason
@@ -281,7 +283,8 @@ export default function PostPage() {
     };
     reportPost(parseInt(postId), e.target.innerText);
     setIsPostSettingModalOn(false);
-    setReportSnackbarOpen(true);
+    // setReportSnackbarOpen(true);
+    setUserBlockOpen(true);
   };
 
   const handleScrapSnackbarClose = (e, reason) => {
@@ -302,7 +305,7 @@ export default function PostPage() {
 
   const postLike = async (userIdx, postIdx, likeStatus) => {
     try {
-      const response = await axios.post(`/api/post/like`,
+      const response = await axios.post(`${baseUrl}/api/post/like`,
         {
           postIdx: postIdx,
           userIdx: userIdx,
@@ -319,7 +322,7 @@ export default function PostPage() {
 
   const postCancelLike = async (userIdx, postIdx) => {
     try {
-      const response = await axios.patch('/api/post/like/cancel',
+      const response = await axios.patch(`${baseUrl}/api/post/like/cancel`,
         {
           postIdx: postIdx,
           userIdx: userIdx
@@ -335,7 +338,7 @@ export default function PostPage() {
 
   const postCancelScrap = async (postIdx) => {
     try {
-      const response = await axios.post(`/api/post/unscrap/${postIdx}`,
+      const response = await axios.post(`${baseUrl}/api/post/unscrap/${postIdx}`,
         JSON.stringify({}),
         { headers }
         );
@@ -350,7 +353,7 @@ export default function PostPage() {
   const postScrap = async (postIdx) => {
     console.log(postIdx);
     try {
-      const response = await axios.post(`/api/post/scrap/${postIdx}`,
+      const response = await axios.post(`${baseUrl}/api/post/scrap/${postIdx}`,
         JSON.stringify({}),
         { headers }
         );
@@ -368,6 +371,8 @@ export default function PostPage() {
     handleModalCloseClick();
   };
 
+  const [userBlockOpen, setUserBlockOpen] = useState(false);
+  
   return (
     <>
       <Header />
@@ -391,10 +396,17 @@ export default function PostPage() {
               handleReportClick={handleReportClick}
               handleModalCloseClick={handleModalCloseClick}
               setReportSnackbarOpen={setReportSnackbarOpen}
+              setUserBlockOpen={setUserBlockOpen}
             />
             <PostReportOtherModal
               isOpen={postReportOtherModalOn}
               onRequestClose={() => setPostReportOtherModalOn(false)}
+              setReportSnackbarOpen={setReportSnackbarOpen}
+              setUserBlockOpen={setUserBlockOpen}
+            />
+            <UserBlockModal 
+              isOpen={userBlockOpen}
+              onRequestClose={() => setUserBlockOpen(false)}
               setReportSnackbarOpen={setReportSnackbarOpen}
             />
             <div className="post-scroll-part">
@@ -457,7 +469,9 @@ export default function PostPage() {
                     <button className='default-status-scrap-button' onClick={() => {
                       setScrapSnackbarOpen(true);
                       setPostScrapStatus(true);
-                      postScrap(postId)}}
+                      postScrap(postId);
+                    }
+                    }
                     >
                       <img src={unScrappedIcon} alt="" />
                       <div>스크랩</div>

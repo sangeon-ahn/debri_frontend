@@ -13,6 +13,7 @@ import writeCommentIcon from '../../assets/writeCommentIcon.png';
 import { AddLectureSnackbar } from "./AddLectureSnackbar/AddLectureSnackbar";
 import {useRecoilState} from 'recoil';
 import {AddSnackbarOpen} from '../../Atom';
+import externalLinkIcon from '../../assets/externalLinkIcon.png';
 
 export default function LecturesDeatilPage() {
     const params = useParams();
@@ -28,7 +29,7 @@ export default function LecturesDeatilPage() {
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState('');
     const [addSnackbarOpen, setAddSnackbarOpen] = useRecoilState(AddSnackbarOpen);
-
+    const baseUrl = process.env.REACT_APP_BASE_URL;
     const headers = {
         'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
         'Accept': 'application/json',
@@ -73,7 +74,7 @@ export default function LecturesDeatilPage() {
         try {
             setError(null);
             setLoading(true); //로딩이 시작됨
-            const response = await axios.get(`/api/lecture/getLecture/${lectureIdx}`, { headers });
+            const response = await axios.get(`${baseUrl}/api/lecture/getLecture/${lectureIdx}`, { headers });
             setLectureDetail(response.data.result);
             console.log(response.data.result);
         } catch (e) {
@@ -97,7 +98,7 @@ export default function LecturesDeatilPage() {
     // 스크랩
     async function scrapLecture(lectureIdx) {
       try {
-        const response = await axios.post(`/api/lecture/scrap/create`,
+        const response = await axios.post(`${baseUrl}/api/lecture/scrap/create`,
           JSON.stringify({
             userIdx : `${JSON.parse(localStorage.getItem("userData")).userIdx}`,
             lectureIdx : lectureIdx
@@ -113,7 +114,7 @@ export default function LecturesDeatilPage() {
 
     async function unScrapLecture(lectureIdx) {
       try {
-        const response = await axios.patch(`/api/lecture/scrap/delete`,
+        const response = await axios.patch(`${baseUrl}/api/lecture/scrap/delete`,
           JSON.stringify({
             userIdx : `${JSON.parse(localStorage.getItem("userData")).userIdx}`,
             lectureIdx : lectureIdx
@@ -140,7 +141,7 @@ export default function LecturesDeatilPage() {
     // 추천
     async function likeLecture(lectureIdx) {
       try {
-        const response = await axios.post(`/api/lecture/like/create?lectureIdx=${lectureIdx}`,
+        const response = await axios.post(`${baseUrl}/api/lecture/like/create?lectureIdx=${lectureIdx}`,
           JSON.stringify({}),
           { headers }
         );
@@ -153,7 +154,7 @@ export default function LecturesDeatilPage() {
 
     async function unLikeLecture(lectureIdx) {
       try {
-        const response = await axios.patch(`/api/lecture/like/delete?lectureIdx=${lectureIdx}`,
+        const response = await axios.patch(`${baseUrl}/api/lecture/like/delete?lectureIdx=${lectureIdx}`,
           JSON.stringify({}),
           { headers }
         );
@@ -181,7 +182,7 @@ export default function LecturesDeatilPage() {
       try {
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`/api/lecture/review/get?lectureIdx=${lectureIdx}`, { headers });
+          const response = await axios.get(`${baseUrl}/api/lecture/review/get?lectureIdx=${lectureIdx}`, { headers });
           setComments(response.data.result);
           console.log(response.data.result);
       } catch (e) {
@@ -196,7 +197,7 @@ export default function LecturesDeatilPage() {
     };
     const handleEnterInput = async (lectureIdx, content) => {
       try {
-        const response = await axios.post(`/api/lecture/review/create`,
+        const response = await axios.post(`${baseUrl}/api/lecture/review/create`,
           JSON.stringify(
             {
               lectureIdx: lectureIdx,
@@ -214,6 +215,9 @@ export default function LecturesDeatilPage() {
       }
     };
 
+    const openExternalPage = () => {
+      window.open(lectureDetail.srcLink, '_blank');
+    };
 
     const handleScrapSnackbarClose = (e, reason) => {
       if (reason === 'clickway') {
@@ -263,17 +267,33 @@ export default function LecturesDeatilPage() {
                   <span style={{margin:'5px', fontSize:'14px'}}>{lectureDetail.usedCount}</span>명이 강의를 커리큘럼에 추가했어요! 
                 </div>
               </div>
-              <div>
-                <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: lectureDetail})}}>커리큘럼에 추가하기</button>
-                <button className='srcLink'><a href={lectureDetail.srcLink} className='srcLinktext'>강의 정보 확인하기</a></button>
+              <div style={{alignItems: 'center', display: 'flex'}}>
+              <button className='add_curri' onClick={() => {navigate('/addLectureToCurri', {state: lectureDetail})}}>커리큘럼에 추가하기</button>
+                <button className='srcLink' onClick={openExternalPage}>
+                  <div className='external-link-icon-box'>
+                    <img src={externalLinkIcon} alt="" />
+                  </div>
+                  <div className='check-lecture-info-text'>강의 정보 확인하기</div>
+                </button>
               </div>
+          
               {lectureLikeStatus ?
-                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}><img src={whiteHeart} alt=''/>추천</button> :
-                <button className='likebtn' onClick={handleLike}><img src={whiteHeart} alt=''/>추천</button>
+                <button className='likebtn' onClick={handleUnLike} style={{borderColor:'#66CC66', color:'#66CC66'}}>
+                  <div className='curri-liked-box'>
+                    <img src={greenHeart} alt=''/>
+                  </div>
+                  <div className='curri-like-text'>추천</div>
+                </button> :
+                <button className='likebtn' onClick={handleLike}>
+                  <div className='curri-liked-box'>
+                    <img src={whiteHeart} alt=''/>
+                  </div>
+                  <div>추천</div>
+                </button>
               }
             </div>}
             
-            <div style={{width: '200px',height: '0px', border: '2px solid #1D361D', margin:'30px auto'}}></div>
+            <div style={{width: '200px',height: '0px', borderBottom: '2px solid #1D361D', margin:'30px auto'}}></div>
 
             {lectureDetail && <div className='LectureReview'>
               <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
@@ -282,7 +302,7 @@ export default function LecturesDeatilPage() {
                 {comments.map((reivew,i) => (
                   <div key={i} className='LectureReviewContents'>
                     <div className='LectureReviewContent'>{reivew.content}</div>
-                    <div className='LectureReviewName'><span style={{fontSize:'9px'}}>by </span>{reivew.authorName}</div>
+                    <div className='LectureReviewName'><span style={{fontSize:'9px', fontWeight: '400'}}>by&nbsp;  </span>{reivew.authorName}</div>
                   </div>
                 ))}
               </div>}

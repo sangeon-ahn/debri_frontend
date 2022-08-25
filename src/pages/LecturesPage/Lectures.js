@@ -9,7 +9,7 @@ export default function Lectures(props) {
   const [lectures, setLectures] = useState(null);
   const [error, setError] = useState(false);
   const [loading, isLoading] = useState(false);
-  
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
@@ -23,7 +23,7 @@ export default function Lectures(props) {
   const fetchLecturesWithFilter = async (lang, type, price, key) => {
     try {
       setError(false);
-      const response = await axios.get(`/api/lecture/search?lang=${lang}&type=${type}&price=${price}&key=${key}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/lecture/search?lang=${lang}&type=${type}&price=${price}&key=${key}`, { headers });
       setLectures(response.data.result);
       console.log(response);
     } catch (e) {

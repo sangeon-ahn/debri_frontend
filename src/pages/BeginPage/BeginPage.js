@@ -12,6 +12,7 @@ export default function BeginPage() {
   const [curri, setCurri] = useState(null);
   const [error, setError] = useState(null);
   const [displayedCurri, setDisplayedCurri] = useState(0);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const headers = {
     'ACCESS-TOKEN': String(JSON.parse(localStorage.getItem("userData")).jwt),
@@ -22,7 +23,7 @@ export default function BeginPage() {
   const getCurriList = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/curri/getList', { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/getList`, { headers });
       console.log("커리리스트", response);
       setCurriList(response.data.result.sort((a, b) => b.createdAt - a.createdAt));
     } catch(e) {
@@ -34,7 +35,7 @@ export default function BeginPage() {
   const getCurriDetail = async (curriIdx) => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/curri/getThisCurri/${curriIdx}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/curri/getThisCurri/${curriIdx}`, { headers });
       console.log("커리 디테일", response);
       setCurri(response.data.result);
     } catch (e) {

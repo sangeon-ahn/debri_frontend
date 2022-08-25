@@ -10,7 +10,7 @@ export default function ScrappedLectures() {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [scrappedLectures, setScrappedLectures] = useState(null);
@@ -19,7 +19,7 @@ export default function ScrappedLectures() {
   const fetchScrappedLectures = async () => {
     try {
 
-      const response = await axios.get(`api/lecture/getScrapList/${userData.userIdx}`, { headers });
+      const response = await axios.get(`${baseUrl}/api/lecture/getScrapList/${userData.userIdx}`, { headers });
       setScrappedLectures(response.data.result);
     } catch (e) {
       console.log(e);
