@@ -95,7 +95,6 @@ export default function LoginPage() {
               <div className={isLoginFailed ? 'input_keyword input_keyword_failed' : 'input_keyword'}>PW</div>
               <div className={isLoginFailed ? 'vertical_line vertical_line_failed' : 'vertical_line'}></div>
               <input className='pw_input' placeholder="비밀번호" type="password" value={password} onChange={e => {setPassword(e.target.value)}} onKeyDown={detectEnterInput} />
-              <img  className='capslock_icon' src={capsLockIcon} alt="" />
             </div>
             <div className="buttons_container">
               <button className='signup_button' onClick={goToAccount}>가입하기</button>

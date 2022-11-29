@@ -30,7 +30,7 @@ function initTrayIconMenu(){
 function createWindow() {
   mainWindow = new BrowserWindow({
     frame: false,
-    width: 360,
+    width: 420,
     height: 839,
     titleBarStyle: 'hidden',
     titleBarOverlay: {

@@ -38,29 +38,6 @@
     top: 340px;
     width : 100%;
 }
-.start_btn{
-    width: 142px;
-    height: 60px;
-    background: #D9D9D9;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    margin-left: 180px;
-    color: #0A1123;
-}
-.start_btn.success {
-    color: #FFFFFF;
-    border: 2px solid #66CC66;
-    background: #0A1123;
-}
-.start_btn.fail {
-    color : #FF0000;
-    border: 2px solid #FF0000;
-    background: #0A1123;
-}
 
 .id_input {
     position: absolute;

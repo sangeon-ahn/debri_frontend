@@ -3,11 +3,11 @@
 }
 .back {
     position: absolute;
-    left: -30px; 
+    left: -20px; 
 }
 .back_text{
     position: absolute;
-    left: 51px;
+    left: 50px;
     top: 63px;
     text-decoration: none;
     font-family: 'Noto Sans KR';
@@ -18,77 +18,34 @@
     color: #FFFFFF;
 }
 
-/*로고*/
-.Logo_box {
+/* 제목 */
+.title{
     position: absolute;
-    width: 223.81px;
-    height: 198px;
-    left: 68px;
-    top: 93px;
+    left: 140px;
+    top: 56px;
+    color:white;
     text-align: center;
+    line-height: 11px;
 }
-.onlylogo {
-    width: 152px;
-    height: 106px;
-}
-.logotype {
-    width: 223.81px;
-    height: 43.61px;
-    margin: 10px 0;
-}
-.logotext {
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 12px;
-    line-height: 17px;
-    margin:0;
-    color: #FFFFFF;
-    }
 
 /*회원가입*/
 .account_warp {
     position: absolute;
     color: white;
     box-sizing: border-box;
-    top: 340px;
+    top: 170px;
     width : 100%;
 }
-.start_btn_acc{
-    width: 142px;
-    height: 60px;
-    background: #D9D9D9;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    margin-left: 190px;
-    margin-bottom : 10px;
-    color: #0A1123;
-}
-.start_btn_acc.success {
-    color: #FFFFFF;
-    border: 2px solid #66CC66;
-    background: #0A1123;
-}
-.start_btn_acc.fail {
-    color : #FF0000;
-    border: 2px solid #FF0000;
-    background: #0A1123;
-}
+
 
 /*account_content*/
 .account_text{
-    display:inline-block;
-    width : 37px;
     line-height: 14px;
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    margin:7px 5px 0px 15px;
+    font-size: 12px;
+    margin:0 30px;
     word-break:keep-all;
 }
 .textinput {
@@ -103,7 +60,7 @@
     float:left;
     width: 300px;
     height: 40px;
-    margin: 10px 30px;
+    margin: 10px 20px 20px;
     line-height: 40px;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
@@ -122,16 +79,73 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
+/*agree_all_btn*/
+.agree_all_btn{
+    width:300px;
+    height: 150px;
+    margin: 10px 20px;
+    line-height: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #D9D9D9;
+    border-radius: 6px;
+    color: #000000;
+    border: 2px solid transparent;
+    position: absolute;
+    top:450px;
+}
+.agree_all_btn input[type="checkbox"] {
+    -webkit-appearance: none;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    outline: none !important;
+    border: 2px solid #eeeeee;
+    border-radius: 4px;
+    background: #fbfbfb;
+    /* line-height: 40px; */
+    margin : 10px;
+}
+.agree_all_btn input[type="checkbox"]::before {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+.agree_all_btn input[type="checkbox"]:checked {
+    background-color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    font-size: 20px;
+}
+.agree_all_btn input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+.agree_all_btn.success{
+    border: 2px solid #66CC66;
+}
+.agree_all_btn.fail {
+    border: 2px solid #FF0000;
+}
+.agree_all_text {
+    display:inline-block;
+    position:absolute;
+}
 
 /*agree_btn*/
 .agree_btn{
-    width: 300px;
-    height: 40px;
-    margin: 10px 30px;
+    width: 260px;
+    height: 36px;
+    margin: -10px 10px 16px 15px;
     line-height: 40px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
-    background: #D9D9D9;
+    background: white;
     border-radius: 6px;
     color: #000000;
     border: 2px solid transparent;
@@ -171,11 +185,40 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .agree_btn.success {
     border: 2px solid #66CC66;
+    background: #66CC66;
 }
 .agree_btn.fail {
     border: 2px solid #FF0000;
+    background: #FF0000;
 }
 .agree_text {
     display:inline-block;
     position:absolute;
+}
+
+/* 시작버튼 */
+.start_btn{
+    width: 142px;
+    height: 60px;
+    background: #3e3c42;
+    border-radius: 6px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 29px;
+    margin-top: 200px;
+    margin-left: 185px;
+    margin-bottom : 10px;
+    color: #a9a9a9;
+}
+.start_btn.success {
+    color: #FFFFFF;
+    border: 2px solid #66CC66;
+    background: #0A1123;
+}
+.start_btn.fail {
+    color : #FF0000;
+    border: 2px solid #FF0000;
+    background: #0A1123;
 }
