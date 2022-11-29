@@ -52,8 +52,8 @@ export default function LoginPage() {
       console.error(error);
     }
   }
-    const goToAccount = () => {
-      navigate("/account");
+    const goToEmailAuth = () => {
+      navigate("/emailAuth");
     };
 
     const goToMain = () => {
@@ -97,8 +97,8 @@ export default function LoginPage() {
               <input className='pw_input' placeholder="비밀번호" type="password" value={password} onChange={e => {setPassword(e.target.value)}} onKeyDown={detectEnterInput} />
             </div>
             <div className="buttons_container">
-              <button className='signup_button' onClick={goToAccount}>가입하기</button>
               <button className='login_button' onClick={goToMain}> 로그인 </button>
+              <button className='signup_button' onClick={goToEmailAuth}>가입하기</button>
             </div>
           </div>
           <div className='copyright'>Copyright © 2022, Debri. All rights reserved.</div>

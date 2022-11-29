@@ -28,6 +28,7 @@ export default function LowBar() {
   };
   
   if (window.location.hash === '#/') return null;
+  if (window.location.hash === '#/emailAuth') return null;
   if (window.location.hash === '#/account') return null;
   if (window.location.hash.includes('/boards/') && window.location.hash.includes('modify')) return null;
   if (window.location.hash.includes('/boards/') && window.location.hash.includes('postwrite')) return null;
