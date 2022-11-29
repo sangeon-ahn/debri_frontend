@@ -1,13 +1,13 @@
 .fixed-bar{
   background-color: #142141;
-  width: 60px;
+  width: 80px;
   height: 100vh;
 }
 
 .low-bar {
   position: fixed;
   display: flex;
-  width: 60px;
+  width: 80px;
   height: 70px;
   top: 0px;
   /* left: 22px; */

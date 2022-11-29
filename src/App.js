@@ -28,29 +28,31 @@ function App() {
     <>
     <RecoilRoot>
       <HashRouter>
-        <Routes>
-          <Route path='/' element={<LoginPage />} />
-          <Route path='/account' element={<Account />} />
-          <Route path="/home" element={<BeginPage />} />
-          <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
-          <Route path="/lectures" element={<LecturesPage />} />
-          <Route path="/lectures/detail/:lectureIdx" element={<LectureDetailPage />} />
-          <Route path="/curriculum/:curriIdx/:lectureIdx" element={<LectureDetailPage />} />
-          <Route path="/boards" element={<BoardsPage />} />
-          <Route path="/boards/:boardId" element={<Board />} />
-          <Route path="/boards/:boardId/:postId" element={<PostPage />} />
-          <Route path="/boards/:boardId/:postId/modify" element={<PostModifyPage />} />
-          <Route path="/boards/:boardId/postwrite" element={<PostWritePage />} />
-          <Route path="/curriculum/:curriIdx" element={<CurriculumPage />} />
-          <Route path="/scrapPostsList" element={<ScrapPostsList />} />
-          <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
-          <Route path='/createCurri' element={<CreateCurriPage />} />
-          <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
-          <Route path='/mypage' element={<MyPage />} />
-          <Route path='/curriculum' element={<CurriculumTabPage />} />
-          <Route path='/recoCurri' element={<RecoCurri />} />
-        </Routes>
         <LowBar />
+        <div>
+          <Routes>
+            <Route path='/' element={<LoginPage />} />
+            <Route path='/account' element={<Account />} />
+            <Route path="/home" element={<BeginPage />} />
+            <Route path="/home/beginCurri" element={<BeginChooseCurrPage />} />
+            <Route path="/lectures" element={<LecturesPage />} />
+            <Route path="/lectures/detail/:lectureIdx" element={<LectureDetailPage />} />
+            <Route path="/curriculum/:curriIdx/:lectureIdx" element={<LectureDetailPage />} />
+            <Route path="/boards" element={<BoardsPage />} />
+            <Route path="/boards/:boardId" element={<Board />} />
+            <Route path="/boards/:boardId/:postId" element={<PostPage />} />
+            <Route path="/boards/:boardId/:postId/modify" element={<PostModifyPage />} />
+            <Route path="/boards/:boardId/postwrite" element={<PostWritePage />} />
+            <Route path="/curriculum/:curriIdx" element={<CurriculumPage />} />
+            <Route path="/scrapPostsList" element={<ScrapPostsList />} />
+            <Route path='/roadmaps' element={<BeginNewRoadmapPage />} />
+            <Route path='/createCurri' element={<CreateCurriPage />} />
+            <Route path='/addLectureToCurri' element={<AddLectureToCurri />} />
+            <Route path='/mypage' element={<MyPage />} />
+            <Route path='/curriculum' element={<CurriculumTabPage />} />
+            <Route path='/recoCurri' element={<RecoCurri />} />
+          </Routes>
+        </div>
       </HashRouter>
     </RecoilRoot>
     </>
