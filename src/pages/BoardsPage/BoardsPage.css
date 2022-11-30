@@ -1,18 +1,32 @@
+.boards-page{
+    position: absolute;
+    left: 107px;
+    top: 30px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
 .board-list {
-    margin-top: 20px;
+    margin-top: 150px;
     /* margin: 0 auto; */
     padding: 0 22px;
 }
 /* 검색창 */
 .search-bar {
     box-sizing: border-box;
-    position: relative;
+    position: absolute;
     width: 316px;
     height: 40px;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
     align-items: center;
     margin: 0 auto;
+    top: 90px;
+    left: 104px;
   }
 .search-bar.success{
     border: 2px solid #66CC66;
@@ -203,7 +217,11 @@
 }
 
 .write-post-container3 {
-    position: fixed;
-    bottom: 86px;
-    left: 120px;
-}
+    position: absolute;
+    z-index: 2;
+    width: 360px;
+    margin: 0 auto;
+    top: 30px;
+    left: 180px;
+  
+  }

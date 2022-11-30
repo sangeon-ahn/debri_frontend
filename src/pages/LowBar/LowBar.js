@@ -6,8 +6,10 @@ import lectureButton from '../../assets/lectureButton.png';
 import activeLectureButton from '../../assets/lectureGreenIcon.png';
 import boardButton from '../../assets/boardButton.png';
 import activeBoardButton from '../../assets/activeBoardButton.png';
-import activeCurriButton from '../../assets/activeCurriButton.png';
 import curriButton from '../../assets/curriButton.png';
+import activeCurriButton from '../../assets/activeCurriButton.png';
+import mypageButton from '../../assets/mypageButton.png';
+import activeMypageButton from '../../assets/activeMypageButton.png';
 import "./LowBar.css";
 import { useRecoilState } from 'recoil';
 import { lowbarSelect } from '../../Atom';
@@ -22,6 +24,7 @@ export default function LowBar() {
       lectureButton: false,
       boardButton: false,
       curriButton: false,
+      mypageButton: false,
       [e.target.id]: true,
     })
     navigate(path);
@@ -30,14 +33,14 @@ export default function LowBar() {
   if (window.location.hash === '#/') return null;
   if (window.location.hash === '#/emailAuth') return null;
   if (window.location.hash === '#/account') return null;
-  if (window.location.hash.includes('/boards/') && window.location.hash.includes('modify')) return null;
-  if (window.location.hash.includes('/boards/') && window.location.hash.includes('postwrite')) return null;
-  if (window.location.hash.includes('/lectures/') && window.location.hash.includes('detail')) return null;
-  if (window.location.hash === '#/boards/postwrite') return null;
-  if (window.location.hash === '#/roadmaps') return null;
-  if (window.location.hash === '#/home/beginCurri') return null;
-  if (window.location.hash === '#/mypage') return null;
-  if (window.location.hash === '#/createCurri') return null;
+  // if (window.location.hash.includes('/boards/') && window.location.hash.includes('modify')) return null;
+  // if (window.location.hash.includes('/boards/') && window.location.hash.includes('postwrite')) return null;
+  // if (window.location.hash.includes('/lectures/') && window.location.hash.includes('detail')) return null;
+  // if (window.location.hash === '#/boards/postwrite') return null;
+  // if (window.location.hash === '#/roadmaps') return null;
+  // if (window.location.hash === '#/home/beginCurri') return null;
+  // if (window.location.hash === '#/mypage') return null;
+  // if (window.location.hash === '#/createCurri') return null;
   
   return (
     <div className="fixed-bar">
@@ -54,7 +57,7 @@ export default function LowBar() {
             </div>
             <div className={(isButtonClicked.lectureButton ? ' active-home-text' : 'home-text')} id='lectureButton'>강의</div>
         </div>
-        <div className="curriculum-button" onClick={(e) => handleLowButtonClick(e, '/curriculum')} id="curriButton">
+        <div className="curriculum-button" onClick={(e) => handleLowButtonClick(e, 'curriculum')} id="curriButton">
             <div className='curriculum-icon-box' id="curriButton">
               <img id='curriButton' src={isButtonClicked.curriButton ? activeCurriButton : curriButton} alt="" />
             </div>
@@ -63,6 +66,10 @@ export default function LowBar() {
         <div className="board-button" onClick={(e) => handleLowButtonClick(e, 'boards')} id="boardButton">
             <div className='board-icon-box' id="boardButton"><img id="boardButton" src={isButtonClicked.boardButton ? activeBoardButton : boardButton} alt=''/></div>
             <div className={(isButtonClicked.boardButton ? ' active-home-text' : 'home-text')} id="boardButton">게시판</div>
+        </div>
+        <div className="mypage-button" onClick={(e) => handleLowButtonClick(e, 'mypage')} id="mypageButton">
+            <div className='mypage-icon-box' id="mypageButton"><img id="mypageButton" src={isButtonClicked.mypageButton ? activeMypageButton : mypageButton} alt=''/></div>
+            <div className={(isButtonClicked.mypageButton ? ' active-home-text' : 'home-text')} id="mypageButton">마이 페이지</div>
         </div>
       </div>
     </div>
