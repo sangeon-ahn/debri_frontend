@@ -56,28 +56,10 @@ export default function MyPage() {
 
   return (
     <div style={{color:'white'}}>
-      <div className="header">
-        <img src={logo} alt="액박" className="logo" onClick={()=>{
-          navigate("/home");
-          setLowbar({
-            homeButton: true,
-            lectureButton: false,
-            boardButton: false,
-            curriButton: false
-          });
-          }}/>
-      </div>
-
-      <div className="roadmap-back-box" onClick={() => navigate(-1)}>
-        <img src={leftSideIcon} alt="" />
-      </div>
-
       {!myinfo.firstLogin &&
         <div>
           <div className='name_my'>{myinfo.userName}</div>
           <div className='id_my'>{myinfo.userID}</div>
-          <img src={profile} alt="액박" className='profile_my' />
-          <img src={human} alt="액박" className='human_my' />
         </div>
       }
 
@@ -112,7 +94,10 @@ export default function MyPage() {
           </div>
         }
       </div>
-
+      
+      <div className='logout' onClick={LogOut}>
+        이용약관
+      </div>
       <div className='logout' onClick={LogOut}>
         로그아웃
       </div>
