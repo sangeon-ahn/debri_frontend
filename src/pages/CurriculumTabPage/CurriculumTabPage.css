@@ -1,5 +1,5 @@
 .curries-container {
-  margin-top: 40px;
+  margin-top: 5px;
   width: 360px;
   padding: 0 22px;
   box-sizing: border-box;
@@ -28,12 +28,11 @@
 } 
 
 .curri-tab-title {
-  font-weight: 700;
-font-size: 14px;
-line-height: 20px;
-
-color: #FFFFFF;
-margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
 }
 
 .me-liked-curries {

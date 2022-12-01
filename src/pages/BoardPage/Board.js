@@ -185,7 +185,7 @@ export default function Board() {
             <div className='board-title' style={{color: '#66CC66', left:'100px'}}>검색 결과</div>
           </div>
           <div>
-            {searchResult && <div className='post-list' style={{top:'180px'}}>
+            {searchResult && <div className='post-list' style={{marginTop:'170px'}}>
               {searchResult.map(post => (
                 <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
               ))}

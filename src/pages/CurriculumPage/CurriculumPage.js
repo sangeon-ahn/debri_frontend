@@ -200,7 +200,7 @@ export default function CurriculumPage() {
 
   return (
     <>
-        <Header />
+    <Header />
     {curri && 
       <>
         <div className="curriculum-header">
