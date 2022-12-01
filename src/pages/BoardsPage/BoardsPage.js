@@ -160,8 +160,19 @@ export default function BoardsPage() {
 
   return (
     <div>
-      <Header />
-
+      <div className='boards-page'>게시판</div>
+      <div className='write-post-container3'>
+        <button
+          className='write-post'
+          onClick={() => navigate(`/boards/1/postwrite`, {state : {prevPath: 'boards'}})}>
+            <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
+              <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
+            </div>
+            <div style={{height: '14px'}}>
+              <img src={writePost} alt="엑박" className='write-post-text' />
+            </div>
+        </button>
+      </div>
       <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
         {text ? 
           <img src={searchIconGreen} alt="액박" className="search-icon"/>: 
@@ -210,18 +221,6 @@ export default function BoardsPage() {
               <p>전체 게시판</p>
             </div>
             {!loading && unScrappedBoards && <UnScrappedBoards unScrappedBoards={unScrappedBoards} onScrap={onScrap} />}
-          </div>
-          <div className='write-post-container3'>
-              <button
-                className='write-post'
-                onClick={() => navigate(`/boards/1/postwrite`, {state : {prevPath: 'boards'}})}>
-                  <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
-                    <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
-                  </div>
-                  <div style={{height: '14px'}}>
-                    <img src={writePost} alt="엑박" className='write-post-text' />
-                  </div>
-              </button>
           </div>
           <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
         </div>

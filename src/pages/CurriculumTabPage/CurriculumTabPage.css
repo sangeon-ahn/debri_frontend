@@ -1,5 +1,5 @@
 .curries-container {
-  margin-top: 40px;
+  margin-top: 5px;
   width: 360px;
   padding: 0 22px;
   box-sizing: border-box;
@@ -28,12 +28,11 @@
 } 
 
 .curri-tab-title {
-  font-weight: 700;
-font-size: 14px;
-line-height: 20px;
-
-color: #FFFFFF;
-margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
 }
 
 .me-liked-curries {
@@ -126,6 +125,13 @@ right: 22px;
 }
 
 /* 내가 추천한 커리큘럼 */
+.curri-list{
+  position:relative;
+  width: 316px;
+  padding: 0 22px;
+  height: 475px;
+  overflow-x: hidden;
+}
 .left-arrow {
   float:left;
   margin:5px;

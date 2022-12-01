@@ -40,7 +40,7 @@ export default function BoardsPage() {
     return (
         <>
             <Header></Header>
-            <div className='post-list'>
+            <div className='curri-list'>
                 <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={()=>{navigate("/curriculum")}}/>
                 <div className='scrapCurriTitle'>내가 추천한 커리큘럼</div>
                 <img src={greenHeart} alt="액박" className="bookmark_Curri"/>

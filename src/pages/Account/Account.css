@@ -1,3 +1,73 @@
+/* 이메일인증 페이지*/
+.codebuttons_container {
+    position:absolute;
+    margin-top: 40px;
+    text-align: center;
+    top:190px;
+}
+.code_button{
+    position: relative;
+    display: flex;
+    width: 363px;
+    height: 40px;
+    margin-left: 37px;
+    line-height: 40px;
+    border: 2px solid #66CC66;
+    border-radius: 6px;
+    color:#000000;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 124px;
+    background-color: #66CC66;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 35px;
+}
+.again_code_button {
+    position: relative;
+    display: flex;
+    width: 363px;
+    height: 40px;
+    margin-left: 37px;
+    line-height: 40px;
+    border: 2px solid #FFFFFF;
+    border-radius: 6px;
+    color:#FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 135px;
+    background-color: transparent;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 35px;
+}
+.code_warp {
+    position: absolute;
+    color: white;
+    box-sizing: border-box;
+    top: 400px;
+    width : 440px;
+}
+.code_items{
+    height:85px;
+}
+.auth_btn{
+    position:absolute;
+    width: 120px;
+    height: 40px;
+    background: #66CC66;
+    border: 2px solid #0A1123;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 29px;
+    top:510px;
+    left:280px;
+    color: #0A1123;
+}
+/* 회원가입 페이지 */
 .account{
     position: relative;
 }
@@ -21,8 +91,9 @@
 /* 제목 */
 .title{
     position: absolute;
-    left: 140px;
+    left: 170px;
     top: 56px;
+    width: 100px;
     color:white;
     text-align: center;
     line-height: 11px;
@@ -33,20 +104,36 @@
     position: absolute;
     color: white;
     box-sizing: border-box;
-    top: 170px;
-    width : 100%;
+    top: 150px;
+    width : 440px;
 }
 
 
 /*account_content*/
+.account_items{
+    height:85px;
+}
 .account_text{
     line-height: 14px;
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    margin:0 30px;
+    margin:2px 45px;
+    width:440px;
     word-break:keep-all;
+}
+.text_bar{
+    display:inline-block;
+    width:100px;
+    padding: 0 10px;
+    border-left: 1px solid white;
+}
+.text_bar.success {
+    border-left: 1px solid #66CC66;
+}
+.text_bar.fail {
+    border-left: 1px solid #FF0000;
 }
 .textinput {
     border:none;
@@ -54,13 +141,13 @@
     background: transparent;
     color:#FFFFFF;
     font-size: 14px;
-    margin: 12px 5px;
+    margin: 12px 16px;
 }
 .account_content {
     float:left;
-    width: 300px;
+    width: 360px;
     height: 40px;
-    margin: 10px 20px 20px;
+    margin: 5px 37px;
     line-height: 40px;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
@@ -81,9 +168,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 /*agree_all_btn*/
 .agree_all_btn{
-    width:300px;
+    width:360px;
     height: 150px;
-    margin: 10px 20px;
+    margin: 10px 37px;
     line-height: 40px;
     font-size: 12px;
     font-weight: 700;
@@ -97,15 +184,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .agree_all_btn input[type="checkbox"] {
     -webkit-appearance: none;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
     outline: none !important;
     border: 2px solid #eeeeee;
     border-radius: 4px;
     background: #fbfbfb;
     /* line-height: 40px; */
-    margin : 10px;
+    margin : 8px;
 }
 .agree_all_btn input[type="checkbox"]::before {
     content: "✔";
@@ -139,9 +226,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /*agree_btn*/
 .agree_btn{
-    width: 260px;
+    width: 300px;
     height: 36px;
-    margin: -10px 10px 16px 15px;
+    margin: -10px 10px 16px 27px;
     line-height: 40px;
     font-size: 10px;
     font-weight: 400;
@@ -154,15 +241,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .agree_btn input[type="checkbox"] {
     -webkit-appearance: none;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
     outline: none !important;
     border: 2px solid #eeeeee;
     border-radius: 4px;
     background: #fbfbfb;
     /* line-height: 40px; */
-    margin : 10px;
+    margin : 8px;
 }
 .agree_btn input[type="checkbox"]::before {
     content: "✔";
@@ -207,8 +294,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 900;
     font-size: 20px;
     line-height: 29px;
-    margin-top: 200px;
-    margin-left: 185px;
+    margin-top: 210px;
+    margin-left: 260px;
     margin-bottom : 10px;
     color: #a9a9a9;
 }

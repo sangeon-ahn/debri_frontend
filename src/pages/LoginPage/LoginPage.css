@@ -7,7 +7,7 @@
     position: absolute;
     width: 223.81px;
     height: 198px;
-    left: 68px;
+    left: 110px;
     top: 93px;
     text-align: center;
 }
@@ -36,6 +36,7 @@
     color: white;
     box-sizing: border-box;
     top: 340px;
+    left: 40px;
     width : 100%;
 }
 
@@ -134,36 +135,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 40px;
     text-align: center;
   }
-
 .signup_button {
-width: 142px;
-height: 60px;
-background: #FFFFFF;
-border-radius: 6px;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 900;
-font-size: 20px;
-line-height: 29px;
-/* identical to box height */
-margin-right: 16px;
-
-color: #283659;
-
-}
-
-.login_button {
-    width: 142px;
-    height: 60px;
-    background: #66CC66;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
+    position: relative;
+    display: flex;
+    width: 300px;
+    height: 40px;
+    margin-left: 30px;
+    line-height: 40px;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    color:#FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 119px;
+    background-color: transparent;
     font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    
-    color: #0A1123;
+    font-size: 14px;
+    line-height: 35px;
+}
+.login_button {
+    position: relative;
+    display: flex;
+    width: 300px;
+    height: 40px;
+    margin-left: 30px;
+    line-height: 40px;
+    border: 2px solid #66CC66;
+    border-radius: 10px;
+    color:#000000;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 124px;
+    background-color: #66CC66;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 35px;
 }
 
 .copyright {
@@ -176,7 +182,7 @@ color: #283659;
     text-align: center;
     color: #FFFFFF;
     bottom: 66px;
-    left: 78px;
+    left: 120px;
     z-index: 2;
 }
 

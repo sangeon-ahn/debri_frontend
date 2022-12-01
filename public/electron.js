@@ -66,27 +66,27 @@ function createWindow() {
 //     mainWindow.hide();
 // });
 
-mainWindow.on('close', function (event) {
-    if(!app.isQuiting){
-        event.preventDefault();
-        mainWindow.hide();
-        initTrayIconMenu();
-        const showNotification = () => {
-          new Notification({
-            title: "데브리",
-            body: "데브리를 트레이에 보관합니다",
-            silent: true, //// Disable sound by operating system
-          }).show();
+// mainWindow.on('close', function (event) {
+//     if(!app.isQuiting){
+//         event.preventDefault();
+//         mainWindow.hide();
+//         initTrayIconMenu();
+//         const showNotification = () => {
+//           new Notification({
+//             title: "데브리",
+//             body: "데브리를 트레이에 보관합니다",
+//             silent: true, //// Disable sound by operating system
+//           }).show();
         
-          // Play custom sound
+//           // Play custom sound
           
-          // console.log(__dirname);
-          sound.play(`${path.join(__dirname, "/closeToTraySound.mp3")}`);
-        };
-        showNotification();
-    }
-    return false;
-});
+//           // console.log(__dirname);
+//           sound.play(`${path.join(__dirname, "/closeToTraySound.mp3")}`);
+//         };
+//         showNotification();
+//     }
+//     return false;
+// });
 }
 
 app.on("ready", createWindow);

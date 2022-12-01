@@ -155,7 +155,19 @@ export default function Board() {
 
   return (
     <>
-      <Header />
+      {/* 글쓰기 버튼 */}
+      <div className='write-post-container2'>
+          <button
+            className='write-post'
+            onClick={() => navigate(`/boards/${params.boardId}/postwrite?scrapped=${scrapped}`, { state })}>
+              <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
+                <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
+              </div>
+              <div style={{height: '14px'}}>
+                <img src={writePost} alt="엑박" className='write-post-text' />
+              </div>
+          </button>
+      </div>
 
       <div className={`search-bar ${(text ? 'success' : 'fail')}`}>
         {text ? 
@@ -164,15 +176,16 @@ export default function Board() {
         }
         <input type="text" className="search" placeholder="게시물 검색하기" onChange={onChange}/>
       </div>
-
+      
+      {/* 검색했을 때 나오는 화면 */}
       {text ?
-        <div className='board-list'>
-          <div className="search-result">
+        <div className='board-main-container'>
+          <div className='board-title-container'>
             <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={back}/>
-            <p>검색 결과</p>
+            <div className='board-title' style={{color: '#66CC66', left:'100px'}}>검색 결과</div>
           </div>
           <div>
-            {searchResult && <div>
+            {searchResult && <div className='post-list' style={{marginTop:'170px'}}>
               {searchResult.map(post => (
                 <PostSummary post={post} key={post.postIdx} state={state} boardName={board.boardName} />
               ))}
@@ -189,13 +202,13 @@ export default function Board() {
               </button>
               <div className='board-title'>{board.boardName}</div>
               {JSON.parse(scrapped) ?
-              <button className='favorite-button-box' onClick={handleUnScrap}>
-                <img src={favoriteStar} alt=''/>
-              </button> :
-              <button className='favorite-button-box' onClick={handleScrap}>
-              <img src={emptyStar} alt=''/>
-            </button>
-            }
+                <button className='favorite-button-box' onClick={handleUnScrap}>
+                  <img src={favoriteStar} alt=''/>
+                </button> :
+                <button className='favorite-button-box' onClick={handleScrap}>
+                <img src={emptyStar} alt=''/>
+              </button>
+              }
             </div>
             <div className='board-detail'>파이썬과 관련된 질문을 하고, 답변을 할 수 있는 게시판이에요!</div>
             </>}
@@ -208,19 +221,6 @@ export default function Board() {
               ))}
             </div>
           }
-
-          <div className='write-post-container2'>
-              <button
-                className='write-post'
-                onClick={() => navigate(`/boards/${params.boardId}/postwrite?scrapped=${scrapped}`, { state })}>
-                  <div style={{height: '16px', width:'16px', marginLeft: '15px',marginRight:'10px'} }>
-                    <img src={pencil} alt="엑박" className='pencil2' style={{verticalAlign:'middle'}} />
-                  </div>
-                  <div style={{height: '14px'}}>
-                    <img src={writePost} alt="엑박" className='write-post-text' />
-                  </div>
-              </button>
-          </div>
         </div>        
       }    
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>

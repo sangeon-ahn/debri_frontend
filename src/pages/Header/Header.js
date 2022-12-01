@@ -14,22 +14,7 @@ export default function Header() {
   return (
     <>
       <div className="header">
-        <img src={logo} alt="액박" className="logo" onClick={()=>{
-          navigate("/home");
-          setLowbar({
-            homeButton: true,
-            lectureButton: false,
-            boardButton: false,
-            curriButton: false
-          });
-          
-        }}/>
-        {!isFirstLogin &&
-          <div onClick={()=>{navigate("/mypage")}}>
-            <img src={profile} alt="액박" className='profile' />
-            <img src={human} alt="액박" className='human' />
-          </div>
-        }
+
       </div>
     </>
   );

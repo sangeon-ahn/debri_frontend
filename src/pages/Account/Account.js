@@ -107,7 +107,7 @@ const Account =()=>{
   return (
     <div className='account'>
       <div>
-        <Link to="/" className='back_text'><img src={account_back} alt="back" className='back'></img></Link>
+        <Link to="/emailAuth" className='back_text'><img src={account_back} alt="back" className='back'></img></Link>
       </div>
       <div className='title'>
         <h1 style={{fontSize:'18px'}}>회원가입</h1>
@@ -116,31 +116,31 @@ const Account =()=>{
 
       <div className='account_warp'>
         <div className='account_items'>
-          <div className='account_text'><span>이메일 (ID)</span></div>
+          <div className='account_text'><span className={`text_bar ${!login ? '' :( Id ? 'success' : 'fail')}`}>이메일 (ID)</span></div>
           <div className= {`account_content ${!login ? '' :( Id ? 'success' : 'fail')}`}>
             <input className='textinput' type="email" placeholder="email 형식" onChange={onChangeId} value={Id}/>
           </div>
         </div>
         <div className='account_items'>
-          <div className='account_text'>비밀번호</div>
+          <div className='account_text'><span className={`text_bar ${!login ? '' :( Password ? 'success' : 'fail')}`}>비밀번호</span></div>
           <div className= {`account_content ${!login ? '' :( Password ? 'success' : 'fail')}`}>
             <input className='textinput' type="password" placeholder="비밀번호" onChange={onChangePassword} value={Password} />
           </div>
         </div>
         <div className='account_items'>
-          <div className='account_text'>비밀번호확인</div>
+          <div className='account_text'><span className={`text_bar ${!login ? '' :( PasswordCheck ? 'success' : 'fail')}`}>비밀번호확인</span></div>
           <div className= {`account_content ${!login ? '' :( PasswordCheck ? 'success' : 'fail')}`}>
             <input className='textinput' type="password" placeholder="비밀번호 확인" onChange={onChangePasswordCheck} value={PasswordCheck} />
           </div>
         </div>
         <div className='account_items'>
-          <div className='account_text'>생년월일</div>
+          <div className='account_text'><span className={`text_bar ${!login ? '' :( Birth ? 'success' : 'fail')}`}>생년월일</span></div>
           <div className= {`account_content ${!login ? '' :( Birth ? 'success' : 'fail')}`}>
             <input className='textinput' type="date" onChange={onChangeBirth} value={Birth}/>
           </div>
         </div>
         <div className='account_items'>
-          <div className='account_text'>닉네임</div>
+          <div className='account_text'><span className={`text_bar ${!login ? '' :( Nickname ? 'success' : 'fail')}`}>닉네임</span></div>
           <div className= {`account_content ${!login ? '' :( Nickname ? 'success' : 'fail')}`}>
             <input className='textinput' type="text" placeholder="닉네임" onChange={onChangeNickname} value={Nickname} />
           </div>
