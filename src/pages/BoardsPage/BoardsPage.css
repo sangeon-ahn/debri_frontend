@@ -21,12 +21,12 @@
     position: absolute;
     width: 316px;
     height: 40px;
-    border: 1px solid #FFFFFF;
     border-radius: 10px;
     align-items: center;
     margin: 0 auto;
     top: 90px;
     left: 104px;
+    background: rgba(217, 217, 217, 0.08);
   }
 .search-bar.success{
     border: 2px solid #66CC66;

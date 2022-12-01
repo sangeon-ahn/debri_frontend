@@ -350,7 +350,7 @@ export default function LecturesDeatilPage() {
                 }}
               />
             </div>
-            <div className="bottomBar-blocker2"></div>
+            <div className="bottomBar-blocker3"></div>
           </div>
           <AddLectureSnackbar handleClose={handleScrapSnackbarClose} open={addSnackbarOpen}/>
         </div>

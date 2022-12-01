@@ -125,6 +125,13 @@ right: 22px;
 }
 
 /* 내가 추천한 커리큘럼 */
+.curri-list{
+  position:relative;
+  width: 316px;
+  padding: 0 22px;
+  height: 475px;
+  overflow-x: hidden;
+}
 .left-arrow {
   float:left;
   margin:5px;

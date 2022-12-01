@@ -3,10 +3,10 @@
   position: relative;
   width: 316px;
   height: 40px;
-  border: 1px solid #FFFFFF;
   border-radius: 10px;
   align-items: center;
   margin: 0 auto;
+  background: rgba(217, 217, 217, 0.08);
 }
 
 .lecture-search-icon {
