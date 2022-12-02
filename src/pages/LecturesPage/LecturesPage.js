@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from "react"
 import Lectures from "./Lectures";
 import LectureSearch from "./LectureSearch/LectureSearch";
 import LecturesFilter from "./LecturesFilter";
+import AllLectures from "./AllLectures/AllLectures";
 import ScrappedLectures from "./ScrappedLectures/ScrappedLectures";
 
 export default React.memo(function LecturesPage() {
@@ -13,6 +14,7 @@ export default React.memo(function LecturesPage() {
   const [material, setMaterial] = useState(null);
   const [pricing, setPricing] = useState(null);
   const [searchInput, setSearchInput] = useState('');
+  const [allLectures, setAllLectures] = useState(true);
   console.log(subject, material, pricing, searchInput);
   const handleSubjectClick = (lang) => {
     if (subject === null) {
@@ -42,6 +44,15 @@ export default React.memo(function LecturesPage() {
   }
 
   const [filterHeight, setFilterHeight] = useState(null);
+
+  const selectAllLectures =()=>{
+    setAllLectures(true)
+  };
+
+  const selectScrappedLectures =()=>{
+    setAllLectures(false)
+  };
+  
   
   return (
     <>
@@ -70,8 +81,16 @@ export default React.memo(function LecturesPage() {
           handlePriceClick={handlePriceClick}
           setFilterHeight={setFilterHeight}
         />
-        {(!subject && !material && !pricing && !searchInput) && <ScrappedLectures />
-        }
+
+        <div className="select-lectures">
+          <div className={`select-lectures-items ${allLectures ? 'success' : 'fail'}`} onClick={selectAllLectures}>전체 강의</div>
+          <div className={`select-lectures-items ${allLectures ? 'fail' : 'success'}`} onClick={selectScrappedLectures}>즐겨 찾기</div>
+          <div className={`green-bar ${allLectures ? 'success' : 'fail'}`}></div>
+          <div className={`green-bar ${allLectures ? 'fail' : 'success'}`}></div>
+        </div>
+        {(!subject && !material && !pricing && !searchInput && allLectures) && <AllLectures />}
+        {(!subject && !material && !pricing && !searchInput && !allLectures) && <ScrappedLectures />}
+
         {(subject || material || pricing || searchInput) && <Lectures
           lang={subject}
           type={material}

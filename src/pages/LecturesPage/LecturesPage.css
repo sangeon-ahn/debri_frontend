@@ -413,11 +413,43 @@ color: #FFFFFF;
 
 .filter-vertical-line {
   width: 10px;
-height: 0px;
-border: 1px solid #2F343A;
-transform: rotate(90deg);
+  height: 1.5px;
+  background-color: #2F343A;
+  transform: rotate(90deg);
 }
 
+.select-lectures{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.select-lectures-items{
+  width: 152px;
+  height: 30px;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  text-align : center;
+  line-height: 30px;
+  color: #FFFFFF;
+  opacity: 0.2;
+}
+.select-lectures-items.success{
+  color: #FFFFFF;
+  opacity: 1;
+}
+.green-bar{
+  width:152px;
+  height: 4px;
+  background-color: #FFFFFF;
+  opacity: 0.2;
+  border-radius: 10px;
+}
+.green-bar.success{
+  background-color: #66CC66;
+  opacity: 1;
+}
 .filter-text {
   font-weight: 700;
   font-size: 12px;

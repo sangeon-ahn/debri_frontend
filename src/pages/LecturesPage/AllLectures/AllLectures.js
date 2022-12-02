@@ -1,9 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
 import Lecture from "../Lecture/Lecture";
-import './ScrappedLectures.css';
+import './AllLectures.css';
 
-export default function ScrappedLectures() {
+export default function AllLectures() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -13,14 +13,14 @@ export default function ScrappedLectures() {
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [scrappedLectures, setScrappedLectures] = useState(null);
-  console.log(scrappedLectures);
+  const [AllLectures, setAllLectures] = useState(null);
+  console.log(AllLectures);
 
-  const fetchScrappedLectures = async () => {
+  const fetchAllLectures = async () => {
     try {
 
-      const response = await axios.get(`${baseUrl}/api/lecture/getScrapList/${userData.userIdx}`, { headers });
-      setScrappedLectures(response.data.result);
+      const response = await axios.get(`${baseUrl}/api/lecture/getLectureList`, { headers });
+      setAllLectures(response.data.result);
     } catch (e) {
       console.log(e);
       setError(e);
@@ -28,7 +28,7 @@ export default function ScrappedLectures() {
   }
 
   useEffect(() => {
-    fetchScrappedLectures();
+    fetchAllLectures();
   }, []);
 
   if (error) return null;
@@ -36,7 +36,7 @@ export default function ScrappedLectures() {
   return (
     <div className="scrapped-lectures-container">
       <div className="scrapped-lectures">
-      {scrappedLectures && scrappedLectures.map(scrappedLecture => {
+      {AllLectures && AllLectures.map(scrappedLecture => {
         return <Lecture lecture={scrappedLecture} key={scrappedLecture.lectureIdx} isScrappedLecture={true} />
       })}
     </div>
