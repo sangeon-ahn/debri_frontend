@@ -13,8 +13,8 @@ export default function AllLectures() {
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [AllLectures, setAllLectures] = useState(null);
-  console.log(AllLectures);
+  const [allLectures, setAllLectures] = useState(null);
+  console.log(allLectures);
 
   const fetchAllLectures = async () => {
     try {
@@ -36,8 +36,8 @@ export default function AllLectures() {
   return (
     <div className="scrapped-lectures-container">
       <div className="scrapped-lectures">
-      {AllLectures && AllLectures.map(scrappedLecture => {
-        return <Lecture lecture={scrappedLecture} key={scrappedLecture.lectureIdx} isScrappedLecture={true} />
+      {allLectures && allLectures.map(allLecture => {
+        return <Lecture lecture={allLecture} key={allLecture.lectureIdx} isScrappedLecture={allLecture.userScrap} />
       })}
     </div>
     </div>

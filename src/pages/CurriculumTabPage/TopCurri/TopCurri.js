@@ -7,9 +7,22 @@ export default function TopCurri(props) {
   const { curri } = props;
   const navigate = useNavigate();
 
+  const setRankingColor = (culum) => {
+    if (culum.ranking === 1) {
+      return 'ranking yellow';
+    } else if (culum.ranking === 2) {
+      return 'ranking whitegray';
+    } else if (culum.ranking === 3) {
+      return 'ranking orange';
+    }
+    else{
+      return 'ranking black'
+    }
+  };
+
   return (
     <div className='top-curri-container'>
-      <div className='ranking'>{curri.ranking}</div>
+      <div className={setRankingColor(curri)}>{curri.ranking}</div>
       <div className='top-curri-desc' onClick={() => navigate(`/curriculum/${curri.curriIdx}`)}>
         <div className='curri-img-box'>
           <img src={curriIcon} alt="" className='curri-icon'/>

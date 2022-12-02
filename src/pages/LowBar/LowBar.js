@@ -44,11 +44,11 @@ export default function LowBar() {
             </div>
             <div className={(isButtonClicked.homeButton ? ' active-home-text' : 'home-text')} id="homeButton">홈</div>
         </div>
-        <div className="lecture-button" onClick={(e) => handleLowButtonClick(e, 'lectures')} id="lectureButton">
-            <div className='lecture-icon-box' id="lectureButton">
-              <img id='lectureButton' src={isButtonClicked.lectureButton ? activeLectureButton : lectureButton} alt="" />
+        <div className="board-button" onClick={(e) => handleLowButtonClick(e, 'boards')} id="boardButton">
+            <div className='board-icon-box' id="boardButton">
+              <img id="boardButton" src={isButtonClicked.boardButton ? activeBoardButton : boardButton} alt=''/>
             </div>
-            <div className={(isButtonClicked.lectureButton ? ' active-home-text' : 'home-text')} id='lectureButton'>강의</div>
+            <div className={(isButtonClicked.boardButton ? ' active-home-text' : 'home-text')} id="boardButton">게시판</div>
         </div>
         <div className="curriculum-button" onClick={(e) => handleLowButtonClick(e, 'curriculum')} id="curriButton">
             <div className='curriculum-icon-box' id="curriButton">
@@ -56,9 +56,11 @@ export default function LowBar() {
             </div>
             <div className={(isButtonClicked.curriButton ? ' active-home-text' : 'home-text')} id="curriButton">커리큘럼</div>
         </div>
-        <div className="board-button" onClick={(e) => handleLowButtonClick(e, 'boards')} id="boardButton">
-            <div className='board-icon-box' id="boardButton"><img id="boardButton" src={isButtonClicked.boardButton ? activeBoardButton : boardButton} alt=''/></div>
-            <div className={(isButtonClicked.boardButton ? ' active-home-text' : 'home-text')} id="boardButton">게시판</div>
+        <div className="lecture-button" onClick={(e) => handleLowButtonClick(e, 'lectures')} id="lectureButton">
+            <div className='lecture-icon-box' id="lectureButton">
+              <img id='lectureButton' src={isButtonClicked.lectureButton ? activeLectureButton : lectureButton} alt="" />
+            </div>
+            <div className={(isButtonClicked.lectureButton ? ' active-home-text' : 'home-text')} id='lectureButton'>강의</div>
         </div>
         <div className="mypage-button" onClick={(e) => handleLowButtonClick(e, 'mypage')} id="mypageButton">
             <div className='mypage-icon-box' id="mypageButton"><img id="mypageButton" src={isButtonClicked.mypageButton ? activeMypageButton : mypageButton} alt=''/></div>
