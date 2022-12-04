@@ -5,7 +5,7 @@ import './CurriculumTabPage.css';
 import leftArrow from '../../assets/leftArrow.png';
 import greenHeart from '../../assets/greenHeart.png';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import LatestCurri from './LatestCurri/LatestCurri';
+import Curris from './Curris/Curris';
 
 export default function BoardsPage() {
     const [loading,setLoading] = useState(false); // 로딩되는지 여부
@@ -48,7 +48,7 @@ export default function BoardsPage() {
                     {scrapCurrilist &&
                     <div style={{marginTop:'50px', clear:'both' }}>
                     {scrapCurrilist.map(curri => {
-                        return <LatestCurri key={curri.curriIdx} curri={curri}/>
+                        return <Curris key={curri.curriIdx} curri={curri}/>
                     })}
                     </div>
                     }

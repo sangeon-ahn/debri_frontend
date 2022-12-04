@@ -311,12 +311,6 @@ export default function LecturesDeatilPage() {
               <div className='LectureReview'>
                 <div style={{display:'flex', width: '335px', position: 'relative', marginBottom: '20px'}}>
                   <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
-                  <div className='latest-curries-live'>
-                    <div className='onair-icon-box' alt="">
-                      <img src={liveIcon} alt="" style={liveIconStyle}/>
-                    </div>
-                    <div className='live-text'>LIVE</div>
-                  </div>
                 </div>
 
                 {comments && <div style={{marginBottom:'100px'}}>

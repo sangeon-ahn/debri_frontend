@@ -12,9 +12,9 @@
 }
 
 .ranking {
+  position: relative;
   width: 34px;
   height: 34px;
-  background: #D9D9D9;
   border-radius: 10px;
   text-align: center;
   line-height: 33px;
@@ -22,6 +22,37 @@
   font-size: 16px;
   color: #000000;
   margin-right: 18px;
+}
+
+.crown-icon{
+  position:absolute;
+  top: -15px;
+  left: 7px;
+}
+
+.yellow{
+  background-color: #EDCA4F;
+  border: none;
+}
+
+.whitegray{
+  background-color: #D9D9D9;
+  border: none;
+}
+
+.orange{
+  background: #E27B41;
+  border: none;
+}
+
+.black {
+  width: 32.5px;
+  height: 32.5px;
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 3px solid white;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .top-curri-desc {
@@ -54,6 +85,19 @@
   position: absolute;
   right: 21.29px;
   cursor: pointer;
+}
+
+.who-made-container {
+  display: flex;
+  align-items: center;
+  margin-top: 17px;
+  line-height: 13px;
+}
+
+.who-made {
+  font-weight: 700;
+  font-size: 12px;
+  color: #FFFFFF;
 }
 
 .curri-img-box {
