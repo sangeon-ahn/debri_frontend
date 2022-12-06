@@ -22,7 +22,6 @@ function App() {
           <Route path="search" element={<SearchLecture />} />
           <Route path="menu" element={<Menu />} />
           <Route path="mycurri" element={<MyCurri></MyCurri>}/>
-          
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

@@ -33,6 +33,7 @@ function App() {
         <div>
           <Routes>
             <Route path='/' element={<LoginPage />} />
+            <Route path='/login' element={<LoginPage />} />
             <Route path='/emailAuth' element={<EmailAuth />} />
             <Route path='/account' element={<Account />} />
             <Route path="/home" element={<BeginPage />} />

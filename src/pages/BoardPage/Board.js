@@ -1,6 +1,7 @@
 import Header from '../Header/Header';
 import './Board.css';
 import PostSummary from './PostSummary/PostSummary';
+import Paging from '../Paging/Paging';
 import leftArrow from '../../assets/leftArrow.png';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import favoriteStar from '../../assets/favoriteStar.png';
@@ -29,6 +30,7 @@ export default function Board() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [text, setText] = useState(false);
+  const [page, setpage] = useState(1);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   console.log(board);
 
@@ -39,24 +41,27 @@ export default function Board() {
   };
 
   useEffect( () =>{
-        fetchPosts(params.boardId);
+        fetchPosts(params.boardId, page);
         fetchBoard();
     },[]);
 
-  const fetchPosts = async (boardIdx) => {
-      try {
-          setError(null);
-          setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}`, { headers });
-          if (response.data.isSuccess) {
-            const sortedPosts = response.data.result.sort((a, b) => b.postIdx - a.postIdx);
-            setPosts(sortedPosts);
-          }
-          console.log(response);
-      } catch (e) {
-          setError(e);
-      }
-      setLoading(false);
+
+  const handlePageChange = (page) => {
+    setpage(page);
+    fetchPosts(params.boardId, page)
+  };
+
+  const fetchPosts = async (boardIdx, pagenum) => {
+    try {
+        setError(null);
+        setLoading(true); //로딩이 시작됨
+        const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}/${pagenum}`, { headers });
+        setPosts(response.data.result)
+        console.log(response);
+    } catch (e) {
+        setError(e);
+    }
+    setLoading(false);
   };
 
   const fetchBoard = async () => {
@@ -125,6 +130,7 @@ export default function Board() {
     
   if (error) return null;
 
+
   //검색
   function back() {
     setText(false)
@@ -177,7 +183,6 @@ export default function Board() {
         <input type="text" className="search" placeholder="게시물 검색하기" onChange={onChange}/>
       </div>
       
-      {/* 검색했을 때 나오는 화면 */}
       {text ?
         <div className='board-main-container'>
           <div className='board-title-container'>
@@ -223,6 +228,7 @@ export default function Board() {
           }
         </div>        
       }    
+      <Paging page={page} count={3} setPage={handlePageChange} />
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );
