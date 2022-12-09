@@ -23,7 +23,6 @@ export default function Board() {
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
   const [board, setBoard] = useState(null);
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrapped, setScrapped] = useState(searchParams.get('scrapped'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -31,6 +30,7 @@ export default function Board() {
   const [searchResult, setSearchResult] = useState(null);
   const [text, setText] = useState(false);
   const [page, setpage] = useState(1);
+  const [allPage, setAllPage] = useState(0);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   console.log(board);
 
@@ -56,8 +56,8 @@ export default function Board() {
         setError(null);
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}/${pagenum}`, { headers });
-        setPosts(response.data.result)
-        console.log(response);
+        setPosts(response.data.result.postList)
+        setAllPage(response.data.result.postCount)
     } catch (e) {
         setError(e);
     }
@@ -80,7 +80,7 @@ export default function Board() {
 
   async function scrapBoard(boardIdx) {
     try {
-      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}/`,
+      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -92,7 +92,7 @@ export default function Board() {
 
   async function unScrapBoard(boardIdx) {
     try {
-      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}/`,
+      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -228,7 +228,7 @@ export default function Board() {
           }
         </div>        
       }    
-      <Paging page={page} count={3} setPage={handlePageChange} />
+      <Paging page={page} count={Math.ceil(allPage/12)} setPage={handlePageChange} />
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );
