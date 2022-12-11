@@ -49,6 +49,8 @@ export default function PostPage() {
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const scrapped = searchParams.get('scrapped');
+  const [page, setpage] = useState(1);
+  const [allPage, setAllPage] = useState(0);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -58,7 +60,7 @@ export default function PostPage() {
   console.log(location);
   useEffect(() => {
       fetchPost(postId);
-      fetchComments(postId);
+      fetchComments(postId, page);
       document.addEventListener('mousedown', clickModalOutside);
 
       return () => {
@@ -121,14 +123,15 @@ export default function PostPage() {
     setLoading(false);
   };
 
-  const fetchComments = async (postIdx) => {
+  const fetchComments = async (postIdx, pageNum) => {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}`,{ headers });
+      const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}?pageNum=${pageNum}`,{ headers });
       if (response.data.isSuccess) {
-        console.log('댓글', response.data.result);
-        setComments(response.data.result);
+        console.log('댓글', response.data.result.commentList);
+        setComments(response.data.result.commentList);
+        setAllPage(response.data.result.commentCount)
       }
       console.log('댓글실패', response);
     } catch (e) {
@@ -136,6 +139,13 @@ export default function PostPage() {
       console.log(e);
     }
     setLoading(false);
+  };
+
+  //페이지네이션
+  const handlePageChange = (e) => {
+    console.log(e)
+    setpage(e);
+    fetchComments(postId, e);
   };
 
   const clickModalOutside = e => {
@@ -504,6 +514,9 @@ export default function PostPage() {
           setPlaceHolder={setPlaceHolder}
           setRootCommentIdx={setRootCommentIdx}
         />
+        {Array.from(Array(Math.ceil(allPage/12)), (_, i) => i + 1).map((i) => {
+          return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+        })}
        <PostScrapSnackbar handleClose={handleScrapSnackbarClose} open={scrapSnackbarOpen}/>
        <PostReportSnackbar handleClose={handleReportSnackbarClose} open={reportSnackbarOpen}/>
        <div className="bottom-bar-blocker2" ></div>

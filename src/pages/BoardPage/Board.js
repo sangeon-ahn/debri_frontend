@@ -1,7 +1,6 @@
 import Header from '../Header/Header';
 import './Board.css';
 import PostSummary from './PostSummary/PostSummary';
-import Paging from '../Paging/Paging';
 import leftArrow from '../../assets/leftArrow.png';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import favoriteStar from '../../assets/favoriteStar.png';
@@ -45,10 +44,11 @@ export default function Board() {
         fetchBoard();
     },[]);
 
-
-  const handlePageChange = (page) => {
-    setpage(page);
-    fetchPosts(params.boardId, page)
+  
+  //페이지네이션
+  const handlePageChange = (e) => {
+    setpage(e);
+    fetchPosts(params.boardId, e)
   };
 
   const fetchPosts = async (boardIdx, pagenum) => {
@@ -159,6 +159,8 @@ export default function Board() {
     setLoading(false);
   };
 
+
+
   return (
     <>
       {/* 글쓰기 버튼 */}
@@ -228,7 +230,11 @@ export default function Board() {
           }
         </div>        
       }    
-      <Paging page={page} count={Math.ceil(allPage/12)} setPage={handlePageChange} />
+      <div className='page-wrap'>
+        {Array.from(Array(Math.ceil(allPage/12)), (_, i) => i + 1).map((i, idx) => {
+          return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+        })}
+      </div>
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );

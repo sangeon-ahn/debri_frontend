@@ -174,3 +174,22 @@
   margin: 5px 10px;
   float:right;
 }
+
+/* 페이지 */
+.page-wrap{
+  display: inline-block;
+  width:180px;
+}
+.page {
+  list-style: none;
+  background-color: inherit;
+  color: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.page.active {
+  background-color: #66CC66;
+}
