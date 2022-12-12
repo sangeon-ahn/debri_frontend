@@ -10,6 +10,8 @@ import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/글쓰기.png';
 import searchIcon from '../../assets/searchIcon.png';
 import searchIconGreen from '../../assets/searchIconGreen.png';
+import pagePrev from '../../assets/pagePrev.png';
+import pageNext from '../../assets/pageNext.png';
 import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
 import BoardScrapSnackbar from '../BoardsPage/BoardScrapSnackbar/BoardScrapSnackbar';
@@ -29,7 +31,8 @@ export default function Board() {
   const [searchResult, setSearchResult] = useState(null);
   const [text, setText] = useState(false);
   const [page, setpage] = useState(1);
-  const [allPage, setAllPage] = useState(0);
+  const [pageFive, setPageFive] = useState(0);
+  const [postCnt, setPostCnt] = useState(0);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   console.log(board);
 
@@ -46,10 +49,21 @@ export default function Board() {
 
   
   //페이지네이션
+  const totalpage = Math.ceil(postCnt/12)
+  const pageGoPrev = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive-1)
+  };
+  const pageGoNext = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive+1)
+  };
+
   const handlePageChange = (e) => {
     setpage(e);
     fetchPosts(params.boardId, e)
   };
+  //
 
   const fetchPosts = async (boardIdx, pagenum) => {
     try {
@@ -57,7 +71,7 @@ export default function Board() {
         setLoading(true); //로딩이 시작됨
         const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}/${pagenum}`, { headers });
         setPosts(response.data.result.postList)
-        setAllPage(response.data.result.postCount)
+        setPostCnt(response.data.result.postCount)
     } catch (e) {
         setError(e);
     }
@@ -230,10 +244,14 @@ export default function Board() {
           }
         </div>        
       }    
-      <div className='page-wrap'>
-        {Array.from(Array(Math.ceil(allPage/12)), (_, i) => i + 1).map((i, idx) => {
-          return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
-        })}
+      <div className='page-section'>
+        {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
+        <div className='page-wrap'>
+          {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
+            return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+          })}
+        </div>
+        {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
       </div>
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>

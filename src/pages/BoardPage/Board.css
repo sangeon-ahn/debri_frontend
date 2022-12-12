@@ -176,9 +176,11 @@
 }
 
 /* 페이지 */
+.page-section{
+  text-align: center;
+}
 .page-wrap{
   display: inline-block;
-  width:180px;
 }
 .page {
   list-style: none;
