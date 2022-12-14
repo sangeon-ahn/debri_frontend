@@ -79,13 +79,15 @@
   right: 9px;
 }
 
-/* .lecture-list {
-  width: 338px;
-  margin-top: 14px;
-  height: calc(.keyword-minus-icon);
+.keyword-drop-icon {
+  position: absolute;
+  right: 9px;
+}
+.lecture-list {
+  width: 360px;
+  height: 480px;
   overflow-x: hidden;
-} */
-
+}
 .lecture-list::-webkit-scrollbar {
   width: 8px;
 }
@@ -107,7 +109,7 @@
   font-size: 18px;
   line-height: 26px;
   color: #FFFFFF;
-  margin-top: 34px;
+  margin-top: 35px;
 }
 .red {
   background-color: #CB3953;
@@ -403,11 +405,10 @@ color: #0A1123;
 
 .filter-lang-title, .filter-material-title, .filter-pricing-title {
   font-weight: 400;
-font-size: 10px;
-line-height: 14px;
-text-align: center;
-
-color: #FFFFFF;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  color: #FFFFFF;
 }
 
 .filter-vertical-line {
