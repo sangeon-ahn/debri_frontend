@@ -5,28 +5,6 @@
   box-sizing: border-box;
 }
 
-.curriculumTab-scroll-area {
-  position: relative;
-  width: 338px;
-  /* height: 490px; */
-  overflow-x: hidden;
-  margin-top: 20px;
-}
-
-.curriculumTab-scroll-area::-webkit-scrollbar {
-  width: 8px;
-}
-
-.curriculumTab-scroll-area::-webkit-scrollbar-thumb {
-  height: 30%;
-  background-color: #304057;
-  border-radius: 10px;
-} 
-
-.curriculumTab-scroll-area::-webkit-scrollbar-track {
-  background: rgba(33, 122, 244, .1); 
-} 
-
 .curri-tab-title {
   font-weight: 900;
   font-size: 22px;
@@ -64,7 +42,9 @@
   color: #FFFFFF;
   margin-right: 113.27px;
 }
-
+.curriculumTab-area{
+  margin-top: 20px;
+}
 .curri-top5-text {
   font-weight: 400;
   font-size: 12px;
@@ -144,16 +124,25 @@
   height: 200px;
 }
 
-.all-curris::-webkit-scrollbar {
+.curri-wrap {
+  position:relative;
+  width: 316px;
+  padding: 0 22px 0 0;
+  height: 680px;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+.curri-wrap::-webkit-scrollbar {
   width: 8px;
 }
 
-.all-curris::-webkit-scrollbar-thumb {
+.curri-wrap::-webkit-scrollbar-thumb {
   height: 30%;
   background-color: #304057;
   border-radius: 10px;
 }
 
-.all-curris::-webkit-scrollbar-track {
+.curri-wrap::-webkit-scrollbar-track {
   background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }

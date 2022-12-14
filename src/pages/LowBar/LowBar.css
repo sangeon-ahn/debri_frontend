@@ -1,7 +1,7 @@
 .fixed-bar{
   background-color: #142141;
   width: 80px;
-  height: 100vh;
+  height: 790px;
 }
 
 .low-bar {
@@ -10,7 +10,6 @@
   width: 80px;
   height: 70px;
   top: 0px;
-  /* left: 22px; */
   justify-content: space-around;
   flex-wrap: wrap;
   background-color: #142141;

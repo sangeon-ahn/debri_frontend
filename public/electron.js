@@ -31,7 +31,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     frame: false,
     width: 440,
-    height: 839,
+    height: 790,
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#2f3241',

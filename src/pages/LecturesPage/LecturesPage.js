@@ -81,13 +81,14 @@ export default React.memo(function LecturesPage() {
           handlePriceClick={handlePriceClick}
           setFilterHeight={setFilterHeight}
         />
-
-        <div className="select-lectures">
-          <div className={`select-lectures-items ${allLectures ? 'success' : 'fail'}`} onClick={selectAllLectures}>전체 강의</div>
-          <div className={`select-lectures-items ${allLectures ? 'fail' : 'success'}`} onClick={selectScrappedLectures}>즐겨 찾기</div>
-          <div className={`green-bar ${allLectures ? 'success' : 'fail'}`}></div>
-          <div className={`green-bar ${allLectures ? 'fail' : 'success'}`}></div>
-        </div>
+        {(!subject && !material && !pricing && !searchInput) &&
+          <div className="select-lectures">
+            <div className={`select-lectures-items ${allLectures ? 'success' : 'fail'}`} onClick={selectAllLectures}>전체 강의</div>
+            <div className={`select-lectures-items ${allLectures ? 'fail' : 'success'}`} onClick={selectScrappedLectures}>즐겨 찾기</div>
+            <div className={`green-bar ${allLectures ? 'success' : 'fail'}`}></div>
+            <div className={`green-bar ${allLectures ? 'fail' : 'success'}`}></div>
+          </div>
+        }
         {(!subject && !material && !pricing && !searchInput && allLectures) && <AllLectures />}
         {(!subject && !material && !pricing && !searchInput && !allLectures) && <ScrappedLectures />}
 

@@ -86,7 +86,7 @@ export default function CurriculumTabPage() {
           </div>
         </div>
         {topFiveCurriList &&
-          <div className='curriculumTab-scroll-area'>
+          <div className='curriculumTab-area'>
             <div className='curri-top5-text'>유저들이 추천하는 커리큘럼 TOP 5</div>
             <div className='curri-top5'>
               {topFiveCurriList.map(curri => {
@@ -103,7 +103,7 @@ export default function CurriculumTabPage() {
           <div className={`green-bar ${allCurris ? 'fail' : 'success'}`}></div>
         </div>
         {allCurris && allCurriList &&
-          <div>
+          <div className='curri-wrap'>
             {allCurriList.map(curri => {
               return <Curris key={curri.curriIdx} curri={curri}/>
               })
@@ -111,7 +111,7 @@ export default function CurriculumTabPage() {
           </div>
         }
         {!allCurris && likeCurriList &&
-          <div>
+          <div className='curri-wrap'>
             {likeCurriList.map(curri => {
               return <Curris key={curri.curriIdx} curri={curri}/>
               })
