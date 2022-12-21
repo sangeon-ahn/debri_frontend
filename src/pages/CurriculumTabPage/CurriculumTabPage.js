@@ -6,9 +6,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import TopCurri from './TopCurri/TopCurri';
-import LatestCurri from './LatestCurri/LatestCurri';
-import liveIcon from '../../assets/liveIcon.png';
-import useInterval from './useInterval';
+import Curris from "./Curris/Curris";
 
 export default function CurriculumTabPage() {
   const headers = {
@@ -17,9 +15,10 @@ export default function CurriculumTabPage() {
     'Content-Type': 'application/json',
   };
   const [topFiveCurriList, setTopFiveCurriList] = useState(null);
-  const [latestFiveCurriList, setLatestFiveCurriList] = useState(null);
-  const [visibility, setVisibility] = useState(true);
+  const [allCurriList, setAllCurriList] = useState(null);
+  const [likeCurriList, setLikeCurriList] = useState(null);
   const [error, setError] = useState(null);
+  const [allCurris, setAllCurris] = useState(true);
   const navigate = useNavigate();
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -34,27 +33,41 @@ export default function CurriculumTabPage() {
     }
   };
 
-  const getLatestCurriList = async () => {
+  const getAllCurriList = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/curri/getNewList`, { headers });
-      console.log('최신커리', response);
-      setLatestFiveCurriList(response.data.result);
+      const response = await axios.get(`${baseUrl}/api/curri/getList`, { headers });
+      console.log(response);
+      setAllCurriList(response.data.result);
     } catch (e) {
       console.log(e);
       setError(e);
     }
   };
-  const liveIconStyle = {
-    opacity: visibility ? '1' : '0',
-    transition: 'all .0.5s ease-out'
+
+  const getLikeCurriList = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/curri/getScrapList`, { headers });
+      console.log(response);
+      setLikeCurriList(response.data.result);
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  };
+
+  const selectAllCurris =()=>{
+    setAllCurris(true)
+  };
+
+  const selectLikeCurris =()=>{
+    setAllCurris(false)
   };
 
   useEffect(() => {
     getTopTenCurriList();
-    getLatestCurriList();
+    getAllCurriList();
+    getLikeCurriList();
   }, []);
-
-  useInterval(() => setVisibility(state => !state), 1000);
 
   if (error) return null;
   
@@ -72,8 +85,8 @@ export default function CurriculumTabPage() {
             <img src={rightArrow} alt="" />
           </div>
         </div>
-        {(topFiveCurriList && latestFiveCurriList) &&
-          <div className='curriculumTab-scroll-area'>
+        {topFiveCurriList &&
+          <div className='curriculumTab-area'>
             <div className='curri-top5-text'>유저들이 추천하는 커리큘럼 TOP 5</div>
             <div className='curri-top5'>
               {topFiveCurriList.map(curri => {
@@ -81,21 +94,28 @@ export default function CurriculumTabPage() {
                 })
               }
             </div>
-            <div className='latest-curries-top-area'>
-              <div className='latest-curries-text'>최신 등록 커리큘럼</div>
-              <div className='latest-curries-live'>
-                <div className='onair-icon-box' alt="">
-                  <img src={liveIcon} alt="" style={liveIconStyle}/>
-                </div>
-                <div className='live-text'>LIVE</div>
-              </div>
-            </div>
-            <div className='latest-curries'>
-              {latestFiveCurriList.map(curri => {
-                return <LatestCurri key={curri.curriIdx} curri={curri}/>
-                })
-              }
-            </div>
+          </div>
+        }
+        <div className="select-curris">
+          <div className={`select-curris-items ${allCurris ? 'success' : 'fail'}`} onClick={selectAllCurris}>전체 커리큘럼</div>
+          <div className={`select-curris-items ${allCurris ? 'fail' : 'success'}`} onClick={selectLikeCurris}>좋아요한 커리큘럼</div>
+          <div className={`green-bar ${allCurris ? 'success' : 'fail'}`}></div>
+          <div className={`green-bar ${allCurris ? 'fail' : 'success'}`}></div>
+        </div>
+        {allCurris && allCurriList &&
+          <div className='curri-wrap'>
+            {allCurriList.map(curri => {
+              return <Curris key={curri.curriIdx} curri={curri}/>
+              })
+            }
+          </div>
+        }
+        {!allCurris && likeCurriList &&
+          <div className='curri-wrap'>
+            {likeCurriList.map(curri => {
+              return <Curris key={curri.curriIdx} curri={curri}/>
+              })
+            }
           </div>
         }
       </div>

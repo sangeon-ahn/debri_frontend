@@ -8,7 +8,7 @@
   z-index: 2;
   width: 360px;
   margin: 0 auto;
-  top: 30px;
+  top: 60px;
   left: 180px;
 
 }
@@ -22,7 +22,7 @@
   border-radius: 10px;
   align-items: center;
   margin: 0 auto;
-  top: 90px;
+  top: 120px;
   left: 104px;
   background: rgba(217, 217, 217, 0.08);
 }
@@ -71,7 +71,7 @@
   height: 80px;
   margin: 0 auto;
   margin-top: 20px;
-  top: 120px;
+  top: 150px;
   left: 95px;
 }
 
@@ -133,9 +133,9 @@
   position:relative;
   width: 316px;
   padding: 0 22px;
-  height: 475px;
+  height: 500px;
   overflow-x: hidden;
-  margin-top: 200px;
+  margin-top: 230px;
 }
 
 .post-list::-webkit-scrollbar {
@@ -154,7 +154,7 @@
 
 .board-main-container {
   width: 360px;
-  height: 573px;
+  height: 520px;
 }
 
 /* 스크랩한 게시물 */
@@ -173,4 +173,26 @@
 .bookmark_Posts{
   margin: 5px 10px;
   float:right;
+}
+
+/* 페이지 */
+.page-section{
+  text-align: center;
+}
+.page-wrap{
+  display: inline-block;
+}
+.page {
+  list-style: none;
+  background-color: inherit;
+  color: white;
+  border:none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.page.active {
+  background-color: #66CC66;
 }

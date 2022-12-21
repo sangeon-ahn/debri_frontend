@@ -1,5 +1,5 @@
 import React, { Component, useEffect }  from 'react';
-import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate, HashRouter, BrowserRouter } from "react-router-dom";
 import Account from "./pages/Account/Account";
 import EmailAuth from "./pages/Account/EmailAuth";
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
@@ -33,6 +33,7 @@ function App() {
         <div>
           <Routes>
             <Route path='/' element={<LoginPage />} />
+            <Route path='/login' element={<LoginPage />} />
             <Route path='/emailAuth' element={<EmailAuth />} />
             <Route path='/account' element={<Account />} />
             <Route path="/home" element={<BeginPage />} />

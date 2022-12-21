@@ -1,4 +1,4 @@
-.latest-curri-container {
+.curri-container {
   display: flex;
   width: 329px;
   height: 86px;
@@ -7,7 +7,7 @@
   cursor: pointer;
 }
 
-.latest-curri-container:hover {
+.curri-container:hover {
   background-color: #131927;
 }
 
@@ -17,7 +17,7 @@
   margin-right: 5px;
 }
 
-.latest-curri-name {
+.curri-name {
   font-weight: 700;
   font-size: 14px;
   color: #FFFFFF;
@@ -26,14 +26,14 @@
   margin-top: 5px;
 }
 
-.latest-curri-desc {
+.curri-desc {
   font-weight: 400;
   font-size: 10px;
   color: #FFFFFF;
   line-height: 14px;
 }
 
-.latest-curri-navigator {
+.curri-navigator {
   position: absolute;
   right: 21.29px;
   width: 10px;
@@ -54,6 +54,6 @@
   color: #FFFFFF;
 }
 
-.latest-curri-text-container {
+.curri-text-container {
   height: 86px;
 }

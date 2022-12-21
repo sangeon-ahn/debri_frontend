@@ -10,6 +10,8 @@ import pencil from '../../assets/pencil.png';
 import writePost from '../../assets/글쓰기.png';
 import searchIcon from '../../assets/searchIcon.png';
 import searchIconGreen from '../../assets/searchIconGreen.png';
+import pagePrev from '../../assets/pagePrev.png';
+import pageNext from '../../assets/pageNext.png';
 import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
 import BoardScrapSnackbar from '../BoardsPage/BoardScrapSnackbar/BoardScrapSnackbar';
@@ -22,13 +24,15 @@ export default function Board() {
   const [error,setError] = useState(null); //에러
   const { state } = useLocation();
   const [board, setBoard] = useState(null);
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrapped, setScrapped] = useState(searchParams.get('scrapped'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [text, setText] = useState(false);
+  const [page, setpage] = useState(1);
+  const [pageFive, setPageFive] = useState(0);
+  const [postCnt, setPostCnt] = useState(0);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   console.log(board);
 
@@ -39,24 +43,39 @@ export default function Board() {
   };
 
   useEffect( () =>{
-        fetchPosts(params.boardId);
+        fetchPosts(params.boardId, page);
         fetchBoard();
     },[]);
 
-  const fetchPosts = async (boardIdx) => {
-      try {
-          setError(null);
-          setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}`, { headers });
-          if (response.data.isSuccess) {
-            const sortedPosts = response.data.result.sort((a, b) => b.postIdx - a.postIdx);
-            setPosts(sortedPosts);
-          }
-          console.log(response);
-      } catch (e) {
-          setError(e);
-      }
-      setLoading(false);
+  
+  //페이지네이션
+  const totalpage = Math.ceil(postCnt/12)
+  const pageGoPrev = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive-1)
+  };
+  const pageGoNext = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive+1)
+  };
+
+  const handlePageChange = (e) => {
+    setpage(e);
+    fetchPosts(params.boardId, e)
+  };
+  //
+
+  const fetchPosts = async (boardIdx, pagenum) => {
+    try {
+        setError(null);
+        setLoading(true); //로딩이 시작됨
+        const response = await axios.get(`${baseUrl}/api/post/getList/${boardIdx}/${pagenum}`, { headers });
+        setPosts(response.data.result.postList)
+        setPostCnt(response.data.result.postCount)
+    } catch (e) {
+        setError(e);
+    }
+    setLoading(false);
   };
 
   const fetchBoard = async () => {
@@ -75,7 +94,7 @@ export default function Board() {
 
   async function scrapBoard(boardIdx) {
     try {
-      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}/`,
+      const response = await axios.post(`${baseUrl}/api/board/scrap/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -87,7 +106,7 @@ export default function Board() {
 
   async function unScrapBoard(boardIdx) {
     try {
-      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}/`,
+      const response = await axios.patch(`${baseUrl}/api/board/scrap/cancel/${boardIdx}`,
         JSON.stringify({}),
         { headers }
       );
@@ -125,6 +144,7 @@ export default function Board() {
     
   if (error) return null;
 
+
   //검색
   function back() {
     setText(false)
@@ -153,6 +173,8 @@ export default function Board() {
     setLoading(false);
   };
 
+
+
   return (
     <>
       {/* 글쓰기 버튼 */}
@@ -177,7 +199,6 @@ export default function Board() {
         <input type="text" className="search" placeholder="게시물 검색하기" onChange={onChange}/>
       </div>
       
-      {/* 검색했을 때 나오는 화면 */}
       {text ?
         <div className='board-main-container'>
           <div className='board-title-container'>
@@ -223,6 +244,15 @@ export default function Board() {
           }
         </div>        
       }    
+      <div className='page-section'>
+        {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
+        <div className='page-wrap'>
+          {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
+            return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+          })}
+        </div>
+        {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
+      </div>
       <BoardScrapSnackbar handleClose={handleSnackbarClose} open={snackbarOpen}/>
     </>
   );

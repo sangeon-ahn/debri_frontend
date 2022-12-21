@@ -1,0 +1,93 @@
+.keywords-modal-container {
+  background-color: #142141;
+  box-sizing: border-box;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-radius: 20px;
+  text-align: center;
+  width: 320px;
+  height: 656px;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+.setting{
+  margin:30px;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+}
+.sub-setting{
+  text-align: left;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-left: 30px;
+}
+
+/* 언어 */
+.keywords-subject-modal-container{
+  padding: 10px 13px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.keyword{
+  margin: 5px;
+}
+  
+/* 매체 */
+.keywords-material-modal-container{
+  height: 150px;
+}
+.material{
+  width: 130px;
+  height: 82px;
+  margin: 10px;
+  border: 1px solid #FFFFFF;
+  border-radius: 9px;
+  background-color: inherit;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+.material.active{
+  border: 3px solid #66CC66;
+  color: #66CC66;
+}
+
+/* 가격 */
+.pricing{
+  width: 130px;
+  height: 40px;
+  margin: 10px;
+  border: 1px solid #FFFFFF;
+  border-radius: 9px;
+  background-color: inherit;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+.pricing.active{
+  border: 3px solid #66CC66;
+  color: #66CC66;
+}
+
+/* 확정하기 버튼 */
+.ok-button{
+  margin:30px;
+  width: 132px;
+  height: 40px;
+  background: #66CC66;
+  border-radius: 9px;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 17px;
+  color: #0A1123;
+  cursor: pointer;
+}
