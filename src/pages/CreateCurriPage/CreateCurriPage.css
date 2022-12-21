@@ -31,8 +31,9 @@
 .create-curri-main {
   position: absolute;
   width: 300px;
-  left: 30px;
-  top: 163px;
+  left: 104px;
+  top: 189px;
+  z-index: 1;
 }
 
 .curri-name-text {
@@ -108,7 +109,7 @@
 
 .background-image-box {
   position: absolute;
-  z-index: -1;
+  top: 173px;
 }
 
 .curri-detail-setting {
@@ -286,7 +287,7 @@ color: #FF0000;
   position: absolute;
 width: 120px;
 height: 40px;
-left: 120px;
+left: 194px;
 top: 657px;
 
 background: #66CC66;

@@ -30,7 +30,7 @@ export default function LowBar() {
     navigate(path);
   };
   
-  if (window.location.hash === '#/login') return null;
+  if (window.location.hash === '') return null;
   if (window.location.hash === '#/') return null;
   if (window.location.hash === '#/emailAuth') return null;
   if (window.location.hash === '#/account') return null;

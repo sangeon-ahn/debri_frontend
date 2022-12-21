@@ -1,6 +1,7 @@
 .fixed-bar{
   width: 80px;
   height: 790px;
+  z-index: 1;
 }
 .background{
   position:fixed;
