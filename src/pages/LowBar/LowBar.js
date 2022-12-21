@@ -30,13 +30,14 @@ export default function LowBar() {
     navigate(path);
   };
   
-  if (window.location.pathname === '/login') return null;
+  if (window.location.hash === '#/login') return null;
   if (window.location.hash === '#/') return null;
   if (window.location.hash === '#/emailAuth') return null;
   if (window.location.hash === '#/account') return null;
   
   return (
     <div className="fixed-bar">
+      <div className='background'></div>
       <div className="low-bar">
         <div className="home-button" onClick={(e) => handleLowButtonClick(e, '/home')} id="homeButton">
             <div className='home-icon-box' id="homeButton">

@@ -41,9 +41,9 @@ export const PostScrapSnackbar = (props) => {
           horizontal: 'center',
         }}
         sx={{
-          bottom: '31px',
+          bottom: '300px',
           width: '316px',
-          left: '22px'
+          left: '104px'
         }}
       >
         <Alert icon={<PostScrapSuccessIcon />} sx={alertStyle}>

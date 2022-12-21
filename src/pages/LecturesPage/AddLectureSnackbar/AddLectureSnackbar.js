@@ -32,9 +32,9 @@ export const AddLectureSnackbar = (props) => {
           horizontal: 'center',
         }}
         sx={{
-          top: '180px',
+          bottom: '300px',
           width: '316px',
-          left: '22px'
+          left: '104px'
         }}
       >
         <Alert icon={<AddLectureSuccessIcon />} sx={alertStyle}>

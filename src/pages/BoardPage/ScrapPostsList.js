@@ -39,7 +39,7 @@ export default function BoardsPage() {
 
     return (
         <div>
-            <div className='post-list' style={{marginTop:'40px'}}>
+            <div className='post-list' style={{marginTop:'70px'}}>
                 <img src={leftArrow} alt="엑박" width="9.44px" height="16.19px" className='left-arrow' onClick={()=>{navigate("/boards")}}/>
                 <div className='scrapPostTitle'>내가 스크랩한 게시물</div>
                 <img src={bookmarkGreen} alt="액박" className="bookmark_Posts"/>
