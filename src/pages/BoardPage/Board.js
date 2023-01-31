@@ -160,18 +160,18 @@ export default function Board() {
     SearchPost(params.boardId, e.target.value );
   }
 
-  const SearchPost = async (boardIdx, key) => {
-    try {
-        setError(null);
-        setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`${baseUrl}/api/post/boardPostList/${boardIdx}?key=${key}`, { headers });
-        setSearchResult(response.data.result)
-        console.log(response.data);
-    } catch (e) {
-        setError(e);
-    }
-    setLoading(false);
-  };
+    const SearchPost = async (boardIdx, key) => {
+      try {
+          setError(null);
+          setLoading(true); //로딩이 시작됨
+          const response = await axios.get(`${baseUrl}/api/post/boardPostList/${boardIdx}?key=${key}`, { headers });
+          setSearchResult(response.data.result)
+          console.log(response.data);
+      } catch (e) {
+          setError(e);
+      }
+      setLoading(false);
+    };
 
 
 
