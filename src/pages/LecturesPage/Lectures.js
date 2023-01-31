@@ -4,7 +4,7 @@ import axios from "axios";
 import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 export default function Lectures(props) {
-  const { lang, type, price, searchInput, title, filterHeight } = props;
+  const { lang, type, price, pageNum, searchInput, title, filterHeight } = props;
 
   const [lectures, setLectures] = useState(null);
   const [error, setError] = useState(false);
@@ -17,14 +17,14 @@ export default function Lectures(props) {
   };
 
   useLayoutEffect(() => {
-    fetchLecturesWithFilter(lang, type, price, searchInput);
-  }, [lang, type, price, searchInput]);
+    fetchLecturesWithFilter(lang, type, price, searchInput, pageNum);
+  }, [lang, type, price, searchInput, pageNum]);
 
-  const fetchLecturesWithFilter = async (lang, type, price, key) => {
+  const fetchLecturesWithFilter = async (lang, type, price, key, pageNum) => {
     try {
       setError(false);
-      const response = await axios.get(`${baseUrl}/api/lecture/search?lang=${lang}&type=${type}&price=${price}&key=${key}`, { headers });
-      setLectures(response.data.result);
+      const response = await axios.get(`${baseUrl}/api/lecture/search?lang=${lang}&type=${type}&price=${price}&key=${key}&pageNum=${pageNum}`, { headers });
+      setLectures(response.data.result.lectureList);
       console.log(response);
     } catch (e) {
       setError(e);

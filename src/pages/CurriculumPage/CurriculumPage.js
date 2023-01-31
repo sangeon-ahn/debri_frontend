@@ -11,6 +11,8 @@ import CurriLecture from '../BeginPage/CurriLecture/CurriLecture';
 import writeCommentIcon from '../../assets/writeCommentIcon.png';
 import greenHeart from '../../assets/greenHeart.png';
 import whiteHeart from '../../assets/whiteHeart.png';
+import pagePrev from '../../assets/pagePrev.png';
+import pageNext from '../../assets/pageNext.png';
 import { useRecoilState } from 'recoil';
 import { lowbarSelect } from '../../Atom';
 import curriIcon from '../../assets/orbit.gif';
@@ -30,6 +32,9 @@ export default function CurriculumPage() {
   const [curriLikes, setCurriLikes] = useState(0);
   const [pureStatus, setPureStatus] = useState(true);
   const [lowbar, setLowbar] = useRecoilState(lowbarSelect);
+  const [page, setpage] = useState(1);
+  const [pageFive, setPageFive] = useState(0);
+  const [reviewCnt, setReivewCnt] = useState(0);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
@@ -40,7 +45,7 @@ export default function CurriculumPage() {
 
   useEffect(() => {
     getCurriDetail(curriIdx);
-    getCurriReview(curriIdx);
+    getCurriReview(curriIdx, page);
   },[]);
 
   useEffect(() => {
@@ -69,11 +74,6 @@ export default function CurriculumPage() {
       setCurriLikeStatus(false);
     }
 
-    // if (curri.userScrap) {
-    //   setLectureScrapStatus(true);
-    // } else if (!curri.userScrap) {
-    //   setLectureScrapStatus(false);
-    // }
   }, [curri]);
 
   useEffect(() => {
@@ -117,12 +117,13 @@ export default function CurriculumPage() {
   };
 
   //리뷰 가져오기
-  const getCurriReview = async (curriIdx) => {
+  const getCurriReview = async (curriIdx, pageNum) => {
     try {
         setError(null);
         setLoading(true); //로딩이 시작됨
-        const response = await axios.get(`${baseUrl}/api/curri/review/getList/${curriIdx}`, { headers });
-        setComments(response.data.result);
+        const response = await axios.get(`${baseUrl}/api/curri/review/getList/${curriIdx}?pageNum=${pageNum}`, { headers });
+        setComments(response.data.result.reviewList);
+        setReivewCnt(response.data.result.reviewCount);
         console.log('리뷰', response.data.result);
     } catch (e) {
         setError(e);
@@ -130,6 +131,22 @@ export default function CurriculumPage() {
     setLoading(false);
   };
 
+  //페이지네이션
+  const totalpage = Math.ceil(reviewCnt/12)
+  const pageGoPrev = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive-1)
+  };
+  const pageGoNext = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive+1)
+  };
+
+  const handlePageChange = (e) => {
+    setpage(e);
+    getCurriReview(curriIdx, e);
+  };
+  //
 
 
   //리뷰쓰기
@@ -260,24 +277,10 @@ export default function CurriculumPage() {
                     <div>추천</div>
                   </button>
                 }
-          {/* <div className='user-reviews-area'>
-            <div className='user-reviews-title'>유저들의 커리큘럼 한줄평</div>
-            <div className='user-reviews-container'>
-              <div className='user-review'>
-                <div className='user-review-text'>
-                  자바가 너무 쉬워졌어요 어떡하죠?
-                </div>
-                <div className='review-container'>
-                  <div className='review-by'>by</div>
-                  <div className='review-who'>데브리 짱짱맨</div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         {curri && <div className='CurriReview'>
               <div className='CurriReviewTitle'>유저들의 커리큘럼 한 줄 평</div>
                 <div className='CurriReviewLive'>● LIVE</div>
-                {comments && <div style={{marginBottom:'100px'}}>
+                {comments && <div>
                   {comments.map((reivew,i) => (
                     <div key={i} className='CurriReviewContents'>
                       <div className='CurriReviewContent'>{reivew.content}</div>
@@ -286,6 +289,15 @@ export default function CurriculumPage() {
                   ))}
                 </div>}
               </div>}
+        <div className='page-section'>
+          {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
+          <div className='page-wrap'>
+            {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
+              return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+            })}
+          </div>
+          {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
+        </div>
         </div>
             <div className="writeComment-box">
               <div className="writeComment-icon-box">

@@ -51,9 +51,6 @@ export default function PostPage() {
   const [postReportDetailOn, setPostReportDetailOn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const scrapped = searchParams.get('scrapped');
-  const [page, setpage] = useState(1);
-  const [pageFive, setPageFive] = useState(0);
-  const [commentCnt, setCommentCnt] = useState(0);
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
@@ -63,7 +60,7 @@ export default function PostPage() {
   console.log(location);
   useEffect(() => {
       fetchPost(postId);
-      fetchComments(postId, page);
+      fetchComments(postId);
       document.addEventListener('mousedown', clickModalOutside);
 
       return () => {
@@ -106,11 +103,6 @@ export default function PostPage() {
     fetchComments(postId);
   }, [commentReported]);
 
-  // useEffect(() => {
-  //   if (comments === []) return;
-  //   const $postScrollPart = document.querySelector('.post-scroll-part');
-  //   $postScrollPart.scrollHeight = $postScrollPart.clientHeight + $postScrollPart.scrollTop;
-  // }, [comments]);
 
   const fetchPost = async (postIdx) => {
     try {
@@ -126,15 +118,14 @@ export default function PostPage() {
     setLoading(false);
   };
 
-  const fetchComments = async (postIdx, pageNum) => {
+  const fetchComments = async (postIdx) => {
     try {
       setError(null);
       setLoading(true);
-      const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}?pageNum=${pageNum}`,{ headers });
+      const response = await axios.get(`${baseUrl}/api/comment/get/${postIdx}`,{ headers });
       if (response.data.isSuccess) {
-        console.log('댓글', response.data.result.commentList);
-        setComments(response.data.result.commentList);
-        setCommentCnt(response.data.result.commentCount)
+        console.log('댓글', response.data.result);
+        setComments(response.data.result);
       }
       console.log('댓글실패', response);
     } catch (e) {
@@ -144,23 +135,6 @@ export default function PostPage() {
     setLoading(false);
   };
 
-  //페이지네이션
-  const totalpage = Math.ceil(commentCnt/12)
-  const pageGoPrev = () => {
-    console.log('현재페이지', pageFive)
-    setPageFive(pageFive-1)
-  };
-  const pageGoNext = () => {
-    console.log('현재페이지', pageFive)
-    setPageFive(pageFive+1)
-  };
-
-  const handlePageChange = (e) => {
-    console.log(e)
-    setpage(e);
-    fetchComments(postId, e);
-  };
-  //
 
   const clickModalOutside = e => {
     if (e.target.className === "ReactModal__Overlay ReactModal__Overlay--after-open") {
@@ -527,15 +501,6 @@ export default function PostPage() {
           setPlaceHolder={setPlaceHolder}
           setRootCommentIdx={setRootCommentIdx}
         />
-      <div className='page-section'>
-        {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
-        <div className='page-wrap'>
-          {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
-            return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
-          })}
-        </div>
-        {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
-      </div>
        <PostScrapSnackbar handleClose={handleScrapSnackbarClose} open={scrapSnackbarOpen}/>
        <PostReportSnackbar handleClose={handleReportSnackbarClose} open={reportSnackbarOpen}/>
        <div className="bottom-bar-blocker2" ></div>

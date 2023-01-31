@@ -1,4 +1,6 @@
 import Header from "../Header/Header";
+import Lecture from "./Lecture/Lecture";
+import axios from "axios";
 import './LecturesPage.css';
 import filterIcon from "../../assets/filterIcon.png";
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
@@ -7,6 +9,8 @@ import LectureSearch from "./LectureSearch/LectureSearch";
 import keywordMinusIcon from '../../assets/keywordMinusIcon.png';
 import keywordPlusIcon from '../../assets/keywordPlusIcon.png';
 import keywordDropIcon from '../../assets/keywordDropIcon.png';
+import pagePrev from '../../assets/pagePrev.png';
+import pageNext from '../../assets/pageNext.png';
 import AllLectures from "./AllLectures/AllLectures";
 import ScrappedLectures from "./ScrappedLectures/ScrappedLectures";
 import LectureSelectModal from './LectureSelectModal/LectureSelectModal';
@@ -17,10 +21,25 @@ export default React.memo(function LecturesPage() {
   const [material, setMaterial] = useState(null);
   const [pricing, setPricing] = useState(null);
   const [searchInput, setSearchInput] = useState('');
+
+  const [lectures, setLectures] = useState(null);
   const [allLectures, setAllLectures] = useState(true);
   const [lectureSelectModalOn, setLectureSelectModalOn] = useState(false);
 
-  console.log(subject, material, pricing, searchInput);
+  const [page, setpage] = useState(1);
+  const [pageFive, setPageFive] = useState(0);
+  const [lectureCnt, setLectureCnt] = useState(0);
+
+  const [error, setError] = useState(false);
+  const [loading, isLoading] = useState(false);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const headers = {
+    'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
+
+  console.log(subject, material, pricing, page, searchInput);
   const handleSubjectClick = (lang) => {
     if (subject !== lang) {
       setSubject(lang);
@@ -56,6 +75,48 @@ export default React.memo(function LecturesPage() {
     setAllLectures(false)
   };
   
+  //페이지네이션
+  const totalpage = Math.ceil(lectureCnt/12)
+  const pageGoPrev = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive-1)
+  };
+  const pageGoNext = () => {
+    console.log('현재페이지', pageFive)
+    setPageFive(pageFive+1)
+  };
+
+  const handlePageChange = (e) => {
+    setpage(e);
+  };
+  //
+
+  //강의 필터
+  useLayoutEffect(() => {
+    fetchLecturesWithFilter(subject, material, pricing, searchInput, page);
+  }, [subject, material, pricing, searchInput, page]);
+
+  const fetchLecturesWithFilter = async (subject, material, pricing, searchInput, page) => {
+    try {
+      setError(false);
+      const response = await axios.get(`${baseUrl}/api/lecture/search?lang=${subject}&type=${material}&price=${pricing}&key=${searchInput}&pageNum=${page}`, { headers });
+      setLectures(response.data.result.lectureList);
+      setLectureCnt(response.data.result.lectureCount)
+      console.log(response);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+  };
+
+  const lectureListStyle = {
+    width: '338px',
+    marginTop: '14px',
+    // height: (440 - filterHeight) + 'px',
+    overflowX: 'hidden'
+  }
+  if (error) return null;
+  //
   
   return (
     <>
@@ -169,13 +230,25 @@ export default React.memo(function LecturesPage() {
         {(!subject && !material && !pricing && !searchInput && allLectures) && <AllLectures />}
         {(!subject && !material && !pricing && !searchInput && !allLectures) && <ScrappedLectures />}
 
-        {(subject || material || pricing || searchInput) && <Lectures
-          lang={subject}
-          type={material}
-          price={pricing}
-          searchInput={searchInput}
-          title="검색된 강의"
-        />}
+        {(subject || material || pricing || searchInput) && 
+          <div className="lectures-container">
+            <div className="lectures-title">강의 검색</div>
+            <div className="lecture-list" style={lectureListStyle}>
+              {lectures && lectures.map(lecture => {
+                return <Lecture lecture={lecture} key={lecture.lectureIdx} isScrappedLecture={lecture.userScrap} />
+              })}
+            </div>
+          </div>
+        }
+      </div>
+      <div className='page-section'>
+        {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
+        <div className='page-wrap'>
+          {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
+            return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+          })}
+        </div>
+        {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
       </div>
     </>
   )

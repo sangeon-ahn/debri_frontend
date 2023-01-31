@@ -15,6 +15,8 @@ import {useRecoilState} from 'recoil';
 import {AddSnackbarOpen} from '../../Atom';
 import externalLinkIcon from '../../assets/externalLinkIcon.png';
 import liveIcon from '../../assets/liveIcon.png';
+import pagePrev from '../../assets/pagePrev.png';
+import pageNext from '../../assets/pageNext.png';
 import useInterval from '../CurriculumTabPage/useInterval';
 
 export default function LecturesDeatilPage() {
@@ -32,6 +34,9 @@ export default function LecturesDeatilPage() {
     const [commentContent, setCommentContent] = useState('');
     const [addSnackbarOpen, setAddSnackbarOpen] = useRecoilState(AddSnackbarOpen);
     const [visibility, setVisibility] = useState(true);
+    const [page, setpage] = useState(1);
+    const [pageFive, setPageFive] = useState(0);
+    const [reviewCnt, setReivewCnt] = useState(0);
 
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const headers = {
@@ -43,7 +48,7 @@ export default function LecturesDeatilPage() {
     //강의 세부 데이터 조회
     useEffect( () =>{
         fetchLectureDetail(params.lectureIdx);
-        fetchLectureReview(params.lectureIdx);
+        fetchLectureReview(page, params.lectureIdx);
     },[]);
 
     useEffect(() => {
@@ -182,12 +187,13 @@ export default function LecturesDeatilPage() {
     };
 
     //리뷰 가져오기
-    const fetchLectureReview = async (lectureIdx) => {
+    const fetchLectureReview = async (pageNum, lectureIdx) => {
       try {
           setError(null);
           setLoading(true); //로딩이 시작됨
-          const response = await axios.get(`${baseUrl}/api/lecture/review/get?lectureIdx=${lectureIdx}`, { headers });
-          setComments(response.data.result);
+          const response = await axios.get(`${baseUrl}/api/lecture/review/get/${pageNum}?lectureIdx=${lectureIdx}`, { headers });
+          setComments(response.data.result.reviewList);
+          setReivewCnt(response.data.result.reviewCount)
           console.log(response.data.result);
       } catch (e) {
           setError(e);
@@ -218,6 +224,23 @@ export default function LecturesDeatilPage() {
         setError(e);
       }
     };
+
+    //페이지네이션
+    const totalpage = Math.ceil(reviewCnt/12)
+    const pageGoPrev = () => {
+      console.log('현재페이지', pageFive)
+      setPageFive(pageFive-1)
+    };
+    const pageGoNext = () => {
+      console.log('현재페이지', pageFive)
+      setPageFive(pageFive+1)
+    };
+
+    const handlePageChange = (e) => {
+      setpage(e);
+      fetchLectureReview(e, params.lectureIdx);
+    };
+    //
 
     const openExternalPage = () => {
       window.open(lectureDetail.srcLink, '_blank');
@@ -313,7 +336,7 @@ export default function LecturesDeatilPage() {
                   <div className='LectureReviewTitle'>유저들의 한 줄 평</div>
                 </div>
 
-                {comments && <div style={{marginBottom:'100px'}}>
+                {comments && <div>
                   {comments.map((reivew,i) => (
                     <div key={i} className='LectureReviewContents'>
                       <div className='LectureReviewContent'>{reivew.content}</div>
@@ -322,7 +345,15 @@ export default function LecturesDeatilPage() {
                   ))}
                 </div>}
               </div>}
-
+              <div className='page-section'>
+                {pageFive > 0 && <img src={pagePrev} alt=''onClick={pageGoPrev}/>}
+                <div className='page-wrap'>
+                  {Array.from(Array(Math.min(5, totalpage-pageFive*5)), (_, i) => pageFive*5+i+1).map((i) => {
+                    return <button className={"page" + (i == page ? " active" : "")}  key={i} onClick={()=>handlePageChange(i)}>{i}</button>
+                  })}
+                </div>
+                {pageFive < totalpage/5-1 && <img src={pageNext} alt='' onClick={pageGoNext}/>}
+              </div>
             </div>
 
             <div className="writeComment-box">
