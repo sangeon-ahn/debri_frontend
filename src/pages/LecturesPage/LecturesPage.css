@@ -1,6 +1,7 @@
 .lecture-page-container {
   box-sizing: border-box;
   padding: 0 22px;
+  width: 360px;
 }
 
 .lecture-list-text-container {
@@ -13,8 +14,8 @@
 .lecture-list-text {
   font-family: 'Noto Sans KR';
   font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 900;
+  font-size: 22px;
   line-height: 26px;
 
   color: #FFFFFF;
@@ -28,9 +29,10 @@
 
 .keywords-container {
   display: flex;
-  margin-top: 20px;
+  margin-top: 8px;
   width: 316px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .keywords-subject-container {
@@ -39,21 +41,28 @@
 .keyword {
   display: flex;
   box-sizing: border-box;
-  width: 100px;
-  height: 34px;
+  width: 88px;
+  height: 26px;
   border: 1px solid #FFFFFF;
   border-radius: 18px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 31px;
   color: #FFFFFF;
-  padding-left: 17px;
-  margin-bottom: 6px;
+  padding-left: 15px;
+  margin-bottom: 8px;
   align-items: center;
   position: relative;
   background-color: transparent;
-  font-family: 'Noto Sans KR';
-font-style: normal;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #FFFFFF;
+}
+
+.keyword:hover {
+  background-color: #282a31;
+
 }
 
 .keyword:nth-child(3n) {
@@ -70,11 +79,38 @@ font-style: normal;
   right: 9px;
 }
 
+.keyword-drop-icon {
+  position: absolute;
+  right: 9px;
+}
 .lecture-list {
-  margin-top: 14px;
-  height: 350px;
+  width: 360px;
+  height: 450px;
+  overflow-x: hidden;
+}
+.lecture-list::-webkit-scrollbar {
+  width: 8px;
 }
 
+.lecture-list::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.lecture-list::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.lectures-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  margin-top: 35px;
+}
 .red {
   background-color: #CB3953;
   border: none;
@@ -84,28 +120,467 @@ font-style: normal;
   background-color: #53CB39;
   border: none;
   color: #0A1123;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .blue {
   background-color: #4B8BBE;
   border: none;
   color: #0A1123;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .gray {
   background-color: #7F8B99;
   border: none;
   color: #0A1123;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .white {
   background-color: #FFFFFF;
   color: #0A1123;
   border: none;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .darkgray {
   background-color: #8B95A1;
   color: #0A1123;
   border: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* LectureDetail */
+.LectureDetail{
+  padding : 0 0 22px 22px;
+}
+
+.left_slide{
+  position: relative;
+    top: 13px;
+    left: -302px;
+    cursor: pointer;
+}
+.lecture_title{
+  float : left;
+  width: 140px;
+  margin: 3px 20px 0 30px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+}
+.lecture_info{
+  float: left;
+  width: 65px;
+  margin: 23.5px 23px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+.favorite-button{
+  position: absolute;
+  height: 26px;
+  line-height: 20px;
+  right: -34px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.lecture_info_1{
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  float:left;
+  margin:10px 7px 0 0;
+}
+.lecture_desc{
+  clear: both;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-size: 11px;
+  line-height: 14px;
+  padding:12px 20px;
+  background: #0A1123;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  margin:0 15px 15px 0;
+}
+.lecture_reco{
+  border-left: 2px solid #8B95A1;
+  padding : 0 10px;
+  margin: 0 30px;
+  font-size: 10px;
+  line-height: 20px;
+}
+.add_curri{
+  background: #66CC66;
+  border-radius: 10px;
+  width: 147px;
+  height: 44px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;  
+  color: #FFFFFF;
+  margin: 22px 22px 22px 0;
+  cursor: pointer;
+}
+.srcLink{
+  /* box-sizing: border-box; */
+  display: flex;
+  align-items: center;
+  width: 147px;
+  height: 40px;
+  border: 2px solid #FFFFFF;
+  border-radius: 10px;
+  background-color: inherit;
+  cursor: pointer;
+  
+}
+.srcLinktext{
+  text-decoration:none;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+}
+.likebtn{
+  display: flex;
+  align-items: center;
+  width: 90px;
+  height: 40px;
+  border: 2px solid #FFFFFF;
+  border-radius: 10px;
+  background-color: inherit;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 0 auto;
+  /* padding: 2px; */
+  cursor: pointer;
+}
+
+/* 리뷰 */
+.writeComment-box {
+  position: fixed;
+  width: 316px;
+  height: 40px;
+  left: 100px;
+  bottom: 40px;
+  background: #0A1123;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 100;
+  color: white;
+}
+.writeComment-input:focus {
+  outline: none;
+}
+.writeComment-input::placeholder {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #66CC66;
+}
+
+.writeComment-input {
+  width: 250px;
+  height: 20px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+/* .writeComment-input:focus::placeholder {
+  opacity: 0;
+} */
+.writeComment-box span {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #66CC66;
+}
+
+.writeComment-icon-box {
+  margin: 12px 10px 12.85px 16.86px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.LectureReviewTitle{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+.LectureReviewLive{
+  float:right;
+  margin:20px 5px;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 16px;
+  color: #FF0000;
+  width: 43px;
+  height: 16px;
+  border: 1px solid #FF0000;
+  border-radius: 9px;
+  text-align: center;
+}
+.LectureReviewContents{
+  clear:both;
+  width: 300px;
+  height: 35px;
+  background: #D9D9D9;
+  border-radius: 6px;
+  color:black;
+  margin:3px;
+  padding:5px;
+}
+.LectureReviewContent{
+  margin-top: 8px;
+  margin-left: 3px;
+  float: left;
+  font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #0A1123;
+
+}
+.LectureReviewName{
+  float:right;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 25px;
+  margin-top: 5px;
+  margin-right: 3px;
+}
+.bottomBar-blocker3 {
+  position: fixed;
+  width: 360px;
+  height: 100px;
+  background-color: #0A1123;
+  bottom: 0px;
+  left: 80px;
+  /* z-index: 1; */
+  box-shadow: 0px -9px 13px -6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px 10px 0px 0px;
+}
+
+.filter-title {
+  display: flex;
+  justify-content: space-between;
+  width: 254px;
+  height: 14px;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.filter-lang-title, .filter-material-title, .filter-pricing-title {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.filter-vertical-line {
+  width: 10px;
+  height: 1.5px;
+  background-color: #2F343A;
+  transform: rotate(90deg);
+}
+
+.select-lectures{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.select-lectures-items{
+  width: 152px;
+  height: 30px;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  text-align : center;
+  line-height: 30px;
+  color: #FFFFFF;
+  opacity: 0.2;
+}
+.select-lectures-items.success{
+  color: #FFFFFF;
+  opacity: 1;
+}
+.green-bar{
+  width:152px;
+  height: 4px;
+  background-color: #FFFFFF;
+  opacity: 0.2;
+  border-radius: 10px;
+}
+.green-bar.success{
+  background-color: #66CC66;
+  opacity: 1;
+}
+.filter-text {
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.filter-plus-box {
+  position: absolute;
+  width: 13px;
+  height: 12px;
+  right: 0px;
+}
+
+.filter-minus-box {
+  width: 10px;
+  height: 10px;
+}
+
+/* 커리큘럼 추가하기 */
+.curri-title-box2 {
+  display: flex;
+  width: 100%;
+  /* height: 33px; */
+  color: white;
+  align-items: center;
+  margin-left: -10px;
+}
+
+.back-button-curri {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.back-button-curri img {
+  vertical-align: middle;
+}
+.external-link-icon-box {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.check-lecture-info-text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+
+  color: #FFFFFF;
+
+}
+
+.ongoing-curries {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-left: 60px;
+  margin-top: 19px;
+  margin-bottom: 2px;
+}
+
+.add-curri-title {
+  width: 250px;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.lecture-detail-scroll-area {
+  width: 338px;
+  height: 628px;
+  overflow-x: hidden;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.lecture-detail-scroll-area::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.add-curri-scroll-page {
+  height: 600px;
+  overflow-x: hidden;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.add-curri-scroll-page::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+/* 페이지 */
+.page-section{
+  text-align: center;
+  height: 40px;
+  padding: 7px;
+}
+.page-wrap{
+  display: inline-block;
+}
+.page {
+  list-style: none;
+  background-color: inherit;
+  color: white;
+  border:none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.page.active {
+  background-color: #66CC66;
 }

@@ -5,14 +5,18 @@ html, body {
   border: 0px;
   background-color: #0A1123;
   font-family: 'Noto Sans KR', sans-serif;
-  width: 360px;
-  /* height: 800px; */
+  width: 440px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 #root {
   position: relative;
-  width: 360px;
-  /* height: 800px; */
+  width: 440px;
+  /* height: 760px; */
+  display: flex;
 }
 
 body::-webkit-scrollbar {

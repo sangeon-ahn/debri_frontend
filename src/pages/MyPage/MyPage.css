@@ -1,0 +1,53 @@
+.name_my{
+  position: relative;
+  top: 40px;
+  left: 20px;
+  
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.id_my{
+  position: relative;
+  width: 164px;
+  height: 20px;
+  top: 45px;
+  left: 20px;
+
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ing_Curi{
+  margin-top: 90px;
+  margin-left:45px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.logout{
+  width: 250px;
+  height: 50px;
+  border-width: 1px 0px;
+  border-style: solid;
+  border-color: #FFFFFF;
+
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 50px;
+  padding-left:58px;
+
+  margin:20px 26px;
+  cursor: pointer;
+}

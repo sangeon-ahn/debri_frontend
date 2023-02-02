@@ -1,7 +1,115 @@
+.boards-page{
+    position: absolute;
+    left: 107px;
+    top: 60px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
 .board-list {
-    margin-top: 50px;
+    margin-top: 180px;
     /* margin: 0 auto; */
     padding: 0 22px;
+}
+/* 검색창 */
+.search-bar {
+    box-sizing: border-box;
+    position: absolute;
+    width: 316px;
+    height: 40px;
+    border-radius: 10px;
+    align-items: center;
+    margin: 0 auto;
+    top: 120px;
+    left: 104px;
+    background: rgba(217, 217, 217, 0.08);
+  }
+.search-bar.success{
+    border: 2px solid #66CC66;
+}  
+.search-icon {
+  position: relative;
+  top: 9px;
+  left: 11px;
+}  
+.search {
+    position: absolute;
+    background-color: transparent;
+    right: 0px;
+    width: 260px;
+    height: 38px;
+    border: none;
+    top:50%;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: white;
+  } 
+.search:focus {
+    outline: none;
+  }  
+.search:focus::placeholder {
+    opacity: 0;
+  } 
+.search::placeholder {
+    color: #FFFFFF;
+    font-size: 14px;
+    /* transform:translate3d(0,-4px,0); */
+    font-weight: 400;
+    line-height: 20px;
+}
+.left-arrow {
+    margin : 0 15px 0 5px;
+    height: 16.22119140625px;
+    width: 9.470020294189453px;
+}
+.search-result{
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.search-result p{
+    margin: 0px;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    color: #66CC66;
+    margin-right: 22px;
+  }
+
+/* scrap posts */
+.scrapPosts {
+    width: 316px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid #66CC66;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.bookmarkPosts{   
+    float: left;
+    margin:10px 5px;
+}
+
+.scrappoststitle{
+    float: left;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #FFFFFF;
+    margin: 10px 15px;
+}
+.rightarrow{
+    float: right;
+    margin:10px 5px;
 }
 
 /* favorite-boards */
@@ -28,11 +136,16 @@
 .board-menu {
     height: 40px;
     /* padding: 5px 0; */
-    width: 100%;
+    width: 316px;
     display: flex;
     align-items: center;
     position: relative;
     vertical-align:middle;
+    cursor: pointer;
+}
+
+.board-menu:hover {
+    background-color: #131927;
 }
 
 .board-menu button {
@@ -81,17 +194,34 @@
 }
 
 .scrap-star {
+    position: relative;
     cursor: pointer;
+    z-index: 10;
 }
 
 .unscrap-star {
+    position: relative;
     cursor: pointer;
+    z-index: 10;
 }
 
 .board-name {
     cursor: pointer;
+    width: 260px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .boards-toggle-button {
     cursor: pointer;
 }
+
+.write-post-container3 {
+    position: absolute;
+    z-index: 2;
+    width: 360px;
+    margin: 0 auto;
+    top: 60px;
+    left: 180px;
+  
+  }

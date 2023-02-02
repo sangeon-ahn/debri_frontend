@@ -1,0 +1,148 @@
+.curries-container {
+  margin-top: 5px;
+  width: 360px;
+  padding: 0 22px;
+  box-sizing: border-box;
+}
+
+.curri-tab-title {
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.me-liked-curries {
+  display: flex;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 316px;
+  height: 50px;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.curri-like-box {
+  width: 22px;
+  height: 19px;
+  margin: 14.22px 15.23px 13.44px 15.23px;
+}
+
+.navigate-button-box {
+  width: 10px;
+  height: 18px;
+}
+
+.me-liked-curries-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-right: 113.27px;
+}
+.curriculumTab-area{
+  margin-top: 20px;
+}
+.curri-top5-text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+  margin-left: 19px;
+}
+
+.curri-top5 {
+  width: 325px;
+  margin-left: 11px;
+}
+
+.select-curris{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.select-curris-items{
+  width: 152px;
+  height: 30px;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  text-align : center;
+  line-height: 30px;
+  color: #FFFFFF;
+  opacity: 0.2;
+}
+.select-curris-items.success{
+  color: #FFFFFF;
+  opacity: 1;
+}
+.green-bar{
+  width:152px;
+  height: 4px;
+  background-color: #FFFFFF;
+  opacity: 0.2;
+  border-radius: 10px;
+}
+.green-bar.success{
+  background-color: #66CC66;
+  opacity: 1;
+}
+
+/* 내가 추천한 커리큘럼 */
+.curri-list{
+  position:relative;
+  width: 316px;
+  padding: 0 22px;
+  height: 475px;
+  overflow-x: hidden;
+}
+.left-arrow {
+  float:left;
+  margin:5px;
+  cursor: pointer;
+}
+.scrapCurriTitle{
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  color: #FFFFFF;
+  float:left;
+  margin:0 10px;
+}
+.bookmark_Curri{
+  margin: 5px 10px;
+  float:right;
+}
+
+.all-curris {
+  margin-top: 14px;
+  width: 338px;
+  overflow-x: hidden;
+  height: 200px;
+}
+
+.curri-wrap {
+  position:relative;
+  width: 316px;
+  padding: 0 22px 0 0;
+  height: 680px;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+.curri-wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.curri-wrap::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.curri-wrap::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}

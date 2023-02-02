@@ -1,0 +1,36 @@
+.reset-curri {
+color: #FF0000;
+
+box-sizing: border-box;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: #0A1123;
+  text-align: center;
+  width: 300px;
+  height: 48px;
+  align-items: center;
+  line-height: 44px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+}
+
+.delete-curri {
+  text-align: center;
+width: 300px;
+height: 48px;
+align-items: center;
+line-height: 44px;
+margin: 0 auto;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+cursor: pointer;
+color: #FF0000;
+}
