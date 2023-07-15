@@ -1,11 +1,31 @@
 .post-container {
   box-sizing: border-box;
-  padding: 20px 22px 0 22px ;
+  padding: 5px 22px 0 22px ;
   /* border: 1px solid white; */
   width: 360px;
-  height: auto;
+  height: 600px;
   z-index: 10;
   position: relative;
+  /* display: flex; */
+}
+
+.post-scroll-part {
+  overflow-x: hidden;
+  height: 550px;
+  width: 338px;
+}
+.post-scroll-part::-webkit-scrollbar {
+  width: 8px;
+}
+
+.post-scroll-part::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.post-scroll-part::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 
 .post-subject {
@@ -82,12 +102,25 @@
 
 .post-setting-menu-container {
   width: 316px;
-  height: 139px;
+  height: 137px;
   background: #8B95A1;
   border-radius: 10px;
   margin-bottom: 6px;
   text-align: center;
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+}
+
+.comment-setting-menu-container {
+  width: 316px;
+  height: 91px;
+  background: #8B95A1;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  text-align: center;
+  /* display: flex; */
   flex-direction: column;
   /* justify-content: space-evenly; */
   border: 1px solid black;
@@ -106,6 +139,8 @@ color: #FFFFFF;
 text-align: center;
 border: 1px solid black;
 cursor: pointer;
+
+
 }
 
 .post-setting-modal-title {
@@ -115,7 +150,7 @@ font-weight: 400;
 font-size: 12px;
 line-height: 43px;
 text-align: center;
-flex: 1;
+/* flex: 1; */
 
 color: #0A1123;
 }
@@ -151,6 +186,25 @@ color: #000000;
 background-color: transparent;
 border: none;
 cursor: pointer;
+}
+
+.comment-delete {
+  /* flex: 1; */
+  width: 300px;
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 23px;
+text-align: center;
+height: 47px;
+color: #000000;
+background-color: transparent;
+/* border: none; */
+cursor: pointer;
+border: none;
+border-top: 2px solid #0A1123;
+/* border-style: solid; */
 }
 
 .post-menu-button {
@@ -357,12 +411,6 @@ margin-right: 9px;
   align-items: center;
 } */
 
-
-
-.comment-menu-icon {
-  cursor: pointer;
-}
-
 /* 포스트 신고 모달창 */
 .post-report-button {
   width: 316px;
@@ -382,7 +430,7 @@ margin-right: 9px;
 /* 포스트 신고 버튼 누른 후 모달창 */
 .post-report-detail {
   width: 316px;
-  height: 282px;
+  /* height: 282px; */
   background: #8B95A1;
   border-radius: 10px;
   margin-bottom: 6px;
@@ -391,37 +439,37 @@ margin-right: 9px;
   .ad-spam-report {
     box-sizing: border-box;
     border-width: 2px 0px;
-border-style: solid;
-border-color: #0A1123;
-text-align: center;
-width: 300px;
-height: 48px;
-align-items: center;
-line-height: 44px;
-margin: 0 auto;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-text-align: center;
-cursor: pointer;
-color: #000000;
+    border-style: solid;
+    border-color: #0A1123;
+    text-align: center;
+    width: 300px;
+    height: 48px;
+    align-items: center;
+    line-height: 44px;
+    margin: 0 auto;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: #000000;
   }
 
 .fish {
-text-align: center;
-width: 300px;
-height: 48px;
-align-items: center;
-line-height: 44px;
-margin: 0 auto;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-text-align: center;
-cursor: pointer;
-color: #000000;
+  text-align: center;
+  width: 300px;
+  height: 48px;
+  align-items: center;
+  line-height: 44px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  color: #000000;
 }
 
 .irrelevant {
@@ -446,18 +494,18 @@ color: #000000;
 
 .hate {
   text-align: center;
-width: 300px;
-height: 48px;
-align-items: center;
-line-height: 44px;
-margin: 0 auto;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-text-align: center;
-cursor: pointer;
-color: #000000;
+  width: 300px;
+  height: 48px;
+  align-items: center;
+  line-height: 44px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  color: #000000;
 }
 
 .other {
@@ -472,32 +520,32 @@ color: #000000;
   line-height: 44px;
   margin: 0 auto;
   font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
 
-color: #000000;
-cursor: pointer;
+  color: #000000;
+  cursor: pointer;
 }
 
 .default-status-scrap-button {
   box-sizing: border-box;
-width: 74px;
-height: 28px;
-border: 1px solid #FFFFFF;
-border-radius: 10px;
-background-color: transparent;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 700;
-font-size: 10px;
+  width: 74px;
+  height: 28px;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  background-color: transparent;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
 
-color: #FFFFFF;
-align-items: center;
-position: relative;
-display: flex;
-cursor: pointer;
+  color: #FFFFFF;
+  align-items: center;
+  position: relative;
+  display: flex;
+  cursor: pointer;
 }
 
 .default-status-scrap-button img {
@@ -515,21 +563,21 @@ cursor: pointer;
 
 .scrap-status-button {
   box-sizing: border-box;
-width: 74px;
-height: 28px;
-border: 1px solid #66CC66;
-border-radius: 10px;
-background-color: #66CC66;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 800;
-font-size: 10px;
+  width: 74px;
+  height: 28px;
+  border: 1px solid #66CC66;
+  border-radius: 10px;
+  background-color: #66CC66;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 10px;
 
-color: #0A1123;
-align-items: center;
-position: relative;
-display: flex;
-cursor: pointer;
+  color: #0A1123;
+  align-items: center;
+  position: relative;
+  display: flex;
+  cursor: pointer;
 }
 
 .scrap-status-button img {
@@ -543,4 +591,24 @@ cursor: pointer;
 .scrap-status-button div {
   position: absolute;
   left: 30px;
+}
+
+.bottom-bar-blocker2 {
+  position: fixed;
+  width: 360px;
+  height: 100px;
+  background-color: #0A1123;
+  bottom: 0px;
+  z-index: 1;
+  box-shadow: 0px -9px 13px -6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px 10px 0px 0px;
+}
+
+.board-title-box2 {
+  display: flex;
+  width: 100%;
+  height: 33px;
+  color: white;
+  align-items: center;
+  margin-left: -10px;
 }

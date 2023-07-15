@@ -7,7 +7,7 @@
     position: absolute;
     width: 223.81px;
     height: 198px;
-    left: 68px;
+    left: 110px;
     top: 93px;
     text-align: center;
 }
@@ -36,30 +36,8 @@
     color: white;
     box-sizing: border-box;
     top: 340px;
+    left: 40px;
     width : 100%;
-}
-.start_btn{
-    width: 142px;
-    height: 60px;
-    background: #D9D9D9;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    margin-left: 180px;
-    color: #0A1123;
-}
-.start_btn.success {
-    color: #FFFFFF;
-    border: 2px solid #66CC66;
-    background: #0A1123;
-}
-.start_btn.fail {
-    color : #FF0000;
-    border: 2px solid #FF0000;
-    background: #0A1123;
 }
 
 .id_input {
@@ -78,6 +56,12 @@
     outline: none;
     color: white;
     left: 56px;
+    line-height: 30px;
+    width: 200px;
+}
+
+.pw_input::placeholder {
+    /* font-size: 15px; */
 }
 
 /*login_content --> account 값 불러옴, 수정 필요*/
@@ -97,6 +81,10 @@
     padding-left: 13px;
 }
 
+.login_content_failed {
+    border: 2px solid #FF0000;
+}
+
 .input_keyword {
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -105,6 +93,11 @@
     line-height: 23px;
     color: #FFFFFF;
 }
+
+.input_keyword_failed {
+    color: #FF0000;
+}
+
 .vertical_line {
     position: absolute;
     width: 23.16px;
@@ -113,6 +106,10 @@
     transform: rotate(90deg);
     background-color: transparent;
     left: 35px;
+}
+
+.vertical_line_failed {
+    border-bottom: 1px solid #FF0000;
 }
 
 .capslock_icon {
@@ -138,36 +135,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 40px;
     text-align: center;
   }
-
 .signup_button {
-width: 142px;
-height: 60px;
-background: #FFFFFF;
-border-radius: 6px;
-font-family: 'Noto Sans KR';
-font-style: normal;
-font-weight: 900;
-font-size: 20px;
-line-height: 29px;
-/* identical to box height */
-margin-right: 16px;
-
-color: #283659;
-
-}
-
-.login_button {
-    width: 142px;
-    height: 60px;
-    background: #66CC66;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
+    position: relative;
+    display: flex;
+    width: 300px;
+    height: 40px;
+    margin-left: 30px;
+    line-height: 40px;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    color:#FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 119px;
+    background-color: transparent;
     font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    
-    color: #0A1123;
+    font-size: 14px;
+    line-height: 35px;
+}
+.login_button {
+    position: relative;
+    display: flex;
+    width: 300px;
+    height: 40px;
+    margin-left: 30px;
+    line-height: 40px;
+    border: 2px solid #66CC66;
+    border-radius: 10px;
+    color:#000000;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 124px;
+    background-color: #66CC66;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 35px;
 }
 
 .copyright {
@@ -180,6 +182,26 @@ color: #283659;
     text-align: center;
     color: #FFFFFF;
     bottom: 66px;
-    left: 78px;
+    left: 120px;
     z-index: 2;
 }
+
+input.password {
+    font: small-caption;
+    font-size: 16px;
+  }
+
+/* input.password::-webkit-input-placeholder {
+        transform: scale(0.77);
+        transform-origin: 0 50%;
+    }
+
+input.password::-moz-placeholder {
+        font-size: 14px;
+        opacity: 1;
+    }
+
+input.password:-ms-input-placeholder {
+        font-size: 14px;
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    } */

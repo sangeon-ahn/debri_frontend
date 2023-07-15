@@ -1,0 +1,244 @@
+.user-number {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration-line: underline;
+  color: #66CC66;
+  margin-top: 13px;
+  text-align: center;
+}
+
+.lectures-in-curr-container {
+  margin-top: 17px;
+  width: 316px;
+  padding: 0 22px;
+}
+
+/* .user-reviews-area {
+  width: 316px;
+  padding: 0 22px;
+  margin-top: 38px;
+}
+
+.user-reviews-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #FFFFFF;
+
+}
+
+.user-reviews-container {
+  margin-top: 17px;
+}
+
+.user-review {
+  position: relative;
+  display: flex;
+  width: 316px;
+  height: 40px;
+  background: #D9D9D9;
+  border-radius: 6px;
+}
+
+.user-review-text {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #0A1123;
+margin-top: 12px;
+margin-left: 8px;
+}
+
+.review-container {
+  display: flex;
+  position: absolute;
+  right: 8px;
+  top: 15px;
+}
+
+.review-by {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 9px;
+line-height: 13px;
+
+color: #000000;
+margin-right: 5px;
+}
+
+.review-who {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+line-height: 13px;
+
+color: #000000;
+} */
+
+/* 리뷰 */
+.writeComment-box {
+  position: fixed;
+  width: 316px;
+  height: 40px;
+  bottom: 40px;
+  left:100px;
+  background: #0A1123;
+  border: 2px solid #66CC66;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 100;
+  color: white;
+}
+.writeComment-input:focus {
+  outline: none;
+}
+.writeComment-input::placeholder {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #66CC66;
+}
+
+.writeComment-input {
+  width: 250px;
+  height: 20px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+/* .writeComment-input:focus::placeholder {
+  opacity: 0;
+} */
+.writeComment-box span {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #66CC66;
+}
+
+.writeComment-icon-box {
+  margin: 12px 10px 12.85px 16.86px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.CurriReview{
+  padding : 22px;
+}
+
+.CurriReviewTitle{
+  float:left;
+  margin:20px 5px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+.CurriReviewLive{
+  float:right;
+  margin:20px 5px;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 16px;
+  color: #FF0000;
+  width: 43px;
+  height: 16px;
+  border: 1px solid #FF0000;
+  border-radius: 9px;
+  text-align: center;
+}
+.CurriReviewContents{
+  clear:both;
+  width: 300px;
+  height: 35px;
+  background: #D9D9D9;
+  border-radius: 6px;
+  color:black;
+  margin:3px;
+  padding:5px;
+  align-items: center;
+}
+.CurriReviewContent{
+  float: left;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #0A1123;
+  margin-top: 7px;
+  margin-left: 3px;
+}
+.CurriReviewName{
+  float:right;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 13px;
+  margin-top: 10px;
+  margin-right: 3px;
+}
+.bottomBar-blocker2 {
+  position: fixed;
+  width: 360px;
+  height: 100px;
+  background-color: #0A1123;
+  bottom: 0px;
+  left:80px;
+  z-index: 1;
+  box-shadow: 0px -9px 13px -6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px 10px 0px 0px;
+}
+
+.curri-liked-box {
+  width: 22px;
+  height: 19px;
+  margin: 9.22px 9.23px 8.14px 9.23px;
+}
+
+.curriculum-header {
+  display: flex;
+    width: 324.26px;
+}
+
+.curri-detail-scroll-area {
+  width: 360px;
+  height: 470px;
+  overflow-x: hidden;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar-thumb {
+  height: 30%;
+  background-color: #304057;
+  border-radius: 10px;
+}
+
+.curri-detail-scroll-area::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}

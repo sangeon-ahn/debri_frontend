@@ -15,13 +15,22 @@
 .comments-container {
   width: 100%;
   height: auto;
-  margin-bottom: 222px;
 }
 
 .comment-container {
   border-top: 1px solid #2F343A;
   width: 316px;
   /* border: 1px solid white; */
+}
+
+.comment-menu-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.comment-menu-icon {
+  /* cursor: pointer; */
+  vertical-align: middle;
 }
 
 .comment-content {
@@ -35,11 +44,11 @@ color: white;
 }
 
 .comment-detail {
+  position: relative;
   display: flex;
   margin-top: 14px;
   width: 100%;
   height: 16px;
-  /* border: 1px solid white; */
   margin-bottom: 6px;
 }
 
@@ -62,9 +71,7 @@ font-weight: 300;
 font-size: 10px;
 line-height: 14px;
 text-align: right;
-
 color: #FFFFFF;
-
 }
 
 .comment-button-box {
@@ -73,6 +80,6 @@ color: #FFFFFF;
   /* width: 64px; */
   height: 16px;
   /* border: 1px solid white; */
-  right: 33px;
+  right: 0px;
   align-items: center;
 }

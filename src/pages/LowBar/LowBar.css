@@ -1,18 +1,39 @@
+.fixed-bar{
+  width: 80px;
+  height: 790px;
+  z-index: 1;
+}
+.background{
+  position:fixed;
+  background-color: #142141;
+  width: 80px;
+  height: 790px;
+  box-shadow: 0px 2px 12px 8px rgba(0, 0, 0, 0.7);
+  border-radius: 0 0 21px 0px;
+}
+
 .low-bar {
   position: fixed;
   display: flex;
-  width: 316px;
-  height: 61px;
-  bottom: 38px;
-  left: 22px;
-  justify-content: space-between;
+  width: 80px;
+  height: 70px;
+  top: 0px;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
+/* home-button */
 .home-button {
+  margin-top:40px;
   height: 100%;
   width: 60px;
   text-align: center;
   position: relative;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #131927;
 }
 
 .home-icon-box {
@@ -30,31 +51,61 @@
   font-size: 10px;
 }
 
+/* lecture-button */
 .lecture-button {
   height: 100%;
   width: 60px;
   text-align: center;
+  cursor: pointer;
 }
 
+.lecture-button:hover {
+  background-color: #131927;
+}
+
+/* board-button */
 .board-button {
   height: 100%;
   width: 60px;
   text-align: center;
+  cursor: pointer;
 }
 
+.board-button:hover {
+  background-color: #131927;
+}
+
+/* curriculum-button */
 .curriculum-button {
   height: 100%;
   width: 60px;
   text-align: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+  cursor: pointer;
+}
+
+.curriculum-button:hover {
+  background-color: #131927;
+}
+
+/* mypage-button */
+.mypage-button {
+  height: 100%;
+  width: 60px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.mypage-button:hover {
+  background-color: #131927;
 }
 
 a:active {
   color: transparent;
 }
-
 
 .lecture-icon-box {
   padding-top: 19px;
@@ -66,6 +117,10 @@ a:active {
 
 .curriculum-icon-box {
   padding-top: 21px;
+}
+
+.mypage-icon-box {
+  padding-top: 20px;
 }
 
 .curriculum-icons-box {

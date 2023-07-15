@@ -1,31 +1,328 @@
-.start-curriculum {
-  width: 320px;
-  height: 320px;
-  border-radius: 160px;
-  border: 8px solid #66CC66;
-  margin: 0 auto;
-  margin-top: 142px;
+/* .curri-header {
+  position: relative;
+  display: flex;
+  height: 50px;
+  margin-top: 38px;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+}
+
+.curri-title {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 900;
+font-size: 18px;
+text-align: center;
+color: #FFFFFF;
+}
+
+.curri-when-made {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
   text-align: center;
-  /* line-height: 336px; */
-  color: white;
+  color: #FFFFFF;
+  margin-top: 7px;
 }
 
-.start-curriculum-plus-icon {
-  margin: 123px 0 28px 0;
+.next-curri {
+  position: absolute;
+  width: 18px;
+  height: 38px;
+  right: 14px;
 }
 
-.start-curriculum-text {
+.curri-sub-info {
+  display: flex;
+  margin-top: 19px;
+  margin-left: 56.67px;
+}
+
+.curri-private {
+  display: flex;
+  margin-right: 25px;
+  margin-top: 10px;
+}
+
+.dday-achieved-container {
+  margin-right: 14px;
+}
+
+.achieved-rate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  line-height: 12px;
+}
+
+.curri-private-img-box {
+  width: 24px;
+  height: 20px;
+  margin-right: 7.67px;
+}
+
+.curri-private-text {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
-  margin-bottom: 7px;
+  font-size: 10px;
+  color: #FFFFFF;
 }
 
-.start-curriculum-detail-text {
+.dday {
   font-family: 'Noto Sans KR';
   font-style: normal;
-  font-weight: 200;
-  font-size: 12px;
+  font-weight: 900;
+  font-size: 30px;
+  color: #FFFFFF;
+  line-height: 26px;
 }
+
+.horizontal-line {
+  width: 80px;
+  height: 0px;
+  border-bottom: 2px solid #FFFFFF;
+  margin-top: 8px;
+}
+
+.achieved-text {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #FFFFFF;
+}
+
+.achieved-number {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: right;
+  color: #66CC66;
+}
+
+.percent {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #FFFFFF;
+}
+
+.curri-green-circle-border {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  opacity: 0.17;
+  left: 20px;
+  border: 8px solid #66CC66;
+  box-sizing: border-box;
+  border-radius: 160px;
+}
+
+.curri-green-circle-inner {
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  left: 35px;
+  top: 15px;
+  background: #66CC66;
+  opacity: 0.17;
+  border-radius: 145px;
+}
+.curri-middle-area {
+  position: relative;
+}
+
+.curri-stone-checks {
+  position: relative;
+  margin-top: 8px;
+  width: 360px;
+}
+
+.curri-stone-check-one {
+  display: flex;
+  width: 100%;
+  height: 150px;
+}
+
+.curri-chapter {
+  position: relative;
+  display: flex;
+  margin-top: 70px;
+}
+
+.curri-stone-one-box {
+  margin: 18px 7px 0 61px;
+}
+
+.curri-stone-two-box {
+  margin: 18px 18.5px 0 6px;
+}
+
+.curri-stone-three-box {
+  margin: 18px 10px 0 46px;
+}
+
+.curri-chapter-checkbox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.checkbox-border-icon {
+  position: absolute;
+}
+
+.checkbox-inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -6px 0 0 -8px;
+}
+
+.curri-chapter-main {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+
+color: #FFFFFF;
+}
+
+.curri-chapter-subject {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  color: #FFFFFF;
+  width: 40px;
+  height: 16px;
+  background: #CB3953;
+  border-radius: 10px;
+}
+
+.curri-done {
+  position: absolute;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 31px;
+  line-height: 45px;
+  color: #66CC66;
+  right: -26px;
+  top: -26px;
+}
+
+.curri-lectures {
+  margin-top: 44px;
+  width: 340px;
+  margin-bottom: 1000px;
+}
+
+.curri-lecture {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: 340px;
+  height: 70px;
+  border-width: 2px 2px 2px 0px;
+  border-style: solid;
+  border-color: #66CC66;
+  border-radius: 0px 10px 10px 0px;
+  align-items: center;
+}
+
+.lecture-progress-ratio {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 900;
+font-size: 18px;
+line-height: 26px;
+
+text-align: center;
+
+color: #66CC66;
+width: 72px;
+
+}
+
+.lecture-vertical-line {
+  height: 50px;
+  border-left: 2px solid #8B95A1;
+  margin-right: 19px;
+}
+
+.curri-lecture-main-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.curri-lecture-subject {
+  width: 40px;
+height: 16px;
+left: 91px;
+top: 837px;
+
+background: #CB3953;
+border-radius: 10px;
+font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+text-align: center;
+color: #FFFFFF;
+margin-right: 6px;
+}
+
+.curri-lecture-title {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  line-height: 23.2px;
+}
+
+.curri-lecture-progress-box {
+  display: flex;
+}
+
+.curri-lecture-progress-bar {
+  width: 145px;
+height: 17px;
+left: 91px;
+top: 867px;
+
+background: #66CC66;
+border-radius: 14px;
+}
+
+.curri-lecture-progress-text {
+  font-family: 'Noto Sans KR';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+color: #FFFFFF;
+margin-left: 6px;
+}
+
+.curri-lecture-detail-box {
+  position: absolute;
+  width: 9.44px;
+  height: 16.19px;
+  right: 6.29px;
+  top: 24.91px;
+} */

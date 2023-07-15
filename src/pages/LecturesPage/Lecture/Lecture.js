@@ -4,22 +4,25 @@ import scrappedStar from '../../../assets/favoriteStar.png';
 import lectureLikesIcon from '../../../assets/lectureLikesIcon.png';
 import lectureUserNumberIcon from '../../../assets/curriUserNumberIcon.png';
 import lectureDetailIcon from '../../../assets/lectureDetailIcon.png';
+import grayHeart from '../../../assets/grayHeart.png';
+import greenHeart from '../../../assets/greenHeart.png';
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function Lecture(props) {
+  const navigate = useNavigate();
   const { lecture, isScrappedLecture } = props;
   const [error, setError] = useState(false);
   const [isScrapped, setIsScrapped] = useState(isScrappedLecture);
   console.log(isScrapped);
   const userData = JSON.parse(localStorage.getItem("userData"));
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const headers = {
     'ACCESS-TOKEN': `${JSON.parse(localStorage.getItem("userData")).jwt}`,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
-  const count = useRef(0);
 
   const setColor = (lecture) => {
     if (lecture.langTag === "Front") {
@@ -35,7 +38,7 @@ export default function Lecture(props) {
 
   const postLectureScrap = async (lectureIdx) => {
     try {
-      const response = await axios.post(`/api/lecture/scrap/create`,
+      const response = await axios.post(`${baseUrl}/api/lecture/scrap/create`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -49,7 +52,7 @@ export default function Lecture(props) {
   
   const postLectureUnScrap = async (lectureIdx) => {
     try {
-      const response = await axios.patch(`/api/lecture/scrap/delete`,
+      const response = await axios.patch(`${baseUrl}/api/lecture/scrap/delete`,
         JSON.stringify({
           userIdx: userData.userIdx,
           lectureIdx: lectureIdx
@@ -77,11 +80,11 @@ export default function Lecture(props) {
     <div className="lecture">
             <div className="lecture-scrap-box">
               {isScrapped ?
-                <img src={scrappedStar} alt="" onClick={lectureUnScrap}/> :
-                <img src={unScrappedStar} alt="" onClick={lectureScrap}/>
+                <img src={scrappedStar} alt="" style={{cursor: 'pointer'}} onClick={lectureUnScrap}/> :
+                <img src={unScrappedStar} alt="" style={{cursor: 'pointer'}} onClick={lectureScrap}/>
               }
             </div>
-            <div className="lecture-description">
+            <div className="lecture-description" onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
               <div className={setColor(lecture)}>{lecture.langTag}</div>
               <div className="lecture-title-box">
                 <div className="lecture-name">{lecture.lectureName}</div>
@@ -89,19 +92,22 @@ export default function Lecture(props) {
               </div>
               <div className="lecture-info">
                 <div>
-                  <img className="lecture-likes-icon" src={lectureLikesIcon} alt="" />
+                  {lecture.userLike ?
+                    <img src={greenHeart} alt='' style={{height: '10px',width: '11.5px', margin:'2px 7px'}}/> :
+                    <img src={grayHeart} alt='' style={{height: '10px',width: '11.5px', margin:'2px 7px'}}/>
+                  }
                 </div>
-                <div className="lecture-likes-number">103</div>
+                <div className="lecture-likes-number">{lecture.likeNumber === undefined ? lecture.lectureLikeCount : lecture.likeNumber}</div>
                 <div>
                   <img className="lecture-user-number-icon" src={lectureUserNumberIcon} alt="" />
                 </div>
-                <div className="lecture-likes-number">84</div>
+                <div className="lecture-likes-number">{lecture.usedCount}</div>
                 <div className="lecture-info-vertical-line"></div>
-                <div className="lecture-material-type">{lecture.materialType}</div>
-                <div className="lecture-price">{lecture.pricing}</div>
+                <div className="lecture-material-type">#{lecture.materialType === undefined ? lecture.type : lecture.materialType}</div>
+                <div className="lecture-price">#{lecture.pricing}</div>
               </div>
             </div>
-            <div className="lecture-detail-box">
+            <div className="lecture-detail-box" onClick={()=>{navigate(`/lectures/detail/${lecture.lectureIdx}`)}}>
               <img src={lectureDetailIcon} alt="" />
             </div>
           </div>

@@ -1,23 +1,33 @@
 {
   "name": "my-app",
   "homepage": "./",
+  "productName": "Debri",
   "main": "public/electron.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.9.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "custom-electron-titlebar": "^4.1.0",
     "electron-is-dev": "^2.0.0",
     "http-proxy-middleware": "^2.0.6",
+    "node-wav-player": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-js-pagination": "^3.0.3",
     "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-wavify": "^1.6.1",
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0",
+    "sound-play": "^1.1.0",
+    "waveplayer": "^1.2.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -26,8 +36,9 @@
     "react-test": "react-scripts test",
     "react-eject": "react-scripts eject",
     "start": "concurrently \"cross-env NODE_ENV=development BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "yarn react-build && electron-builder",
-    "release": "yarn react-build && electron-builder --publish=always"
+    "build": "yarn react-build",
+    "release": "yarn react-build && electron-builder --publish=always",
+    "electron-pack": "yarn build && electron-builder build -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +69,5 @@
     "productName": "Debri",
     "asar": true,
     "appId": "com.project"
-  },
-  "proxy": "https://www.debri.shop"
+  }
 }

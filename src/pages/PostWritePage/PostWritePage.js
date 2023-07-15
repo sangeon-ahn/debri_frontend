@@ -37,9 +37,9 @@ export default function PostWritePage() {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-    
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then(
+    await axios.get(`${baseUrl}/api/board/allList`, { headers }).then(
       (res) => {
         setBoardList(res.data.result);
       }
@@ -66,26 +66,27 @@ export default function PostWritePage() {
 
     setBoardName(board.boardName);
   };
-
-  if (!boardName) return;
-
   return (
-    <div>
-      <PostWriteCancelModal
-        isCancelModalOpen={isCancelModalOpen}
-        closeCancelModal={() => setIsCancelModalOpen(false)}
-        state={state}
-        boardName={boardName}
-      />
-      <PostWriteConfirmModal
-        isConfirmModalOpen={isConfirmModalOpen}
-        closeConfirmModal={() => setIsConfirmModalOpen(false)}
-        postTitle={postTitle}
-        postContent={postContent}
-        boardId={selectedOption}
-        boardName={boardName}
-      />
+    <>
       <Header />
+      {boardName &&
+      <>
+        <PostWriteCancelModal
+          isCancelModalOpen={isCancelModalOpen}
+          closeCancelModal={() => setIsCancelModalOpen(false)}
+          state={state}
+          boardName={boardName}
+        />
+        <PostWriteConfirmModal
+          isConfirmModalOpen={isConfirmModalOpen}
+          closeConfirmModal={() => setIsConfirmModalOpen(false)}
+          postTitle={postTitle}
+          postContent={postContent}
+          boardId={selectedOption}
+          boardName={boardName}
+        />
+      </>
+      }
       <div className='post-write-container'>
         <button className='go-past-button' onClick={() => setIsCancelModalOpen(true)}>
           <img src={leftArrow} alt=''/>
@@ -133,7 +134,6 @@ export default function PostWritePage() {
           </button>
         </div>
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
-    </div>
+    </>
   );
 }

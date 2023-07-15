@@ -1,69 +1,62 @@
 import React, { useRef, useState } from 'react';
 import Modal from 'react-modal';
 import './PostWriteConfirmModal.css';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import confirmIcon from '../../../assets/confirmIcon.png';
 import axios from 'axios';
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: "86px"
-  },
-};
-
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root');
-Modal.defaultStyles.overlay = {
-  backgroundColor: "rgba(0, 0, 0, 0.6)",
-  bottom: 0,
-  left: 0,
-  position: "fixed",
-  right: 0,
-  top: 0,
-  zIndex: 99
-}
-Modal.defaultStyles.content = {
-  position: 'absolute',
-  top: '40px',
-  left: '40px',
-  right: '40px',
-  bottom: '40px',
-  WebkitOverflowScrolling: 'touch',
-  outline: 'none',
-  width: '316px',
-  height: '86px',
-  backgroundColor: '#D9D9D9',
-  borderRadius: '10px',
-}
-
 
 export default function PostWriteConfirmModal(props) {
   const { isConfirmModalOpen, closeConfirmModal, postContent, postTitle, boardId, boardName } = props;
   const navigate = useNavigate();
   const { userIdx, userName, userId, userBirthday, jwt, refreshToken } = JSON.parse(localStorage.getItem('userData'));
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const scrapped = searchParams.get('scrapped');
   const headers = {
     'ACCESS-TOKEN': jwt,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
   
+  const customStyles = {
+    content: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      height: "86px",
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#D9D9D9',
+      borderRadius: '10px',
+      WebkitOverflowScrolling: 'touch',
+      outline: 'none',
+      width: '316px',
+      boxSizing: 'border-box',
+      padding: '0px'
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      bottom: 0,
+      left: 0,
+      position: "fixed",
+      right: 0,
+      top: 0,
+      zIndex: 99
+    }
+  };
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const postIdxRef = useRef(0);
-
+  Modal.setAppElement('#root');
   async function postData(boardIdx,userIdx,postContent, postName) {
     try {
-      const response = await axios.post(`/api/post/create`,
+      const response = await axios.post(`${baseUrl}/api/post/create`,
         JSON.stringify({boardIdx,userIdx,postContent, postName}),
         { headers }
       );
       console.log('리턴', response);
       postIdxRef.current = response.data.result.postIdx;
-      navigate(`/boards/${boardId}/${postIdxRef.current}`, {state: {boardName: boardName}});
+      navigate(`/boards/${boardId}/${postIdxRef.current}?scrapped=${scrapped}`, {state: {boardName: boardName}});
       return true;
     } catch (error) {
       console.error(error);

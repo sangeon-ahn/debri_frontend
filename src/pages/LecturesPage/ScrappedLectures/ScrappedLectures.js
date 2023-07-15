@@ -10,7 +10,7 @@ export default function ScrappedLectures() {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [scrappedLectures, setScrappedLectures] = useState(null);
@@ -18,7 +18,8 @@ export default function ScrappedLectures() {
 
   const fetchScrappedLectures = async () => {
     try {
-      const response = await axios.get(`api/lecture/getScrapList/${userData.userIdx}`, { headers });
+
+      const response = await axios.get(`${baseUrl}/api/lecture/getScrapList/${userData.userIdx}`, { headers });
       setScrappedLectures(response.data.result);
     } catch (e) {
       console.log(e);
@@ -30,12 +31,13 @@ export default function ScrappedLectures() {
     fetchScrappedLectures();
   }, []);
 
+  if (error) return null;
+
   return (
     <div className="scrapped-lectures-container">
-      <div className="scrapped-lectures-container-title">즐겨찾기한 강의</div>
       <div className="scrapped-lectures">
       {scrappedLectures && scrappedLectures.map(scrappedLecture => {
-        return <Lecture lecture={scrappedLecture} key={scrappedLecture.lectureIdx} isScrappedLecture={true}/>
+        return <Lecture lecture={scrappedLecture} key={scrappedLecture.lectureIdx} isScrappedLecture={true} />
       })}
     </div>
     </div>

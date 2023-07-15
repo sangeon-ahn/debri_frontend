@@ -20,7 +20,7 @@ export default function PostModifyPage() {
   const [boardList,setBoardList] = useState([]);
   const params = useParams();
   const [selectedOption, setSelectedOption] = useState(params.boardId);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     getData();
     }, []);
@@ -37,7 +37,7 @@ export default function PostModifyPage() {
   };
     
   async function getData() {
-    await axios.get(`/api/board/allList`, { headers }).then(
+    await axios.get(`${baseUrl}/api/board/allList`, { headers }).then(
       (res) => {
         setBoardList(res.data.result);
       }
@@ -71,14 +71,13 @@ export default function PostModifyPage() {
             type='text'
             className='title-input'
             value={title}
-            placeholder='제목'
-            onChange={(e) => setTitle(e.target.value)}
             spellCheck="false"
+            disabled
            />
         </div>
         <div className='select-board'>
           <div className='select-box'>
-            <select name="option" onChange={handleSelectOption} value={selectedOption}>
+            <select name="option" onChange={handleSelectOption} value={selectedOption} disabled>
               {boardList.map((board) => (
                 <option value={board.boardIdx} key={board.boardIdx}>{board.boardName}</option>
               ))}
@@ -109,7 +108,6 @@ export default function PostModifyPage() {
           </button>
         </div>
       </div>
-      <div style={{position:"fixed", zIndex: 1, width: '360px', height: '100px', backgroundColor: '#0A1123', bottom: '10px'}} ></div>
     </div>
   );
 }

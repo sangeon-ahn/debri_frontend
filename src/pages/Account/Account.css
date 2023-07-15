@@ -1,72 +1,165 @@
-.account{
-    position: relative;
-}
-
-/*로고*/
-.Logo_box {
-    position: absolute;
-    width: 223.81px;
-    height: 198px;
-    left: 68px;
-    top: 93px;
+/* 이메일인증 페이지*/
+.codebuttons_container {
+    position:absolute;
+    margin-top: 40px;
     text-align: center;
+    top:190px;
 }
-.onlylogo {
-    width: 152px;
-    height: 106px;
+.code_button{
+    position: relative;
+    display: flex;
+    width: 363px;
+    height: 40px;
+    margin-left: 37px;
+    line-height: 40px;
+    border: 2px solid #66CC66;
+    border-radius: 6px;
+    color:#000000;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 124px;
+    background-color: #66CC66;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 35px;
+    cursor: pointer;
 }
-.logotype {
-    width: 223.81px;
-    height: 43.61px;
-    margin: 10px 0;
+.again_code_button {
+    position: relative;
+    display: flex;
+    width: 363px;
+    height: 40px;
+    margin-left: 37px;
+    line-height: 40px;
+    border: 2px solid #FFFFFF;
+    border-radius: 6px;
+    color:#FFFFFF;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-left: 135px;
+    background-color: transparent;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 35px;
+    cursor: pointer;
 }
-.logotext {
+.code_warp {
+    position: absolute;
+    color: white;
+    box-sizing: border-box;
+    top: 400px;
+    width : 440px;
+}
+.code_items{
+    height:85px;
+}
+.left_time{
+    margin-left: 60px;
+    font-weight: 400;
+    font-size: 12px;
+}
+.timeout{
+    font-weight: 900;
+    font-size: 14px;
+}
+.auth_btn{
+    position:absolute;
+    width: 120px;
+    height: 40px;
+    background: #66CC66;
+    border: 2px solid #0A1123;
+    border-radius: 10px;
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 900;
+    font-size: 14px;
+    line-height: 29px;
+    top:510px;
+    left:280px;
+    color: #0A1123;
+    cursor: pointer;
+}
+/* 회원가입 페이지 */
+.account{
+    position: relative;
+}
+.back {
+    position: absolute;
+    left: -20px; 
+}
+.back_text{
+    position: absolute;
+    left: 50px;
+    top: 63px;
+    text-decoration: none;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 17px;
-    margin:0;
     color: #FFFFFF;
-    }
+}
+
+/* 제목 */
+.title{
+    position: absolute;
+    left: 170px;
+    top: 56px;
+    width: 100px;
+    color:white;
+    text-align: center;
+    line-height: 11px;
+}
 
 /*회원가입*/
 .account_warp {
     position: absolute;
     color: white;
     box-sizing: border-box;
-    top: 340px;
-    width : 100%;
-}
-.start_btn{
-    width: 142px;
-    height: 60px;
-    background: #D9D9D9;
-    border-radius: 6px;
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 20px;
-    line-height: 29px;
-    margin-left: 180px;
-    color: #0A1123;
-}
-.start_btn.success {
-    color: #FFFFFF;
-    border: 2px solid #66CC66;
-    background: #0A1123;
-}
-.start_btn.fail {
-    color : #FF0000;
-    border: 2px solid #FF0000;
-    background: #0A1123;
+    top: 150px;
+    width : 440px;
 }
 
+
 /*account_content*/
+.account_items{
+    height:85px;
+}
+.account_text{
+    line-height: 14px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    margin:2px 45px;
+    width:440px;
+    word-break:keep-all;
+}
+.text_bar{
+    display:inline-block;
+    width:100px;
+    padding: 0 10px;
+    border-left: 1px solid white;
+}
+.text_bar.success {
+    border-left: 1px solid #66CC66;
+}
+.text_bar.fail {
+    border-left: 1px solid #FF0000;
+}
+.textinput {
+    border:none;
+    outline: none;
+    background: transparent;
+    color:#FFFFFF;
+    font-size: 14px;
+    margin: 12px 16px;
+}
 .account_content {
-    width: 300px;
+    float:left;
+    width: 360px;
     height: 40px;
-    margin: 10px 20px;
+    margin: 5px 37px;
     line-height: 40px;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
@@ -85,16 +178,73 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
+/*agree_all_btn*/
+.agree_all_btn{
+    width:360px;
+    height: 150px;
+    margin: 10px 37px;
+    line-height: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #D9D9D9;
+    border-radius: 6px;
+    color: #000000;
+    border: 2px solid transparent;
+    position: absolute;
+    top:450px;
+}
+.agree_all_btn input[type="checkbox"] {
+    -webkit-appearance: none;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    outline: none !important;
+    border: 2px solid #eeeeee;
+    border-radius: 4px;
+    background: #fbfbfb;
+    /* line-height: 40px; */
+    margin : 8px;
+}
+.agree_all_btn input[type="checkbox"]::before {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+.agree_all_btn input[type="checkbox"]:checked {
+    background-color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    font-size: 20px;
+}
+.agree_all_btn input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+.agree_all_btn.success{
+    border: 2px solid #66CC66;
+}
+.agree_all_btn.fail {
+    border: 2px solid #FF0000;
+}
+.agree_all_text {
+    display:inline-block;
+    position:absolute;
+}
 
 /*agree_btn*/
 .agree_btn{
     width: 300px;
-    height: 40px;
-    margin: 10px 20px;
+    height: 36px;
+    margin: -10px 10px 16px 27px;
     line-height: 40px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
-    background: #D9D9D9;
+    background: white;
     border-radius: 6px;
     color: #000000;
     border: 2px solid transparent;
@@ -103,15 +253,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .agree_btn input[type="checkbox"] {
     -webkit-appearance: none;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
     outline: none !important;
     border: 2px solid #eeeeee;
     border-radius: 4px;
     background: #fbfbfb;
     /* line-height: 40px; */
-    margin : 10px;
+    margin : 8px;
 }
 .agree_btn input[type="checkbox"]::before {
     content: "✔";
@@ -134,29 +284,40 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .agree_btn.success {
     border: 2px solid #66CC66;
+    background: #66CC66;
 }
 .agree_btn.fail {
     border: 2px solid #FF0000;
+    background: #FF0000;
 }
 .agree_text {
     display:inline-block;
     position:absolute;
 }
-.account_text{
-    display:inline-block;
-    width : 40px;
-    line-height: 14px;
+
+/* 시작버튼 */
+.start_btn{
+    width: 142px;
+    height: 60px;
+    background: #3e3c42;
+    border-radius: 6px;
     font-family: 'Noto Sans KR';
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    margin:7px 5px 0px 15px;
-    word-break:keep-all;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 29px;
+    margin-top: 210px;
+    margin-left: 260px;
+    margin-bottom : 10px;
+    color: #a9a9a9;
 }
-.textinput {
-    border: none;
-    outline: none;
-    background: transparent;
-    color:#FFFFFF;
-    font-size: 14px;
+.start_btn.success {
+    color: #FFFFFF;
+    border: 2px solid #66CC66;
+    background: #0A1123;
+}
+.start_btn.fail {
+    color : #FF0000;
+    border: 2px solid #FF0000;
+    background: #0A1123;
 }
