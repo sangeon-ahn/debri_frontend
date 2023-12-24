@@ -20,7 +20,7 @@
 | 웨일-안상언(파트장) | 시리-최진실 |
 | :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img src="https://canary-lunch-ad0.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6c43316e-e853-4111-9826-3c0b69ee7b72%2Fphoto_2022-08-24_21-32-32.jpg?table=block&id=ee7fe4a1-f546-407f-b6f8-0d66877ba9f2&spaceId=ec4b1f8e-46a4-4fba-a137-4f22efc10e86&width=770&userId=&cache=v2" style="width:150px; margin: 0 auto"/> | <img src="https://canary-lunch-ad0.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff58a7eb3-0d8b-45b4-87b7-563f7f3031d1%2FUntitled.jpeg?table=block&id=e2cab65a-4afc-4f6e-b478-3ceeb8233849&spaceId=ec4b1f8e-46a4-4fba-a137-4f22efc10e86&width=1920&userId=&cache=v2" style="width:150px; margin: 0 auto"/> |
-| 시립대학교 기계과 | 세종대학교 데이터사이언스학과 |
+| 서울시립대학교 기계정보공학과 | 세종대학교 데이터사이언스학과 |
 | 프론트엔드 개발자 | 프론트엔드 개발자 |
 
 # 프로젝트 소개
